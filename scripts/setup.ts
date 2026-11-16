@@ -211,6 +211,8 @@ runCmd([
   join(REPO_ROOT, "scripts", "merge-brain.ts"),
   "--cleanup",
 ]);
+// Hostinger stdio MCP servers (token from HOSTINGER_API_TOKEN, no OAuth); version pinned, referenced by absolute path in the plugin.
+runCmd(["bun", "add", "-g", "@hostinger/mcp@4.3.0"]);
 setupGit();
 setupAgyAndGemini();
 await setupClaudePlugins();
