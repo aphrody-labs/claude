@@ -4,6 +4,7 @@
 //   pull: fast-forward from origin at session start.
 //   push: commit every tracked or whitelisted change and push at session end.
 // Never blocks a session: every failure is reported on stderr and exits 0.
+import { spawn } from "node:child_process"
 import { resolve } from "node:path"
 
 const mode = process.argv[2]
@@ -26,12 +27,11 @@ if (mode === "pull" && hasRemote) {
 } else if (mode === "push") {
   git("add", "-A")
   if (git("diff", "--cached", "--quiet").ok) process.exit(0)
-  const host = process.env.COMPUTERNAME ?? process.env.HOSTNAME ?? "host"
-  const c = git("commit", "--quiet", "-m", `config: sync from ${host}`)
+  const c = git("commit", "--quiet", "-m", "config: sync")
   if (!c.ok) console.error(`config-sync commit: ${c.err}`)
   else if (hasRemote) {
-    const p = git("push", "--quiet")
-    if (!p.ok) console.error(`config-sync push: ${p.err}`)
+    // Push detached: SessionEnd hooks are cancelled when the session exits.
+    spawn("git", ["-C", root, "push", "--quiet"], { detached: true, stdio: "ignore", windowsHide: true }).unref()
   }
 }
 process.stdout.write("{}")

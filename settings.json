@@ -39,7 +39,8 @@
     "cloudflare@anthropic-plugin-directory": true,
     "vercel@anthropic-plugin-directory": true,
     "context7@anthropic-plugin-directory": true,
-    "github@anthropic-plugin-directory": true
+    "github@anthropic-plugin-directory": true,
+    "hostinger@anthropic-plugin-directory": true
   },
   "outputStyle": "Autonome",
   "alwaysThinkingEnabled": true,
