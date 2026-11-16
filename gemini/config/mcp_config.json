@@ -1,9 +1,3 @@
 {
-  "mcpServers": {
-    "relay": {
-      "command": "bun",
-      "args": ["${SRC_ROOT}/frameworks/ai-os/src/relay/cli.ts", "mcp-stdio"],
-      "disabled": false
-    }
-  }
+  "mcpServers": {}
 }
