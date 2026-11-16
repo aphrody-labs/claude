@@ -25,6 +25,15 @@ for (const key of ["user.name", "user.email"]) git("config", "--global", "--unse
 const gh = Bun.spawnSync(["gh", "auth", "setup-git"], { stdout: "pipe", stderr: "pipe" })
 console.log(gh.exitCode === 0 ? "ok       git identity + gh credential helper" : "FAILED   gh auth setup-git (run gh auth login)")
 
+// Marketplaces declared in settings.json (GitHub sources) must exist before
+// their plugins can install; adding an existing one is a no-op failure.
+const known = claude("plugin", "marketplace", "list").out
+for (const [name, m] of Object.entries<any>(settings.extraKnownMarketplaces ?? {})) {
+  if (known.includes(name) || m?.source?.source !== "github") continue
+  const r = claude("plugin", "marketplace", "add", m.source.repo)
+  console.log(`${r.ok ? "add     " : "FAILED  "} marketplace ${name}`)
+}
+
 const installed = claude("plugin", "list").out
 const wanted = Object.entries(settings.enabledPlugins ?? {})
   .filter(([id, on]) => on === true && !id.endsWith("@builtin") && !id.endsWith("@skills-dir"))

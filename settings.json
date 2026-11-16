@@ -15,6 +15,11 @@
     "CLAUDE_CODE_ENABLE_AWAY_SUMMARY": "1",
     "CLAUDE_CODE_EFFORT_LEVEL": "auto"
   },
+  "attribution": {
+    "commit": "",
+    "pr": "",
+    "sessionUrl": false
+  },
   "permissions": {
     "deny": [
       "AskUserQuestion",
@@ -40,7 +45,16 @@
     "vercel@anthropic-plugin-directory": true,
     "context7@anthropic-plugin-directory": true,
     "github@anthropic-plugin-directory": true,
-    "hostinger@anthropic-plugin-directory": true
+    "hostinger@claude-plugins-official": true,
+    "code-modernization@anthropic-plugin-directory": true
+  },
+  "extraKnownMarketplaces": {
+    "claude-plugins-official": {
+      "source": {
+        "source": "github",
+        "repo": "anthropics/claude-plugins-official"
+      }
+    }
   },
   "outputStyle": "Autonome",
   "alwaysThinkingEnabled": true,
@@ -53,10 +67,5 @@
   },
   "showThinkingSummaries": true,
   "skipDangerousModePermissionPrompt": true,
-  "useAutoModeDuringPlan": true,
-  "attribution": {
-    "commit": "",
-    "pr": "",
-    "sessionUrl": false
-  }
+  "useAutoModeDuringPlan": true
 }
