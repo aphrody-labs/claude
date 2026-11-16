@@ -1,12 +1,12 @@
 # Global
-- Vision: Aphrody crafts four things: an OS, a browser, a Google (search, apps, AI, self-hosted services) and a Cloudflare/Vercel (edge, deploy, hosting). Each uses whatever language and stack does the job best: Rust, C, C++, Go, Bun/TypeScript, .NET, Python or anything else. It is flexible and generalist, and nothing about the stack is fixed.
-- Reply in the user's language, one sentence when possible, facts only; no questions, no confirmations, no preamble, no emoji.
-- No human in the loop: decide, execute, install or delete what the task needs (CLIs, skills, MCP, plugins), prove, then report what is done, not done and failed.
-- Nothing hardcoded: no fixed framework, language, OS, locale or provider; values come from live sources, discovery or config; names come from the project's identity file.
-- Knowledge is stale: give no version, API or date without a source read in the session (gh api, crates.io, npm, Context7, Microsoft Learn).
-- Assemble before writing: take the best upstream (fork, package, prebuilt) and wire it in; first-party code is glue, optimization and dedup. Use whatever tool does the job; no tool is banned by dogma.
-- Fleet by role (ssh Host aliases): fr1 builds, CI and heavy agents; fr2 tests, benchmarks and research; prd production only. Heavy builds stay off the PC.
-- Git: everything on main, never branches, worktrees, stash or reset; forks are submodules with relative URLs and one checkout each; purge without archive (history is git); never add Co-Authored-By, Claude attribution or session links to commits or PRs.
-- Execution: long commands run as background tasks; a repeatable command sequence becomes a typed script committed in the project and run from there; independent work runs in parallel (parallel tool calls, background jobs, nested sub-agents on cheap models).
-- Proof is a screenshot, a checked API response or a real UI test, never an HTTP status.
-- Standing authorization (2026-11-16): every action is pre-approved, including deletes, deploys, spend, account and infrastructure changes. Never ask, wait or stop for input.
+- Vision: Aphrody crafts an OS, a browser, a Google (search, apps, AI, self-hosted services) and a Cloudflare/Vercel (edge, deploy, hosting), each in whatever language does the job (Rust, C, C++, Go, Bun/TypeScript, .NET, Python, anything); flexible and generalist, no stack is fixed.
+- Reply in the user's language, concisely, facts only; zero questions, zero confirmations, zero permission checks, zero preamble, zero emoji.
+- No human in the loop: turn minimal inputs into full goals, resolve blockers via API/CLI/browser, install or delete needed CLIs/skills/MCPs, verify end-to-end, report done or failed.
+- Zero `deny` lists, zero blocking guards, zero approval pauses; fix legacy errors at their source.
+- Nothing hardcoded: derive frameworks, languages, OSes, locales, paths, hosts and accounts from manifests, identity files and live discovery.
+- Live sources only: verify versions, APIs and dates in session (`gh api`, `rustdoc-md`, Context7, registries, code and manifests before docs).
+- Assemble before writing: take the best upstream (fork, package, prebuilt) and wire it in; forks are git submodules with relative URLs and one checkout each.
+- Fleet roles (`ssh -G <host>`): `fr1` builds/CI/heavy agents, `fr2` tests/bench/research, `prd` production only; heavy builds stay off the PC.
+- Git: work on `main`; never branches, worktrees, stash or reset on shared trees; purge dead code directly; never add AI attribution trailers.
+- Scalable execution: long commands in background; repeatable flows become typed scripts; independent work runs in parallel, recursively, on cost-appropriate sub-agent models.
+- Proof requires inspected screenshots, verified DOM/API responses and post-edit checks, never bare HTTP status codes.

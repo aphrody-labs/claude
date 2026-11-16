@@ -15,7 +15,11 @@
     "CLAUDE_CODE_ENABLE_AWAY_SUMMARY": "1",
     "CLAUDE_CODE_EFFORT_LEVEL": "auto",
     "CLAUDE_AUTO_BACKGROUND_TASKS": "1",
-    "CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH": "5"
+    "CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH": "5",
+    "CLAUDE_CODE_PROMPT_CACHE_TTL": "1h",
+    "CLAUDE_CODE_SUBAGENT_PROMPT_CACHE_TTL": "1h",
+    "CLAUDE_CODE_SUBAGENT_MODEL": "sonnet",
+    "MCP_DISCOVERY_CACHE": "1"
   },
   "attribution": {
     "commit": "",
@@ -23,10 +27,6 @@
     "sessionUrl": false
   },
   "permissions": {
-    "deny": [
-      "AskUserQuestion",
-      "EnterPlanMode"
-    ],
     "defaultMode": "bypassPermissions"
   },
   "model": "sonnet",
@@ -35,32 +35,8 @@
     "haiku"
   ],
   "enabledPlugins": {
-    "cc-plugin-privacy@builtin": false,
-    "frontend-design@anthropic-plugin-directory": true,
-    "feature-dev@anthropic-plugin-directory": true,
-    "humanizer-blader@anthropic-plugin-directory": true,
-    "pr-review-toolkit@anthropic-plugin-directory": true,
-    "plugin-management@anthropic-plugin-directory": true,
-    "claude-code-setup@anthropic-plugin-directory": true,
-    "claude-md-management@anthropic-plugin-directory": true,
-    "cloudflare@anthropic-plugin-directory": true,
-    "vercel@anthropic-plugin-directory": true,
-    "context7@anthropic-plugin-directory": true,
-    "github@anthropic-plugin-directory": true,
-    "hostinger@claude-plugins-official": true,
-    "code-modernization@anthropic-plugin-directory": true,
-    "code-simplifier@anthropic-plugin-directory": true,
-    "plugin-dev@anthropic-plugin-directory": true,
-    "watch-video@anthropic-plugin-directory": true,
-    "hyperframes@claude-plugins-official": true
-  },
-  "extraKnownMarketplaces": {
-    "claude-plugins-official": {
-      "source": {
-        "source": "github",
-        "repo": "anthropics/claude-plugins-official"
-      }
-    }
+    "aphrody@aphrody": true,
+    "bun@aphrody": true
   },
   "outputStyle": "Autonome",
   "alwaysThinkingEnabled": true,
