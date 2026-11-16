@@ -1,0 +1,13 @@
+{
+  "$schema": "https://anthropic.com/claude-code/plugin.schema.json",
+  "name": "aphrody",
+  "version": "0.1.0",
+  "description": "Aphrody global Claude Code config: agents, skills, hooks, output style",
+  "author": {
+    "name": "aphrody-dev",
+    "email": "324927936+aphrody-dev@users.noreply.github.com"
+  },
+  "skills": [
+    "./"
+  ]
+}

@@ -1,0 +1,20 @@
+# Whitelist: ignore everything, track only portable config.
+/*
+!/.gitignore
+!/.gitattributes
+!/README.md
+!/CLAUDE.md
+!/settings.json
+!/gitconfig
+!/package.json
+!/bun.lock
+!/tsconfig.json
+!/scripts/
+!/skills/
+!/.claude/
+/.claude/settings.local.json
+# Per-project auto-memory only, not transcripts.
+!/projects/
+/projects/*/*
+!/projects/*/memory/
+node_modules/
