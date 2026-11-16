@@ -30,13 +30,18 @@
     "defaultMode": "bypassPermissions"
   },
   "model": "sonnet",
-  "fallbackModel": [
-    "sonnet",
-    "haiku"
-  ],
+  "fallbackModel": ["sonnet", "haiku"],
   "enabledPlugins": {
     "aphrody@aphrody": true,
     "bun@aphrody": true
+  },
+  "extraKnownMarketplaces": {
+    "aphrody": {
+      "source": {
+        "source": "directory",
+        "path": "C:\\Users\\aphro\\.claude"
+      }
+    }
   },
   "outputStyle": "Autonome",
   "alwaysThinkingEnabled": true,

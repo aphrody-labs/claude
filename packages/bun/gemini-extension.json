@@ -1,0 +1,6 @@
+{
+  "name": "bun",
+  "version": "1.4.5",
+  "description": "Bun-native workflow plugin: rules and Bun/Rust/JSC engineering skills.",
+  "contextFileName": "rules/AGENTS.md"
+}

@@ -1,52 +1,219 @@
-#!/usr/bin/env bun
-// Reproduces the global Claude Code setup on this machine:
-// configures git identity and GitHub credentials, installs every plugin enabled in settings.json that is not installed yet,
-// then validates the local aphrody plugin.
-import { resolve } from "node:path"
+import { existsSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { join, resolve } from "node:path";
+import {
+  ensureDirLink,
+  HOME,
+  renderTemplate,
+  REPO_ROOT,
+  runCmd,
+  templateVars,
+  writeIfChanged,
+} from "./lib.ts";
+import { syncInstructionFiles } from "./sync.ts";
 
-const root = resolve(import.meta.dir, "..")
-const settings = await Bun.file(resolve(root, "settings.json")).json()
+const KEEP_CLAUDE_PLUGINS = new Set(["aphrody@aphrody", "bun@aphrody"]);
 
-function claude(...args: string[]) {
-  const r = Bun.spawnSync(["claude", ...args], { stdout: "pipe", stderr: "pipe" })
-  return { ok: r.exitCode === 0, out: r.stdout.toString() + r.stderr.toString() }
+function setupGit(): void {
+  const gitconfig = resolve(REPO_ROOT, "gitconfig");
+  const includes = runCmd([
+    "git",
+    "config",
+    "--global",
+    "--get-all",
+    "include.path",
+  ]).out.split(/\r?\n/);
+  if (
+    !includes.some(
+      (l) => l.trim().replaceAll("\\", "/") === gitconfig.replaceAll("\\", "/"),
+    )
+  ) {
+    runCmd(["git", "config", "--global", "--add", "include.path", gitconfig]);
+  }
+  for (const key of ["user.name", "user.email"]) {
+    runCmd(["git", "config", "--global", "--unset-all", key]);
+  }
+  if (Bun.which("gh")) {
+    runCmd(["gh", "auth", "setup-git"]);
+  }
 }
 
-// Git identity and GitHub credentials: include the tracked gitconfig from the
-// global git config, then let gh serve git credentials for github.com.
-function git(...args: string[]) {
-  return Bun.spawnSync(["git", ...args], { stdout: "pipe", stderr: "pipe" }).stdout.toString().trim()
-}
-const gitconfig = resolve(root, "gitconfig").replaceAll("\\", "/")
-if (!git("config", "--global", "--get-all", "include.path").split("\n").includes(gitconfig)) {
-  git("config", "--global", "--add", "include.path", gitconfig)
-}
-for (const key of ["user.name", "user.email"]) git("config", "--global", "--unset-all", key)
-const gh = Bun.spawnSync(["gh", "auth", "setup-git"], { stdout: "pipe", stderr: "pipe" })
-console.log(gh.exitCode === 0 ? "ok       git identity + gh credential helper" : "FAILED   gh auth setup-git (run gh auth login)")
+async function setupClaudePlugins(): Promise<void> {
+  if (!Bun.which("claude")) return;
 
-// Marketplaces declared in settings.json (GitHub sources) must exist before
-// their plugins can install; adding an existing one is a no-op failure.
-const known = claude("plugin", "marketplace", "list").out
-for (const [name, m] of Object.entries<any>(settings.extraKnownMarketplaces ?? {})) {
-  if (known.includes(name) || m?.source?.source !== "github") continue
-  const r = claude("plugin", "marketplace", "add", m.source.repo)
-  console.log(`${r.ok ? "add     " : "FAILED  "} marketplace ${name}`)
+  const oldSkill = join(REPO_ROOT, "skills", "aphrody");
+  if (existsSync(oldSkill)) rmSync(oldSkill, { recursive: true, force: true });
+
+  const listRes = runCmd(["claude", "plugin", "list", "--json"]);
+  if (listRes.ok && listRes.out) {
+    try {
+      const installed = JSON.parse(listRes.out) as Array<{ id: string }>;
+      const toRemove = installed
+        .filter((p) => !KEEP_CLAUDE_PLUGINS.has(p.id))
+        .map((p) => p.id);
+      if (toRemove.length > 0) {
+        await Promise.all(
+          toRemove.map(async (id) => {
+            const p = Bun.spawn(
+              ["claude", "plugin", "uninstall", id, "--scope", "user"],
+              {
+                cwd: REPO_ROOT,
+                stdout: "ignore",
+                stderr: "ignore",
+                stdin: "ignore",
+              },
+            );
+            await p.exited;
+          }),
+        );
+      }
+    } catch {
+      // Ignore parse failure.
+    }
+  }
+
+  for (const staleDir of [
+    join(REPO_ROOT, "plugins", "cache", "anthropic-plugin-directory"),
+    join(REPO_ROOT, "plugins", "cache", "claude-plugins-official"),
+    join(REPO_ROOT, "plugins", "marketplaces", "claude-plugins-official"),
+  ]) {
+    if (existsSync(staleDir))
+      rmSync(staleDir, { recursive: true, force: true });
+  }
+  runCmd([
+    "claude",
+    "plugin",
+    "marketplace",
+    "remove",
+    "claude-plugins-official",
+  ]);
+
+  const mktList = runCmd(["claude", "plugin", "marketplace", "list", "--json"]);
+  const hasMkt = mktList.ok && mktList.out.includes('"name": "aphrody"');
+  if (!hasMkt) {
+    runCmd(["claude", "plugin", "marketplace", "add", REPO_ROOT]);
+  } else {
+    runCmd(["claude", "plugin", "marketplace", "update", "aphrody"]);
+  }
+
+  for (const id of KEEP_CLAUDE_PLUGINS) {
+    const res = runCmd([
+      "claude",
+      "plugin",
+      "install",
+      id,
+      "--scope",
+      "user",
+      "-y",
+    ]);
+    if (!res.ok)
+      console.error(`claude plugin install ${id}: ${res.err || res.out}`);
+    runCmd(["claude", "plugin", "update", id, "--scope", "user"]);
+  }
 }
 
-const installed = claude("plugin", "list").out
-const wanted = Object.entries(settings.enabledPlugins ?? {})
-  .filter(([id, on]) => on === true && !id.endsWith("@builtin") && !id.endsWith("@skills-dir"))
-  .map(([id]) => id)
+function setupAgyAndGemini(): void {
+  const geminiRoot = join(HOME, ".gemini");
+  const agyPluginsDir = join(geminiRoot, "config", "plugins");
 
-let failed = 0
-for (const id of wanted) {
-  if (installed.includes(id)) { console.log(`ok       ${id}`); continue }
-  const r = claude("plugin", "install", id, "--scope", "user")
-  console.log(`${r.ok ? "install " : "FAILED  "} ${id}`)
-  if (!r.ok) { failed++; console.error(r.out.trim()) }
+  for (const name of ["aphrody", "bun"]) {
+    ensureDirLink(join(REPO_ROOT, "packages", name), join(agyPluginsDir, name));
+  }
+
+  if (Bun.which("gemini")) {
+    for (const name of ["aphrody", "bun"]) {
+      const target = join(REPO_ROOT, "packages", name);
+      const extLink = join(geminiRoot, "extensions", name);
+      if (existsSync(extLink))
+        rmSync(extLink, { recursive: true, force: true });
+      const res = runCmd(["gemini", "extensions", "link", target, "--consent"]);
+      if (!res.ok)
+        console.error(`gemini extensions link ${name}: ${res.err || res.out}`);
+    }
+  }
+
+  ensureDirLink(
+    join(REPO_ROOT, "packages", "bun"),
+    join(HOME, ".bun", "agent-plugin"),
+  );
+
+  const vars = templateVars();
+  const tmplRoot = join(REPO_ROOT, "gemini");
+  const simpleFiles = [
+    "settings.json",
+    "projects.json",
+    "trustedFolders.json",
+    join("config", "hooks.json"),
+    join("config", "mcp_config.json"),
+    join("config", "projects", "default-cli-project.json"),
+    join("antigravity-cli", "hooks.json"),
+  ];
+  for (const rel of simpleFiles) {
+    const src = join(tmplRoot, rel);
+    if (!existsSync(src)) continue;
+    const rendered = renderTemplate(
+      readFileSync(src, "utf8"),
+      vars,
+      rel.endsWith(".json"),
+    );
+    writeIfChanged(join(geminiRoot, rel), rendered);
+  }
+
+  const agySettingsSrc = join(tmplRoot, "antigravity-cli", "settings.json");
+  const agySettingsDst = join(geminiRoot, "antigravity-cli", "settings.json");
+  if (existsSync(agySettingsSrc)) {
+    const desired = JSON.parse(
+      renderTemplate(readFileSync(agySettingsSrc, "utf8"), vars, true),
+    ) as Record<string, unknown>;
+    let current: Record<string, unknown> = {};
+    if (existsSync(agySettingsDst)) {
+      try {
+        current = JSON.parse(readFileSync(agySettingsDst, "utf8")) as Record<
+          string,
+          unknown
+        >;
+      } catch {
+        current = {};
+      }
+    }
+    const oldWs = Array.isArray(current.trustedWorkspaces)
+      ? (current.trustedWorkspaces as string[])
+      : [];
+    const wantedWs = Array.isArray(desired.trustedWorkspaces)
+      ? (desired.trustedWorkspaces as string[])
+      : [];
+    const cleanWs = [...new Set([...wantedWs, ...oldWs])].filter((w) =>
+      existsSync(w),
+    );
+    const merged = { ...current, ...desired, trustedWorkspaces: cleanWs };
+    writeIfChanged(agySettingsDst, `${JSON.stringify(merged, null, 2)}\n`);
+  }
+
+  const piSettings = join(HOME, ".pi", "agent", "settings.json");
+  if (existsSync(piSettings)) {
+    try {
+      const data = JSON.parse(readFileSync(piSettings, "utf8")) as Record<
+        string,
+        unknown
+      >;
+      if (typeof data.envFile === "string" && !existsSync(data.envFile)) {
+        delete data.envFile;
+        writeFileSync(piSettings, `${JSON.stringify(data, null, 2)}\n`, "utf8");
+      }
+    } catch {
+      // Ignore invalid JSON.
+    }
+  }
 }
 
-const v = claude("plugin", "validate", resolve(root, "skills", "aphrody"))
-console.log(v.ok ? "ok       aphrody@skills-dir (valid)" : `FAILED   aphrody@skills-dir\n${v.out.trim()}`)
-process.exit(failed || !v.ok ? 1 : 0)
+runCmd([
+  "bun",
+  "--no-install",
+  join(REPO_ROOT, "scripts", "merge-brain.ts"),
+  "--cleanup",
+]);
+setupGit();
+setupAgyAndGemini();
+await setupClaudePlugins();
+syncInstructionFiles();
+runCmd(["bun", "--no-install", join(REPO_ROOT, "scripts", "merge-brain.ts")]);
+console.log("Setup complete.");

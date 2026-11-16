@@ -1,0 +1,51 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|resume|clear|compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bun --no-install --no-env-file \"${CLAUDE_PLUGIN_ROOT}/hooks/session-start.ts\" claude",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash|Grep|Glob",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bun --no-install --no-env-file \"${CLAUDE_PLUGIN_ROOT}/hooks/pre-tool-use.ts\" claude",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bun --no-install --no-env-file \"${CLAUDE_PLUGIN_ROOT}/hooks/post-tool-use.ts\" claude",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bun --no-install --no-env-file \"${CLAUDE_PLUGIN_ROOT}/hooks/user-prompt-submit.ts\" claude",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  }
+}

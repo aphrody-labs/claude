@@ -1,30 +1,20 @@
-# Claude Code global config
+# Aphrody Global Agent Config
 
-Versioned `~/.claude`: global instructions, settings, per-project auto-memory and one local plugin, `aphrody` (`skills/aphrody`), which carries every global skill, subagent, hook and output style. Third-party plugins are declared in `settings.json` and reinstalled by a Bun script. `.gitignore` is a whitelist: credentials, history, sessions and caches are never tracked.
+Versioned, reproducible global configuration for **Claude Code**, **Antigravity (`agy`)**, **Gemini CLI**, and **Bun**.
 
-## Install on a machine
+## What Is Managed Here
 
-Requires `git`, `bun`, `gh` (logged in with `gh auth login`) and `claude` on `PATH`.
+- `packages/aphrody` (`aphrody`): unified cross-CLI autonomous plugin (recursive `worker`/`researcher` agents, non-blocking Bun hooks for auto-backgrounding, native `bun check` diagnostics, continuous self-learning journal capture/distillation, config sync, MCP integrations, `Autonome` output style, curated skills).
+- `packages/bun` (`bun`): unified Bun-native command rewriter and 36 specialized Bun/Rust/JSC skills.
+- `.claude-plugin/marketplace.json`: local Claude Code marketplace registering `aphrody` and `bun`.
+- `gemini/`: portable templates materialized into `~/.gemini/` (`settings.json`, `projects.json`, `trustedFolders.json`, `config/*`, `antigravity-cli/*`).
+- `projects/*/memory/`: deduplicated, conflict-free project memory synchronized with local SQLite memory stores.
+- `scripts/`: `setup.ts` (idempotent cross-CLI provisioning), `check.ts` (strict multi-CLI validation + lint/type/hygiene), `sync.ts` (bidirectional sync + git push), `merge-brain.ts` (memory/SQLite/session compaction).
+
+## Quickstart
 
 ```sh
-# ~/.claude absent
-git clone https://github.com/aphrody-labs/claude ~/.claude
-# ~/.claude already present (Claude Code ran once)
-git -C ~/.claude init -b main
-git -C ~/.claude remote add origin https://github.com/aphrody-labs/claude
-git -C ~/.claude fetch origin && git -C ~/.claude checkout -f -B main --track origin/main
-
-cd ~/.claude && bun install && bun run setup
+bun run setup
+bun run check
+bun run sync
 ```
-
-## Scripts
-
-| Command | Effect |
-| --- | --- |
-| `bun run setup` | Include `gitconfig` (git identity) in the global git config, run `gh auth setup-git`, install every plugin enabled in `settings.json`, validate `aphrody` |
-| `bun run check` | `claude plugin validate` on `aphrody` and `tsc` over all TypeScript |
-| `bun run sync` | Commit all whitelisted changes and push |
-| `bun run cloudflare-ci-token <owner/repo>...` | Mint a Cloudflare CI token and store it as the repos' Actions secrets |
-| `bun run github [fix]` | Audit (or fix) the GitHub user and administered orgs: purge archived repos whose content survives elsewhere, fill missing descriptions, refresh profile READMEs |
-
-The `aphrody` plugin's SessionStart hook fast-forwards this repo from `origin`; its SessionEnd hook commits and pushes, so the config stays in sync without manual steps.

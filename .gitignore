@@ -1,4 +1,4 @@
-# Whitelist: ignore everything, track only portable config.
+# Whitelist: ignore runtime state, secrets, transcripts, and caches; track only portable config.
 /*
 !/.gitignore
 !/.gitattributes
@@ -9,12 +9,15 @@
 !/package.json
 !/bun.lock
 !/tsconfig.json
-!/scripts/
-!/skills/
+!/.claude-plugin/
 !/.claude/
 /.claude/settings.local.json
-# Per-project auto-memory only, not transcripts.
+!/packages/
+!/gemini/
+!/scripts/
+# Per-project auto-memory only, not session transcripts.
 !/projects/
 /projects/*/*
 !/projects/*/memory/
 node_modules/
+packages/**/node_modules/

@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "claude-bridge": {
+      "command": "bun",
+      "args": ["./hooks-handlers/bridge-mcp.ts"]
+    },
+    "hostinger": {
+      "serverUrl": "https://mcp.hostinger.com"
+    },
+    "ovhcloud": {
+      "serverUrl": "https://mcp.eu.ovhcloud.com/mcp"
+    }
+  }
+}

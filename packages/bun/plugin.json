@@ -1,0 +1,8 @@
+{
+  "name": "bun",
+  "version": "1.4.5",
+  "description": "Bun-native workflow plugin: transparent npm/npx/node/yarn/pnpm/tsc/prettier/eslint rewrites to bun/bunx/bun check/bun lint/bun fmt, non-blocking hooks, and Bun/Rust/JSC skills.",
+  "author": "aphrody-labs",
+  "repository": "https://github.com/aphrody-labs/claude",
+  "logo": "assets/icon.png"
+}

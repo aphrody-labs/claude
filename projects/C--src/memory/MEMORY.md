@@ -1,14 +1,15 @@
 - [agent-policy](agent-policy.md) — Recursive parallelism, cheap subagent models, literal request diffing, and writer coordination
-- [vision](vision.md) — Owner 2026-11-16: craft an OS, a browser, a Google and a Cloudflare/Vercel in any language; replaces all earlier product, stack and UI picks
+- [ai-os-architecture](ai-os-architecture.md) — Reusable building blocks across OS, browser, self-hosted Google services, UI, and Bun-style logo
 - [assemble-and-reuse](assemble-and-reuse.md) — Upstream-first assembly, restore inventory lookup, deduplication, and measured performance
 - [autonomy-nhitl](autonomy-nhitl.md) — Blanket consent, zero `deny`/blocking gates, minimal-input goal execution, zero pauses
 - [budget-and-hosting](budget-and-hosting.md) — Google Sheet budget ledger, Cloudflare/VPS primary hosting, $0 Vercel policy
-- [code-quality-and-design](code-quality-and-design.md) — Code-before-docs, Google eng bar, design baseline and visual diffing, latest deps, real proof
+- [code-quality-and-design](code-quality-and-design.md) — Code-before-docs, Google eng bar, Figma/M3 visual diffing, latest deps, real proof
 - [english-i18n-generalist](english-i18n-generalist.md) — English code/docs baseline, pluggable i18n catalogs, registry-driven generalist design
 - [fleet-and-relay](fleet-and-relay.md) — Fleet roles (`fr1`/`fr2`/`prd`/PC), SSH recovery, AphrodyRelay hub, Chrome Gemini fallback
 - [git-and-workspace-map](git-and-workspace-map.md) — `C:\src\*` checkouts, `ay`/`aphrody`/`open`/`auto`/`rosegriffon`/`nie` split, main-only git discipline
-- [language-and-tooling](language-and-tooling.md) — Any language per task, unrestricted CLI tooling, rustdoc-md, Windows path/shell quirks, %TEMP% sandboxes
+- [language-and-tooling](language-and-tooling.md) — Generalist unrestricted CLI/language tooling, rustdoc-md, Windows path/shell quirks, `%TEMP%` sandboxes
 - [legal-and-licenses](legal-and-licenses.md) — Never gate architecture, absorption, or asset pipelines on license speculation
 - [naming-and-privacy](naming-and-privacy.md) — Goal-derived naming (`identity.toml`), live discovery, zero private literals in tracked files
 - [owner-accessibility](owner-accessibility.md) — Low-vision UX for rare human-only steps (short numbered single actions, direct launch)
 - [platform-lessons](platform-lessons.md) — Reproducible host setup, focused workspace crates, platform API depth, continuous refactoring
+- [vision](vision.md) — Generalist core vision: OS, browser, Google self-hosted services, and Cloudflare/Vercel in any best-fit language

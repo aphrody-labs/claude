@@ -1,0 +1,26 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "aphrody",
+  "owner": {
+    "name": "aphrody-labs",
+    "url": "https://github.com/aphrody-labs"
+  },
+  "metadata": {
+    "description": "Portable Aphrody global agent plugins across Claude Code, Antigravity, and Gemini CLI.",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "aphrody",
+      "source": "./packages/aphrody",
+      "description": "Unified cross-CLI autonomous engineering plugin: recursive agents, non-blocking Bun hooks, MCP servers, autonomous output style, and curated cross-project skills.",
+      "version": "1.0.0"
+    },
+    {
+      "name": "bun",
+      "source": "./packages/bun",
+      "description": "Bun-native workflow plugin: transparent command rewrites to bun/bunx/bun check/bun lint/bun fmt, non-blocking hooks, and Bun/Rust/JSC skills.",
+      "version": "1.4.5"
+    }
+  ]
+}

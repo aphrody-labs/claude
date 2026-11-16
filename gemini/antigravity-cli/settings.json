@@ -1,0 +1,10 @@
+{
+  "toolPermission": "always-proceed",
+  "artifactReviewPolicy": "always-proceed",
+  "allowNonWorkspaceAccess": true,
+  "trustedWorkspaces": [
+    "${HOME_WIN}",
+    "${WORKSPACE_ROOT_WIN}",
+    "${SRC_ROOT_WIN}"
+  ]
+}

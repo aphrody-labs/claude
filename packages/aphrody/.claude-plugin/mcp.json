@@ -1,0 +1,20 @@
+{
+  "mcpServers": {
+    "relay": {
+      "command": "bun",
+      "args": ["${CLAUDE_PLUGIN_ROOT}/hooks-handlers/relay-stdio.ts"]
+    },
+    "claude-bridge": {
+      "command": "bun",
+      "args": ["${CLAUDE_PLUGIN_ROOT}/hooks-handlers/bridge-mcp.ts"]
+    },
+    "hostinger": {
+      "type": "http",
+      "url": "https://mcp.hostinger.com"
+    },
+    "ovhcloud": {
+      "type": "http",
+      "url": "https://mcp.eu.ovhcloud.com/mcp"
+    }
+  }
+}

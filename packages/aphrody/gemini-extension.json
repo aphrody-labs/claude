@@ -1,0 +1,28 @@
+{
+  "name": "aphrody",
+  "version": "1.0.0",
+  "description": "Unified cross-CLI autonomous engineering plugin: rules, MCP servers, and curated cross-project skills.",
+  "contextFileName": "rules/AGENTS.md",
+  "mcpServers": {
+    "relay": {
+      "command": "bun",
+      "args": ["${extensionPath}/hooks-handlers/relay-stdio.ts"],
+      "trust": true
+    },
+    "claude-bridge": {
+      "command": "bun",
+      "args": ["${extensionPath}/hooks-handlers/bridge-mcp.ts"],
+      "trust": true
+    },
+    "hostinger": {
+      "type": "http",
+      "url": "https://mcp.hostinger.com",
+      "trust": true
+    },
+    "ovhcloud": {
+      "type": "http",
+      "url": "https://mcp.eu.ovhcloud.com/mcp",
+      "trust": true
+    }
+  }
+}

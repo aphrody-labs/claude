@@ -1,0 +1,100 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|resume|clear|compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bun --no-install --no-env-file \"${CLAUDE_PLUGIN_ROOT}/hooks-handlers/config-sync.ts\" pull claude",
+            "timeout": 10
+          },
+          {
+            "type": "command",
+            "command": "bun --no-install --no-env-file \"${CLAUDE_PLUGIN_ROOT}/hooks-handlers/session-bridge.ts\" start",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bun --no-install --no-env-file \"${CLAUDE_PLUGIN_ROOT}/hooks-handlers/learn.ts\" capture claude",
+            "timeout": 5
+          },
+          {
+            "type": "command",
+            "command": "bun --no-install --no-env-file \"${CLAUDE_PLUGIN_ROOT}/hooks-handlers/session-bridge.ts\" deliver",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bun --no-install --no-env-file \"${CLAUDE_PLUGIN_ROOT}/hooks-handlers/auto-background.ts\" claude",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bun --no-install --no-env-file \"${CLAUDE_PLUGIN_ROOT}/hooks-handlers/session-bridge.ts\" deliver",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bun --no-install --no-env-file \"${CLAUDE_PLUGIN_ROOT}/hooks-handlers/typecheck.ts\" claude",
+            "timeout": 15
+          }
+        ]
+      },
+      {
+        "matcher": "Bash|Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bun --no-install --no-env-file \"${CLAUDE_PLUGIN_ROOT}/hooks-handlers/learn.ts\" capture claude",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bun --no-install --no-env-file \"${CLAUDE_PLUGIN_ROOT}/hooks-handlers/session-bridge.ts\" deliver",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bun --no-install --no-env-file \"${CLAUDE_PLUGIN_ROOT}/hooks-handlers/config-sync.ts\" push claude",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}

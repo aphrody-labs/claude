@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "${WORKSPACE_ROOT}": "src",
+    "${SRC_ROOT}": "ay"
+  }
+}
