@@ -2,7 +2,7 @@
 name: bun-graph-hotspots
 description: "Historical upstream source churn, commit subjects and maintained-source divergence as of 2026-10-08"
 metadata:
- type: reference
+  type: reference
 ---
 
 Measured 2026-10-08 on local `upstream/main` (tip 620b50f6abe, 2026-10-08 00:29 -0700; not re-fetched). `aphrody git inspect` only reports branch/HEAD/remotes/dirty state (gix), no history, so churn came from `git log`.

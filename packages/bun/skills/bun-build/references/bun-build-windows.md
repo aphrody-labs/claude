@@ -2,7 +2,7 @@
 name: bun-build-windows
 description: "Building Bun natively on this Windows machine (<bun>) — prerequisites, MSVC env via `bun msvc sync` (ex vs-shell.ps1), tool discovery, local state (build/debug/bun-debug.exe, caches), Windows-specific gotchas, cross-compiling Windows from Linux"
 metadata:
- type: reference
+  type: reference
 ---
 
 # Building Bun on Windows

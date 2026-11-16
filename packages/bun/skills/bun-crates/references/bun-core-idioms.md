@@ -2,7 +2,7 @@
 name: bun-core-idioms
 description: "Zig→Rust port heritage and house idioms in Bun's Rust code — naming, Zig-to-Rust mappings, unsafe/SAFETY discipline, error propagation, review rules from REVIEW.md and src/CLAUDE.md, common traits/macros"
 metadata:
- type: reference
+  type: reference
 ---
 
 # Idioms and port heritage in Bun's Rust
@@ -12,20 +12,20 @@ metadata:
 - The Rust tree is a port of the earlier Zig codebase. Many comments cite the Zig original (`bun.foo.bar`, `defer x.deinit`) and a `docs/PORTING.md` that is **not in the repo**.
 - Marker comments you will see: `MOVE_DOWN`, `Note: reshaped for borrowck`, `R-2 noalias mitigation`, `PORT NOTE`, `§Dispatch`, `§Forbidden`.
 - **Zig to Rust mapping**
- | Zig | Rust | |---|---|
- | `Maybe(T)` with `.result`/`.err` | `bun_sys::Maybe<T>` = `Result<T, sys::Error>` with `?` |
- | `bun.JSError!T` | `JsResult<T>` (`JsError::{Thrown, OutOfMemory, Terminated}`) |
- | `bun.handleOom(x)` | `bun_core::handle_oom(x)` / `.unwrap_or_oom` |
- | `bun.Output.scoped(.X.hidden)` | `declare_scope!(X, hidden)` + `scoped_log!(X..)` / `define_scoped_log!` |
- | `bun.String` | `bun_core::String` (Clone=ref, Drop=deref) |
- | `[:0]const u8` | `&ZStr` (`zstr!` literal), `ZBox` owned |
- | `bun.FD` | `bun_core::Fd` |
- | `bun.default_allocator` | mimalloc global, `bun_alloc::default_alloc` for C-shared memory |
- | `defer x.deinit` | Drop / RAII guard |
- | `jsc.Strong` / `JSRef` | `bun_jsc::Strong` / `JsRef` |
- | `@fieldParentPtr` | `container_of`, `from_field_ptr!`, `impl_field_parent!`, `intrusive_field!` (bun_core) |
- | `bun.Environment.isDebug` | `bun_core::env::IS_DEBUG` |
- | `bun.getenvZ` / feature flag | `bun_core::env_var::NAME::get` |
+  | Zig | Rust | |---|---|
+  | `Maybe(T)` with `.result`/`.err` | `bun_sys::Maybe<T>` = `Result<T, sys::Error>` with `?` |
+  | `bun.JSError!T` | `JsResult<T>` (`JsError::{Thrown, OutOfMemory, Terminated}`) |
+  | `bun.handleOom(x)` | `bun_core::handle_oom(x)` / `.unwrap_or_oom` |
+  | `bun.Output.scoped(.X.hidden)` | `declare_scope!(X, hidden)` + `scoped_log!(X..)` / `define_scoped_log!` |
+  | `bun.String` | `bun_core::String` (Clone=ref, Drop=deref) |
+  | `[:0]const u8` | `&ZStr` (`zstr!` literal), `ZBox` owned |
+  | `bun.FD` | `bun_core::Fd` |
+  | `bun.default_allocator` | mimalloc global, `bun_alloc::default_alloc` for C-shared memory |
+  | `defer x.deinit` | Drop / RAII guard |
+  | `jsc.Strong` / `JSRef` | `bun_jsc::Strong` / `JsRef` |
+  | `@fieldParentPtr` | `container_of`, `from_field_ptr!`, `impl_field_parent!`, `intrusive_field!` (bun_core) |
+  | `bun.Environment.isDebug` | `bun_core::env::IS_DEBUG` |
+  | `bun.getenvZ` / feature flag | `bun_core::env_var::NAME::get` |
 - **Naming**
 - Constructors are often `Type::init`; the lint `self_named_constructors` is allowed.
 - Some files keep PascalCase names (`ErrorCode.rs`, `VirtualMachine.rs`) and are mapped with `#[path]`.

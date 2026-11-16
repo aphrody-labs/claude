@@ -2,7 +2,7 @@
 name: bun-build-ci
 description: "Bun CI — Buildkite pipeline (.buildkite/ci.ts), build/test platforms, commit-subject tags, artifacts, test runner, ci:* / pr:comments scripts, GitHub Actions workflows"
 metadata:
- type: reference
+  type: reference
 ---
 
 # CI (Buildkite + GitHub Actions)

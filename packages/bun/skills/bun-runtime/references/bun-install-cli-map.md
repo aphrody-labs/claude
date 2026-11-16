@@ -2,7 +2,7 @@
 name: bun-install-cli-map
 description: "Map of bun package-manager CLI subcommands (install/add/remove/update/pm/publish/pack/audit/why/link/patch/info/bunx...) to source files, plus bunfig [install] keys.npmrc, flags"
 metadata:
- type: reference
+  type: reference
 ---
 
 # PM CLI subcommand -> file map
@@ -14,25 +14,25 @@ Related: `bun-install-architecture` · `bun-install-linkers-workspaces` · `bun-
 `src/runtime/cli/mod.rs`: `RootCommandMatcher` -> `Tag::*Command` (around lines 975-1100), exec table (`exec_pm`, `exec_install`... ~line 1642) and special cases (`bun_info`, `exec_audit`, `exec_prune`).
 Each command file lives in `src/runtime/cli/` and calls `PackageManager::init(ctx, cli, Subcommand::X)` then `update_package_json_and_install_and_cli` or `install_with_manager`.
 
-| CLI | aliases | Tag | File |
+| CLI                              | aliases                                                                      | Tag                                 | File                                                                                                          |
 | -------------------------------- | ---------------------------------------------------------------------------- | ----------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| `bun install` | `i`; `-g/--global` re-routes to AddCommand | InstallCommand | `install_command.rs` |
-| `bun ci` | = install + `frozen_lockfile` (CommandLineArguments.rs: positional[0]=="ci") | InstallCommand | `install_command.rs` |
-| `bun add` | `a` | AddCommand | `add_command.rs` |
-| `bun remove` | `rm`, `r`, `uninstall` | RemoveCommand | `remove_command.rs` |
-| `bun update` | `up`; `-i/--interactive` | UpdateCommand | `update_command.rs`, `update_interactive_command.rs` |
-| `bun outdated` | | OutdatedCommand | `outdated_command.rs` |
-| `bun link` / `bun unlink` | | Link/UnlinkCommand | `link_command.rs`, `unlink_command.rs` |
-| `bun patch` / `bun patch-commit` | | Patch/PatchCommitCommand | `patch_command.rs`, `patch_commit_command.rs` |
-| `bun publish` | | PublishCommand | `publish_command.rs` |
-| `bun audit` | | AuditCommand | `audit_command.rs` (POSTs `{registry}/-/npm/v1/security/advisories/bulk`; fix via `src/install/audit_fix.rs`) |
-| `bun why` | (`bun pm why`) | WhyCommand | `why_command.rs`, `pm_why_command.rs` |
-| `bun info` | | InfoCommand -> `bun_info` in mod.rs | uses `pm_view_command.rs` |
-| `bun dedupe` | | DedupeCommand | `dedupe_command.rs` + `src/install/dedupe.rs` |
-| `bun prune` | | PruneCommand | `prune_command.rs` + `src/install/prune.rs` |
-| `bun x` / `bunx` | | BunxCommand | `bunx_command.rs` |
-| `bun pm ...` | `whoami`, `list` at root also -> PackageManagerCommand | PackageManagerCommand | `package_manager_command.rs` |
-| `bun upgrade` | (self-upgrade, not PM) | UpgradeCommand | `upgrade_command.rs` |
+| `bun install`                    | `i`; `-g/--global` re-routes to AddCommand                                   | InstallCommand                      | `install_command.rs`                                                                                          |
+| `bun ci`                         | = install + `frozen_lockfile` (CommandLineArguments.rs: positional[0]=="ci") | InstallCommand                      | `install_command.rs`                                                                                          |
+| `bun add`                        | `a`                                                                          | AddCommand                          | `add_command.rs`                                                                                              |
+| `bun remove`                     | `rm`, `r`, `uninstall`                                                       | RemoveCommand                       | `remove_command.rs`                                                                                           |
+| `bun update`                     | `up`; `-i/--interactive`                                                     | UpdateCommand                       | `update_command.rs`, `update_interactive_command.rs`                                                          |
+| `bun outdated`                   |                                                                              | OutdatedCommand                     | `outdated_command.rs`                                                                                         |
+| `bun link` / `bun unlink`        |                                                                              | Link/UnlinkCommand                  | `link_command.rs`, `unlink_command.rs`                                                                        |
+| `bun patch` / `bun patch-commit` |                                                                              | Patch/PatchCommitCommand            | `patch_command.rs`, `patch_commit_command.rs`                                                                 |
+| `bun publish`                    |                                                                              | PublishCommand                      | `publish_command.rs`                                                                                          |
+| `bun audit`                      |                                                                              | AuditCommand                        | `audit_command.rs` (POSTs `{registry}/-/npm/v1/security/advisories/bulk`; fix via `src/install/audit_fix.rs`) |
+| `bun why`                        | (`bun pm why`)                                                               | WhyCommand                          | `why_command.rs`, `pm_why_command.rs`                                                                         |
+| `bun info`                       |                                                                              | InfoCommand -> `bun_info` in mod.rs | uses `pm_view_command.rs`                                                                                     |
+| `bun dedupe`                     |                                                                              | DedupeCommand                       | `dedupe_command.rs` + `src/install/dedupe.rs`                                                                 |
+| `bun prune`                      |                                                                              | PruneCommand                        | `prune_command.rs` + `src/install/prune.rs`                                                                   |
+| `bun x` / `bunx`                 |                                                                              | BunxCommand                         | `bunx_command.rs`                                                                                             |
+| `bun pm ...`                     | `whoami`, `list` at root also -> PackageManagerCommand                       | PackageManagerCommand               | `package_manager_command.rs`                                                                                  |
+| `bun upgrade`                    | (self-upgrade, not PM)                                                       | UpgradeCommand                      | `upgrade_command.rs`                                                                                          |
 
 Reserved (no-op): `deploy`, `cloud`, `config`, `use`, `auth`, `login`, `logout`.
 

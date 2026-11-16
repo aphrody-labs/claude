@@ -2,7 +2,7 @@
 name: bun-docs-runtime-apis-a-m
 description: "Dense cheat-sheet of docs/runtime/*.mdx pages archive..module-resolution (Archive, spawn, check, cron, FFI/cc, file I/O, Glob, hashing, HTMLRewriter, Image, JSON5/JSONL, markdown, ModuleGraph, resolution)"
 metadata:
- type: reference
+  type: reference
 ---
 
 Source: <bun>\docs\runtime\*.mdx (read 2026-10-08). Siblings: `bun-docs-runtime-apis-n-z`, `bun-docs-http-networking`, `bun-docs-bundler`, `bun-docs-bunfig-env`, `bun-docs-map`.

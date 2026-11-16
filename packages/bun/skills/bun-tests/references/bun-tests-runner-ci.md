@@ -2,7 +2,7 @@
 name: bun-tests-runner-ci
 description: "Bun CI test runner scripts/runner.node.ts — options, test discovery, expectations.txt quarantine, platform modifiers, ASAN exception/LeakSan validation lists, flaky/parallel lists, timeouts, retries, package.json test scripts"
 metadata:
- type: reference
+  type: reference
 ---
 
 # CI test runner (scripts/runner.node.ts)

@@ -9,6 +9,7 @@ metadata:
 ---
 
 Aphrody crafts four products:
+
 - an OS;
 - a browser;
 - a Google: search, apps, AI and self-hosted services;
@@ -19,6 +20,7 @@ The language does not matter ("peu importe"): Rust, C, C++, Go, Bun/TypeScript, 
 **Why:** on 2026-11-16 the owner asked to erase the contradictions, context, docs and legacy directives. The new vision is flexible and generalist.
 
 **How to apply:**
+
 - No language, framework, UI kit, OS family layout or provider is fixed. Earlier picks were history, not rules: language-by-domain, Material per platform, the Zed/GPUI convergence, the ay/ANU/ayNT/aydroid names, and the product splits.
 - Pick per task from live evidence ([[assemble-and-reuse]]), then wire upstream in.
 - Existing code (Google-service crates, the Bun fork, craft-anything in the Bun fork's src/craft, the forks in aphrody-git) is material to reuse, not a constraint.

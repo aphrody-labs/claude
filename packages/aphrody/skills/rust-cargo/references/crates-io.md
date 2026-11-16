@@ -26,7 +26,6 @@ xh -b https://crates.io/api/v1/crates/serde User-Agent:aphrody-src-agent/1.0
 xh -b "https://crates.io/api/v1/crates?sort=downloads&per_page=10" User-Agent:aphrody-src-agent/1.0
 ```
 
-
 ## Publishing Checklist
 
 ```bash

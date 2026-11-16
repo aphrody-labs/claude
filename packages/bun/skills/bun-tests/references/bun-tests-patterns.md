@@ -2,7 +2,7 @@
 name: bun-tests-patterns
 description: "How to write Bun repo tests — placement rules, spawn template, platform skip/todo idioms, snapshots, concurrency, leak/RSS test patterns, package-manager test setup with Verdaccio, anti-flake rules"
 metadata:
- type: reference
+  type: reference
 ---
 
 # Writing tests in the Bun repo
@@ -26,12 +26,21 @@ Exception-scope validation locally: `BUN_JSC_validateExceptionChecks=1 BUN_JSC_d
 ```ts
 import { test, expect } from "bun:test";
 import { bunEnv, bunExe, normalizeBunSnapshot, tempDir } from "harness";
-test.concurrent("x", async => {
- using dir = tempDir("prefix", { "index.js": `console.log("hi")` });
- await using proc = Bun.spawn({ cmd: [bunExe, "index.js"], env: bunEnv, cwd: String(dir), stderr: "pipe" });
- const [stdout, stderr, exitCode] = await Promise.all([proc.stdout.text, proc.stderr.text, proc.exited]);
- expect(normalizeBunSnapshot(stdout, dir)).toMatchInlineSnapshot(`"hi"`);
- expect(exitCode).toBe(0); // exit code LAST
+test.concurrent("x", (async) => {
+  using dir = tempDir("prefix", { "index.js": `console.log("hi")` });
+  await using proc = Bun.spawn({
+    cmd: [bunExe, "index.js"],
+    env: bunEnv,
+    cwd: String(dir),
+    stderr: "pipe",
+  });
+  const [stdout, stderr, exitCode] = await Promise.all([
+    proc.stdout.text,
+    proc.stderr.text,
+    proc.exited,
+  ]);
+  expect(normalizeBunSnapshot(stdout, dir)).toMatchInlineSnapshot(`"hi"`);
+  expect(exitCode).toBe(0); // exit code LAST
 });
 ```
 

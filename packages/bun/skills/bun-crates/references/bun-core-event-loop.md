@@ -2,7 +2,7 @@
 name: bun-core-event-loop
 description: "Bun's event loop in Rust — VirtualMachine access, jsc::EventLoop tick/run_callback/Stopped, Task/TaskTag/Taskable/ConcurrentTask, hoisted dispatch in bun_runtime, AnyEventLoop/EventLoopHandle/MiniEventLoop, timers, KeepAlive, uSockets/libuv"
 metadata:
- type: reference
+  type: reference
 ---
 
 # Event loop (src/jsc/event_loop.rs, src/event_loop/, src/runtime/dispatch.rs)

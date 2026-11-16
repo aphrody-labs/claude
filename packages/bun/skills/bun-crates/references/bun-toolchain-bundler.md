@@ -2,7 +2,7 @@
 name: bun-toolchain-bundler
 description: "Bun bundler (src/bundler) - BundleV2 scan/parse phase, LinkerContext link pipeline (esbuild linker.go port), tree shaking, chunking, codegen, plugins, loaders, HTML/CSS, bytecode, Bun.build and --compile"
 metadata:
- type: reference
+  type: reference
 ---
 
 # Bundler — `src/bundler/` (crate `bun_bundler`)
@@ -14,15 +14,15 @@ via Zig `bundle_v2.zig`/`LinkerContext.zig`. The authoritative walkthrough is
 ## Entry points
 
 - CLI `bun build`: `src/runtime/cli/build_command.rs` -> `BundleV2::generate_from_cli` (bundle_v2.rs ~4386);
- `--compile` then `StandaloneModuleGraph::to_executable` (build_command.rs ~924); `--check` ->
- `check_command::check_for_build_command` (`bun-toolchain-check-sema`).
+  `--compile` then `StandaloneModuleGraph::to_executable` (build_command.rs ~924); `--check` ->
+  `check_command::check_for_build_command` (`bun-toolchain-check-sema`).
 - JS `Bun.build`: `src/runtime/api/JSBundler.rs` (config parsing `Config::from_js`, plugin host
- `BuildArtifact`) -> `BundleThread<JSBundleCompletionTask>` (`BundleThread.rs`, dedicated bundling thread)
- -> `BundleV2::run_from_js_in_new_thread`. JSC bridge crate `src/bundler_jsc/` (`options_jsc.rs` CompileTarget
- parse, `analyze_jsc.rs` ModuleInfo -> JSC module record). Plugin JS glue `src/js/builtins/BundlerPlugin.ts`
- C++ `src/jsc/bindings/JSBundlerPlugin.cpp`.
+  `BuildArtifact`) -> `BundleThread<JSBundleCompletionTask>` (`BundleThread.rs`, dedicated bundling thread)
+  -> `BundleV2::run_from_js_in_new_thread`. JSC bridge crate `src/bundler_jsc/` (`options_jsc.rs` CompileTarget
+  parse, `analyze_jsc.rs` ModuleInfo -> JSC module record). Plugin JS glue `src/js/builtins/BundlerPlugin.ts`
+  C++ `src/jsc/bindings/JSBundlerPlugin.cpp`.
 - DevServer: `start_from_bake_dev_server` / `finish_from_bake_dev_server`, `enqueue_entry_points_dev_server`;
- production bake: `generate_from_bake_production_cli` (`bun-toolchain-bake`).
+  production bake: `generate_from_bake_production_cli` (`bun-toolchain-bake`).
 
 ## Scan phase (bundle_v2.rs ~8.4k)
 
@@ -38,17 +38,17 @@ Then in `generate_from_cli`: `fail_if_no_entry_points`, `type_check`, `scan_for_
 
 - `Graph.rs` `Graph { pool, entry_points, input_files (SoA: source, loader, side_effects…), ast (SoA of
  `BundledAst`), build_graphs, server_component_boundaries }`. `bundled_ast.rs` = slim `Ast` for bundling (SoA
- `MultiArrayList`; CSS column `CssCol`). `PathToSourceIndexMap.rs`. Source index 0 = runtime (`src/runtime.js`).
+  `MultiArrayList`; CSS column `CssCol`). `PathToSourceIndexMap.rs`. Source index 0 = runtime (`src/runtime.js`).
 - Plugins: `on_resolve`/`on_load` (+ `_async`/`_mini`), `enqueue_on_resolve_plugin_if_needed`
- `enqueue_on_load_plugin_if_needed`; `.defer` handled by `DeferredBatchTask.rs`; native
- `onBeforeParse` plugins via C ABI `OnBeforeParseArguments`/`OnBeforeParseResult` (ParseTask.rs ~1626;
- `bundler_plugin.h`; tests `test/bundler/native-plugin.test.ts`, `native_plugin.cc`).
+  `enqueue_on_load_plugin_if_needed`; `.defer` handled by `DeferredBatchTask.rs`; native
+  `onBeforeParse` plugins via C ABI `OnBeforeParseArguments`/`OnBeforeParseResult` (ParseTask.rs ~1626;
+  `bundler_plugin.h`; tests `test/bundler/native-plugin.test.ts`, `native_plugin.cc`).
 - `barrel_imports.rs`: barrel-file optimization (defer unused submodules of pure re-export barrels; Rolldown-style
- `requested_exports`); configured by `Bun.build({ optimizeImports: [...] })` (JSBundler.rs ~1124). `ServerComponentParseTask.rs` + `AstBuilder.rs`
- generate RSC boundary modules without the parser. `HTMLImportManifest.rs`: `import html from "./x.html"` ->
- `__jsonParse(manifest)`. `defines.rs` (`--define`, env inlining), `entry_points.rs`, `options.rs` (~2.6k:
- `BundleOptions` ~200 fields, `DefaultLoaders`, `PathTemplate` [name]/[hash]/[dir]/[ext], `SourceMapOption`
- `CompileMode`, `PackagesOption`, `TypeChecked`).
+  `requested_exports`); configured by `Bun.build({ optimizeImports: [...] })` (JSBundler.rs ~1124). `ServerComponentParseTask.rs` + `AstBuilder.rs`
+  generate RSC boundary modules without the parser. `HTMLImportManifest.rs`: `import html from "./x.html"` ->
+  `__jsonParse(manifest)`. `defines.rs` (`--define`, env inlining), `entry_points.rs`, `options.rs` (~2.6k:
+  `BundleOptions` ~200 fields, `DefaultLoaders`, `PathTemplate` [name]/[hash]/[dir]/[ext], `SourceMapOption`
+  `CompileMode`, `PackagesOption`, `TypeChecked`).
 
 ## Link phase — `LinkerContext::link` (LinkerContext.rs ~854)
 
@@ -66,29 +66,29 @@ sets `File.entry_bits`) -> `compute_chunks` (chunk key = entry_bits; `mergeSmall
  entry_point_kind, entry_point_chunk_index, line_offset_table, quoted_source_contents }`.
 - `Chunk.rs`: `Chunk { unique_key, entry_bits, final_rel_path, template, cross_chunk_imports, content
  (Content::Javascript|Css|Html), renamer, compile_results_for_chunk, intermediate_output, isolated_hash, … }`;
- `OutputPieces` + `Query` placeholders patched with final hashes (`break_output_into_pieces`).
+  `OutputPieces` + `Query` placeholders patched with final hashes (`break_output_into_pieces`).
 - `linker_context/` files (one pass each): `scanImportsAndExports`, `doStep5`, `computeChunks`
- `mergeSmallChunks`, `computeCrossChunkDependencies`, `crossChunkNames`, `findAllImportedPartsInJSOrder`
- (EntryWalk order, chunk owner by `load_rank`), `findImportedCSSFilesInJSOrder`, `findImportedFilesInCSSOrder`
- `renameSymbolsInChunk` (renamer), `generateChunksInParallel` (rename -> codegen per part range ->
- post-process -> write), `generateCodeForFileInChunkJS`, `generateCompileResultFor{JS,Css,Html}Chunk`
- `generateCodeForLazyExport`, `convertStmtsForChunk` (format-specific import/export rewriting)
- `convertStmtsForChunkForDevServer`, `prepareCssAstsForChunk`, `postProcess{JS,CSS,HTML}Chunk`
- `writeOutputFilesToDisk`, `MetafileBuilder` (`--metafile`), `OutputFileListBuilder`, `StaticRouteVisitor`.
+  `mergeSmallChunks`, `computeCrossChunkDependencies`, `crossChunkNames`, `findAllImportedPartsInJSOrder`
+  (EntryWalk order, chunk owner by `load_rank`), `findImportedCSSFilesInJSOrder`, `findImportedFilesInCSSOrder`
+  `renameSymbolsInChunk` (renamer), `generateChunksInParallel` (rename -> codegen per part range ->
+  post-process -> write), `generateCodeForFileInChunkJS`, `generateCompileResultFor{JS,Css,Html}Chunk`
+  `generateCodeForLazyExport`, `convertStmtsForChunk` (format-specific import/export rewriting)
+  `convertStmtsForChunkForDevServer`, `prepareCssAstsForChunk`, `postProcess{JS,CSS,HTML}Chunk`
+  `writeOutputFilesToDisk`, `MetafileBuilder` (`--metafile`), `OutputFileListBuilder`, `StaticRouteVisitor`.
 - Output: `OutputFile.rs`. Formats `esm|cjs|iife|internal_bake_dev`.
 
 ## Bytecode / compile
 
 - `--bytecode`: JSC bytecode via link-time externs `__bun_jsc_generate_cached_bytecode`, link encoder
- (`__bun_jsc_bytecode_link_encoder_*`), `chunk_gets_bytecode`. `prelinked_module_graph.rs` builds
- `JSC::PrelinkedModuleGraph` tables (bump `VERSION` both sides, WebKit `runtime/PrelinkedModuleGraph.h`).
- `bytecode_order.rs` reads `--bytecode-order` files (written by a run with `BUN_BYTECODE_ORDER_OUT`), naming
- functions by `js_parser/function_identities.rs` hashes.
+  (`__bun_jsc_bytecode_link_encoder_*`), `chunk_gets_bytecode`. `prelinked_module_graph.rs` builds
+  `JSC::PrelinkedModuleGraph` tables (bump `VERSION` both sides, WebKit `runtime/PrelinkedModuleGraph.h`).
+  `bytecode_order.rs` reads `--bytecode-order` files (written by a run with `BUN_BYTECODE_ORDER_OUT`), naming
+  functions by `js_parser/function_identities.rs` hashes.
 - `src/standalone_graph/StandaloneModuleGraph.rs` (~3.5k): embedded virtual FS (`BASE_PATH` `/$bunfs/`, Windows
- `B:\~BUN\`), `File`, `to_bytes`/`to_executable`/`inject`/`from_executable`, `TRAILER = "\n---- Bun! ----\n"`;
- payload in Mach-O segment `__BUN`, PE section `.bun`, ELF RW PT_LOAD (writers in `src/exe_format/{elf,macho,pe}.rs`)
- 8-byte length header; bytecode aligned so `offset % 128 == 120`. Cross-compile downloads target bun
- (`download_to_path`). LIEF was abandoned (350 ms overhead).
+  `B:\~BUN\`), `File`, `to_bytes`/`to_executable`/`inject`/`from_executable`, `TRAILER = "\n---- Bun! ----\n"`;
+  payload in Mach-O segment `__BUN`, PE section `.bun`, ELF RW PT_LOAD (writers in `src/exe_format/{elf,macho,pe}.rs`)
+  8-byte length header; bytecode aligned so `offset % 128 == 120`. Cross-compile downloads target bun
+  (`download_to_path`). LIEF was abandoned (350 ms overhead).
 
 ## Related
 

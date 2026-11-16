@@ -34,13 +34,13 @@ pub fn write_file(path: &[u8], data: &[u8]) -> Result<(), bun_sys::Error> {
 
 ## Why bun_sys?
 
-| Aspect      | bun_sys                            | std::fs / libc         |
-| ----------- | ---------------------------------- | ---------------------- |
-| Return Type | `Maybe<T>` with rich `Error`       | `io::Error` (lossy)    |
-| Windows     | Full support with libuv fallback   | Incomplete/POSIX-ish   |
-| Error Info  | errno, syscall tag, path, fd       | errno only             |
-| EINTR       | Automatic retry                    | Manual handling        |
-| Paths       | `&[u8]` (WTF-8 safe)               | `&Path` (UTF-8 lossy)  |
+| Aspect      | bun_sys                          | std::fs / libc        |
+| ----------- | -------------------------------- | --------------------- |
+| Return Type | `Maybe<T>` with rich `Error`     | `io::Error` (lossy)   |
+| Windows     | Full support with libuv fallback | Incomplete/POSIX-ish  |
+| Error Info  | errno, syscall tag, path, fd     | errno only            |
+| EINTR       | Automatic retry                  | Manual handling       |
+| Paths       | `&[u8]` (WTF-8 safe)             | `&Path` (UTF-8 lossy) |
 
 ## Error Handling with Maybe<T>
 

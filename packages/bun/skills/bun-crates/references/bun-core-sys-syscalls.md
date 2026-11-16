@@ -2,7 +2,7 @@
 name: bun-core-sys-syscalls
 description: "bun_sys syscall layer (Maybe<T>, sys::Error/Tag, Fd encoding, File RAII, FdExt, platform modules), bun_alloc allocators/arenas, and sys_jsc conversion traits"
 metadata:
- type: reference
+  type: reference
 ---
 
 # bun_sys, Fd, and bun_alloc

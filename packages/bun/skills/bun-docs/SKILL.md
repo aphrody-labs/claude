@@ -8,6 +8,7 @@ description: "Find the right page of the Aphrody runtime's documentation (docs/,
 `docs/docs.json` is the navigation; each page is `docs/<path>.mdx`.
 
 ## Get Started
+
 - `docs/index.mdx`: Welcome to Bun (Bun is an all-in-one toolkit for developing modern JavaScript/TypeScript applications.)
 - `docs/installation.mdx`: Installation (Install the Aphrody runtime with the install script, npm, or a release archive.)
 - `docs/quickstart.mdx`: Quickstart (Build your first app with Bun)
@@ -17,6 +18,7 @@ description: "Find the right page of the Aphrody runtime's documentation (docs/,
 - `docs/runtime/templating/create.mdx`: bun create (Create a new Bun project from a React component, a `create-<template>` npm package, a GitHub repo, or a local template)
 
 ## Core Runtime
+
 - `docs/runtime/index.mdx`: Bun Runtime (Execute JavaScript/TypeScript files, package.json scripts, and executable packages with Bun's fast runtime.)
 - `docs/runtime/watch-mode.mdx`: Watch Mode (Automatic reloading in Bun with --watch and --hot modes)
 - `docs/runtime/check.mdx`: Type checking (Type check your TypeScript project with bun check)
@@ -33,6 +35,7 @@ description: "Find the right page of the Aphrody runtime's documentation (docs/,
 - `docs/runtime/code-generation-from-strings.mdx`: Code generation from strings (Make eval(), new Function() and every other way a string becomes code throw, for the whole process, with --disallow-code-generation-from-strings.)
 
 ## File & Module System
+
 - `docs/runtime/file-types.mdx`: File Types (File types and loaders supported by Bun's bundler and runtime)
 - `docs/runtime/module-resolution.mdx`: Module Resolution (How Bun resolves modules and handles imports in JavaScript and TypeScript)
 - `docs/runtime/jsx.mdx`: JSX (Built-in JSX and TSX support in Bun with configurable transpilation options)
@@ -41,6 +44,7 @@ description: "Find the right page of the Aphrody runtime's documentation (docs/,
 - `docs/runtime/file-system-router.mdx`: File System Router (Bun provides a fast API for resolving routes against file-system paths)
 
 ## HTTP server
+
 - `docs/runtime/http/server.mdx`: Server (Use `Bun.serve` to start a high-performance HTTP server in Bun)
 - `docs/runtime/http/routing.mdx`: Routing (Define routes in `Bun.serve` using static paths, parameters, and wildcards)
 - `docs/runtime/http/cookies.mdx`: Cookies (Work with cookies in HTTP requests and responses using Bun's built-in Cookie API.)
@@ -49,6 +53,7 @@ description: "Find the right page of the Aphrody runtime's documentation (docs/,
 - `docs/runtime/http/metrics.mdx`: Metrics (Monitor server activity with built-in metrics)
 
 ## Networking
+
 - `docs/runtime/networking/fetch.mdx`: Fetch (Send HTTP requests with Bun's fetch API)
 - `docs/runtime/http/websockets.mdx`: WebSockets (Server-side WebSockets in Bun)
 - `docs/runtime/networking/tcp.mdx`: TCP (Use Bun's native TCP API to implement performance-sensitive systems like database clients, game servers, or anything that needs to communicate over TCP (instead of HTTP))
@@ -56,9 +61,11 @@ description: "Find the right page of the Aphrody runtime's documentation (docs/,
 - `docs/runtime/networking/dns.mdx`: DNS (Use Bun's DNS module to resolve DNS records)
 
 ## VPN
+
 - `docs/vpn/index.mdx`: Native VPN (Use Bun's embedded Mullvad daemon and native VPN management client)
 
 ## Data & Storage
+
 - `docs/runtime/cookies.mdx`: Cookies (Use Bun's native APIs for working with HTTP cookies)
 - `docs/runtime/file-io.mdx`: File I/O (Bun provides a set of optimized APIs for reading and writing files.)
 - `docs/runtime/streams.mdx`: Streams (Use Bun's streams API to work with binary data without loading it all into memory at once)
@@ -70,11 +77,13 @@ description: "Find the right page of the Aphrody runtime's documentation (docs/,
 - `docs/runtime/redis.mdx`: Redis (Use Bun's native Redis client with a Promise-based API)
 
 ## Concurrency
+
 - `docs/runtime/workers.mdx`: Workers (Use Bun's Workers API to create and communicate with a new JavaScript instance running on a separate thread while sharing I/O resources with the main thread)
 - `docs/runtime/module-graph.mdx`: ModuleGraph (Run many instances of one app in a single process with Bun.ModuleGraph. Each instance gets fresh module state and its own timers and I/O; compiled code is shared.)
 - `docs/runtime/graph.mdx`: Native code graph (Extract source graphs and export scoped snapshot evidence)
 
 ## Process & System
+
 - `docs/runtime/environment-variables.mdx`: Environment Variables (Read and configure environment variables in Bun, including automatic .env file support)
 - `docs/runtime/shell.mdx`: Shell (Use Bun's shell scripting API to run shell commands from JavaScript)
 - `docs/runtime/buv.mdx`: /runtime/buv (Native JavaScriptCore and UV runtime with the PyJS language surface)
@@ -86,6 +95,7 @@ description: "Find the right page of the Aphrody runtime's documentation (docs/,
 - `docs/runtime/cron.mdx`: Cron (Schedule and parse cron jobs with Bun)
 
 ## Interop & Tooling
+
 - `docs/runtime/node-api.mdx`: Node-API (Use Bun's Node-API module to build native add-ons to Node.js)
 - `docs/runtime/ffi.mdx`: FFI (Use Bun's FFI module to efficiently call native libraries from JavaScript)
 - `docs/runtime/linux.mdx`: Linux (Call Linux kernel interfaces directly from JavaScript with bun:linux)
@@ -100,6 +110,7 @@ description: "Find the right page of the Aphrody runtime's documentation (docs/,
 - `docs/runtime/transpiler.mdx`: Transpiler (Use Bun's transpiler to transpile JavaScript and TypeScript code)
 
 ## Utilities
+
 - `docs/runtime/csrf.mdx`: CSRF Protection (Generate and verify CSRF tokens with Bun's built-in API)
 - `docs/runtime/secrets.mdx`: Secrets (Use Bun's Secrets API to store and retrieve sensitive credentials securely)
 - `docs/runtime/console.mdx`: Console (The console object in Bun)
@@ -155,12 +166,14 @@ description: "Find the right page of the Aphrody runtime's documentation (docs/,
 - `docs/guides/util/which-path-to-executable-bin.mdx`: Get the path to an executable bin file
 
 ## Standards & Compatibility
+
 - `docs/runtime/globals.mdx`: Globals (Use Bun's global objects)
 - `docs/runtime/bun-apis.mdx`: Bun APIs (Overview of Bun's native APIs available on the Bun global object and built-in modules)
 - `docs/runtime/web-apis.mdx`: Web APIs (Web-standard APIs supported by Bun for server-side JavaScript)
 - `docs/runtime/nodejs-compat.mdx`: Node.js Compatibility (Bun's compatibility status with Node.js APIs, modules, and globals)
 
 ## Contributing
+
 - `docs/project/roadmap.mdx`: Roadmap (Bun's roadmap and long-term plans)
 - `docs/project/benchmarking.mdx`: Benchmarking (How to benchmark Bun)
 - `docs/project/setup.mdx`: One-command setup (Clone and build the Aphrody runtime (aphrody-labs/bun), toolchains and dependencies included, with one command)

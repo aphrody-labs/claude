@@ -21,13 +21,13 @@ If the `hub_*` tools are not loaded in the session, POST JSON-RPC `tools/call` t
 
 Docs can lag. When the source and the docs disagree, the source wins; report the conflict.
 
-| Question | Command |
-| --- | --- |
+| Question             | Command                                                                                  |
+| -------------------- | ---------------------------------------------------------------------------------------- |
 | head commit and date | `gh api repos/<o>/<r>/commits/<branch> --jq '.sha[0:10] + " " + .commit.committer.date'` |
-| a file at HEAD | `gh api repos/<o>/<r>/contents/<path> --jq .content`, then base64-decode it in `bun -e` |
-| releases and tags | `gh api repos/<o>/<r>/releases/latest`, `git ls-remote --tags <url>` |
-| a crate | `cargo info <crate>` on fr1 |
-| an npm package | `bun info <pkg>` |
+| a file at HEAD       | `gh api repos/<o>/<r>/contents/<path> --jq .content`, then base64-decode it in `bun -e`  |
+| releases and tags    | `gh api repos/<o>/<r>/releases/latest`, `git ls-remote --tags <url>`                     |
+| a crate              | `cargo info <crate>` on fr1                                                              |
+| an npm package       | `bun info <pkg>`                                                                         |
 
 Pipe JSON to `jaq` (gh `--jq` breaks on quotes under niubash).
 

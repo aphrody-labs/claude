@@ -2,7 +2,7 @@
 name: bun-aphrody-graph-memory
 description: Provider-neutral native graph and memory workflow with explicit Bun domain scopes and source evidence
 metadata:
- type: reference
+  type: reference
 ---
 
 Use the selected checkout, `aphrody graph --help`, `aphrody home --help` and

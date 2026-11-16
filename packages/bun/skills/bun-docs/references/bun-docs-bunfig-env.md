@@ -2,7 +2,7 @@
 name: bun-docs-bunfig-env
 description: "Every bunfig.toml key (runtime, [serve], [test], [install], [run]) with defaults.env loading order, Bun-specific env vars, and the full `bun run` flag list from docs"
 metadata:
- type: reference
+  type: reference
 ---
 
 # bunfig.toml, env vars, `bun run` flags (docs/runtime/bunfig.mdx, environment-variables.mdx, runtime/index.mdx, snippets/cli/run.mdx)
@@ -15,17 +15,17 @@ metadata:
 
 ## Top-level (runtime)
 
-| key | notes |
+| key                                                   | notes                                                                              |
 | ----------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| `preload = ["./preload.ts"]` | scripts/plugins run before file/script (= `--preload`/`-r`/`--require`/`--import`) |
-| `jsx`, `jsxFactory`, `jsxFragment`, `jsxImportSource` | same as tsconfig compilerOptions; for non-TS projects |
-| `smol = true` | less memory, more GC |
-| `logLevel` | `"debug" \| "warn" \| "error"` |
-| `[define]` `"process.env.bagel" = "'lox'"` | values parsed as JSON; single-quoted strings ok; `'undefined'` -> undefined |
-| `[loader]` `".bagel" = "tsx"` | loaders: jsx js ts tsx css file json toml wasm napi base64 dataurl text |
-| `telemetry = false` | = `DO_NOT_TRACK`; today only controls anonymous crash reports |
-| `env = false` or `[env] file = false` | disable auto .env loading; explicit `--env-file` still loads |
-| `[console] depth = 3` | default 2; `--console-depth` overrides |
+| `preload = ["./preload.ts"]`                          | scripts/plugins run before file/script (= `--preload`/`-r`/`--require`/`--import`) |
+| `jsx`, `jsxFactory`, `jsxFragment`, `jsxImportSource` | same as tsconfig compilerOptions; for non-TS projects                              |
+| `smol = true`                                         | less memory, more GC                                                               |
+| `logLevel`                                            | `"debug" \| "warn" \| "error"`                                                     |
+| `[define]` `"process.env.bagel" = "'lox'"`            | values parsed as JSON; single-quoted strings ok; `'undefined'` -> undefined        |
+| `[loader]` `".bagel" = "tsx"`                         | loaders: jsx js ts tsx css file json toml wasm napi base64 dataurl text            |
+| `telemetry = false`                                   | = `DO_NOT_TRACK`; today only controls anonymous crash reports                      |
+| `env = false` or `[env] file = false`                 | disable auto .env loading; explicit `--env-file` still loads                       |
+| `[console] depth = 3`                                 | default 2; `--console-depth` overrides                                             |
 
 ## `[serve]`
 
@@ -41,35 +41,35 @@ metadata:
 
 ## `[install]` (details in `bun-docs-pm`)
 
-| key | default | notes |
+| key                                               | default                                                                            | notes                                                                              |
 | ------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| `optional` / `dev` / `peer` | true | which dep kinds to install |
-| `production` | false | skip devDeps + freezes lockfile (add/remove/update then fail) |
-| `exact` | false | default writes caret `^x.y.z` |
-| `ignoreScripts` | false | skips pre/install/postinstall/prepare for project AND trustedDependencies |
-| `concurrentScripts` | 2 x CPU cores | `--concurrent-scripts` |
-| `saveTextLockfile` | true (since 1.2) | false -> binary `bun.lockb` when no lockfile exists |
-| `auto` | "auto" | auto-install: `auto` / `force` / `disable` / `fallback` (`bun -i`) |
-| `prefer` | "online" | `offline` (= `--prefer-offline`) / `latest` (= `--prefer-latest`) |
-| `offline` | false | never touch network; missing cache = error |
-| `frozenLockfile` | false | mismatch package.json vs bun.lock errors |
-| `dryRun` | false | |
-| `globalDir` | `~/.bun/install/global` | env `BUN_INSTALL_GLOBAL_DIR` |
-| `globalBinDir` | `~/.bun/bin` | env `BUN_INSTALL_BIN` |
-| `registry` | `http<registry.npmjs.org>/` | string, `{ url, token }`, or `http<user>:pass@host` |
-| `linkWorkspacePackages` | true | |
-| `[install.scopes] myorg = ...` | | string or `{ url, token }` / `{ url, username, password }`; `$ENVVAR` substitution |
-| `ca` / `cafile` | | PEM string / path (multi-cert ok) |
-| `[install.cache] dir / disable / disableManifest` | `~/.bun/install/cache`, false, false | |
-| `[install.lockfile] save / print` | true / - | `print = "yarn"` also writes yarn.lock (only value) |
-| `linker` | `isolated` for new workspaces, `hoisted` for single-package and pre-1.3.2 projects | |
-| `globalStore` | false | isolated only; share installs in `<cache>/links/`; env `BUN_INSTALL_GLOBAL_STORE` |
-| `publicHoistPattern` | [] | isolated: hoist to root node_modules (pnpm public-hoist-pattern) |
-| `hoistPattern` | ["*"] | isolated: hoist into `node_modules/.bun/node_modules` |
-| `hoist` | true | false = no `.bun/node_modules` fallback (no phantom deps); beats hoistPattern |
-| `logLevel` | | debug/warn/error |
-| `[install.security] scanner = "<pkg>"` | | disables auto-install; cancels install on fatal findings |
-| `minimumReleaseAge` | null | seconds (259200 = 3 days); `minimumReleaseAgeExcludes = [...]` |
+| `optional` / `dev` / `peer`                       | true                                                                               | which dep kinds to install                                                         |
+| `production`                                      | false                                                                              | skip devDeps + freezes lockfile (add/remove/update then fail)                      |
+| `exact`                                           | false                                                                              | default writes caret `^x.y.z`                                                      |
+| `ignoreScripts`                                   | false                                                                              | skips pre/install/postinstall/prepare for project AND trustedDependencies          |
+| `concurrentScripts`                               | 2 x CPU cores                                                                      | `--concurrent-scripts`                                                             |
+| `saveTextLockfile`                                | true (since 1.2)                                                                   | false -> binary `bun.lockb` when no lockfile exists                                |
+| `auto`                                            | "auto"                                                                             | auto-install: `auto` / `force` / `disable` / `fallback` (`bun -i`)                 |
+| `prefer`                                          | "online"                                                                           | `offline` (= `--prefer-offline`) / `latest` (= `--prefer-latest`)                  |
+| `offline`                                         | false                                                                              | never touch network; missing cache = error                                         |
+| `frozenLockfile`                                  | false                                                                              | mismatch package.json vs bun.lock errors                                           |
+| `dryRun`                                          | false                                                                              |                                                                                    |
+| `globalDir`                                       | `~/.bun/install/global`                                                            | env `BUN_INSTALL_GLOBAL_DIR`                                                       |
+| `globalBinDir`                                    | `~/.bun/bin`                                                                       | env `BUN_INSTALL_BIN`                                                              |
+| `registry`                                        | `http<registry.npmjs.org>/`                                                        | string, `{ url, token }`, or `http<user>:pass@host`                                |
+| `linkWorkspacePackages`                           | true                                                                               |                                                                                    |
+| `[install.scopes] myorg = ...`                    |                                                                                    | string or `{ url, token }` / `{ url, username, password }`; `$ENVVAR` substitution |
+| `ca` / `cafile`                                   |                                                                                    | PEM string / path (multi-cert ok)                                                  |
+| `[install.cache] dir / disable / disableManifest` | `~/.bun/install/cache`, false, false                                               |                                                                                    |
+| `[install.lockfile] save / print`                 | true / -                                                                           | `print = "yarn"` also writes yarn.lock (only value)                                |
+| `linker`                                          | `isolated` for new workspaces, `hoisted` for single-package and pre-1.3.2 projects |                                                                                    |
+| `globalStore`                                     | false                                                                              | isolated only; share installs in `<cache>/links/`; env `BUN_INSTALL_GLOBAL_STORE`  |
+| `publicHoistPattern`                              | []                                                                                 | isolated: hoist to root node_modules (pnpm public-hoist-pattern)                   |
+| `hoistPattern`                                    | ["*"]                                                                              | isolated: hoist into `node_modules/.bun/node_modules`                              |
+| `hoist`                                           | true                                                                               | false = no `.bun/node_modules` fallback (no phantom deps); beats hoistPattern      |
+| `logLevel`                                        |                                                                                    | debug/warn/error                                                                   |
+| `[install.security] scanner = "<pkg>"`            |                                                                                    | disables auto-install; cancels install on fatal findings                           |
+| `minimumReleaseAge`                               | null                                                                               | seconds (259200 = 3 days); `minimumReleaseAgeExcludes = [...]`                     |
 
 ## `[run]`
 
@@ -101,7 +101,7 @@ Order (increasing precedence): `.env` -> `.env.{production|development|test}` (b
 - `DO_NOT_TRACK=1` disables crash report upload to bun.report (on by default on macOS & Windows).
 - `BUN_OPTIONS="--hot"` prepends CLI args to every bun invocation (e.g. `BUN_OPTIONS="--cpu-prof-md"`).
 - Others mentioned elsewhere: `BUN_PORT`/`PORT`, `BUN_INSTALL`, `BUN_INSTALL_BIN`, `BUN_INSTALL_GLOBAL_DIR`, `BUN_INSTALL_GLOBAL_STORE`, `BUN_INSTALL_CACHE_DIR` (see `bun-docs-pm`)
- `DATABASE_URL`/`PG*`, `REDIS_URL`, `S3_*`/`AWS_*` (see `bun-docs-runtime-apis-n-z`).
+  `DATABASE_URL`/`PG*`, `REDIS_URL`, `S3_*`/`AWS_*` (see `bun-docs-runtime-apis-n-z`).
 - Dev-build only: `BUN_DEBUG_<scope>=1`, `BUN_DEBUG_QUIET_LOGS=1`, `BUN_DEBUG=<file>.log` (see `bun-docs-voice-contributing`).
 
 ## `bun run` semantics

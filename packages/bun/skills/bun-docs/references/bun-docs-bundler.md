@@ -2,7 +2,7 @@
 name: bun-docs-bundler
 description: "Cheat-sheet of docs/bundler/* — Bun.build options/defaults with bun build CLI flags, outputs, errors, loaders, plugins, macros, --compile executables, bytecode, CSS/HTML/fullstack/HMR, esbuild diffs, minifier."
 metadata:
- type: reference
+  type: reference
 ---
 
 Source: <bun>\docs\bundler\{index,bytecode,css,esbuild,executables,fullstack,hot-reloading,html-static,loaders,macros,minifier,plugins,standalone-html}.mdx. Related: `bun-docs-map`, `bun-docs-runtime-apis-a-m`, `bun-docs-runtime-apis-n-z`, `bun-docs-http-networking` (Bun.serve routes), `bun-docs-bunfig-env` ([serve.static], env).

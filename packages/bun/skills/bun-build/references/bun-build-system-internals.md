@@ -2,7 +2,7 @@
 name: bun-build-system-internals
 description: "Architecture of scripts/build/** (TS → build.ninja): phases, module inventory, Rust-per-crate ninja graph, flags tables, toolchain checks, how to add a flag/profile/config field/rule/workaround"
 metadata:
- type: reference
+  type: reference
 ---
 
 # scripts/build internals (source of truth: `scripts/build/CLAUDE.md`, 328 lines)

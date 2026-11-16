@@ -2,7 +2,7 @@
 name: bun-core-classes-ts-bindings
 description: "The .classes.ts → generate-classes.ts → ZigGeneratedClasses.cpp + generated_classes.rs pipeline, #[JsClass] Rust side, generated symbol names, and two end-to-end examples (Glob, CronJob); plus hand-written C++ class pattern"
 metadata:
- type: reference
+  type: reference
 ---
 
 # JS classes backed by Rust: the `.classes.ts` pipeline

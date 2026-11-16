@@ -2,7 +2,7 @@
 name: bun-tests-harness
 description: "test/harness.ts exports with signatures — bunExe/bunEnv, tempDir, normalizeBunSnapshot, platform flags (isWindows/isASAN/isDebug...), gc/leak helpers, VerdaccioRegistry, install helpers, matchers"
 metadata:
- type: reference
+  type: reference
 ---
 
 # test/harness.ts (~2400 lines) — import as `from "harness"`

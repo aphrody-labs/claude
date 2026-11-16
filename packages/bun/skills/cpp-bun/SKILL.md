@@ -207,15 +207,15 @@ BUN_LSP_AI="claude -p" names the command that fixes code: it reads a prompt on s
 
 _From `package.json`._
 
-| Script | Runs |
-| --- | --- |
-| `bun run bd` | `BUN_DEBUG_QUIET_LOGS=1 bun scripts/build.ts --profile=debug --quiet` |
-| `bun run build:debug` | `bun scripts/build.ts --profile=debug` |
-| `bun run build:asan` | `bun scripts/build.ts --profile=release-asan --build-dir=build/release-asan` |
-| `bun run build:local` | `bun scripts/build.ts --profile=debug-local --build-dir=build/debug-local` |
-| `bun run fmt:cpp` | `bun run clang-format` |
-| `bun run clang-format:check` | `./scripts/run-clang-format.sh check` |
-| `bun run codegen:verify` | `bun src/codegen/generate-agent-tools.ts --check && (bun run codegen:string-maps && git diff --exit-code 'src/**/*.generated.rs' \|\| (echo '\n*.generated.rs is stale — run `bun run codegen:string-maps` and commit the result.' >&2; exit 1))` |
-| `bun run rust:check-all` | `bun scripts/rust-check-all.ts` |
-| `bun run rust:clippy` | `cargo clippy --workspace --no-deps --keep-going` |
-| `bun run test` | `bun scripts/runner.node.ts --exec-path ./build/debug/bun-debug` |
+| Script                       | Runs                                                                                                                                                                                                                                              |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `bun run bd`                 | `BUN_DEBUG_QUIET_LOGS=1 bun scripts/build.ts --profile=debug --quiet`                                                                                                                                                                             |
+| `bun run build:debug`        | `bun scripts/build.ts --profile=debug`                                                                                                                                                                                                            |
+| `bun run build:asan`         | `bun scripts/build.ts --profile=release-asan --build-dir=build/release-asan`                                                                                                                                                                      |
+| `bun run build:local`        | `bun scripts/build.ts --profile=debug-local --build-dir=build/debug-local`                                                                                                                                                                        |
+| `bun run fmt:cpp`            | `bun run clang-format`                                                                                                                                                                                                                            |
+| `bun run clang-format:check` | `./scripts/run-clang-format.sh check`                                                                                                                                                                                                             |
+| `bun run codegen:verify`     | `bun src/codegen/generate-agent-tools.ts --check && (bun run codegen:string-maps && git diff --exit-code 'src/**/*.generated.rs' \|\| (echo '\n*.generated.rs is stale — run `bun run codegen:string-maps` and commit the result.' >&2; exit 1))` |
+| `bun run rust:check-all`     | `bun scripts/rust-check-all.ts`                                                                                                                                                                                                                   |
+| `bun run rust:clippy`        | `cargo clippy --workspace --no-deps --keep-going`                                                                                                                                                                                                 |
+| `bun run test`               | `bun scripts/runner.node.ts --exec-path ./build/debug/bun-debug`                                                                                                                                                                                  |

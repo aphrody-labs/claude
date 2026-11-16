@@ -2,7 +2,7 @@
 name: bun-install-lockfile
 description: "Bun lockfile internals — Lockfile struct, text bun.lock (v0..v3) format/parser, binary bun.lockb, migration from npm/yarn/pnpm, load/save paths"
 metadata:
- type: reference
+  type: reference
 ---
 
 # Lockfile (bun.lock / bun.lockb)
@@ -15,7 +15,7 @@ Related: `bun-install-architecture` · `bun-install-linkers-workspaces` · `bun-
 - `lockfile/bun.lock.rs` — text lockfile stringifier (`Stringifier`) + parser (`parse_into_binary_lockfile`-style; reads root keys).
 - `lockfile/bun.lockb.rs` — binary serializer (`Serializer` alias), header `#!/usr/bin/env bun\nbun-lockfile-format-v0\n`; optional trailing sections tagged by 8-byte magic: `pAtChEdD`, `wOrKsPaC`, `tRuStEDd`, `eMpTrUsT`, `oVeRriDs`, `cAtAlOgS`, `cNfGvRsN`, `sCoPdOvR`.
 - `lockfile/Buffers.rs` (column buffers: dependencies, resolutions, trees, hoisted_dependencies, string_bytes, extern_strings), `Package.rs` (+ `Package/Meta.rs`, `Scripts.rs`, `WorkspaceMap.rs`), `Tree.rs` (hoisted node_modules tree, `Iterator`, `relative_path_and_depth`)
- `CatalogMap.rs`, `OverrideMap.rs` + `override_selector.rs` (scoped overrides), `pruned_workspaces.rs`, `reachable.rs`, `printer/{Yarn.rs,tree_printer.rs}`, `lockfile_json_stringify_for_debugging.rs`.
+  `CatalogMap.rs`, `OverrideMap.rs` + `override_selector.rs` (scoped overrides), `pruned_workspaces.rs`, `reachable.rs`, `printer/{Yarn.rs,tree_printer.rs}`, `lockfile_json_stringify_for_debugging.rs`.
 
 ## Lockfile struct fields
 

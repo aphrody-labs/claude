@@ -2,7 +2,7 @@
 name: bun-agent-shared-memory
 description: Shared source-backed Bun OS decisions and qualification for coding-agent harnesses
 metadata:
- type: reference
+  type: reference
 ---
 
 # Shared Bun OS source context

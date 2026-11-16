@@ -1,6 +1,6 @@
 ---
 name: fleet-and-relay
-description: Fleet host roles (fr1, fr2, prd, PC), SSH timeout recovery, AphrodyRelay local hub endpoints, and Chrome Gemini review fallback
+description: Fleet host roles (fr1, fr2, prd, PC), SSH timeout recovery, and Chrome Gemini review fallback
 type: project
 ---
 
@@ -11,5 +11,4 @@ type: project
   - PC (RTX 4070 `sm_89`): local GPU/UI/assets, no heavy Rust compilation.
   - Resilience: systemd `Restart=always`, Docker `unless-stopped`, linger, `agent` user with sudo for headless workers; cluster failover.
 - **SSH traps**: always invoke SSH with `timeout 60 ssh <host> '...'`. Exit 255 typically indicates CPU/RAM saturation from runaway `gitleaks` or `lighthouse` Chrome processes (`pkill -f gitleaks; pkill -f user-data-dir=/tmp/lighthouse`).
-- **AphrodyRelay** (`$RELAY_URL`, default `http://127.0.0.1:8790`): exposes MCP (`POST /mcp`), A2A (`/.well-known/agent-card.json`, `POST /a2a`), RPC, WS, and metrics (`GET /metrics`). If MCP transport fails inside a session, call `hubCall` (`ay/frameworks/ai-os/src/relay/mcp-hub.ts`) or `sessions.ts` directly via `bun`.
 - **Large Gemini Carbon review fallback**: if relay `gemini_review` hits 429, inject `<input type=file>` into `gemini.google.com/app`, upload bundle under `%TEMP%`, insert into `.ql-editor`, submit, poll `Stop response`, and read verified findings against live code.

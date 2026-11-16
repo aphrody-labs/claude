@@ -2,7 +2,7 @@
 name: bun-core-crate-map
 description: "Map of Bun's Rust foundation crates (bun_core, bun_alloc, bun_sys, paths, collections, threading, ptr, safety, jsc, event_loop, io, uws_sys), their tiers and the lints and disallowed-std rules that govern them"
 metadata:
- type: reference
+  type: reference
 ---
 
 # Bun Rust workspace: foundation crate map

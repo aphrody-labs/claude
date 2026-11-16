@@ -2,7 +2,7 @@
 name: bun-build-lint-format
 description: "Rust workspace layout (Cargo.toml, rust-toolchain, profiles, workspace lints, clippy.toml bans), rustfmt, mordant, hawk, miri, rust:check-all, oxlint, prettier, clang-format, source-lints"
 metadata:
- type: reference
+  type: reference
 ---
 
 # Rust workspace, lints and formatters

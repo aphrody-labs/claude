@@ -11,13 +11,19 @@
   "license": "MIT",
   "privacyPolicyUrl": "https://github.com/aphrody-labs/claude#privacy",
   "icon": "./assets/icon.png",
-  "keywords": ["aphrody", "autonomous", "recursive", "agents", "hooks", "learn", "mcp", "bun"],
+  "keywords": [
+    "aphrody",
+    "autonomous",
+    "recursive",
+    "agents",
+    "hooks",
+    "learn",
+    "mcp",
+    "bun"
+  ],
   "hooks": "./.claude-plugin/hooks.json",
   "mcpServers": "./.claude-plugin/mcp.json",
   "skills": "./skills/",
-  "agents": [
-    "./agents/worker.md",
-    "./agents/researcher.md"
-  ],
+  "agents": ["./agents/worker.md", "./agents/researcher.md"],
   "outputStyles": "./output-styles/"
 }

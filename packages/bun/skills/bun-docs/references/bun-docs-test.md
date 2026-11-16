@@ -2,7 +2,7 @@
 name: bun-docs-test
 description: "Cheat-sheet bun test (docs/test + docs/guides/test) - CLI flags/defauts, [test] bunfig, discovery, modifiers, hooks, mocks, timers, snapshots, DOM, reporters, coverage, parallel/shard, runtime"
 metadata:
- type: reference
+  type: reference
 ---
 
 Source : `<bun>\docs\test\*.mdx`, `docs\snippets\cli\test.mdx`, `docs\guides\test\*.mdx`. Voir aussi `bun-docs-map`, `bun-docs-bunfig-env`, `bun-docs-pm`.
@@ -20,60 +20,60 @@ Source : `<bun>\docs\test\*.mdx`, `docs\snippets\cli\test.mdx`, `docs\guides\tes
 
 ## Flags CLI (défauts)
 
-| Flag | Effet / défaut |
+| Flag                                      | Effet / défaut                                                                                                                                               |
 | ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `--timeout <ms>` | timeout par test, défaut **5000** |
-| `--bail[=N]` | stop après N échecs; sans nombre = 1 |
-| `--rerun-each N` | relance chaque fichier N fois (flaky) |
-| `--retry N` | réessaie un test échoué jusqu'à N fois; `{retry:N}` par test prime |
-| `--concurrent` | tous les tests = `test.concurrent` (sauf `test.serial`) |
-| `--max-concurrency N` | défaut **20** |
-| `--randomize` | ordre aléatoire; le seed s'affiche (`--seed=12345`) dans le résumé |
-| `--seed N` | implique `--randomize`, ordre reproductible |
-| `--only` | ne lance que `test.only`/`describe.only` |
-| `--todo` | exécute les `test.todo` ; todo qui passe = échec ("marked as todo but passes"), todo qui échoue = OK (exit 0) |
-| `-t, --test-name-pattern <re>` | filtre par nom |
-| `-u, --update-snapshots` | réécrit les snapshots |
-| `--reporter=junit\|dots` | junit exige `--reporter-outfile`; défaut console |
-| `--reporter-outfile <path>` | sortie du reporter |
-| `--dots` | = `--reporter=dots` |
-| `--only-failures` | moins de sortie (cité guide migrate-from-jest) |
-| `--coverage` | profil de couverture |
-| `--coverage-reporter text\|lcov` | défaut `text`, répétable, implique `--coverage` |
-| `--coverage-dir <dir>` | défaut `coverage` |
-| `--check` | type-check tests + imports avant exécution; erreur -> exit 1, aucun test |
-| `--preload <f>` | répétable; scripts avant les tests |
-| `--watch` / `--hot` | watch redémarre le process (meilleure isolation); hot préserve l'état |
-| `--parallel[=N]` | fichiers sur N workers (défaut nb cœurs); implique `--isolate` |
-| `--no-isolate` | avec `--parallel` : un global par worker |
-| `--isolate` | global neuf par fichier dans le même process |
-| `--parallel-delay=<ms>` | défaut 5, spawn paresseux des workers |
-| `--shard=i/n` | i-ème tranche déterministe |
-| `--timings=<f.json>` / `--update-timings` | équilibrage par durée |
-| `--smol` | mémoire réduite |
-| Autres runtime | `--inspect`, `--inspect-brk`, `--define`, `--loader .svg:text`, `--tsconfig-override`, `--conditions`, `--env-file`, `--prefer-offline`, `--frozen-lockfile` |
-| CLI prime toujours sur bunfig. |
+| `--timeout <ms>`                          | timeout par test, défaut **5000**                                                                                                                            |
+| `--bail[=N]`                              | stop après N échecs; sans nombre = 1                                                                                                                         |
+| `--rerun-each N`                          | relance chaque fichier N fois (flaky)                                                                                                                        |
+| `--retry N`                               | réessaie un test échoué jusqu'à N fois; `{retry:N}` par test prime                                                                                           |
+| `--concurrent`                            | tous les tests = `test.concurrent` (sauf `test.serial`)                                                                                                      |
+| `--max-concurrency N`                     | défaut **20**                                                                                                                                                |
+| `--randomize`                             | ordre aléatoire; le seed s'affiche (`--seed=12345`) dans le résumé                                                                                           |
+| `--seed N`                                | implique `--randomize`, ordre reproductible                                                                                                                  |
+| `--only`                                  | ne lance que `test.only`/`describe.only`                                                                                                                     |
+| `--todo`                                  | exécute les `test.todo` ; todo qui passe = échec ("marked as todo but passes"), todo qui échoue = OK (exit 0)                                                |
+| `-t, --test-name-pattern <re>`            | filtre par nom                                                                                                                                               |
+| `-u, --update-snapshots`                  | réécrit les snapshots                                                                                                                                        |
+| `--reporter=junit\|dots`                  | junit exige `--reporter-outfile`; défaut console                                                                                                             |
+| `--reporter-outfile <path>`               | sortie du reporter                                                                                                                                           |
+| `--dots`                                  | = `--reporter=dots`                                                                                                                                          |
+| `--only-failures`                         | moins de sortie (cité guide migrate-from-jest)                                                                                                               |
+| `--coverage`                              | profil de couverture                                                                                                                                         |
+| `--coverage-reporter text\|lcov`          | défaut `text`, répétable, implique `--coverage`                                                                                                              |
+| `--coverage-dir <dir>`                    | défaut `coverage`                                                                                                                                            |
+| `--check`                                 | type-check tests + imports avant exécution; erreur -> exit 1, aucun test                                                                                     |
+| `--preload <f>`                           | répétable; scripts avant les tests                                                                                                                           |
+| `--watch` / `--hot`                       | watch redémarre le process (meilleure isolation); hot préserve l'état                                                                                        |
+| `--parallel[=N]`                          | fichiers sur N workers (défaut nb cœurs); implique `--isolate`                                                                                               |
+| `--no-isolate`                            | avec `--parallel` : un global par worker                                                                                                                     |
+| `--isolate`                               | global neuf par fichier dans le même process                                                                                                                 |
+| `--parallel-delay=<ms>`                   | défaut 5, spawn paresseux des workers                                                                                                                        |
+| `--shard=i/n`                             | i-ème tranche déterministe                                                                                                                                   |
+| `--timings=<f.json>` / `--update-timings` | équilibrage par durée                                                                                                                                        |
+| `--smol`                                  | mémoire réduite                                                                                                                                              |
+| Autres runtime                            | `--inspect`, `--inspect-brk`, `--define`, `--loader .svg:text`, `--tsconfig-override`, `--conditions`, `--env-file`, `--prefer-offline`, `--frozen-lockfile` |
+| CLI prime toujours sur bunfig.            |
 
 ## bunfig `[test]`
 
-| Clé | Notes |
+| Clé                                                                                                                                                                                                                                                                                                                                    | Notes                                                                         |
 | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| `root` | string, un seul dossier (tableau non supporté) |
-| `preload` | string ou tableau; aussi `test.preload = [...]` au top-level |
-| `pathIgnorePatterns` | string ou tableau de globs (exclut de la découverte) |
-| `smol` | = `--smol` |
-| `concurrentTestGlob` | string ou tableau; fichiers matchés = `--concurrent`; `--concurrent` l'écrase |
-| `randomize` / `seed` | seed requiert `randomize = true` |
-| `retry` | défaut 0; `--retry` et `{retry}` priment |
-| `rerunEach` | relance chaque fichier N fois |
-| `coverage` | bool |
-| `coverageReporter` | `"text"`/`"lcov"` ou tableau, défaut `["text"]` |
-| `coverageDir` | défaut `"coverage"` |
-| `coverageThreshold` | nombre ou `{ lines, functions, statements }` |
-| `coverageSkipTestFiles` | défaut true |
-| `coveragePathIgnorePatterns` | globs, n'affecte que la couverture |
-| `coverageIgnoreSourcemaps` | défaut false |
-| `[test.reporter] junit = "path.xml"`. `bun test` hérite de `[install]` (registry, cafile, prefer, exact). |
+| `root`                                                                                                                                                                                                                                                                                                                                 | string, un seul dossier (tableau non supporté)                                |
+| `preload`                                                                                                                                                                                                                                                                                                                              | string ou tableau; aussi `test.preload = [...]` au top-level                  |
+| `pathIgnorePatterns`                                                                                                                                                                                                                                                                                                                   | string ou tableau de globs (exclut de la découverte)                          |
+| `smol`                                                                                                                                                                                                                                                                                                                                 | = `--smol`                                                                    |
+| `concurrentTestGlob`                                                                                                                                                                                                                                                                                                                   | string ou tableau; fichiers matchés = `--concurrent`; `--concurrent` l'écrase |
+| `randomize` / `seed`                                                                                                                                                                                                                                                                                                                   | seed requiert `randomize = true`                                              |
+| `retry`                                                                                                                                                                                                                                                                                                                                | défaut 0; `--retry` et `{retry}` priment                                      |
+| `rerunEach`                                                                                                                                                                                                                                                                                                                            | relance chaque fichier N fois                                                 |
+| `coverage`                                                                                                                                                                                                                                                                                                                             | bool                                                                          |
+| `coverageReporter`                                                                                                                                                                                                                                                                                                                     | `"text"`/`"lcov"` ou tableau, défaut `["text"]`                               |
+| `coverageDir`                                                                                                                                                                                                                                                                                                                          | défaut `"coverage"`                                                           |
+| `coverageThreshold`                                                                                                                                                                                                                                                                                                                    | nombre ou `{ lines, functions, statements }`                                  |
+| `coverageSkipTestFiles`                                                                                                                                                                                                                                                                                                                | défaut true                                                                   |
+| `coveragePathIgnorePatterns`                                                                                                                                                                                                                                                                                                           | globs, n'affecte que la couverture                                            |
+| `coverageIgnoreSourcemaps`                                                                                                                                                                                                                                                                                                             | défaut false                                                                  |
+| `[test.reporter] junit = "path.xml"`. `bun test` hérite de `[install]` (registry, cafile, prefer, exact).                                                                                                                                                                                                                              |
 | Jest -> bunfig : setupFiles(AfterEnv)->`preload`, testPathIgnorePatterns->`pathIgnorePatterns`, rootDir->`root`, coverageDirectory->`coverageDir`, coverageReporters->`coverageReporter`, coverageThreshold en fraction (0.9). bail/collectCoverage/testTimeout -> `--bail`/`--coverage`/`--timeout`. Pas de `__mocks__` ni auto-mock. |
 
 ## Écrire des tests (`bun:test`)

@@ -2,7 +2,7 @@
 name: bun-tests-layout
 description: "Bun test/ directory layout in depth — js/node/test ported Node tests, regression, cli/install (verdaccio + dummy registry), napi, v8, @aphrody/bun-types, bake, bundler, quarantine/config files"
 metadata:
- type: reference
+  type: reference
 ---
 
 # test/ layout

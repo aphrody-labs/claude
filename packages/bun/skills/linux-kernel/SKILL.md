@@ -211,9 +211,9 @@ BUN_LSP_AI="claude -p" names the command that fixes code: it reads a prompt on s
 
 _From `package.json`._
 
-| Script | Runs |
-| --- | --- |
-| `bun run bd` | `BUN_DEBUG_QUIET_LOGS=1 bun scripts/build.ts --profile=debug --quiet` |
-| `bun run rust:check-all` | `bun scripts/rust-check-all.ts` |
-| `bun run rust:clippy` | `cargo clippy --workspace --no-deps --keep-going` |
-| `bun run test` | `bun scripts/runner.node.ts --exec-path ./build/debug/bun-debug` |
+| Script                   | Runs                                                                  |
+| ------------------------ | --------------------------------------------------------------------- |
+| `bun run bd`             | `BUN_DEBUG_QUIET_LOGS=1 bun scripts/build.ts --profile=debug --quiet` |
+| `bun run rust:check-all` | `bun scripts/rust-check-all.ts`                                       |
+| `bun run rust:clippy`    | `cargo clippy --workspace --no-deps --keep-going`                     |
+| `bun run test`           | `bun scripts/runner.node.ts --exec-path ./build/debug/bun-debug`      |

@@ -40,11 +40,11 @@ Rules:
 
 Three files, three owners:
 
-| File | Role | Written by |
-|---|---|---|
-| `~/.niubash/plugins.json` | declarative spec — what should be installed and enabled | `niu plugin` verbs, or hand-edit + `niu plugin sync` |
-| `~/.niubash/sources/registry.json` | lockfile — what is installed (commit pins) | `niu plugin` verbs |
-| `~/.niubash/generated/plugins.niu` | derived activation plane — one section per enabled source | `niu plugin` verbs, validate-then-atomic publish |
+| File                               | Role                                                      | Written by                                           |
+| ---------------------------------- | --------------------------------------------------------- | ---------------------------------------------------- |
+| `~/.niubash/plugins.json`          | declarative spec — what should be installed and enabled   | `niu plugin` verbs, or hand-edit + `niu plugin sync` |
+| `~/.niubash/sources/registry.json` | lockfile — what is installed (commit pins)                | `niu plugin` verbs                                   |
+| `~/.niubash/generated/plugins.niu` | derived activation plane — one section per enabled source | `niu plugin` verbs, validate-then-atomic publish     |
 
 The loader is **host-owned and read-only**: never edit it — the next verb
 regenerates it. At startup the host sources it BEFORE `~/.niubashrc`, so

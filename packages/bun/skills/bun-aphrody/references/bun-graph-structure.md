@@ -2,7 +2,7 @@
 name: bun-graph-structure
 description: "What the graph:bun code graph says about Bun's structure (communities decoded, god nodes, crate coupling), repo size facts from aphrody scan/ingest, and the graph's reliability limits + label-to-id recipe"
 metadata:
- type: reference
+  type: reference
 ---
 
 Sources: `aphrody graph --source graph:bun report|explain|path|query`, a Bun script over `~\.aphrody\graphs\bun\graph.json` (keys `nodes`, `links`, `hyperedges`=0, `built_at_commit`=null), `aphrody scan tree|manifests`, `aphrody ingest --subpath … --include "*.rs" --json`. HEAD fe43d1d685a, 2026-10-08. Graph setup: `bun-aphrody-graph-memory`.

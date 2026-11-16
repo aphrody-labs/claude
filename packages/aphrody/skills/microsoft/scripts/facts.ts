@@ -44,7 +44,9 @@ const crates = [
   "wasm-bindgen",
   "web-sys",
 ];
-const ghRepos: string[] = (await import("./repos.json", { with: { type: "json" } })).default;
+const ghRepos: string[] = (
+  await import("./repos.json", { with: { type: "json" } })
+).default;
 
 const nuget = Object.fromEntries(
   await Promise.all(

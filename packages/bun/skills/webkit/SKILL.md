@@ -46,24 +46,24 @@ WebKit (JavaScriptCore) — the JS engine.
 Two modes via `cfg.webkit`:
 
 **prebuilt**: Download tarball from oven-sh/WebKit releases (or from
-  aphrody-labs/WebKit, see `webkitPrebuiltRepo` / `$BUN_WEBKIT_REPO`). Tarball name
-  encodes {os, arch, musl, debug|lto, asan, assertions} — each is a separate
-  ABI — and coverage.
-  ASAN MUST match bun's setting: WTF::Vector layout changes with ASAN
-  (see WTF/Vector.h:682), so mixing → silent memory corruption.
+aphrody-labs/WebKit, see `webkitPrebuiltRepo` / `$BUN_WEBKIT_REPO`). Tarball name
+encodes {os, arch, musl, debug|lto, asan, assertions} — each is a separate
+ABI — and coverage.
+ASAN MUST match bun's setting: WTF::Vector layout changes with ASAN
+(see WTF/Vector.h:682), so mixing → silent memory corruption.
 
 **local**: Source at `vendor/WebKit/`, or `$BUN_WEBKIT_PATH` if set. User
-  clones manually (clone takes 10+ min — too slow for the build system
-  to do). Set `BUN_WEBKIT_PATH` to share one clone across worktrees. We
-  cmake it like any other dep. Headers land in the BUILD dir (generated
-  during configure), which is why `provides.includes` returns absolute
-  paths.
+clones manually (clone takes 10+ min — too slow for the build system
+to do). Set `BUN_WEBKIT_PATH` to share one clone across worktrees. We
+cmake it like any other dep. Headers land in the BUILD dir (generated
+during configure), which is why `provides.includes` returns absolute
+paths.
 
 ### Implementation notes
 
 - Build dir is `buildDir/deps/webkit/` (generic path), NOT CMake's
   `vendor/WebKit/WebKitBuild/`. Better: consistent, cleaned by `rm -rf
-  build/`, separate per-profile.
+build/`, separate per-profile.
 
 - Flags: WebKit's own cmake machinery sets -O/-g/sanitizer flags. We
   override `CMAKE_C_FLAGS` to drop the global dep flags (which would
@@ -87,10 +87,10 @@ _From `scripts/aphrody/webkit-prebuilt.ts`._
 
 Flux des prébuilts WebKit du fork (PLAN-ALPINE-BUN.md, chantier P).
 
-  bun scripts/aphrody/webkit-prebuilt.ts status
-  bun scripts/aphrody/webkit-prebuilt.ts build  [--ref <sha|branche>] [--lanes <regex,regex|all>]
-  bun scripts/aphrody/webkit-prebuilt.ts record [--sha <sha>]   # liste les assets de la release aphrody
-  bun scripts/aphrody/webkit-prebuilt.ts bump   --sha <sha>     # WEBKIT_VERSION = sha (puis `record` après la CI)
+bun scripts/aphrody/webkit-prebuilt.ts status
+bun scripts/aphrody/webkit-prebuilt.ts build [--ref <sha|branche>] [--lanes <regex,regex|all>]
+bun scripts/aphrody/webkit-prebuilt.ts record [--sha <sha>] # liste les assets de la release aphrody
+bun scripts/aphrody/webkit-prebuilt.ts bump --sha <sha> # WEBKIT_VERSION = sha (puis `record` après la CI)
 
 `build` lance `aphrody-prebuilts.yml` sur aphrody-labs/WebKit ; `record` écrit dans
 `APHRODY_WEBKIT_PREBUILTS` (scripts/build/deps/webkit.ts) les archives publiées pour le sha, ce qui fait basculer
@@ -223,13 +223,13 @@ BUN_LSP_AI="claude -p" names the command that fixes code: it reads a prompt on s
 
 _From `package.json`._
 
-| Script | Runs |
-| --- | --- |
-| `bun run build:local` | `bun scripts/build.ts --profile=debug-local --build-dir=build/debug-local` |
-| `bun run build:release:local` | `bun scripts/build.ts --profile=release-local --build-dir=build/release-local` |
-| `bun run jsc:build` | `bun scripts/build.ts --profile=release-local --build-dir=build/release-local --target=WebKit` |
-| `bun run jsc:build:debug` | `bun scripts/build.ts --profile=debug-local --build-dir=build/debug-local --target=WebKit` |
-| `bun run jsc:build:lto` | `bun scripts/build.ts --profile=release-local --lto=on --build-dir=build/release-local-lto --target=WebKit` |
-| `bun run sync-webkit-source` | `bun ./scripts/sync-webkit-source.ts` |
-| `bun run fmt:cpp` | `bun run clang-format` |
-| `bun run clang-format:check` | `./scripts/run-clang-format.sh check` |
+| Script                        | Runs                                                                                                        |
+| ----------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `bun run build:local`         | `bun scripts/build.ts --profile=debug-local --build-dir=build/debug-local`                                  |
+| `bun run build:release:local` | `bun scripts/build.ts --profile=release-local --build-dir=build/release-local`                              |
+| `bun run jsc:build`           | `bun scripts/build.ts --profile=release-local --build-dir=build/release-local --target=WebKit`              |
+| `bun run jsc:build:debug`     | `bun scripts/build.ts --profile=debug-local --build-dir=build/debug-local --target=WebKit`                  |
+| `bun run jsc:build:lto`       | `bun scripts/build.ts --profile=release-local --lto=on --build-dir=build/release-local-lto --target=WebKit` |
+| `bun run sync-webkit-source`  | `bun ./scripts/sync-webkit-source.ts`                                                                       |
+| `bun run fmt:cpp`             | `bun run clang-format`                                                                                      |
+| `bun run clang-format:check`  | `./scripts/run-clang-format.sh check`                                                                       |

@@ -2,7 +2,7 @@
 name: bun-review-rules
 description: "Condensed checklist of what blocks Bun PRs (REVIEW.md + .claude/docs/landing-prs.md) — tests, memory safety, errors, style, compat, perf, cross-platform"
 metadata:
- type: reference
+  type: reference
 ---
 
 Source of truth: `<bun>\REVIEW.md` (core) and `<bun>\.claude\docs\landing-prs.md` (situational: Node/Web compat, API design, perf, cross-platform, deps, docs/types, PR process). Re-read the relevant section before non-obvious work. Condensed:

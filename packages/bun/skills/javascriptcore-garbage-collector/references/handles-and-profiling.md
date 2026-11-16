@@ -87,4 +87,3 @@ API (`HeapAnalyzer`):
 - `setOpaqueRootReachabilityReasonForCell` — why a weakly-held wrapper survived
 
 If your class shows up as an opaque blob in heap snapshots, implement `analyzeHeap`.
-

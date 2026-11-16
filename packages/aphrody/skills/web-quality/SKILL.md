@@ -9,13 +9,13 @@ Versions: not pinned here. Check live: `lighthouse --version`, `bun info web-vit
 
 ## Thresholds (p75 of page loads, mobile and desktop split)
 
-| Metric | Good      | Poor     | Kind                  | Source                                           |
-| ------ | --------- | -------- | --------------------- | ------------------------------------------------ |
+| Metric | Good      | Poor     | Kind                  | Source                                                        |
+| ------ | --------- | -------- | --------------------- | ------------------------------------------------------------- |
 | LCP    | <=2500 ms | >4000 ms | CWV, loading          | GoogleChrome/web-vitals:src/onLCP.ts; web.dev/articles/vitals |
-| INP    | <=200 ms  | >500 ms  | CWV, responsiveness   | web-vitals src/onINP.ts                                  |
-| CLS    | <=0.1     | >0.25    | CWV, visual stability | web-vitals src/onCLS.ts                                     |
-| FCP    | <=1800 ms | >3000 ms | diagnostic            | web-vitals src/onFCP.ts                                     |
-| TTFB   | <=800 ms  | >1800 ms | diagnostic            | web-vitals src/onTTFB.ts                                    |
+| INP    | <=200 ms  | >500 ms  | CWV, responsiveness   | web-vitals src/onINP.ts                                       |
+| CLS    | <=0.1     | >0.25    | CWV, visual stability | web-vitals src/onCLS.ts                                       |
+| FCP    | <=1800 ms | >3000 ms | diagnostic            | web-vitals src/onFCP.ts                                       |
+| TTFB   | <=800 ms  | >1800 ms | diagnostic            | web-vitals src/onTTFB.ts                                      |
 
 Lab vs field: Lighthouse has no real INP in navigation mode (weight 0); use TBT as the lab proxy, and timespan user flows or field data for INP.
 

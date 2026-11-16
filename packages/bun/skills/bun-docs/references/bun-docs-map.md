@@ -2,7 +2,7 @@
 name: bun-docs-map
 description: "Map of <bun>\\docs (Mintlify site bun.com/docs) - docs.json nav tabs/groups, page locations, guides categories, install/quickstart facts, MDX conventions"
 metadata:
- type: reference
+  type: reference
 ---
 
 # Bun docs map (`<bun>\docs`, published at http<bun>.com/docs)
@@ -31,10 +31,10 @@ Only page not in nav: `runtime/typescript.mdx` (orphan). Nav has no dead links (
 - Standards & Compatibility: globals, bun-apis, web-apis, nodejs-compat
 - Contributing: project/{roadmap,benchmarking,contributing,building-windows,bindgen,license}
 - **Package Manager** tab: Core (pm/cli install/add/remove/update/dedupe/prune, pm/bunx); Publishing & Analysis (publish/outdated/why/audit/info);
- Workspace Mgmt (pm/workspaces, catalogs, cli/link, cli/pm); Advanced (cli/patch, filter, global-cache, global-store, isolated-installs, lockfile
- lifecycle, scopes-registries, overrides, security-scanner-api, npmrc)
+  Workspace Mgmt (pm/workspaces, catalogs, cli/link, cli/pm); Advanced (cli/patch, filter, global-cache, global-store, isolated-installs, lockfile
+  lifecycle, scopes-registries, overrides, security-scanner-api, npmrc)
 - **Bundler** tab: bundler/index; Dev Server (fullstack, hot-reloading); Assets (html-static, standalone-html, css, loaders); executables;
- Extensions (plugins, macros); Optimization (bytecode, minifier); Migration (esbuild)
+  Extensions (plugins, macros); Optimization (bytecode, minifier); Migration (esbuild)
 - **Test Runner** tab: test/index, writing-tests, configuration; runtime-behavior, discovery, parallel; lifecycle, mocks, snapshots, dates-times; dom; code-coverage, reporters
 - **Guides** tab (~190 pages under `docs/guides/<cat>/`)
 - External tabs: Reference -> http<bun>.com/reference, Blog -> http<bun>.com/blog; Feedback tab -> /feedback
@@ -54,7 +54,7 @@ Topic memories: `bun-docs-runtime-apis-a-m`, `bun-docs-runtime-apis-n-z`, `bun-d
 - test (19): run-tests, watch-mode, migrate-from-jest, mock-functions, spy-on, mock-clock, snapshot, update-snapshots, coverage(-threshold), concurrent-test-glob, skip/todo, timeout, bail, rerun-each, testing-library, happy-dom, svelte-test
 - util (19): upgrade, detect-bun, version, hash-a-password, javascript-uuid, base64, gzip, deflate, escape-html, deep-equals, sleep, file-url-to-path, path-to-file-url, which-path-to-executable-bin, import-meta-dir/file/path, entrypoint, main
 - read-file (9), write-file (10), binary (22 conversion recipes), streams (12 to-X recipes), html-rewriter (2: extract-links, extract-social-meta)
- Guide frontmatter: `title`, `sidebarTitle`, `mode: center`.
+  Guide frontmatter: `title`, `sidebarTitle`, `mode: center`.
 
 ## MDX conventions
 

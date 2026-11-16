@@ -2,7 +2,7 @@
 name: bun-build-alpine
 description: "Bun OS native Linux build owners, GNU and musl targets, pinned toolchains and separate release gates"
 metadata:
- type: reference
+  type: reference
 ---
 
 # Bun OS Linux builds

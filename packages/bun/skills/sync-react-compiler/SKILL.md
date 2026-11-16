@@ -35,9 +35,11 @@ the porting reference for the AST-boundary files.
 1. **Produce the upstream diff.** The script sparse-fetches facebook/react into
    a temp dir (nothing is written to the repo) and prints, per ported file, the
    diff between `src/react_compiler/UPSTREAM_PORTED` and upstream's tip:
+
    ```sh
    scripts/sync-react-compiler.sh            # or pass an explicit <sha>
    ```
+
    Output is grouped into three sections: whole-crate ports, AST-boundary
    ports, and any new upstream file that newly references `react_compiler_ast`
    (i.e. a new boundary file that needs a fresh Bun port).
@@ -66,10 +68,12 @@ the porting reference for the AST-boundary files.
    `DESIGN.md`.
 
 5. **Verify.**
+
    ```sh
    cargo check -p bun_react_compiler
    bun bd test test/bundler/transpiler/react-compiler.test.ts
    ```
+
    Snapshots will change if codegen changed upstream — review the diff against
    upstream's new fixture output and update with `bun bd test -u` if it
    matches.

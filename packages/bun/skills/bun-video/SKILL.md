@@ -16,7 +16,8 @@ const video = new Bun.Video("input.mp4");
 const metadata = await video.metadata();
 await video.frame(1).resize(640).jpeg({ quality: 85 }).write("preview.jpg");
 const frames = await video.frames({ start: 0, end: 3, step: 1, maxFrames: 3 });
-for (const frame of frames) await Bun.write(`frame-${frame.time}.png`, frame.bytes);
+for (const frame of frames)
+  await Bun.write(`frame-${frame.time}.png`, frame.bytes);
 await video.remux("new-output.mp4");
 ```
 

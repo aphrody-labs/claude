@@ -2,7 +2,7 @@
 name: bun-build-deps-vendor
 description: "Vendored native deps (scripts/build/deps/*.ts, vendor/), allDeps order, BuildSpec kinds, WebKit prebuilt/local, version pins (LLVM, nightly, node), --local-deps, bump workflows"
 metadata:
- type: reference
+  type: reference
 ---
 
 # Vendored dependencies
@@ -24,7 +24,7 @@ Rules: a dep with `fetchDeps: ["X"]` must come after X (zlib before libarchive/l
 - `nested-cmake`: `cmake --fresh -B` + `cmake --build` as edges (`NestedCmakeBuild`), used by WebKit local.
 - `cargo`: rule kept, unused — lolhtml and rust-argon2 are path deps in the Cargo workspace (`vendor/lolhtml`, `vendor/rust-argon2`).
 - `none` / `prebuilt`: no build step.
- Each dep → fetch (`vendor/<name>/.ref` = `sha256(commit+patches)[:16]`, restat) → configure (cmake only) → build; pool `dep` depth 4. Phony targets `<name>`, `clone-<name>`, `configure-<name>`.
+  Each dep → fetch (`vendor/<name>/.ref` = `sha256(commit+patches)[:16]`, restat) → configure (cmake only) → build; pool `dep` depth 4. Phony targets `<name>`, `clone-<name>`, `configure-<name>`.
 
 Worked examples: hdrhistogram/libdeflate (simplest direct), mimalloc (single unity TU as C++), tinycc (build-time codegen tool), zlib (per-source SIMD flags + `.h.in`), libarchive/cares (hand-written per-target config.h), boringssl (NASM on win-x64, big gen manifest, `forbidUndefined` with libuv), sqlite (in-tree), libuv (`enabled: cfg => cfg.windows`), lolhtml (cargo), webkit (nested-cmake + prebuilt).
 Patches live in `patches/<dep>/`.

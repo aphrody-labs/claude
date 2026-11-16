@@ -2,7 +2,7 @@
 name: bun-docs-runtime-apis-n-z
 description: "Cheat-sheet of docs/runtime N-Z (node-api, nodejs-compat, plugins, redis, repl, s3, secrets, semver, shell, sql, sqlite, streams, toml, transpiler, typescript, utils, watch-mode, web-apis, webview, workers, xml, yaml) + docs/typescript*.mdx"
 metadata:
- type: reference
+  type: reference
 ---
 
 Source: `<bun>\docs\runtime\*.mdx` + `docs/typescript.mdx`, `docs/typescript-6.mdx`. Related: `bun-docs-runtime-apis-a-m`, `bun-docs-http-networking`, `bun-docs-bundler`, `bun-docs-bunfig-env`, `bun-docs-map`.

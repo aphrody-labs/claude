@@ -2,7 +2,7 @@
 name: bun-core-jsc-rust-api
 description: "bun_jsc Rust API for touching JavaScriptCore — JSValue, JSGlobalObject, CallFrame, JsResult/JsError, host_fn adapters & ABI, exception scopes, cpp.rs ZIG_EXPORT bindings, ErrorCode/$ERR_* pipeline"
 metadata:
- type: reference
+  type: reference
 ---
 
 # bun_jsc: the Rust-side JSC API (src/jsc/)

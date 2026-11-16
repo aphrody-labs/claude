@@ -2,7 +2,7 @@
 name: bun-docs-http-networking
 description: "Cheat-sheet of Bun docs for Bun.serve (options, routes, Server methods, TLS, HTTP/2/3, errors, metrics), WebSockets, fetch extensions, DNS cache, TCP/UDP, Cookie/CookieMap, CSRF"
 metadata:
- type: reference
+  type: reference
 ---
 
 Sources: docs/runtime/http/{server,routing,cookies,error-handling,metrics,tls,websockets}.mdx
@@ -41,7 +41,7 @@ Related: `bun-docs-map`, `bun-docs-runtime-apis-a-m`, `bun-docs-runtime-apis-n-z
 ## Routes syntax
 
 - Values: handler `(req: BunRequest, server) => Response | Promise<Response>`; per-method object `{ GET, POST... }`;
- static `Response` (`Response.json`, `Response.redirect`); `Bun.file(...)`; HTML import; `{ dir: "./public" }` (path must end `/*`).
+  static `Response` (`Response.json`, `Response.redirect`); `Bun.file(...)`; HTML import; `{ dir: "./public" }` (path must end `/*`).
 - Params `/users/:id` -> `req.params.id`, typed from string literal (or explicit `BunRequest<"/orgs/:orgId">`).
 - Percent-decoded incl. Unicode; invalid Unicode -> U+FFFD.
 - Wildcard `/api/*`, global catch-all `/*`. Routing is case-sensitive.
@@ -96,7 +96,7 @@ Related: `bun-docs-map`, `bun-docs-runtime-apis-a-m`, `bun-docs-runtime-apis-n-z
 
 - Handlers declared once per server: `message(ws, msg)` (required), `open`, `close(ws, code, reason)`, `drain`, `error`, `ping(ws, buf)`, `pong`.
 - Defaults: `maxPayloadLength` 16 MB (bigger -> close), `idleTimeout` 120 s, `backpressureLimit` 16 MB
- `closeOnBackpressureLimit` false, `sendPings` true, `publishToSelf` false.
+  `closeOnBackpressureLimit` false, `sendPings` true, `publishToSelf` false.
 - `perMessageDeflate: true | { compress, decompress }`.
 - Compressor: `"disable" | "shared" | "dedicated" | "3KB" | "4KB" | ... | "256KB"`.
 - Per message `ws.send(msg, true)`; sent uncompressed unless perMessageDeflate enabled.
@@ -173,7 +173,7 @@ Related: `bun-docs-map`, `bun-docs-runtime-apis-a-m`, `bun-docs-runtime-apis-n-z
 - `send(data, port, ip)` -> `false` on backpressure; IP only, NO DNS. Connected socket: `send(data)`.
 - `sendMany([data, port, ip...])`, connected `sendMany([d1, d2])` -> number of packets sent.
 - `setBroadcast`, `setTTL`, `addMembership(group, iface?)`, `dropMembership`, `setMulticastTTL`, `setMulticastLoopback`
- `setMulticastInterface`, `addSourceSpecificMembership(src, group)` / `dropSourceSpecificMembership`.
+  `setMulticastInterface`, `addSourceSpecificMembership(src, group)` / `dropSourceSpecificMembership`.
 
 ## Cookies
 

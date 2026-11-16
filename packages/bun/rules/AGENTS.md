@@ -9,47 +9,47 @@
 
 ## Tools of `bun mcp`
 
-| Tool | What |
-| --- | --- |
-| `docs_search` | Search Bun docs |
-| `docs_read` | Read a Bun docs page |
-| `examples_search` | Bun code examples |
-| `skills_list` | List agent skills |
-| `skill_read` | Read an agent skill |
-| `memory_search` | Search project memory |
-| `memory_read` | Read a memory |
-| `memory_write` | Save a memory |
-| `memory_import` | Import Markdown memories |
-| `graph_query` | Query the code graph |
-| `graph_symbols` | Find symbols |
-| `graph_callers` | Find callers or callees |
-| `graph_path` | Path between symbols |
-| `graph_community` | Code communities |
-| `graph_impact` | Change impact |
-| `host_inventory` | Host inventory |
-| `host_find` | Find a host |
-| `vfs_find` | Find files |
-| `vfs_grep` | Search file contents |
-| `vfs_edit` | Preview a bulk edit |
-| `vfs_apply` | Apply a bulk edit |
-| `lsp_diagnostics` | Diagnostics |
-| `lsp_definition` | Go to definition |
-| `lsp_references` | Find references |
-| `lsp_hover` | Hover |
-| `lsp_rename` | Rename symbol |
-| `lsp_symbols` | Symbols |
-| `run` | bun run |
-| `test` | bun test |
-| `html_parse` | Parse inert HTML |
-| `css_parse` | Parse browser CSS |
-| `git_ingest` | Directory digest |
-| `deps_list` | List dependencies |
-| `deps_info` | Dependency facts |
-| `deps_tree` | Dependency tree |
-| `deps_read` | Read a dependency file |
-| `deps_search` | Search dependency sources |
-| `deps_docs` | Search dependency documentation |
-| `yolo_decide` | Bun typed decision |
+| Tool              | What                            |
+| ----------------- | ------------------------------- |
+| `docs_search`     | Search Bun docs                 |
+| `docs_read`       | Read a Bun docs page            |
+| `examples_search` | Bun code examples               |
+| `skills_list`     | List agent skills               |
+| `skill_read`      | Read an agent skill             |
+| `memory_search`   | Search project memory           |
+| `memory_read`     | Read a memory                   |
+| `memory_write`    | Save a memory                   |
+| `memory_import`   | Import Markdown memories        |
+| `graph_query`     | Query the code graph            |
+| `graph_symbols`   | Find symbols                    |
+| `graph_callers`   | Find callers or callees         |
+| `graph_path`      | Path between symbols            |
+| `graph_community` | Code communities                |
+| `graph_impact`    | Change impact                   |
+| `host_inventory`  | Host inventory                  |
+| `host_find`       | Find a host                     |
+| `vfs_find`        | Find files                      |
+| `vfs_grep`        | Search file contents            |
+| `vfs_edit`        | Preview a bulk edit             |
+| `vfs_apply`       | Apply a bulk edit               |
+| `lsp_diagnostics` | Diagnostics                     |
+| `lsp_definition`  | Go to definition                |
+| `lsp_references`  | Find references                 |
+| `lsp_hover`       | Hover                           |
+| `lsp_rename`      | Rename symbol                   |
+| `lsp_symbols`     | Symbols                         |
+| `run`             | bun run                         |
+| `test`            | bun test                        |
+| `html_parse`      | Parse inert HTML                |
+| `css_parse`       | Parse browser CSS               |
+| `git_ingest`      | Directory digest                |
+| `deps_list`       | List dependencies               |
+| `deps_info`       | Dependency facts                |
+| `deps_tree`       | Dependency tree                 |
+| `deps_read`       | Read a dependency file          |
+| `deps_search`     | Search dependency sources       |
+| `deps_docs`       | Search dependency documentation |
+| `yolo_decide`     | Bun typed decision              |
 
 Prefer `graph_symbols`, `graph_callers`, `lsp_references`, `lsp_definition`, `vfs_grep` over Grep for code in a project.
 

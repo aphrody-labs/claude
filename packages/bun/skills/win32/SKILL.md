@@ -67,7 +67,10 @@ Functions that set the last error record it in `win32.lastError()`.
 COM classes are created by coclass name or CLSID. Methods are called through the vtable. `[retval]` parameters become the return value. A failing `HRESULT` throws a `win32.Win32Error`:
 
 ```ts
-const service = win32.com.create("TaskScheduler", "System.TaskScheduler.ITaskService");
+const service = win32.com.create(
+  "TaskScheduler",
+  "System.TaskScheduler.ITaskService",
+);
 service.Connect(undefined, undefined, undefined, undefined);
 service.GetFolder("\\").GetTasks(1).get_Count();
 service.release();
@@ -152,14 +155,14 @@ _From `.claude/docs/windows-deep.md`._
 
 Installé / configuré pendant cette mission (état d'avant : ni cdb ni WinDbg dans le PATH, lldb cassé) :
 
-| Outil | Chemin / action | Avant |
-|---|---|---|
-| cdb 10.0.26100.7705, symchk, dumpchk | déjà dans `Windows Kits\10\Debuggers\x64` (hors PATH) → shims `~\.local\bin\{cdb,symchk,dumpchk}.cmd` | absent du PATH |
-| WinDbg (Store) 1.2610.1001.0 | `winget install --id Microsoft.WinDbg -e` ; alias `WinDbgX.exe` dans `%LOCALAPPDATA%\Microsoft\WindowsApps` | absent |
-| procdump 12.01 | `curl https://live.sysinternals.com/procdump64.exe` → `~\.local\bin\procdump.exe` + `procdump64.exe` (pas dans winget : `winget search procdump` vide) | absent |
-| lldb 23.1.3 | `liblldb.dll` importe `python3.dll` (ABI stable) ; sans `PYTHONHOME` il charge le stub → « Failed to import encodings ». Shim `~\.local\bin\lldb.cmd` fixant `PYTHONHOME=...\uv\python\cpython-3.12.15-windows-x86_64-none` et PATH, placé avant LLVM dans le PATH. `lldb -b -o "script print(1+1)"` → 2 | cassé |
-| `_NT_SYMBOL_PATH` | `HKCU\Environment` = `srv*<symbols>*https://msdl.microsoft.com/download/symbols` (via `set_registry_value`) ; `<symbols>` créé | absent |
-| registre Python | clé périmée `HKCU\Software\Python\Astral\CPython3.12.13` (exécutable inexistant, warning à chaque `uv python list`) supprimée | présente |
+| Outil                                | Chemin / action                                                                                                                                                                                                                                                                                          | Avant          |
+| ------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------- |
+| cdb 10.0.26100.7705, symchk, dumpchk | déjà dans `Windows Kits\10\Debuggers\x64` (hors PATH) → shims `~\.local\bin\{cdb,symchk,dumpchk}.cmd`                                                                                                                                                                                                    | absent du PATH |
+| WinDbg (Store) 1.2610.1001.0         | `winget install --id Microsoft.WinDbg -e` ; alias `WinDbgX.exe` dans `%LOCALAPPDATA%\Microsoft\WindowsApps`                                                                                                                                                                                              | absent         |
+| procdump 12.01                       | `curl https://live.sysinternals.com/procdump64.exe` → `~\.local\bin\procdump.exe` + `procdump64.exe` (pas dans winget : `winget search procdump` vide)                                                                                                                                                   | absent         |
+| lldb 23.1.3                          | `liblldb.dll` importe `python3.dll` (ABI stable) ; sans `PYTHONHOME` il charge le stub → « Failed to import encodings ». Shim `~\.local\bin\lldb.cmd` fixant `PYTHONHOME=...\uv\python\cpython-3.12.15-windows-x86_64-none` et PATH, placé avant LLVM dans le PATH. `lldb -b -o "script print(1+1)"` → 2 | cassé          |
+| `_NT_SYMBOL_PATH`                    | `HKCU\Environment` = `srv*<symbols>*https://msdl.microsoft.com/download/symbols` (via `set_registry_value`) ; `<symbols>` créé                                                                                                                                                                           | absent         |
+| registre Python                      | clé périmée `HKCU\Software\Python\Astral\CPython3.12.13` (exécutable inexistant, warning à chaque `uv python list`) supprimée                                                                                                                                                                            | présente       |
 
 Procédure bout en bout, testée sur `<bun>\build\release\bun-profile.exe` (build v1.4.3-aphrody.2 f7a7086b6, PDB
 `bun-profile.pdb` 569 Mo à côté de l'exe) :
@@ -179,6 +182,7 @@ bun <bun>\scripts\aphrody\win-crash.ts analyze <dump.dmp> [--pdb build/release] 
 
 Résultat : `FAILURE_BUCKET_ID NULL_CLASS_PTR_READ_c0000005_bun-profile.exe!bun_runtime::ffi::dom_call_slowpath::Reader__u8__slowpath`,
 pile avec fichiers/lignes Rust (`FFIObject.rs @ 304`, `ffi/mod.rs @ 54`) et C++ (`JSModuleRecord.cpp @ 277`). Notes :
+
 - L'exe de release (`bun.exe`) est le même binaire que `bun-profile.exe` (taille identique) : le PDB `bun-profile.pdb`
   convient, d'où `-y build\release`. Les sources WebKit sont des chemins `/webkit/...` (non résolvables), les sources
   bun `<bun>\src\...` sont vraies.
@@ -252,11 +256,11 @@ BUN_LSP_AI="claude -p" names the command that fixes code: it reads a prompt on s
 
 _From `package.json`._
 
-| Script | Runs |
-| --- | --- |
-| `bun run bd` | `BUN_DEBUG_QUIET_LOGS=1 bun scripts/build.ts --profile=debug --quiet` |
-| `bun run build:release` | `bun scripts/build.ts --profile=release` |
-| `bun run watch-windows` | `cargo watch -x "check --workspace --target x86_64-pc-windows-msvc --message-format=short"` |
-| `bun run rust:check-all` | `bun scripts/rust-check-all.ts` |
-| `bun run rust:clippy` | `cargo clippy --workspace --no-deps --keep-going` |
-| `bun run test` | `bun scripts/runner.node.ts --exec-path ./build/debug/bun-debug` |
+| Script                   | Runs                                                                                        |
+| ------------------------ | ------------------------------------------------------------------------------------------- |
+| `bun run bd`             | `BUN_DEBUG_QUIET_LOGS=1 bun scripts/build.ts --profile=debug --quiet`                       |
+| `bun run build:release`  | `bun scripts/build.ts --profile=release`                                                    |
+| `bun run watch-windows`  | `cargo watch -x "check --workspace --target x86_64-pc-windows-msvc --message-format=short"` |
+| `bun run rust:check-all` | `bun scripts/rust-check-all.ts`                                                             |
+| `bun run rust:clippy`    | `cargo clippy --workspace --no-deps --keep-going`                                           |
+| `bun run test`           | `bun scripts/runner.node.ts --exec-path ./build/debug/bun-debug`                            |

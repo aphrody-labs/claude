@@ -18,82 +18,82 @@ description: "Write Bun-native code for Bun 1.4.5: Bun APIs before Node.js modul
 
 ## Instead of X, use Y
 
-| Instead of | Use |
-| --- | --- |
-| express, fastify, koa, node:http | Bun.serve({ routes }) |
-| ws, socket.io, uWebSockets.js | Bun.serve({ websocket }) |
-| fs.readFile, fs.writeFile, fs-extra | Bun.file / Bun.write |
-| better-sqlite3, sqlite3, sqlite | bun:sqlite |
-| pg, postgres, mysql2 | Bun.sql / Bun.SQL |
-| ioredis, redis | Bun.redis / Bun.RedisClient |
-| @aws-sdk/client-s3, aws-sdk, minio | Bun.s3 / Bun.S3Client |
-| execa, shelljs, child_process.exec | Bun.$ (Bun Shell) |
-| child_process.spawn, cross-spawn | Bun.spawn / Bun.spawnSync |
-| jest, vitest, mocha, chai, ts-jest | bun:test |
-| bcrypt, bcryptjs, argon2 | Bun.password |
-| crypto.createHash, xxhash, murmurhash | Bun.CryptoHasher / Bun.hash |
-| glob, fast-glob, globby, minimatch | Bun.Glob |
-| dotenv, dotenv/config, cross-env | Bun.env (.env loaded automatically) |
-| node-fetch, axios, got, cross-fetch, undici | global fetch |
-| esbuild, webpack, rollup, parcel, tsup | Bun.build / bun build |
-| ts-node, tsx, nodemon, node --watch | bun <file>.ts / bun --watch |
-| uuid, nanoid | crypto.randomUUID / Bun.randomUUIDv7 |
-| js-yaml, yaml, @iarna/toml, toml, jsonc-parser, json5 | Bun.YAML / Bun.TOML / Bun.JSONC / Bun.JSON5 (or import the file) |
-| semver | Bun.semver |
-| zlib.gzipSync, pako, node-gzip | Bun.gzipSync / Bun.zstdCompress |
-| cheerio, jsdom, node-html-parser | HTMLRewriter |
-| string-width, escape-html, fast-deep-equal, which, strip-ansi, util.promisify(setTimeout) | Bun.stringWidth / Bun.escapeHTML / Bun.deepEquals / Bun.which / Bun.stripANSI / Bun.sleep |
-| cookie, cookie-parser | req.cookies / Bun.CookieMap |
-| worker_threads, piscina, threads | Web Worker (new Worker) |
-| ffi-napi, node-ffi, koffi | bun:ffi |
-| keytar | Bun.secrets |
-| ffprobe-static, video-thumbnail, fluent-ffmpeg | Bun.Video for native metadata, transformed frames, bounded audio and MP4 remux; composition encoding uses the Bun Video package |
-| npm install, npx, yarn, pnpm, npm run | bun install / bun fmt / bun run; bunx only for commands without a native Bun owner |
-| isomorphic-fetch | global fetch |
-| minimist | util.parseArgs |
-| chalk | natif |
-| rimraf | fs.rm |
-| mkdirp | fs.mkdir |
-| node-cron | Bun.cron |
-| node-got | global fetch |
-| superagent | global fetch |
-| make-fetch-happen | global fetch |
-| ky | global fetch |
-| form-data | FormData |
-| abort-controller | AbortController |
-| whatwg-url | URL |
-| node-blob | Blob |
-| web-streams-polyfill | global |
-| @jest/globals | bun:test |
-| jest-circus | bun:test |
-| esm | natif |
-| concurrently | natif |
-| @types/node | @types/bun |
-| smol-toml | Bun.TOML |
-| dns-packet | bun dns |
-| mime | natif |
-| mime-types | natif |
-| tiny-glob | bun (Glob) |
-| glob-parent | bun (Glob) |
-| deep-equal | Bun.deepEquals |
-| lodash.isequal | Bun.deepEquals |
-| he | Bun.escapeHTML |
-| lodash.escape | Bun.escapeHTML |
-| csurf | Bun.CSRF |
-| csrf | Bun.CSRF |
-| marked | Bun.markdown |
-| markdown-it | Bun.markdown |
-| ansi-regex | Bun.stripANSI |
-| slice-ansi | Bun.sliceAnsi |
-| kleur | natif |
-| colorette | natif |
-| picocolors | natif |
-| eventsource | Bun.EventSource |
-| eslint | @biomejs/biome |
-| prettier | @biomejs/biome |
-| @typescript-eslint/parser | @biomejs/biome |
-| @typescript-eslint/eslint-plugin | @biomejs/biome |
-| eslint-config-prettier | @biomejs/biome |
+| Instead of                                                                                | Use                                                                                                                             |
+| ----------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| express, fastify, koa, node:http                                                          | Bun.serve({ routes })                                                                                                           |
+| ws, socket.io, uWebSockets.js                                                             | Bun.serve({ websocket })                                                                                                        |
+| fs.readFile, fs.writeFile, fs-extra                                                       | Bun.file / Bun.write                                                                                                            |
+| better-sqlite3, sqlite3, sqlite                                                           | bun:sqlite                                                                                                                      |
+| pg, postgres, mysql2                                                                      | Bun.sql / Bun.SQL                                                                                                               |
+| ioredis, redis                                                                            | Bun.redis / Bun.RedisClient                                                                                                     |
+| @aws-sdk/client-s3, aws-sdk, minio                                                        | Bun.s3 / Bun.S3Client                                                                                                           |
+| execa, shelljs, child_process.exec                                                        | Bun.$ (Bun Shell)                                                                                                               |
+| child_process.spawn, cross-spawn                                                          | Bun.spawn / Bun.spawnSync                                                                                                       |
+| jest, vitest, mocha, chai, ts-jest                                                        | bun:test                                                                                                                        |
+| bcrypt, bcryptjs, argon2                                                                  | Bun.password                                                                                                                    |
+| crypto.createHash, xxhash, murmurhash                                                     | Bun.CryptoHasher / Bun.hash                                                                                                     |
+| glob, fast-glob, globby, minimatch                                                        | Bun.Glob                                                                                                                        |
+| dotenv, dotenv/config, cross-env                                                          | Bun.env (.env loaded automatically)                                                                                             |
+| node-fetch, axios, got, cross-fetch, undici                                               | global fetch                                                                                                                    |
+| esbuild, webpack, rollup, parcel, tsup                                                    | Bun.build / bun build                                                                                                           |
+| ts-node, tsx, nodemon, node --watch                                                       | bun <file>.ts / bun --watch                                                                                                     |
+| uuid, nanoid                                                                              | crypto.randomUUID / Bun.randomUUIDv7                                                                                            |
+| js-yaml, yaml, @iarna/toml, toml, jsonc-parser, json5                                     | Bun.YAML / Bun.TOML / Bun.JSONC / Bun.JSON5 (or import the file)                                                                |
+| semver                                                                                    | Bun.semver                                                                                                                      |
+| zlib.gzipSync, pako, node-gzip                                                            | Bun.gzipSync / Bun.zstdCompress                                                                                                 |
+| cheerio, jsdom, node-html-parser                                                          | HTMLRewriter                                                                                                                    |
+| string-width, escape-html, fast-deep-equal, which, strip-ansi, util.promisify(setTimeout) | Bun.stringWidth / Bun.escapeHTML / Bun.deepEquals / Bun.which / Bun.stripANSI / Bun.sleep                                       |
+| cookie, cookie-parser                                                                     | req.cookies / Bun.CookieMap                                                                                                     |
+| worker_threads, piscina, threads                                                          | Web Worker (new Worker)                                                                                                         |
+| ffi-napi, node-ffi, koffi                                                                 | bun:ffi                                                                                                                         |
+| keytar                                                                                    | Bun.secrets                                                                                                                     |
+| ffprobe-static, video-thumbnail, fluent-ffmpeg                                            | Bun.Video for native metadata, transformed frames, bounded audio and MP4 remux; composition encoding uses the Bun Video package |
+| npm install, npx, yarn, pnpm, npm run                                                     | bun install / bun fmt / bun run; bunx only for commands without a native Bun owner                                              |
+| isomorphic-fetch                                                                          | global fetch                                                                                                                    |
+| minimist                                                                                  | util.parseArgs                                                                                                                  |
+| chalk                                                                                     | natif                                                                                                                           |
+| rimraf                                                                                    | fs.rm                                                                                                                           |
+| mkdirp                                                                                    | fs.mkdir                                                                                                                        |
+| node-cron                                                                                 | Bun.cron                                                                                                                        |
+| node-got                                                                                  | global fetch                                                                                                                    |
+| superagent                                                                                | global fetch                                                                                                                    |
+| make-fetch-happen                                                                         | global fetch                                                                                                                    |
+| ky                                                                                        | global fetch                                                                                                                    |
+| form-data                                                                                 | FormData                                                                                                                        |
+| abort-controller                                                                          | AbortController                                                                                                                 |
+| whatwg-url                                                                                | URL                                                                                                                             |
+| node-blob                                                                                 | Blob                                                                                                                            |
+| web-streams-polyfill                                                                      | global                                                                                                                          |
+| @jest/globals                                                                             | bun:test                                                                                                                        |
+| jest-circus                                                                               | bun:test                                                                                                                        |
+| esm                                                                                       | natif                                                                                                                           |
+| concurrently                                                                              | natif                                                                                                                           |
+| @types/node                                                                               | @types/bun                                                                                                                      |
+| smol-toml                                                                                 | Bun.TOML                                                                                                                        |
+| dns-packet                                                                                | bun dns                                                                                                                         |
+| mime                                                                                      | natif                                                                                                                           |
+| mime-types                                                                                | natif                                                                                                                           |
+| tiny-glob                                                                                 | bun (Glob)                                                                                                                      |
+| glob-parent                                                                               | bun (Glob)                                                                                                                      |
+| deep-equal                                                                                | Bun.deepEquals                                                                                                                  |
+| lodash.isequal                                                                            | Bun.deepEquals                                                                                                                  |
+| he                                                                                        | Bun.escapeHTML                                                                                                                  |
+| lodash.escape                                                                             | Bun.escapeHTML                                                                                                                  |
+| csurf                                                                                     | Bun.CSRF                                                                                                                        |
+| csrf                                                                                      | Bun.CSRF                                                                                                                        |
+| marked                                                                                    | Bun.markdown                                                                                                                    |
+| markdown-it                                                                               | Bun.markdown                                                                                                                    |
+| ansi-regex                                                                                | Bun.stripANSI                                                                                                                   |
+| slice-ansi                                                                                | Bun.sliceAnsi                                                                                                                   |
+| kleur                                                                                     | natif                                                                                                                           |
+| colorette                                                                                 | natif                                                                                                                           |
+| picocolors                                                                                | natif                                                                                                                           |
+| eventsource                                                                               | Bun.EventSource                                                                                                                 |
+| eslint                                                                                    | @biomejs/biome                                                                                                                  |
+| prettier                                                                                  | @biomejs/biome                                                                                                                  |
+| @typescript-eslint/parser                                                                 | @biomejs/biome                                                                                                                  |
+| @typescript-eslint/eslint-plugin                                                          | @biomejs/biome                                                                                                                  |
+| eslint-config-prettier                                                                    | @biomejs/biome                                                                                                                  |
 
 ## Idioms
 
@@ -105,9 +105,9 @@ Instead of express, fastify, koa, node:http:
 const server = Bun.serve({
   port: 3000,
   routes: {
-    "/users/:id": req => Response.json({ id: req.params.id }),
+    "/users/:id": (req) => Response.json({ id: req.params.id }),
     "/users": {
-      POST: async req => Response.json(await req.json(), { status: 201 }),
+      POST: async (req) => Response.json(await req.json(), { status: 201 }),
     },
   },
   fetch: () => new Response("Not found", { status: 404 }),
@@ -157,7 +157,11 @@ import { Database } from "bun:sqlite";
 const db = new Database("app.db", { strict: true });
 db.run("CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, name TEXT)");
 db.query("INSERT INTO users (name) VALUES ($name)").run({ name: "Ada" });
-const user = db.query<{ id: number; name: string }, [number]>("SELECT * FROM users WHERE id = ?").get(1);
+const user = db
+  .query<{ id: number; name: string }, [number]>(
+    "SELECT * FROM users WHERE id = ?",
+  )
+  .get(1);
 console.log(user);
 ```
 
@@ -192,7 +196,10 @@ Instead of @aws-sdk/client-s3, aws-sdk, minio:
 
 ```ts
 import { S3Client } from "bun";
-const s3 = new S3Client({ bucket: "b", endpoint: "https://<account>.r2.cloudflarestorage.com" });
+const s3 = new S3Client({
+  bucket: "b",
+  endpoint: "https://<account>.r2.cloudflarestorage.com",
+});
 await s3.write("k.txt", "hi");
 const text = await s3.file("k.txt").text();
 const url = s3.presign("k.txt", { expiresIn: 3600 });
@@ -216,7 +223,10 @@ console.log(branch, exitCode);
 Instead of child_process.spawn, cross-spawn:
 
 ```ts
-const proc = Bun.spawn(["bun", "--version"], { stdout: "pipe", stderr: "pipe" });
+const proc = Bun.spawn(["bun", "--version"], {
+  stdout: "pipe",
+  stderr: "pipe",
+});
 const [stdout, exitCode] = await Promise.all([proc.stdout.text(), proc.exited]);
 const sync = Bun.spawnSync(["git", "status"]);
 console.log(stdout, exitCode, sync.success);
@@ -398,7 +408,7 @@ Instead of cookie, cookie-parser:
 ```ts
 Bun.serve({
   routes: {
-    "/": req => {
+    "/": (req) => {
       const session = req.cookies.get("session");
       req.cookies.set("seen", "1", { httpOnly: true, sameSite: "lax" });
       return new Response(session ?? "anonymous");
@@ -415,7 +425,7 @@ Instead of worker_threads, piscina, threads:
 
 ```ts
 const worker = new Worker(new URL("./worker.ts", import.meta.url).href);
-worker.onmessage = event => console.log(event.data);
+worker.onmessage = (event) => console.log(event.data);
 worker.postMessage({ n: 42 });
 ```
 
@@ -425,7 +435,9 @@ Instead of ffi-napi, node-ffi, koffi:
 
 ```ts
 import { dlopen, FFIType, suffix } from "bun:ffi";
-const lib = dlopen(`libm.${suffix}`, { cos: { args: [FFIType.f64], returns: FFIType.f64 } });
+const lib = dlopen(`libm.${suffix}`, {
+  cos: { args: [FFIType.f64], returns: FFIType.f64 },
+});
 console.log(lib.symbols.cos(0));
 lib.close();
 ```

@@ -2,7 +2,7 @@
 name: bun-core-gc-lifetimes
 description: "Keeping JS values and native objects alive correctly in Bun Rust — Strong/StrongOptional/Weak/JsRef, refcount types (RefPtr, CellRefCounted, ThreadSafeRefCount), BackRef/JsCell/ThisPtr, JSC GC rules (write barriers, extra memory, pending activity), threading affinity"
 metadata:
- type: reference
+  type: reference
 ---
 
 # GC, handles, refcounts, lifetimes

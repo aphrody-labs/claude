@@ -1,4 +1,5 @@
 ## Core Commands
+
 - `docs/pm/cli/install.mdx`: bun install (Install packages with Bun's fast package manager)
 - `docs/pm/cli/add.mdx`: bun add (Add packages to your project with Bun's fast package manager)
 - `docs/pm/cli/remove.mdx`: bun remove (Remove dependencies from your project)
@@ -8,6 +9,7 @@
 - `docs/pm/bunx.mdx`: bunx (Run packages from npm)
 
 ## Publishing & Analysis
+
 - `docs/pm/cli/publish.mdx`: bun publish (Use `bun publish` to publish a package to the npm registry)
 - `docs/pm/cli/outdated.mdx`: bun outdated (Check for outdated dependencies)
 - `docs/pm/cli/why.mdx`: bun why (Explain why a package is installed)
@@ -15,12 +17,14 @@
 - `docs/pm/cli/info.mdx`: bun info (Display package metadata from the npm registry)
 
 ## Workspace Management
+
 - `docs/pm/workspaces.mdx`: Workspaces (Develop complex monorepos with multiple independent packages)
 - `docs/pm/catalogs.mdx`: Catalogs (Share common dependency versions across multiple packages in a monorepo)
 - `docs/pm/cli/link.mdx`: bun link (Link local packages for development)
 - `docs/pm/cli/pm.mdx`: bun pm (Package manager utilities)
 
 ## Advanced Configuration
+
 - `docs/pm/cli/patch.mdx`: bun patch (Persistently patch node_modules packages in a git-friendly way)
 - `docs/pm/filter.mdx`: bun --filter (Select packages by pattern in a monorepo using the --filter flag)
 - `docs/pm/global-cache.mdx`: Global cache (How Bun stores and manages packages in its global cache)
@@ -36,36 +40,45 @@
 - `docs/pm/winget.mdx`: System packages (winget) (Declare winget packages in package.json and install them with bun install)
 
 ## Core
+
 - `docs/bundler/index.mdx`: Bundler (Bun's fast native bundler for JavaScript, TypeScript, JSX, and more)
 
 ## Development Server
+
 - `docs/bundler/fullstack.mdx`: Fullstack dev server (Build fullstack applications with Bun's integrated dev server that bundles frontend assets and handles API routes)
 - `docs/bundler/hot-reloading.mdx`: Hot reloading (Hot Module Replacement (HMR) for Bun's development server)
 
 ## Asset Processing
+
 - `docs/bundler/html-static.mdx`: HTML & static sites (Build static sites, landing pages, and web applications with Bun's bundler)
 - `docs/bundler/standalone-html.mdx`: Standalone HTML (Bundle a single-page app into a single self-contained .html file with no external dependencies)
 - `docs/bundler/css.mdx`: CSS (Bun's bundler has built-in support for CSS with modern features)
 - `docs/bundler/loaders.mdx`: Loaders (Built-in loaders for the Bun bundler and runtime)
 
 ## Single File Executable
+
 - `docs/bundler/executables.mdx`: Single-file executable (Generate standalone executables from TypeScript or JavaScript files with Bun)
 
 ## WebAssembly
+
 - `docs/bundler/wasm.mdx`: WebAssembly from Rust (Build Rust crates into WebAssembly ES modules with bun wasm build, bun build --target=wasm and bun:wasm)
 
 ## Extensions
+
 - `docs/bundler/plugins.mdx`: Plugins (Universal plugin API for extending Bun's runtime and bundler)
 - `docs/bundler/macros.mdx`: Macros (Run JavaScript functions at bundle-time with Bun macros)
 
 ## Optimization
+
 - `docs/bundler/bytecode.mdx`: Bytecode Caching (Speed up JavaScript execution with bytecode caching in Bun's bundler)
 - `docs/bundler/minifier.mdx`: /bundler/minifier (Reduce bundle sizes with Bun's JavaScript and TypeScript minifier)
 
 ## Migration
+
 - `docs/bundler/esbuild.mdx`: esbuild (Migration guide from esbuild to Bun's bundler)
 
 ## Getting Started
+
 - `docs/test/index.mdx`: Test runner (Bun's fast, built-in, Jest-compatible test runner with TypeScript support, lifecycle hooks, mocking, and watch mode)
 - `docs/test/writing-tests.mdx`: Writing tests (Write tests with Bun's Jest-compatible API, including async tests, timeouts, and test modifiers)
 - `docs/test/configuration.mdx`: Test configuration (Configure bun test behavior with bunfig.toml and command-line options)
@@ -73,37 +86,45 @@
 - `docs/format/index.mdx`: Formatter (Bun's fast, built-in formatter for JavaScript, TypeScript, CSS, HTML, JSON, YAML, Markdown, and more)
 
 ## Test Execution
+
 - `docs/test/runtime-behavior.mdx`: Runtime behavior (Learn about Bun test's runtime integration, environment variables, timeouts, and error handling)
 - `docs/test/discovery.mdx`: Finding tests (Learn how Bun's test runner discovers and filters test files in your project)
 - `docs/test/parallel.mdx`: Parallel & isolated test runs (Run test files across CPU cores with --parallel, isolate files from each other with --isolate, run tests within a file concurrently, and split suites across CI machines with --shard and --timings)
 
 ## Test Features
+
 - `docs/test/lifecycle.mdx`: Lifecycle hooks (Learn how to use beforeAll, beforeEach, afterEach, and afterAll lifecycle hooks in Bun tests)
 - `docs/test/mocks.mdx`: Mocks (Learn how to create and use mock functions, spies, and module mocks in Bun tests)
 - `docs/test/snapshots.mdx`: Snapshots (Learn how to use snapshot testing in Bun to save and compare output between test runs)
 - `docs/test/dates-times.mdx`: Dates and times (Learn how to manipulate time and dates in your Bun tests using setSystemTime and Jest compatibility functions)
 
 ## Specialized Testing
+
 - `docs/test/dom.mdx`: DOM testing (Learn how to test DOM elements and components using Bun with happy-dom and React Testing Library)
 
 ## Reporting
+
 - `docs/test/code-coverage.mdx`: Code coverage (Use Bun's built-in code coverage reporting to track test coverage and find untested code)
 - `docs/test/reporters.mdx`: Test Reporters
 
 ## Rules
+
 - `docs/lint/rules/index.mdx`: Lint rules (Every rule built into bun lint)
 - `docs/lint/plugins.mdx`: ESLint plugins (Run ESLint plugins in bun lint, and write your own rules)
 
 ## Migrate
+
 - `docs/guides/lint/migrate-from-eslint.mdx`: Migrate from ESLint to bun lint
 - `docs/guides/lint/migrate-from-oxlint.mdx`: Migrate from oxlint to bun lint
 - `docs/guides/format/migrate-from-prettier.mdx`: Migrate from Prettier to bun fmt
 - `docs/guides/format/migrate-from-oxfmt.mdx`: Migrate from oxfmt to bun fmt
 
 ## Overview
+
 - `docs/guides/index.mdx`: Guides (Code samples and walkthroughs for common tasks with Bun)
 
 ## Deployment
+
 - `docs/guides/deployment/vercel.mdx`: Deploy a Bun application on Vercel
 - `docs/guides/deployment/railway.mdx`: Deploy a Bun application on Railway (Deploy a Bun application to Railway from the CLI or dashboard, with optional PostgreSQL setup and automatic SSL)
 - `docs/guides/deployment/render.mdx`: Deploy a Bun application on Render
@@ -112,6 +133,7 @@
 - `docs/guides/deployment/google-cloud-run.mdx`: Deploy a Bun application on Google Cloud Run
 
 ## Runtime & Debugging
+
 - `docs/guides/runtime/typescript.mdx`: Install TypeScript declarations for Bun
 - `docs/guides/runtime/tsconfig-paths.mdx`: Re-map import paths
 - `docs/guides/runtime/vscode-debugger.mdx`: Debugging Bun with the VS Code extension
@@ -142,6 +164,7 @@
 - `docs/guides/runtime/codesign-macos-executable.mdx`: Codesign a single-file JavaScript executable on macOS (Fix the "can't be opened because it is from an unidentified developer" Gatekeeper warning when running your JavaScript executable.)
 
 ## Ecosystem & Frameworks
+
 - `docs/guides/ecosystem/astro.mdx`: Build an app with Astro and Bun
 - `docs/guides/ecosystem/discordjs.mdx`: Create a Discord bot
 - `docs/guides/ecosystem/discord.mdx`: Run discord.js, @discordjs/voice and discordx
@@ -172,6 +195,7 @@
 - `docs/guides/ecosystem/upstash.mdx`: Bun Redis with Upstash
 
 ## HTTP & Networking
+
 - `docs/guides/http/server.mdx`: Common HTTP server usage
 - `docs/guides/http/simple.mdx`: Write a simple HTTP server
 - `docs/guides/http/fetch.mdx`: Send an HTTP request using fetch
@@ -187,12 +211,14 @@
 - `docs/guides/http/stream-node-streams-in-bun.mdx`: Streaming HTTP Server with Node.js Streams
 
 ## WebSocket
+
 - `docs/guides/websocket/simple.mdx`: Build a simple WebSocket server
 - `docs/guides/websocket/pubsub.mdx`: Build a publish-subscribe WebSocket server
 - `docs/guides/websocket/context.mdx`: Set per-socket contextual data on a WebSocket
 - `docs/guides/websocket/compression.mdx`: Enable compression for WebSocket messages
 
 ## Processes & System
+
 - `docs/guides/process/spawn.mdx`: Spawn a child process
 - `docs/guides/process/spawn-stdout.mdx`: Read stdout from a child process
 - `docs/guides/process/spawn-stderr.mdx`: Read stderr from a child process
@@ -208,6 +234,7 @@
 - `docs/guides/runtime/read-env.mdx`: Read environment variables
 
 ## Package Manager
+
 - `docs/guides/install/add.mdx`: Add a dependency
 - `docs/guides/install/add-dev.mdx`: Add a development dependency
 - `docs/guides/install/add-optional.mdx`: Add an optional dependency
@@ -227,6 +254,7 @@
 - `docs/guides/install/cicd.mdx`: Install dependencies with Bun in GitHub Actions
 
 ## Test Runner
+
 - `docs/guides/test/run-tests.mdx`: Run your tests with the Bun test runner
 - `docs/guides/test/watch-mode.mdx`: Run tests in watch mode with Bun
 - `docs/guides/test/migrate-from-jest.mdx`: Migrate from Jest to Bun's test runner
@@ -248,12 +276,14 @@
 - `docs/guides/test/svelte-test.mdx`: import, require, and test Svelte components with bun test
 
 ## Linter & Formatter
+
 - `docs/guides/lint/migrate-from-eslint.mdx`: Migrate from ESLint to bun lint
 - `docs/guides/lint/migrate-from-oxlint.mdx`: Migrate from oxlint to bun lint
 - `docs/guides/format/migrate-from-prettier.mdx`: Migrate from Prettier to bun fmt
 - `docs/guides/format/migrate-from-oxfmt.mdx`: Migrate from oxfmt to bun fmt
 
 ## Module System
+
 - `docs/guides/runtime/import-json.mdx`: Import a JSON file
 - `docs/guides/runtime/import-toml.mdx`: Import a TOML file
 - `docs/guides/runtime/import-yaml.mdx`: Import a YAML file
@@ -267,6 +297,7 @@
 - `docs/guides/util/main.mdx`: Get the absolute path to the current entrypoint
 
 ## File System
+
 - `docs/guides/read-file/string.mdx`: Read a file as a string
 - `docs/guides/read-file/buffer.mdx`: Read a file to a Buffer
 - `docs/guides/read-file/uint8array.mdx`: Read a file to a Uint8Array
@@ -290,10 +321,12 @@
 - `docs/guides/runtime/delete-directory.mdx`: Delete directories
 
 ## HTML Processing
+
 - `docs/guides/html-rewriter/extract-links.mdx`: Extract links from a webpage using HTMLRewriter
 - `docs/guides/html-rewriter/extract-social-meta.mdx`: Extract social share images and Open Graph tags
 
 ## Binary Data
+
 - `docs/guides/binary/arraybuffer-to-string.mdx`: Convert an ArrayBuffer to a string
 - `docs/guides/binary/arraybuffer-to-buffer.mdx`: Convert an ArrayBuffer to a Buffer
 - `docs/guides/binary/arraybuffer-to-blob.mdx`: Convert an ArrayBuffer to a Blob
@@ -318,6 +351,7 @@
 - `docs/guides/binary/dataview-to-string.mdx`: Convert a DataView to a string
 
 ## Streams
+
 - `docs/guides/streams/to-string.mdx`: Convert a ReadableStream to a string
 - `docs/guides/streams/to-json.mdx`: Convert a ReadableStream to JSON
 - `docs/guides/streams/to-blob.mdx`: Convert a ReadableStream to a Blob
@@ -332,5 +366,5 @@
 - `docs/guides/streams/node-readable-to-arraybuffer.mdx`: Convert a Node.js Readable to an ArrayBuffer
 
 ## Feedback
-- `docs/feedback.mdx`: Feedback (Share feedback, bug reports, and feature requests)
 
+- `docs/feedback.mdx`: Feedback (Share feedback, bug reports, and feature requests)

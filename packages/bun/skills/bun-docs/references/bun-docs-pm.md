@@ -2,7 +2,7 @@
 name: bun-docs-pm
 description: "Bun package manager cheat-sheet (install/add/remove/update/audit/dedupe/prune/patch/pm/publish/bunx/create/init, bunfig [install], lockfile, linkers, trust, catalogs, overrides, workspaces, --filter) verified from docs/pm, docs/runtime/templating, docs/guides/install"
 metadata:
- type: reference
+  type: reference
 ---
 
 Source: <bun>\docs\pm\*.mdx, docs\pm\cli\*.mdx, docs\runtime\templating\{create,init}.mdx, docs\guides\install\*, docs\snippets\cli\*.mdx (flag lists).
@@ -13,20 +13,20 @@ Related: `bun-docs-bunfig-env` (full bunfig/env ref), `bun-docs-test`, `bun-docs
 - Installs deps+devDeps+optionalDeps; peerDeps installed by default (optional peers in `peerDependenciesMeta` reuse existing dep if possible).
 - Runs ROOT project's `{pre|post}install` + `{pre|post}prepare`; dependency lifecycle scripts only if trusted (see Trust).
 - Flags: `--production` (no devDeps, IMPLIES `--frozen-lockfile`; leaves already-present devDeps -> use `bun prune --production`)
- `--frozen-lockfile` (exact lock, error if package.json disagrees; no lockfile -> installs from package.json, writes none)
- `--dry-run`, `--lockfile-only`, `--no-save` (no lockfile), `--save` (default true), `--yarn` (also write yarn.lock v1)
- `--save-text-lockfile`, `--omit dev|peer|optional` (repeatable), `--only-missing`, `--force`, `--no-verify`
- `--ignore-scripts`, `--trust`, `--concurrent-scripts N` (default 2x CPU), `--network-concurrency N` (default 48)
- `--backend hardlink|clonefile|clonefile_each_dir|copyfile|symlink`, `--linker isolated|hoisted`, `--cpu`, `--os`
- `--filter/-F`, `-g/--global`, `--registry`, `--ca`, `--cafile`, `--cache-dir`, `--no-cache`, `--config/-c`, `--cwd`
- `--verbose`, `--silent`, `--no-progress`, `--no-summary`, `--analyze`, `--minimum-release-age <sec>`
- `--prefer-offline` (cached metadata regardless of age; fetch only missing), `--offline` (never network; uncached = error).
+  `--frozen-lockfile` (exact lock, error if package.json disagrees; no lockfile -> installs from package.json, writes none)
+  `--dry-run`, `--lockfile-only`, `--no-save` (no lockfile), `--save` (default true), `--yarn` (also write yarn.lock v1)
+  `--save-text-lockfile`, `--omit dev|peer|optional` (repeatable), `--only-missing`, `--force`, `--no-verify`
+  `--ignore-scripts`, `--trust`, `--concurrent-scripts N` (default 2x CPU), `--network-concurrency N` (default 48)
+  `--backend hardlink|clonefile|clonefile_each_dir|copyfile|symlink`, `--linker isolated|hoisted`, `--cpu`, `--os`
+  `--filter/-F`, `-g/--global`, `--registry`, `--ca`, `--cafile`, `--cache-dir`, `--no-cache`, `--config/-c`, `--cwd`
+  `--verbose`, `--silent`, `--no-progress`, `--no-summary`, `--analyze`, `--minimum-release-age <sec>`
+  `--prefer-offline` (cached metadata regardless of age; fetch only missing), `--offline` (never network; uncached = error).
 - `bun ci` == `bun install --frozen-lockfile` (requires committed bun.lock). CI does NOT auto-enable frozen.
 - Validate lock w/o install: `bun install --frozen-lockfile --dry-run`. Fully offline CI: `--offline --frozen-lockfile` with restored cache.
 - `--production`/`--omit` installs don't cache the omitted groups (cache warming must place the same packages, same platform).
 - Pruned monorepo (turbo prune/Docker): frozen install skips workspaces missing package.json with `note:`; fails if a kept ws depends on a skipped one.
 - `--cpu` values: arm arm64 ia32 mips mipsel ppc ppc64 s390 s390x x32 x64. `--os`: aix darwin freebsd linux openbsd sunos win32 android.
- Lockfile stores normalized cpu/os -> lock identical across platforms; disabled pkgs skipped at runtime.
+  Lockfile stores normalized cpu/os -> lock identical across platforms; disabled pkgs skipped at runtime.
 - Up-to-date check: reads only `"name"`/`"version"` of node_modules/*/package.json (early-exit parser). Lock present+unchanged -> lazy downloads.
 - Feature flags to disable postinstall optimizations (esbuild, sharp...): `BUN_FEATURE_FLAG_DISABLE_NATIVE_DEPENDENCY_LINKER=1`, `BUN_FEATURE_FLAG_DISABLE_IGNORE_SCRIPTS=1`.
 - Registry metadata cache: binary `~/.bun/install/cache/${hash(name)}.npm`; Cache-Control ignores `Age` -> may lag npm ~5 min.
@@ -40,12 +40,12 @@ Related: `bun-docs-bunfig-env` (full bunfig/env ref), `bun-docs-test`, `bun-docs
 
 - Default from lockfile `configVersion`: v1 + workspaces -> `isolated`; v1 no workspaces -> `hoisted`; v0 -> `hoisted`.
 - New projects get configVersion 1; pre-v1.3.2 lockfiles w/o version get 0. Migration: from pnpm -> 1; from npm/yarn -> 0.
- workspace pkgs symlinked to source. Hidden fallback `node_modules/.bun/node_modules` (all pkgs) -> `install.hoist = false` (or `.npmrc hoist=false`) removes it for strictness; root node_modules still reachable.
+  workspace pkgs symlinked to source. Hidden fallback `node_modules/.bun/node_modules` (all pkgs) -> `install.hoist = false` (or `.npmrc hoist=false`) removes it for strictness; root node_modules still reachable.
 - Store dir resolution suffix capped at 80 bytes (63 + `+` + 16 hex). Windows: >260-char path breaks lifecycle script cwd.
 - Stale store entries stay until `bun prune`. Debug: `--linker isolated --verbose`.
 - `.npmrc`: `install-strategy=hoisted|linked`, `node-linker=isolated|hoisted|pnpm|node-modules`.
 - Global virtual store (off by default, isolated only): `[install] globalStore = true` or `BUN_INSTALL_GLOBAL_STORE=1`; entries in `<cache>/links/<storepath>-<16hex hash of dep closure>`;
- ~7x faster warm installs. Stays project-local if: patched, in trustedDependencies, or (transitively) depends on workspac<file>:/link:. Breaks true phantom deps; hoistPattern/publicHoistPattern unreachable from store pkgs. `bun pm cache rm` clears it. Concurrency-safe (tmp dir + rename).
+  ~7x faster warm installs. Stays project-local if: patched, in trustedDependencies, or (transitively) depends on workspac<file>:/link:. Breaks true phantom deps; hoistPattern/publicHoistPattern unreachable from store pkgs. `bun pm cache rm` clears it. Concurrency-safe (tmp dir + rename).
 
 ## [install] bunfig keys (defaults from docs)
 
@@ -79,14 +79,14 @@ globalDir = "~/.bun/install/global"; globalBinDir = "~/.bun/bin"
 
 - Precedence (later wins): `~/.npmrc` (or `$XDG_CONFIG_HOME/.npmrc`) < `./.npmrc` < bunfig (global, project) < env vars < CLI flags.
 - Keys: `registry`, `@scope:registry`, `//host/:_authToken|username|_password(base64)|_auth(base64 user:pass)|email`, `link-workspace-packages`
- `save-exact`, `ignore-scripts`, `dry-run`, `cache` (path|false), `ca`/`ca[]`/`cafile`, `omit`/`omit[]`/`include` (dev|peer|optional)
- `install-strategy`, `node-linker`, `public-hoist-pattern[]`, `hoist-pattern`, `hoist`. `${NAME}` kept as-is if unset; `${NAME?}` -> "".
+  `save-exact`, `ignore-scripts`, `dry-run`, `cache` (path|false), `ca`/`ca[]`/`cafile`, `omit`/`omit[]`/`include` (dev|peer|optional)
+  `install-strategy`, `node-linker`, `public-hoist-pattern[]`, `hoist-pattern`, `hoist`. `${NAME}` kept as-is if unset; `${NAME?}` -> "".
 - Credentials matched by host+path even if registry set in bunfig.
 
 ## Lockfile
 
 - `bun.lock` = text JSONC (default since 1.2; introduced 1.1.39). Commit it. Old binary `bun.lockb`: migrate with
- `bun install --save-text-lockfile --frozen-lockfile --lockfile-only` then delete .lockb. `bun bun.lockb` prints yarn-format; git textconv `diff.lockb.textconv bun`.
+  `bun install --save-text-lockfile --frozen-lockfile --lockfile-only` then delete .lockb. `bun bun.lockb` prints yarn-format; git textconv `diff.lockb.textconv bun`.
 - Always rewritten unless `--frozen-lockfile`/`--production`. `--lockfile-only` (install/add/remove/update/dedupe) still fills cache.
 - Auto-migration when no bun.lock: yarn.lock v1, package-lock.json v2/3/4 (not v1 -> warn), pnpm-lock.yaml v7-9 (pnpm-workspace.yaml packages+catalogs -> package.json `workspaces`; pnpm.overrides/patchedDependencies -> root). Originals kept. `bun pm migrate` = migrate without install.
 - Nested/version-scoped overrides -> written as `lockfileVersion` 3 (older Bun can't read). Catalog defs stored in lock.
@@ -110,11 +110,11 @@ globalDir = "~/.bun/install/global"; globalBinDir = "~/.bun/bin"
 
 - `bun remove` (`rm`, `uninstall`, `r`): removes from all groups; `--filter` ('*' = every ws).
 - `bun update` (`up`): newest within ranges for direct+transitive; preserves `^`/`~`; exact pins, dist-tags, `*`, `1.x`, `>=` untouched (lock only) unless `--latest/-L`; never rewrites `catalog:` (updates catalog entry).
- Names/globs/`!excl`; `bun update caniuse-lite` fixes transitive w/o adding to package.json; unknown name = error. `-i/--interactive` (space, enter, a, n, i, l=latest, j/k).
- `-r/--recursive` all ws package.json; `--filter`; `--dev/-D`, `--prod/-P`, `--no-optional` (selection only); `-g`; `--no-save`; `--dry-run`. Patched deps kept (moved by --latest / audit fix).
+  Names/globs/`!excl`; `bun update caniuse-lite` fixes transitive w/o adding to package.json; unknown name = error. `-i/--interactive` (space, enter, a, n, i, l=latest, j/k).
+  `-r/--recursive` all ws package.json; `--filter`; `--dev/-D`, `--prod/-P`, `--no-optional` (selection only); `-g`; `--no-save`; `--dry-run`. Patched deps kept (moved by --latest / audit fix).
 - `bun outdated [pkg|glob|!glob]`: Current/Update/Latest; `--filter`, `-r` (incl. catalogs, Workspace column).
 - `bun audit`: reads bun.lock only; `--audit-level=low|moderate|high|critical`, `--prod/-p/-P`, `--omit=dev|optional|peer`, `--ignore <GHSA|id>` (not CVE), `--json` (raw, unfiltered).
- `bun audit fix [--latest] [--dry-run] [--json]`: lowest safe version within ranges; exact direct pins treated as `^`; rejects `--prod/--frozen-lockfile/--no-save`; re-audits after. Exit 0 none remaining / 1 otherwise; request fail -> 1.
+  `bun audit fix [--latest] [--dry-run] [--json]`: lowest safe version within ranges; exact direct pins treated as `^`; rejects `--prod/--frozen-lockfile/--no-save`; re-audits after. Exit 0 none remaining / 1 otherwise; request fail -> 1.
 - `bun dedupe [--check (exit 1 if dupes) | --dry-run | --lockfile-only]`: only among already-locked versions; never edits package.json; needs lock in sync; not with frozen/production/no-save; keeps patched.
 - `bun prune [--production|--omit=..] [--dry-run] [--filter] [--linker] [--os/--cpu]`: deletes node_modules entries not in bun.lock (incl. stale `.bun` entries); no registry, no scripts, no lock edits; always from ws root; no `--global`.
 - `bun why <pkg|glob> [--top] [--depth N]`. `bun info <pkg>[@v] [prop.path] [--json]` (alias `bun pm view`).

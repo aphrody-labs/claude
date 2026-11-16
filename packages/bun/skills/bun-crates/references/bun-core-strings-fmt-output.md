@@ -2,7 +2,7 @@
 name: bun-core-strings-fmt-output
 description: "bun_core String/ZStr/Utf8Bytes ownership rules, strings SIMD helpers, fmt helpers, scoped debug logging (declare_scope!/scoped_log!), pretty output macros, env_var and feature flags"
 metadata:
- type: reference
+  type: reference
 ---
 
 # bun_core: strings, fmt, output, env vars

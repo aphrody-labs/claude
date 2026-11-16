@@ -23,7 +23,7 @@ export default [
     finalize: true,
     hasPendingActivity: true,
     proto: {
-      scan:  { fn: "scan",  length: 1 },
+      scan: { fn: "scan", length: 1 },
       match: { fn: "match", length: 1 },
     },
   }),
@@ -71,13 +71,13 @@ impl Glob {
 
 ### Canonical signatures
 
-| Hook                | Signature                                                                            |
-| ------------------- | ------------------------------------------------------------------------------------ |
-| constructor         | `pub fn constructor(global: &JSGlobalObject, frame: &CallFrame) -> JsResult<Box<Self>>` |
-| method (`fn:`)      | `pub fn name(&self, global: &JSGlobalObject, frame: &CallFrame) -> JsResult<JSValue>`   |
-| getter              | `pub fn get_x(this: &Self, global: &JSGlobalObject) -> JsResult<JSValue>`               |
-| finalize            | `pub fn finalize(self: Box<Self>)` — or omit; the blanket `JsFinalize` just drops    |
-| hasPendingActivity  | `pub fn has_pending_activity(&self) -> bool`                                         |
+| Hook               | Signature                                                                               |
+| ------------------ | --------------------------------------------------------------------------------------- |
+| constructor        | `pub fn constructor(global: &JSGlobalObject, frame: &CallFrame) -> JsResult<Box<Self>>` |
+| method (`fn:`)     | `pub fn name(&self, global: &JSGlobalObject, frame: &CallFrame) -> JsResult<JSValue>`   |
+| getter             | `pub fn get_x(this: &Self, global: &JSGlobalObject) -> JsResult<JSValue>`               |
+| finalize           | `pub fn finalize(self: Box<Self>)` — or omit; the blanket `JsFinalize` just drops       |
+| hasPendingActivity | `pub fn has_pending_activity(&self) -> bool`                                            |
 
 A missing or mis-typed hook is a **compile error** in `cargo check -p bun_runtime` — the generated code calls the inherent method directly.
 

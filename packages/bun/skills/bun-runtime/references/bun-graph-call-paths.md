@@ -2,7 +2,7 @@
 name: bun-graph-call-paths
 description: "Verified end-to-end call chains (file:line) for bun run, Bun.serve, bun install and bun build, found via the aphrody graph + source, plus the graph node ids to explain them"
 metadata:
- type: reference
+  type: reference
 ---
 
 Built 2026-10-08 on HEAD fe43d1d685a. Graph (`aphrody graph --source graph:bun`) only locates symbols; its Rust `calls` edges are same-file name matches, so every hop below was confirmed in source (see `bun-graph-structure` for why).

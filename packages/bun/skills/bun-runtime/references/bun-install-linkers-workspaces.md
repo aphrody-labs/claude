@@ -2,7 +2,7 @@
 name: bun-install-linkers-workspaces
 description: "Bun install node_modules linkers (hoisted vs isolated), workspaces, catalogs, overrides, patches, lifecycle scripts/trust, security scanner, minimum release age"
 metadata:
- type: reference
+  type: reference
 ---
 
 # Linkers, workspaces, catalogs, overrides, patch, scripts, scanner
@@ -12,7 +12,7 @@ Related: `bun-install-architecture` · `bun-install-lockfile` · `bun-install-cl
 ## Linker selection
 
 - `bun_install_types::NodeLinker::{Auto, Hoisted, Isolated}`; set by `--linker`, bunfig `install.linker`. Auto resolution in `install_with_manager.rs`:
- configVersion 0 -> hoisted; configVersion 1 -> isolated when the project has workspaces (and lockfile not migrated from npm), else hoisted.
+  configVersion 0 -> hoisted; configVersion 1 -> isolated when the project has workspaces (and lockfile not migrated from npm), else hoisted.
 - test/bunfig.toml sets `[install] linker = "isolated"`, `globalStore = false` for the repo test tree.
 
 ## Hoisted (`src/install/hoisted_install.rs`, `PackageInstaller.rs`, `lockfile/Tree.rs`, `PackageInstall.rs`)

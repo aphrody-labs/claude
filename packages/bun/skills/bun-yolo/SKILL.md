@@ -14,10 +14,16 @@ import { decide, noul, choice, type Provider } from "bun:yolo";
 export async function routeSource(provider: Provider) {
   return await decide(
     {
-      state: { query: "How does Bun.Video resize frames?", passage: "A curated public source excerpt." },
+      state: {
+        query: "How does Bun.Video resize frames?",
+        passage: "A curated public source excerpt.",
+      },
       questions: {
         relevant: noul("Does `passage` help answer `query`?"),
-        route: choice("Which source fits `query`?", { docs: "API docs", graph: "Source relationships" }),
+        route: choice("Which source fits `query`?", {
+          docs: "API docs",
+          graph: "Source relationships",
+        }),
       },
     },
     { provider, timeout: 10000, maxRetries: 0 },

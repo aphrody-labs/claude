@@ -11,17 +11,17 @@ so there is nothing that can mis-convert data — and no opt-out switch.
 
 ## The contract
 
-| Input spelling | Meaning | Resolves to |
-|---|---|---|
-| `C:/Users/me`, `C:\Users\me` | native Windows | itself — always safe |
-| `/c/Users/me` | POSIX display dialect | `C:\Users\me` |
-| `/mnt/c/Users/me` | WSL dialect | `C:\Users\me` |
-| `/usr/bin`, `/bin`, `/etc/...`, `/var/...` | install-tree dialect | real dirs in the WinuxCmd installation root |
-| `/tmp/x`, `/var/tmp/x` | per-user temp namespace | the real Windows temp dir (`TMPDIR`, else `%TEMP%`); `/var/tmp` → `<temp>/var/tmp` |
-| `/home/me` | users dialect | real users directory (`C:/Users`) |
-| `/dev/null` | null device | Windows `NUL` |
-| `~` | home | `USERPROFILE` (kept consistent with `HOME`) |
-| `D:` (bare) | drive designator | the drive's root — `D:` and `cd D:` land on `/d/` |
+| Input spelling                             | Meaning                 | Resolves to                                                                        |
+| ------------------------------------------ | ----------------------- | ---------------------------------------------------------------------------------- |
+| `C:/Users/me`, `C:\Users\me`               | native Windows          | itself — always safe                                                               |
+| `/c/Users/me`                              | POSIX display dialect   | `C:\Users\me`                                                                      |
+| `/mnt/c/Users/me`                          | WSL dialect             | `C:\Users\me`                                                                      |
+| `/usr/bin`, `/bin`, `/etc/...`, `/var/...` | install-tree dialect    | real dirs in the WinuxCmd installation root                                        |
+| `/tmp/x`, `/var/tmp/x`                     | per-user temp namespace | the real Windows temp dir (`TMPDIR`, else `%TEMP%`); `/var/tmp` → `<temp>/var/tmp` |
+| `/home/me`                                 | users dialect           | real users directory (`C:/Users`)                                                  |
+| `/dev/null`                                | null device             | Windows `NUL`                                                                      |
+| `~`                                        | home                    | `USERPROFILE` (kept consistent with `HOME`)                                        |
+| `D:` (bare)                                | drive designator        | the drive's root — `D:` and `cd D:` land on `/d/`                                  |
 
 At the boundary, argv tokens are sorted by shape. Classified path
 spellings (the dialects above, `/mnt/X`, the exact token `/dev/null`)
@@ -53,12 +53,12 @@ Key facts for agents:
 
 ## Contrast with MSYS-family environments
 
-| | MSYS2 / Git Bash | Niubash |
-|---|---|---|
-| Model | POSIX emulation over a Unix-looking root | native shell, dialects as input |
-| Path handling | heuristic conversion of arguments | deterministic translation of classified spellings for native children; data and boundary forms verbatim |
-| Escape hatch | `MSYS_NO_PATHCONV`, `MSYS2_ARG_CONV_EXCL` required when the heuristic breaks | nothing — there is no heuristic converter, and no opt-out switch |
-| Failure mode | silent argument mangling (e.g. `git grep "/pattern"` rewritten) | data is never mangled (verbatim by contract); classified spellings follow the one documented rule |
+|               | MSYS2 / Git Bash                                                             | Niubash                                                                                                 |
+| ------------- | ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| Model         | POSIX emulation over a Unix-looking root                                     | native shell, dialects as input                                                                         |
+| Path handling | heuristic conversion of arguments                                            | deterministic translation of classified spellings for native children; data and boundary forms verbatim |
+| Escape hatch  | `MSYS_NO_PATHCONV`, `MSYS2_ARG_CONV_EXCL` required when the heuristic breaks | nothing — there is no heuristic converter, and no opt-out switch                                        |
+| Failure mode  | silent argument mangling (e.g. `git grep "/pattern"` rewritten)              | data is never mangled (verbatim by contract); classified spellings follow the one documented rule       |
 
 Rule of thumb: if you find yourself reaching for a `NO_PATH_CONV`-style
 variable, stop — in Niubash that variable does not exist because the

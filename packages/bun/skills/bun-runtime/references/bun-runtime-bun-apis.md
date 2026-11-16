@@ -2,7 +2,7 @@
 name: bun-runtime-bun-apis
 description: "globalThis.Bun object — full property table, C++ vs Rust owners, lazy-prop/callback export macros.classes.ts codegen classes and where each Bun.* API lives"
 metadata:
- type: reference
+  type: reference
 ---
 
 # Bun.* APIs (src/runtime/api/ + src/jsc/bindings/BunObject.cpp)
@@ -10,10 +10,10 @@ metadata:
 ## How the Bun object is built
 
 - C++ hash table `@begin bunObjectTable ... @end` in `src/jsc/bindings/BunObject.cpp` (create_hash_table codegen). Each row: name, C++/Rust
- symbol, attributes (`PropertyCallback` = lazy, `Function N`, `CustomAccessor`).
+  symbol, attributes (`PropertyCallback` = lazy, `Function N`, `CustomAccessor`).
 - Rust side: `src/runtime/api/BunObject.rs`, `mod bun_object`:
 - `export_callbacks!{ BunObject_callback_<name> => fn }` -> `#[no_mangle]` host fns wrapped in `bun_jsc::jsc_host_abi!` (SysV on
- Windows-x64! mismatching ABI = garbage globalObject).
+  Windows-x64! mismatching ABI = garbage globalObject).
 - `export_lazy_prop_callbacks!{ BunObject_lazyPropCb_<name> => getter }` (signature `(JSGlobalObject*, JSObject*) -> JSValue`, or `JsResult`).
 - Recipe in doc comment: add callback/prop -> export -> update bunObjectTable in BunObject.cpp -> update `BunObject+exports.h` -> `bun run build`.
 - `src/runtime/api/BunObject.bind.ts` = bindgen fns (e.g. `gc` -> `Generated::BunObject::jsGc`).
@@ -61,12 +61,12 @@ S3Client/s3 (`webcore/S3Client.rs`), ValkeyClient/valkey (RedisClient/redis), Te
 `x509.rs`, `Terminal.rs`. `crash_handler_jsc.rs`, `NativePromiseContext.rs`.
 
 - Sockets (Bun.listen/connect/udpSocket): `src/runtime/socket/` (`Listener.rs`, `socket_body.rs`, `udp_socket.rs`
- `SSLConfig.rs`+`.bindv2.ts`, `SocketConfig.bindv2.ts`, `WindowsNamedPipe.rs`, `UpgradedDuplex.rs`, `bundled_root_certs.rs`
- `system_certs.rs`).
+  `SSLConfig.rs`+`.bindv2.ts`, `SocketConfig.bindv2.ts`, `WindowsNamedPipe.rs`, `UpgradedDuplex.rs`, `bundled_root_certs.rs`
+  `system_certs.rs`).
 - Timers: `src/runtime/timer/` (Timer.rs, TimeoutObject, ImmediateObject, DateHeaderTimer, EventLoopDelayMonitor, WTFTimer).
 - IPC: `src/runtime/ipc.rs`, `ipc_host.rs`.
 - NAPI: `src/runtime/napi/napi_body.rs`. FFI (bun:ffi): `src/runtime/ffi/ffi_body.rs` (TinyCC via `bun_tcc_sys`; `cc` = `Bun__FFI__cc`)
- `FFIObject.rs`, `abi_type.rs`, `FFI.h`.
+  `FFIObject.rs`, `abi_type.rs`, `FFI.h`.
 
 ## .classes.ts codegen (src/codegen/generate-classes.ts)
 

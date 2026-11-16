@@ -2,7 +2,7 @@
 name: bun-os-runtime
 description: "Bun OS and Aphrody runtime source ownership, provenance, integration and qualification boundaries"
 metadata:
- type: reference
+  type: reference
 ---
 
 # Bun OS runtime
@@ -14,19 +14,19 @@ and ABI identifiers remain part of their provenance.
 ## Source owners
 
 - `aphrody-labs/bun` owns the runtime. `oven-sh/bun` is its upstream source;
- `scripts/aphrody/sync-upstream.ts` owns synchronization. Inspect current refs
- and concurrent changes before changing the checkout.
+  `scripts/aphrody/sync-upstream.ts` owns synchronization. Inspect current refs
+  and concurrent changes before changing the checkout.
 - `src/runtime`, `src/js/bun`, `src/jsc` and `src/sys` own runtime behavior.
- `packages/bun-types` declares its public contracts; a declaration is not a
- native behavior test.
+  `packages/bun-types` declares its public contracts; a declaration is not a
+  native behavior test.
 - `scripts/build.ts` and `scripts/build/*` own `bun bd`. Use that driver for
- checkout runtime changes and its trailing execution arguments for tests.
+  checkout runtime changes and its trailing execution arguments for tests.
 - `packages/bun-agent-plugin` owns source skills, adapters, hooks and generated
- bundles. Generated resources qualify their source inputs; they do not prove
- client execution or the installed executable's embedded plugin.
+  bundles. Generated resources qualify their source inputs; they do not prove
+  client execution or the installed executable's embedded plugin.
 - `scripts/aphrody/release-matrix.ts`, `media-stage.ts` and `media-release.ts`
- own release target selection and media staging. Reuse their manifests and
- qualification receipts rather than creating a parallel platform catalog.
+  own release target selection and media staging. Reuse their manifests and
+  qualification receipts rather than creating a parallel platform catalog.
 
 ## Runtime identity and gates
 
