@@ -29,7 +29,7 @@
     ],
     "defaultMode": "bypassPermissions"
   },
-  "model": "best",
+  "model": "sonnet",
   "fallbackModel": [
     "sonnet",
     "haiku"
@@ -64,6 +64,11 @@
   },
   "outputStyle": "Autonome",
   "alwaysThinkingEnabled": true,
+  "modelSettings": {
+    "claude-sonnet-5-5": {
+      "effortLevel": "high"
+    }
+  },
   "pluginConfigs": {
     "cc-plugin-agents-md@builtin": {
       "options": {
