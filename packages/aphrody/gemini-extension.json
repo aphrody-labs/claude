@@ -6,15 +6,14 @@
   "mcpServers": {
     "relay": {
       "command": "bun",
-      "args": [
-        "${extensionPath}/hooks-handlers/relay-stdio.ts"
-      ]
+      "args": ["${extensionPath}/hooks-handlers/relay-stdio.ts"],
+      "env": {
+        "RELAY_HUB": "0"
+      }
     },
     "claude-bridge": {
       "command": "bun",
-      "args": [
-        "${extensionPath}/hooks-handlers/bridge-mcp.ts"
-      ]
+      "args": ["${extensionPath}/hooks-handlers/bridge-mcp.ts"]
     },
     "hostinger": {
       "type": "http",

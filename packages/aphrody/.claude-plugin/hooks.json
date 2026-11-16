@@ -43,15 +43,6 @@
             "timeout": 5
           }
         ]
-      },
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "bun --no-install --no-env-file \"${CLAUDE_PLUGIN_ROOT}/hooks-handlers/session-bridge.ts\" deliver",
-            "timeout": 5
-          }
-        ]
       }
     ],
     "PostToolUse": [

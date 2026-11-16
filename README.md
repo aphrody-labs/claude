@@ -17,6 +17,7 @@ Versioned, reproducible global configuration for Claude Code, Antigravity (`agy`
   - `github.ts`: audit and clean the GitHub account (descriptions, archived duplicates, orgs).
   - `cloudflare-ci-token.ts`: mint an account-owned Cloudflare token and store it as Actions secrets of the given repositories.
   - `notify.ts`: send a message to live Claude Code sessions through the relay mailbox or the native pipe.
+  - `statusline.ts`: status line (model, folder, branch, context use, cost) without subprocesses.
   - `lib.ts`: shared helpers.
 
 ## Quickstart
