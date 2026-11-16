@@ -45,22 +45,25 @@ const pick = (names: string[]) =>
     return { id: g.id };
   });
 const acct = `com.cloudflare.api.account.${account.id}`;
-const minted = await cf<{ value: string }>(
+const tokenName = `github-ci-${new Date().toISOString().slice(0, 10)}`;
+const minted = await cf<{ id: string; value: string }>(
   "POST",
   `/accounts/${account.id}/tokens`,
   {
-    name: `github-ci-${new Date().toISOString().slice(0, 10)}`,
+    name: tokenName,
+    // Least privilege and short-lived: re-run this script to rotate.
+    expires_on: new Date(Date.now() + 90 * 86_400_000)
+      .toISOString()
+      .replace(/\.\d{3}Z$/, "Z"),
     policies: [
       {
         effect: "allow",
         resources: { [acct]: "*" },
         permission_groups: pick([
           "Workers Scripts Write",
-          "Workers R2 Storage Write",
+          "Workers R2 Storage Read",
           "Cloudflare Tunnel Read",
           "Account Settings Read",
-          "Workers KV Storage Write",
-          "D1 Write",
         ]),
       },
       {
@@ -96,6 +99,18 @@ await Promise.all(
     }),
   ),
 );
+// Rotation: once every repository holds the new token, delete the older github-ci-* tokens.
+if (!failed) {
+  const all = await cf<{ id: string; name: string }[]>(
+    "GET",
+    `/accounts/${account.id}/tokens`,
+  );
+  for (const t of all) {
+    if (!t.name.startsWith("github-ci-") || t.id === minted.id) continue;
+    await cf("DELETE", `/accounts/${account.id}/tokens/${t.id}`);
+    console.log(`deleted ${t.name}`);
+  }
+}
 process.exit(failed ? 1 : 0);
 
 export {};
