@@ -302,11 +302,17 @@ export async function deliverRealtime(opts: {
     return false;
   });
 
+  // The native pipe only carries messages from real Claude Code sessions: Claude Code holds a pipe message whose
+  // from-name is not a live session ("unidentified session"). Any other sender (agy, gemini, scripts) goes through the
+  // relay mailbox, which names the sender and is drained by the session-bridge hook.
+  const senderIsSession = sessions.some(
+    (x) => x.name === sender || x.sessionId === sender,
+  );
   const results: DeliveryResult[] = [];
   for (const s of matches) {
     const label = s.name ?? `${basename(s.cwd)}-${s.sessionId.slice(0, 6)}`;
     let piped = false;
-    if (s.messagingSocketPath) {
+    if (s.messagingSocketPath && senderIsSession) {
       const r = await pushPipeMessage(s, opts.message, {
         sender,
         urgent: opts.urgent,
