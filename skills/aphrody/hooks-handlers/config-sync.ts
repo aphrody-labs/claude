@@ -6,12 +6,12 @@
 // Never blocks a session: every failure is reported on stderr and exits 0.
 import { spawn } from "node:child_process"
 import { resolve } from "node:path"
+import { readEvent } from "./lib.ts"
 
 const mode = process.argv[2]
 const root = resolve(import.meta.dir, "..", "..", "..")
 
-// Drain the hook event from stdin; the handler does not need its fields.
-if (!process.stdin.isTTY) await new Response(Bun.stdin.stream()).text()
+await readEvent()
 
 function git(...args: string[]) {
   const r = Bun.spawnSync(["git", "-C", root, ...args], { stdout: "pipe", stderr: "pipe" })

@@ -8,4 +8,5 @@
 - Use whatever tool does the job best: install any CLI, library or runtime that helps (npm, crates.io, PyPI, winget, prebuilt binaries); prefer fast modern tools, but no tool is banned by dogma.
 - Fleet by role (ssh Host aliases): fr1 builds, CI and heavy agents; fr2 tests, benchmarks and research; prd production only. No Rust build on the PC.
 - Git: everything on main, never branches, worktrees, stash or reset; purge without archive, history is git; never add Co-Authored-By, Claude attribution or session links to commits or PRs.
+- Execution: long commands run as background tasks; any multi-step or repeatable command sequence becomes a strict, typed, async script (Bun TypeScript or the domain language) committed in the project's scripts and run from there, never an ad-hoc one-liner; independent work runs in parallel (Promise.all, parallel tool calls, nested subagents that delegate recursively).
 - Proof is a screenshot, a checked API response or a real UI test, never an HTTP status.
