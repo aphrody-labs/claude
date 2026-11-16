@@ -7,7 +7,7 @@
 // another owner, or a fork with no commits of its own), regenerate profile READMEs.
 // Requires gh logged in with repo, delete_repo and admin:org scopes.
 
-type Repo = {
+interface Repo {
   name: string;
   full_name: string;
   owner: { login: string };
@@ -21,7 +21,7 @@ type Repo = {
     default_branch: string;
     description: string | null;
   };
-};
+}
 
 const apply = process.argv[2] === "fix";
 
@@ -67,13 +67,14 @@ async function pool<T, R>(
   size: number,
   fn: (x: T) => Promise<R>,
 ): Promise<R[]> {
-  const out: R[] = new Array(items.length);
+  const out = Array.from<R>({ length: items.length });
   let i = 0;
   await Promise.all(
     Array.from({ length: Math.min(size, items.length) }, async () => {
       while (i < items.length) {
         const k = i++;
-        out[k] = await fn(items[k]!);
+        const item = items[k];
+        if (item !== undefined) out[k] = await fn(item);
       }
     }),
   );
@@ -118,14 +119,16 @@ async function readmeSummary(r: Repo): Promise<string | null> {
     : null;
 }
 
-const me = (await api<{ login: string }>("user"))!.login;
+const self = await api<{ login: string }>("user");
+if (!self) throw new Error("gh api user failed: run gh auth login");
+const me = self.login;
 const orgs = (
-  (await api<{ login: string }[]>(
+  (await api<{ role: string; organization: { login: string } }[]>(
     "user/memberships/orgs?state=active&per_page=100",
   )) ?? []
 )
-  .filter((m: any) => m.role === "admin")
-  .map((m: any) => m.organization.login as string);
+  .filter((m) => m.role === "admin")
+  .map((m) => m.organization.login);
 const owners: { login: string; isOrg: boolean }[] = [
   { login: me, isOrg: false },
   ...orgs.map((login) => ({ login, isOrg: true })),
@@ -150,7 +153,7 @@ console.log(
 // Archived repositories: delete when their content survives elsewhere.
 const archived = repos.filter((r) => r.archived);
 const verdicts = await pool(archived, 8, async (r) => {
-  const full = (await api<Repo>(`repos/${r.full_name}`))!;
+  const full = (await api<Repo>(`repos/${r.full_name}`)) ?? r;
   const twin = (byName.get(r.name.toLowerCase()) ?? []).find(
     (x) => x.full_name !== r.full_name && !x.archived,
   );
@@ -202,7 +205,7 @@ for (const v of verdicts) {
 // Missing descriptions on live repositories.
 const bare = repos.filter((r) => !r.archived && !(r.description ?? "").trim());
 await pool(bare, 8, async (r) => {
-  const full = (await api<Repo>(`repos/${r.full_name}`))!;
+  const full = (await api<Repo>(`repos/${r.full_name}`)) ?? r;
   const desc = full.parent
     ? `Fork of ${full.parent.full_name}${full.parent.description ? `: ${full.parent.description}` : ""}`
     : await readmeSummary(r);

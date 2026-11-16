@@ -79,12 +79,14 @@ const minted = await cf<{ value: string }>(
 let failed = 0;
 await Promise.all(
   repos.flatMap((repo) =>
-    [
-      ["CLOUDFLARE_API_TOKEN", minted.value],
-      ["CLOUDFLARE_ACCOUNT_ID", account.id],
-    ].map(async ([k, v]) => {
-      const p = Bun.spawn(["gh", "secret", "set", k!, "-R", repo], {
-        stdin: new Blob([v!]),
+    (
+      [
+        ["CLOUDFLARE_API_TOKEN", minted.value],
+        ["CLOUDFLARE_ACCOUNT_ID", account.id],
+      ] as [string, string][]
+    ).map(async ([k, v]) => {
+      const p = Bun.spawn(["gh", "secret", "set", k, "-R", repo], {
+        stdin: new Blob([v]),
         stdout: "ignore",
         stderr: "pipe",
       });

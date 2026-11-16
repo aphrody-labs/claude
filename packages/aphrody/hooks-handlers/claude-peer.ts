@@ -111,7 +111,8 @@ export async function pushPipeMessage(
   text: string,
   opts: { sender?: string; urgent?: boolean } = {},
 ): Promise<{ ok: boolean; error?: string }> {
-  if (!session.messagingSocketPath) {
+  const socketPath = session.messagingSocketPath;
+  if (!socketPath) {
     return { ok: false, error: "no messagingSocketPath on session" };
   }
   const fromName = (opts.sender ?? "aphrody-bridge").replace(/["<>]/g, "");
@@ -136,7 +137,7 @@ export async function pushPipeMessage(
       settled = true;
       resolve(error ? { ok, error } : { ok });
     };
-    const sock = connect({ path: session.messagingSocketPath! });
+    const sock = connect({ path: socketPath });
     sock.setTimeout(3000, () => {
       sock.destroy();
       done(false, "pipe timeout");
