@@ -14,3 +14,4 @@
 - [platform-lessons](platform-lessons.md) — Reproducible host setup, focused workspace crates, platform API depth, continuous refactoring
 - [vision](vision.md) — Generalist core vision: OS, browser, Google self-hosted services, and Cloudflare/Vercel in any best-fit language
 - [push-checks-and-shared-writers](push-checks-and-shared-writers.md) — 2026-11-16 errors: run repo gates before push, low-disk build flags, check other writers on shared config, deliver the approved plan
+- [fleet-disks](fleet-disks.md) — fr1 /srv/xbuild 805 GB XFS LVM (~740 GB free, NFS on fr2 /srv/xbuild/shared); small roots; scan with ay tools/disks.ts
