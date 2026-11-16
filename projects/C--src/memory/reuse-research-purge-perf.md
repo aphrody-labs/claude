@@ -14,4 +14,4 @@ Owner directive (2026-11-15): use everything that already exists and always rese
 - Every change carries a before/after measurement (hyperfine, cargo timings, a size diff) run on fr1 or fr2 ([[fleet-roles]]).
 - Delete dead code instead of archiving it ([[terse-reports]]; the history is in git).
 - Prefer flattening and dedup over new layers, and keep abstractions minimal.
-- Run everything in parallel and asynchronously ([[max-parallel-async]]).
+- Run everything in parallel and asynchronously ([[agent-policy]]).

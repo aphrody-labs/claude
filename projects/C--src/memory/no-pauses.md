@@ -1,15 +1,21 @@
 ---
 name: no-pauses
-description: Never stop mid-task to report or wait; chain every remaining step until the whole request is done
+description: "Owner 2026-11-16 - no pauses and never \"not verified\" - chain every step to the end in the same turn and run the check before writing any claim"
 metadata:
   node_type: memory
   type: feedback
-  originSessionId: 3e586339-05ce-487a-bc54-5f2fe1de083d
-  modified: 2026-11-16T09:59:46.317Z
+  originSessionId: aae12588-4a11-4aae-b28f-f3d886683cbb
+  modified: 2026-11-16T17:21:24.248Z
 ---
 
-No pauses: do not end a turn with work left (no "next I will...", no status-only stops, no waiting for a go).
+The owner forbade pauses ("interdiction de faire des pauses") and forbade "je n'ai pas vérifié" / "not verified" in a report.
 
-**Why:** the user wants continuous autonomous execution of the full plan.
+**Why:** I stopped after partial steps and tagged claims "not verified", which pushed the checking back onto the owner.
 
-**How to apply:** after each step, start the next immediately; only report when everything requested is done and verified (see [[verify-dont-hedge]]).
+**How to apply:**
+- Never end a turn with work left: no "next I will...", no status-only stop, no waiting for a go.
+- Before writing a claim, run its check (command, API body, file read, screenshot).
+- If a check is impossible, run the closest real one and report its result, or report what failed. Otherwise drop the claim.
+- Never fake a verification.
+
+Related: [[proof-not-http-200]], [[definition-of-done]].

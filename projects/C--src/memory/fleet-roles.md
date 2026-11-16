@@ -17,5 +17,5 @@ metadata:
 - Map: C:\src\docs\INFRA_MATRIX.md (source infra/deploy.toml); low level: C:\src\infra\fleet.
 
 **Why:** owner decision 2026-11-13 (replaces "fr1 = Chromium/LLVM only").
-**How to apply:** place each workload according to its role; prd/fr2 without build tooling; test before switching. See [[fleet-ssh-traps]], [[agent-first-nhitl]].
+**How to apply:** place each workload according to its role; prd/fr2 without build tooling; test before switching. See [[fleet-ssh-traps]], [[agent-policy]].
 

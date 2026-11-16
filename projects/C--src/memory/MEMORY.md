@@ -1,4 +1,3 @@
-- [agent-first-nhitl](agent-first-nhitl.md) — aphrody agent-first, no human in the loop : sous-agents, workflows dynamiques, Agent SDK, tous providers/CLI en parallèle sur tous
 - [agent-report-vs-request](agent-report-vs-request.md) — Before relaying a sub-agent report, diff it against the owner's literal request; an agent that swapped in its own design has faile
 - [agents-block-causes](agents-block-causes.md) — Why sub-agents stall here - no SendMessage or claude-in-chrome in sub-agents, too many concurrent writers on the shared tree, CI r
 - [ai-os-google-self-hosted](ai-os-google-self-hosted.md) — Aphrody is an AI OS with self-hosted Google services; google-*, gemini, chromium, n2b, a2a, llama/local inference packages and cra
@@ -6,10 +5,8 @@
 - [assemble-not-reinvent](assemble-not-reinvent.md) — Owner 2026-11-15 - src reinvents nothing; it assembles, absorbs, optimizes, dedups and redistributes upstream AI/agent stacks into
 - [auto-saas-of-open](auto-saas-of-open.md) — Owner 2026-11-15 - apps/auto is the paid SaaS edition of open; same vision, codebase and features (auto ~ Apify / n8n cloud / Chro
 - [budget-sheet](budget-sheet.md) — Owner's infra budget lives in Google Sheet "Aphrody - Budget infra 2026" (Drive), tabs Lignes + Synthese; append measured cost row
-- [consolidate-not-spawn](consolidate-not-spawn.md) — Owner 2026-11-15 - stop spawning sub-agents; consolidate existing work and deliver through skills and MCP tools
 - [definition-of-done](definition-of-done.md) — Owner 2026-11-15 - never report "not verified/compiled/run"; ship each item in one pass (latest upstream, built, tested, running, 
 - [english-source-i18n](english-source-i18n.md) — Owner 2026-11-15 - one source language from config (default English) in every project; user-facing text through each project's own
-- [english-source-multilingual](english-source-multilingual.md) — Owner 2026-11-15 - repos are English at the source and multilingual through i18n; no hardcoded French, and no hardcoded locale lis
 - [first-party-audit-approved](first-party-audit-approved.md) — Owner 2026-11-15 approved every recommendation of docs/audit/first-party.md (95 first-party units: 6 delete, 16 merge, 1 replace, 
 - [fleet-roles](fleet-roles.md) — Fleet (global CLAUDE.md 2026-11-13): fr1 = factory (builds, CI, training, heavy agents), prd (USA) = production backends, fr2 = mi
 - [fleet-ssh-traps](fleet-ssh-traps.md) — ssh to vps/prd/cdn - always `timeout N ssh`, kill gitleaks/lighthouse-chrome that saturate vps, exit 255 = overloaded host
@@ -19,18 +16,14 @@
 - [language-by-domain](language-by-domain.md) — No language fanaticism - Rust core, Python for ML/AI/data/research/RE, Go for containers/deploy/cloud tooling, C/C++ for C/C++ eco
 - [licenses-go-to-human](licenses-go-to-human.md) — Licenses never decide an architecture choice; the owner never chose a project license; absorb, flatten and refactor as much upstre
 - [logo-like-bun](logo-like-bun.md) — The Aphrody logo is the aphrody-labs org avatar as docs/logo/aphrody.png, laid out like Bun; the whole "brand" system (brand.toml,
-- [material-platform-choice](material-platform-choice.md) — Owner 2026-11-15 - Material per platform: Angular Material on the web (Material Web is in maintenance), Jetpack Compose on Android
-- [material-ui-stack](material-ui-stack.md) — Material choice per platform - Angular Material on the web (Material Web is in maintenance mode), Jetpack Compose on Android, Flut
-- [max-parallel-async](max-parallel-async.md) — Owner directive 2026-11-14 - act decisively and asynchronously, maximum parallelism and execution speed (fleet + agents + backgrou
+- [material-ui-stack](material-ui-stack.md) — Material per platform (Angular Material web, Compose, Flutter), M3 kit, opentui style, Rust native UI
 - [minimal-input-goal](minimal-input-goal.md) — Owner 2026-11-15 - a bare skill or single word with no args means turn the whole session context into a goal and execute it end to
-- [minimal-input-means-goal](minimal-input-means-goal.md) — 2026-11-15 owner - a bare skill or single word = derive a goal from the whole session context and execute it end to end, no questi
 - [naming-ay-cli](naming-ay-cli.md) — The owner never chose the current names (CLI, args, subcommands, crates, packages); they are agent-made, incoherent and slop; nami
 - [never-stash-shared-tree](never-stash-shared-tree.md) — Never run git stash, stash pop or reset in C:\src while other agents work; pull --rebase fails on a dirty tree and stash pop can a
 - [no-blocking-gates](no-blocking-gates.md) — Owner 2026-11-15 - no blocking security gates or warnings, no slow backups, no useless checkers (archguard deleted); speed and fri
 - [no-machine-excuses](no-machine-excuses.md) — 2026-11-15 owner - never answer "this PC is not configured"; diagnose and fix the setup reproducibly (repo config), then build nat
 - [no-private-data-in-source](no-private-data-in-source.md) — Owner 2026-11-15 - no identity, PC, accounts, Windows folders, VPS names/IPs/paths or owner statements in source or config; import
 - [no-tool-dogma](no-tool-dogma.md) — Owner 2026-11-16 - purge old tool dogmas; install and use any helpful CLI/lib (Vercel, Google, Microsoft, Tauri, egui, iced...), f
-- [open-owns-ui-ai](open-owns-ui-ai.md) — Owner decision relayed 2026-11-15 by session apps-4d - aphrody-labs/open (C:\src\apps\open) owns UI/TUI/GUI, desktop and mobile Ma
 - [open-repo-ownership](open-repo-ownership.md) — Owner 2026-11-15 (relayed by session apps-4d) - aphrody-labs/open (apps/open) owns UI/TUI/GUI/desktop/mobile Material 3, crawl, br
 - [open-session-lessons](open-session-lessons.md) — Requests of the long apps/open session (Bun x M3 app, AI router, agent, purges) and my own recurring mistakes in it, with the rule
 - [orgs-labs-vs-dev](orgs-labs-vs-dev.md) — C:\\src is the monorepo; its GitHub repo is aphrody-labs/aphrody (aphrody-labs/src and aphrody-dev/src redirect there, verified 20
@@ -43,24 +36,22 @@
 - [reuse-research-purge-perf](reuse-research-purge-perf.md) — Owner directive 2026-11-15 - reuse everything that exists, research first, purge dead/legacy code, consolidate and flatten, use pr
 - [sandbox-doc-examples-outside-projects](sandbox-doc-examples-outside-projects.md) — Running third-party doc examples (bun add, bun x, dev servers) must happen in sandboxes outside any project tree, with tree-kill o
 - [ship-complete-latest-roadmap](ship-complete-latest-roadmap.md) — Owner 2026-11-15 - deliver complete (built, run, tested) in one pass, always newest versions with anticipated fixes, follow PLAN/R
-- [stop-fanout-ui-direction](stop-fanout-ui-direction.md) — 2026-11-15 owner stop order - no more workflows/subagent fan-out, git clones, useless builds, fragmented code; UI = Material 3 + o
 - [subagent-models-cheap](subagent-models-cheap.md) — Subagents must run on Sonnet 5.5 (effort medium) or Haiku 5.5 by task, never inherit Opus, to save the weekly limit
 - [vercel-blocked](vercel-blocked.md) — Vercel softBlock (2026-06-12) is lifted as of 2026-11-15 - account aphrody-dev hobby deploys again; dragonballfr.com and rpbey.fr 
 - [aphrody UI](aphrody-ui.md) — agy forks Zed into one aphrody (GPUI, taffy, wgpu) for web, mobile, desktop; src/ui converges
 - [Rust crate docs tools](rust-crate-docs-tools.md) — rustdoc-md (docs.rs JSON to Markdown), cargo doc-md, Context7, gitingest
 - [Normalize or literal-match Windows paths in regex CLI tools](windows-paths-in-regex-tools.md) — Passing raw Windows backslash paths to regex search tools triggers escape-sequence parse errors like
 - [plan-design-before-build](plan-design-before-build.md) — Owner 2026-11-16: slop verdict; plan, docs, Figma mockup, before baseline, zero visual/feature regression before any deploy
-- [no-pauses-verify-everything](no-pauses-verify-everything.md) — Owner 2026-11-16: no pauses; never say "not verified", verify before every claim
 - [owner-low-vision](owner-low-vision.md) — Owner has low vision: numbered single-action steps, open windows for him, fresh skill + spoken hook
 - [fix-at-source-continuous-refactor](fix-at-source-continuous-refactor.md) — Owner 2026-11-16: fix every legacy error at its source, refactor architecture continuously, design for scale and performance
 - [os-family-ay-aynt-aydroid](os-family-ay-aynt-aydroid.md) — ay = Aphrody YOLO (CLI), ANU = Aphrody's Not Unix (uutils+GNU+Linux, Arch family), ayNT (Windows 11 NT, LiberNT fork), aydroid (AOSP), aphrody = userland per OS, Nix everywhere
 - [code-before-docs](code-before-docs.md) — Owner 2026-11-16: code and measurements before docs and web; fact-check, contradict, decide and review before acting
 - [reuse-one-year-of-work](reuse-one-year-of-work.md) — Owner 2026-11-16: search the restore inventory, git history, published crates/npm, third_party and VPS before writing new code; monorepo renamed aphrody-labs/ay
 - [No legal calls](no-legal-calls.md) — never gate asset work on rights; Level-5 and its partner handle licensing
-- [Verify, don't hedge](verify-dont-hedge.md) — never write "je n'ai pas vérifié"; check first
-- [No pauses](no-pauses.md) — never stop with work left; chain steps to the end
+- [No pauses](no-pauses.md) — chain every step to the end; run the check before any claim, never "not verified"
 - [Fix it yourself](fix-it-yourself.md) — do settings/UI blockers myself (API, then Chrome); never hand them back
 - [Blanket consent](blanket-consent.md) — explicit standing OK for every action; never wait for approval
-- [No agent spam](no-agent-spam.md) — do the work myself; no subagent fan-out unless asked
 - [Product split](product-split.md) — rosegriffon TS cloud, nie Rust self-hostable (C:\nie); Achillea=FUT web app, Azalee=nie.exe UI
 - [Checkout relocated to C:\src\ay](aphrody-checkout-relocated.md) — 2026-11-15 move, apps/web rename, merged Claude projects via junctions, relocate gotchas
+- [agent-policy](agent-policy.md) — recursive sub-agents for independent work, cheap models, background jobs, one consolidated report (supersedes no-fan-out notes)
+- [submodule-sibling-checkouts](submodule-sibling-checkouts.md) — forks as submodules with relative URLs, one checkout beside ay (C:\src\bun), vcs submodules init/pin, aphrody-git stack

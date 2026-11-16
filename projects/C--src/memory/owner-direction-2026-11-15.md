@@ -14,4 +14,4 @@ What went wrong (my reading): I hand-built UIs (CSS pages, Win32 edit controls, 
 - UI = fork/absorb the official libraries (material-web, androidx compose material3, flutter material, angular/components, material-color-utilities, material-design-icons; aphrody-labs already has forks of material-web, material-color-utilities, material-design-icons). Never re-implement components, colour science or icons.
 - Read the source first: skill material-3, docs/design/specs/*, m3.material.io pages, design.google. Values come from packages/design generated tokens, never literals.
 - No hardcoded data or values anywhere (rows, colours, model lists, URLs beyond config); no slop (filler docs, fake proofs, unused code).
-- Owner inputs are minimal; still decide and execute, but small, verified, using official sources. Related: [[stop-fanout-ui-direction]], [[minimal-input-means-goal]], [[no-machine-excuses]].
+- Owner inputs are minimal; still decide and execute, but small, verified, using official sources. Related: [[agent-policy]], [[minimal-input-goal]], [[no-machine-excuses]].

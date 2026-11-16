@@ -6,7 +6,8 @@
     "setup": "bun scripts/setup.ts",
     "check": "bun scripts/check.ts",
     "sync": "bun skills/aphrody/hooks-handlers/config-sync.ts push",
-    "github": "bun scripts/github.ts"
+    "github": "bun scripts/github.ts",
+    "cloudflare-ci-token": "bun scripts/cloudflare-ci-token.ts"
   },
   "devDependencies": {
     "@types/bun": "1.4.4"

@@ -9,4 +9,4 @@ Never downgrade a version or stack to dodge a bug: install the newest (canary/ni
 Work from the plan as a spec: docs/games/PLAN.md and docs/native/ROADMAP.md; each task maps to a roadmap item with acceptance = prod-ready shipped.
 
 **Why:** owner finds hedged partial deliveries slow and regressive; Aphrody runs with no human to finish the job.
-**How to apply:** before reporting, the checklist is build + run + test + commit + push; if a step can't run here, run it on fr1/fr2, don't list it as pending. Related: [[deps-always-latest]], [[proof-not-http-200]], [[minimal-input-means-goal]].
+**How to apply:** before reporting, the checklist is build + run + test + commit + push; if a step can't run here, run it on fr1/fr2, don't list it as pending. Related: [[deps-always-latest]], [[proof-not-http-200]], [[minimal-input-goal]].

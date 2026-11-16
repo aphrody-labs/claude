@@ -24,6 +24,7 @@ cd ~/.claude && bun install && bun run setup
 | `bun run setup` | Include `gitconfig` (git identity) in the global git config, run `gh auth setup-git`, install every plugin enabled in `settings.json`, validate `aphrody` |
 | `bun run check` | `claude plugin validate` on `aphrody` and `tsc` over all TypeScript |
 | `bun run sync` | Commit all whitelisted changes and push |
+| `bun run cloudflare-ci-token <owner/repo>...` | Mint a Cloudflare CI token and store it as the repos' Actions secrets |
 | `bun run github [fix]` | Audit (or fix) the GitHub user and administered orgs: purge archived repos whose content survives elsewhere, fill missing descriptions, refresh profile READMEs |
 
 The `aphrody` plugin's SessionStart hook fast-forwards this repo from `origin`; its SessionEnd hook commits and pushes, so the config stays in sync without manual steps.

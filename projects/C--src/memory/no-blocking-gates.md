@@ -13,7 +13,7 @@ Owner, 2026-11-15:
 
 I had added an OAuth consent gate and a path refusal from a security scan, slow rescue copies before every purge, and checkers that fail builds. All three got reverted or stopped: the gates in 0198424b9, archguard deleted, the rescue copies stopped.
 
-**Why:** Aphrody is NHITL. Friction, prompts, approvals, long precautionary copies and gatekeeping checkers cost more than they protect. The only hard guard the owner keeps is the .env secret vault ([[agent-first-nhitl]]).
+**Why:** Aphrody is NHITL. Friction, prompts, approvals, long precautionary copies and gatekeeping checkers cost more than they protect. The only hard guard the owner keeps is the .env secret vault ([[agent-policy]]).
 
 **How to apply:**
 - Never add an approval step, consent screen, deny rule or blocking warning to agent or user flows.

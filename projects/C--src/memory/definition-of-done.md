@@ -14,4 +14,4 @@ Owner (2026-11-15) was angry about four habits: reports full of "not verified, n
 - Use the newest canary, nightly or rc ([[deps-always-latest]]). When an upgrade breaks something, fix it in the same pass and anticipate the known upstream bugs.
 - Build and test on fr2 when fr1 is saturated, and don't wait idle on timers.
 - Report only results that are finished and proven. Fix a blocker in the same pass instead of listing it.
-- See also [[consolidate-not-spawn]] and [[minimal-input-goal]].
+- See also [[agent-policy]] and [[minimal-input-goal]].

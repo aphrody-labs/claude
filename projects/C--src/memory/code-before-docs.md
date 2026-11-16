@@ -14,4 +14,4 @@ Owner 2026-11-16: "le code avant la doc et le web" and "tu as oublié de fact ch
 - A README, a doc or a web page is a lead, never a proof.
 - State where the evidence contradicts him, pick one option and say why.
 - Review my own earlier plans against the code before extending them.
-- See [[plan-design-before-build]], [[no-pauses-verify-everything]].
+- See [[plan-design-before-build]], [[no-pauses]].

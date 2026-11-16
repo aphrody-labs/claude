@@ -12,4 +12,4 @@ Fix blockers yourself, including settings only reachable in a web UI (use Claude
 
 **Why:** the user said "fix tout toi-même, retiens ça" after I reported GitHub Actions disabled on aphrody-labs/bun and asked them to re-enable it.
 
-**How to apply:** for repo/org/dashboard settings the user's task depends on, use the API first, then the browser; report only the outcome. Passwords, payments and CAPTCHAs remain the user's. See [[no-pauses]], [[verify-dont-hedge]].
+**How to apply:** for repo/org/dashboard settings the user's task depends on, use the API first, then the browser; report only the outcome. Passwords, payments and CAPTCHAs remain the user's. See [[no-pauses]], [[no-pauses]].
