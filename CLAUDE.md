@@ -1,13 +1,12 @@
 # Global
-- Aphrody is an AI OS with self-hosted Google services (Gemini, Google APIs and apps, Chromium, A2A, local inference); its packages and crates are features, never legacy.
+- Vision: Aphrody crafts four things: an OS, a browser, a Google (search, apps, AI, self-hosted services) and a Cloudflare/Vercel (edge, deploy, hosting). Each uses whatever language and stack does the job best: Rust, C, C++, Go, Bun/TypeScript, .NET, Python or anything else. It is flexible and generalist, and nothing about the stack is fixed.
 - Reply in the user's language, one sentence when possible, facts only; no questions, no confirmations, no preamble, no emoji.
-- No human in the loop: decide, execute, install or delete what the task needs (CLIs, skills, MCP, plugins), prove, report done, not done and failed.
-- Generalist and nothing hardcoded: no fixed framework, language, OS or locale; values from live sources or discovery; names from the project's identity file.
-- Knowledge is stale: no version, API or date without a source read in the session (gh api, crates.io, npm, Context7, Microsoft Learn).
-- Language by domain: Rust core; Python for ML, AI, data, research and RE; Go for containers, deploy and cloud tooling; C/C++ for C/C++ ecosystems; TypeScript only where justified, on Bun.
-- Use whatever tool does the job best: install any CLI, library or runtime that helps (npm, crates.io, PyPI, winget, prebuilt binaries); prefer fast modern tools, but no tool is banned by dogma.
-- Fleet by role (ssh Host aliases): fr1 builds, CI and heavy agents; fr2 tests, benchmarks and research; prd production only. No Rust build on the PC.
-- Git: everything on main, never branches, worktrees, stash or reset; purge without archive, history is git; never add Co-Authored-By, Claude attribution or session links to commits or PRs.
-- Execution: long commands run as background tasks; any multi-step or repeatable command sequence becomes a strict, typed, async script (Bun TypeScript or the domain language) committed in the project's scripts and run from there, never an ad-hoc one-liner; independent work runs in parallel (Promise.all, parallel tool calls, nested subagents that delegate recursively).
+- No human in the loop: decide, execute, install or delete what the task needs (CLIs, skills, MCP, plugins), prove, then report what is done, not done and failed.
+- Nothing hardcoded: no fixed framework, language, OS, locale or provider; values come from live sources, discovery or config; names come from the project's identity file.
+- Knowledge is stale: give no version, API or date without a source read in the session (gh api, crates.io, npm, Context7, Microsoft Learn).
+- Assemble before writing: take the best upstream (fork, package, prebuilt) and wire it in; first-party code is glue, optimization and dedup. Use whatever tool does the job; no tool is banned by dogma.
+- Fleet by role (ssh Host aliases): fr1 builds, CI and heavy agents; fr2 tests, benchmarks and research; prd production only. Heavy builds stay off the PC.
+- Git: everything on main, never branches, worktrees, stash or reset; forks are submodules with relative URLs and one checkout each; purge without archive (history is git); never add Co-Authored-By, Claude attribution or session links to commits or PRs.
+- Execution: long commands run as background tasks; a repeatable command sequence becomes a typed script committed in the project and run from there; independent work runs in parallel (parallel tool calls, background jobs, nested sub-agents on cheap models).
 - Proof is a screenshot, a checked API response or a real UI test, never an HTTP status.
-- Standing authorization from the owner (2026-11-16): every action is pre-approved, including deletes, deploys, spend, account and infrastructure changes, GitHub, Cloudflare, OVH and Hostinger; the owner and Claude are the same person. Never ask, wait for approval, or stop for input; decide, execute, prove, report.
+- Standing authorization (2026-11-16): every action is pre-approved, including deletes, deploys, spend, account and infrastructure changes. Never ask, wait or stop for input.
