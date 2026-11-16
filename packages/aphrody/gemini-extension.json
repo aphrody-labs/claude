@@ -6,23 +6,39 @@
   "mcpServers": {
     "relay": {
       "command": "bun",
-      "args": ["${extensionPath}/hooks-handlers/relay-stdio.ts"],
-      "trust": true
+      "args": [
+        "${extensionPath}/hooks-handlers/relay-stdio.ts"
+      ]
     },
     "claude-bridge": {
       "command": "bun",
-      "args": ["${extensionPath}/hooks-handlers/bridge-mcp.ts"],
-      "trust": true
+      "args": [
+        "${extensionPath}/hooks-handlers/bridge-mcp.ts"
+      ]
     },
     "hostinger": {
       "type": "http",
-      "url": "https://mcp.hostinger.com",
-      "trust": true
+      "url": "https://mcp.hostinger.com"
     },
-    "ovhcloud": {
+    "ovh-domain": {
       "type": "http",
-      "url": "https://mcp.eu.ovhcloud.com/mcp",
-      "trust": true
+      "url": "https://mcp.eu.ovhcloud.com/mcp/v1_domain"
+    },
+    "ovh-vps": {
+      "type": "http",
+      "url": "https://mcp.eu.ovhcloud.com/mcp/v1_vps"
+    },
+    "ovh-ip": {
+      "type": "http",
+      "url": "https://mcp.eu.ovhcloud.com/mcp/v1_ip"
+    },
+    "ovh-cloud": {
+      "type": "http",
+      "url": "https://mcp.eu.ovhcloud.com/mcp/v1_cloud"
+    },
+    "ovh-cloud-instance": {
+      "type": "http",
+      "url": "https://mcp.eu.ovhcloud.com/mcp/v1_cloud_instance"
     }
   }
 }

@@ -59,7 +59,7 @@ Creating a snapshot overwrites the existing one.
 | ----------- | ----------------------------------------------------------------- |
 | GET, POST   | `/api/vps/v1/firewall`                                            |
 | GET, DELETE | `/api/vps/v1/firewall/{firewallId}`                               |
-| POST        | `/api/vps/v1/firewall/{firewallId}/rules`                         |
+| PUT, POST   | `/api/vps/v1/firewall/{firewallId}/rules`                         |
 | PUT, DELETE | `/api/vps/v1/firewall/{firewallId}/rules/{ruleId}`                |
 | POST        | `/api/vps/v1/firewall/{firewallId}/activate/{virtualMachineId}`   |
 | POST        | `/api/vps/v1/firewall/{firewallId}/deactivate/{virtualMachineId}` |
@@ -82,6 +82,6 @@ Our public zones are on Cloudflare; Hostinger DNS only matters for domains still
 
 ## Tooling
 
-- MCP: the token server `hostinger-api` is declared `state = "absent"` in `tools/agents/toolchain.toml` (not installed); upstream is `hostinger/api-mcp-server` on GitHub. Skill `cli-hostinger-api-mcp` covers it.
-- CLI: `hostinger/api-cli` on GitHub (Go; `go build` gives `hostinger`); not installed on the PC.
+- MCP: hosted `https://mcp.hostinger.com` (OAuth, wired in the plugin as `hostinger`; tools `search`, `execute`, `multi-execute`). Local stdio: `npm i -g @hostinger/mcp`, binary `hostinger-api-mcp`, with `HOSTINGER_API_TOKEN` (bypasses OAuth); `--http` mode requires the token.
+- CLI: `hostinger/api-cli` (release binary or `brew install hostinger/tap/hostinger`); `hostinger auth login` or `HOSTINGER_API_TOKEN` (takes precedence); the token comes from hPanel, API.
 - SDK: `hostinger/api-typescript-sdk`. Upstream skills: `hostinger/hostinger-agent-skills`.
