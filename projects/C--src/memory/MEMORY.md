@@ -13,3 +13,4 @@
 - [owner-accessibility](owner-accessibility.md) — Low-vision UX for rare human-only steps (short numbered single actions, direct launch)
 - [platform-lessons](platform-lessons.md) — Reproducible host setup, focused workspace crates, platform API depth, continuous refactoring
 - [vision](vision.md) — Generalist core vision: OS, browser, Google self-hosted services, and Cloudflare/Vercel in any best-fit language
+- [push-checks-and-shared-writers](push-checks-and-shared-writers.md) — 2026-11-16 errors: run repo gates before push, low-disk build flags, check other writers on shared config, deliver the approved plan
