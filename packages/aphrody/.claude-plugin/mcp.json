@@ -1,15 +1,10 @@
 {
   "mcpServers": {
-    "relay": {
-      "command": "bun",
-      "args": ["${CLAUDE_PLUGIN_ROOT}/hooks-handlers/relay-stdio.ts"],
-      "env": {
-        "RELAY_HUB": "0"
-      }
-    },
     "claude-bridge": {
       "command": "bun",
-      "args": ["${CLAUDE_PLUGIN_ROOT}/hooks-handlers/bridge-mcp.ts"]
+      "args": [
+        "${CLAUDE_PLUGIN_ROOT}/hooks-handlers/bridge-mcp.ts"
+      ]
     },
     "ovh-domain": {
       "type": "http",
