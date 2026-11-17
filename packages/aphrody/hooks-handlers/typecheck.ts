@@ -46,8 +46,12 @@ if (!tsconfig) {
   process.exit(0);
 }
 
+// The Aphrody runtime carries a native checker; --no-script keeps a project "check" script from shadowing it.
 const hasBunCheck =
-  Bun.spawnSync(["bun", "check", "--help"], {
+  (process.release as { sourceUrl?: string } | undefined)?.sourceUrl?.includes(
+    "aphrody-labs/bun",
+  ) === true ||
+  Bun.spawnSync(["bun", "check", "--no-script", "--help"], {
     stdout: "ignore",
     stderr: "ignore",
   }).exitCode === 0;
@@ -58,7 +62,7 @@ const tscBin = join(
   process.platform === "win32" ? "tsc.exe" : "tsc",
 );
 const cmd = hasBunCheck
-  ? ["bun", "check", filePath]
+  ? ["bun", "check", "--no-script", "--no-pretty", filePath]
   : existsSync(tscBin)
     ? [tscBin, "--noEmit", "--pretty", "false", "-p", tsconfig]
     : [

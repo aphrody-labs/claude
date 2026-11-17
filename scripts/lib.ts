@@ -2,6 +2,7 @@ import {
   existsSync,
   lstatSync,
   mkdirSync,
+  readdirSync,
   readFileSync,
   rmSync,
   symlinkSync,
@@ -16,36 +17,90 @@ export const HOME = (
   process.env.HOME ??
   homedir()
 ).replaceAll("\\", "/");
-export const ACTIVE_AGY_SESSION = "5c753f13-dd89-43ae-ae12-7c332bb1e98c";
 
 export function toSlash(p: string): string {
   return p.replaceAll("\\", "/");
 }
 
-export function discoverSrcRoot(): string {
-  const candidates = [
-    process.env.SRC_ROOT,
-    join(HOME, "src", "ay"),
-    "C:/src/ay",
-    join(HOME, "ay"),
+function resolveRepoDir(
+  names: string[],
+  markerFiles: string[],
+): string | undefined {
+  const roots = [
+    process.env.WORKSPACE_ROOT,
+    existsSync("C:/src") ? "C:/src" : join(HOME, "src"),
   ].filter((x): x is string => Boolean(x));
-
-  for (const c of candidates) {
-    const norm = toSlash(c);
-    if (
-      existsSync(join(norm, "tools", "identity.toml")) ||
-      existsSync(join(norm, "frameworks", "ai-os"))
-    ) {
-      return norm;
+  for (const r of roots) {
+    for (const name of names) {
+      const dir = toSlash(join(r, name));
+      if (!existsSync(dir)) continue;
+      if (markerFiles.some((m) => existsSync(join(dir, m)))) return dir;
     }
   }
-  const srcParent = existsSync("C:/src") ? "C:/src" : join(HOME, "src");
-  return toSlash(join(srcParent, "ay"));
+  return undefined;
 }
 
 export function discoverWorkspaceRoot(): string {
-  const srcRoot = discoverSrcRoot();
-  return toSlash(resolve(srcRoot, ".."));
+  if (process.env.WORKSPACE_ROOT && existsSync(process.env.WORKSPACE_ROOT)) {
+    return toSlash(resolve(process.env.WORKSPACE_ROOT));
+  }
+  if (existsSync("C:/src")) return "C:/src";
+  return toSlash(join(HOME, "src"));
+}
+
+export function discoverSrcRoot(): string {
+  const wsRoot = discoverWorkspaceRoot();
+  const envSrc = process.env.SRC_ROOT
+    ? toSlash(resolve(process.env.SRC_ROOT))
+    : "";
+  const isValidEnvSrc =
+    envSrc &&
+    envSrc.toLowerCase() !== wsRoot.toLowerCase() &&
+    envSrc.length > 4 &&
+    existsSync(envSrc);
+  const candidates = [
+    isValidEnvSrc ? envSrc : undefined,
+    resolveRepoDir(
+      ["aphrody"],
+      ["product.toml", "crates/os_desktop/Cargo.toml"],
+    ),
+    resolveRepoDir(["ai-os"], ["frameworks/ai-os", "tools/identity.toml"]),
+    resolveRepoDir(["ay"], ["tools/identity.toml", "frameworks/ai-os"]),
+  ].filter((x): x is string => Boolean(x));
+
+  if (candidates.length > 0) return toSlash(candidates[0]!);
+  return toSlash(join(wsRoot, "aphrody"));
+}
+
+export function discoverWorkspaces(): Record<string, string> {
+  const wsRoot = discoverWorkspaceRoot();
+  const map: Record<string, string> = {};
+  if (existsSync(wsRoot)) {
+    map[wsRoot] = "src";
+    try {
+      for (const entry of readdirSync(wsRoot, { withFileTypes: true })) {
+        if (!entry.isDirectory() || entry.name.startsWith(".")) continue;
+        const full = toSlash(join(wsRoot, entry.name));
+        if (
+          existsSync(join(full, ".git")) ||
+          existsSync(join(full, "product.toml")) ||
+          existsSync(join(full, "Cargo.toml")) ||
+          existsSync(join(full, "package.json"))
+        ) {
+          const slug =
+            entry.name
+              .toLowerCase()
+              .replace(/[^a-z0-9-]+/g, "-")
+              .replace(/^-+|-+$/g, "") || "repo";
+          map[full] = slug;
+        }
+      }
+    } catch {
+      // Ignore unreadable workspace entries.
+    }
+  }
+  map[toSlash(REPO_ROOT)] = "claude";
+  return map;
 }
 
 export function writeIfChanged(path: string, content: string): boolean {

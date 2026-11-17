@@ -8,7 +8,7 @@ import {
   writeFileSync,
 } from "node:fs";
 import { basename, join } from "node:path";
-import { ACTIVE_AGY_SESSION, discoverSrcRoot, HOME, REPO_ROOT } from "./lib.ts";
+import { discoverSrcRoot, HOME, REPO_ROOT } from "./lib.ts";
 
 const MERGED_LEGACY_FILES = new Set([
   "agent-report-vs-request.md",
@@ -78,7 +78,7 @@ interface ParsedMemory {
   body: string;
 }
 
-function parseFrontmatter(
+export function parseFrontmatter(
   raw: string,
   fallbackName: string,
 ): Omit<ParsedMemory, "project" | "fileName"> {
@@ -215,7 +215,8 @@ function cleanupLegacyAndClutter(): void {
       for (const key of Object.keys(data.projects)) {
         if (
           !existsSync(key) ||
-          /scratch-workspaces|gpui-os|[\\/]aphrody$/i.test(key)
+          /scratch-workspaces|gpui-os/i.test(key) ||
+          /^[a-z]:[\\/]aphrody(?:[\\/]|$)/i.test(key)
         ) {
           delete data.projects[key];
         }
@@ -228,13 +229,17 @@ function cleanupLegacyAndClutter(): void {
     }
   }
 
-  // 5. Clean old inactive brain dirs (keep ACTIVE_AGY_SESSION untouched)
+  // 5. Clean stale empty or expired (>14d) brain dirs without touching active sessions
   const brainDir = join(HOME, ".gemini", "antigravity-cli", "brain");
+  const cutoffMs = Date.now() - 14 * 24 * 60 * 60 * 1000;
   if (existsSync(brainDir)) {
     for (const entry of readdirSync(brainDir)) {
-      if (entry === ACTIVE_AGY_SESSION) continue;
+      if (entry === process.env.ANTIGRAVITY_CONVERSATION_ID) continue;
       const full = join(brainDir, entry);
-      if (statSync(full).isDirectory()) {
+      const st = statSync(full);
+      if (!st.isDirectory()) continue;
+      const items = readdirSync(full);
+      if (items.length === 0 || st.mtimeMs < cutoffMs) {
         rmSync(full, { recursive: true, force: true });
       }
     }
@@ -304,8 +309,8 @@ function cleanupLegacyAndClutter(): void {
         const filtered = data.trustedWorkspaces.filter(
           (w) =>
             existsSync(w) &&
-            !/[\\/](aphrody|gpui-os|labs)$/i.test(w) &&
-            !/\\aphrody\\/i.test(w),
+            !/[\\/](gpui-os|labs)$/i.test(w) &&
+            !/^[a-z]:[\\/]aphrody(?:[\\/]|$)/i.test(w),
         );
         if (filtered.length !== data.trustedWorkspaces.length) {
           data.trustedWorkspaces = filtered;
@@ -322,10 +327,12 @@ function cleanupLegacyAndClutter(): void {
   }
 }
 
-const doCleanup = Bun.argv.includes("--cleanup");
-if (doCleanup) cleanupLegacyAndClutter();
-const memories = collectMemories();
-syncSqliteStores(memories);
-console.log(
-  `Synced ${memories.length} memories to SQLite${doCleanup ? " + cleaned legacy clutter" : ""}.`,
-);
+if (import.meta.main) {
+  const doCleanup = Bun.argv.includes("--cleanup");
+  if (doCleanup) cleanupLegacyAndClutter();
+  const memories = collectMemories();
+  syncSqliteStores(memories);
+  console.log(
+    `Synced ${memories.length} memories to SQLite${doCleanup ? " + cleaned legacy clutter" : ""}.`,
+  );
+}

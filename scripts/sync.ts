@@ -14,7 +14,12 @@ export function buildUnifiedInstructions(): string {
     for (const proj of readdirSync(projRoot).sort()) {
       const idx = join(projRoot, proj, "memory", "MEMORY.md");
       if (!existsSync(idx)) continue;
-      const body = readFileSync(idx, "utf8").trim();
+      const body = readFileSync(idx, "utf8")
+        .trim()
+        .replace(
+          /\]\((?!https?:|file:|\/|~)([^)#\s]+\.md)\)/g,
+          `](~/.claude/projects/${proj}/memory/$1)`,
+        );
       if (body) memSections.push(`## Memory (${proj})\n\n${body}`);
     }
   }

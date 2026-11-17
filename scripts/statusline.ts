@@ -1,14 +1,20 @@
 #!/usr/bin/env bun
-// Status line: model, folder, git branch, context use, session cost. Reads the session JSON on stdin; no subprocess, so it stays fast.
+// Status line for Claude Code & Antigravity CLI: model, workspace, branch, mode, context %, cost. Zero subprocesses.
 import { existsSync, readFileSync } from "node:fs";
 import { basename, dirname, join } from "node:path";
 
 interface Session {
-  model?: { display_name?: string; id?: string };
-  workspace?: { current_dir?: string };
+  model?: { display_name?: string; id?: string; effort?: string } | null;
+  workspace?: { current_dir?: string; project_dir?: string };
   cwd?: string;
+  agent?: { name?: string };
+  agent_state?: string;
+  cycle_mode?: string;
+  sandbox?: { enabled?: boolean };
+  task_count?: number;
+  pending_input_count?: number;
   context_window?: { used_percentage?: number | null };
-  cost?: { total_cost_usd?: number };
+  cost?: { total_cost_usd?: number; total_usd?: number };
 }
 
 function branchOf(dir: string): string {
@@ -28,15 +34,24 @@ let s: Session = {};
 try {
   s = JSON.parse(await Bun.stdin.text()) as Session;
 } catch {
-  // An empty or invalid payload still prints a minimal line.
+  // Empty/invalid stdin still emits a minimal line.
 }
-const dir = s.workspace?.current_dir ?? s.cwd ?? process.cwd();
+const dir =
+  s.workspace?.project_dir ??
+  s.workspace?.current_dir ??
+  s.cwd ??
+  process.cwd();
 const used = s.context_window?.used_percentage;
-const cost = s.cost?.total_cost_usd;
+const cost = s.cost?.total_usd ?? s.cost?.total_cost_usd;
+const branch = branchOf(dir);
 const parts = [
-  s.model?.display_name ?? s.model?.id ?? "claude",
-  basename(dir) || dir,
-  branchOf(dir),
+  s.model?.display_name ?? s.model?.id ?? "agy",
+  `${basename(dir) || dir}${branch ? ` (${branch})` : ""}`,
+  s.cycle_mode ? `[${s.cycle_mode}${s.sandbox?.enabled ? "+sbx" : ""}]` : "",
+  s.agent?.name ? `@${s.agent.name}` : "",
+  s.agent_state && s.agent_state !== "idle" ? s.agent_state : "",
+  s.task_count ? `${s.task_count}t` : "",
+  s.pending_input_count ? `${s.pending_input_count}q` : "",
   used == null ? "" : `ctx ${Math.round(used)}%`,
   cost ? `$${cost.toFixed(2)}` : "",
 ];
