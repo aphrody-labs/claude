@@ -12,7 +12,7 @@ import {
 } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { REPO_ROOT, runCmd } from "./lib.ts";
+import { discoverWorkspaceRoot, REPO_ROOT, runCmd, toSlash } from "./lib.ts";
 
 export interface HookCase {
   id: string;
@@ -284,7 +284,7 @@ export const SCRIPT_CASES: Array<{
     command: "bun --no-install --no-env-file scripts/statusline.ts",
     payload: {
       model: { display_name: "Sonnet" },
-      cwd: "C:/src",
+      cwd: discoverWorkspaceRoot(),
       context_window: { used_percentage: 42 },
     },
   },
@@ -370,7 +370,7 @@ if (import.meta.main) {
     mkdirSync(benchDir, { recursive: true });
     writeFileSync(
       join(benchDir, `${label}.json`),
-      `${JSON.stringify(file, null, 2)}\n`,
+      `${JSON.stringify(file, null, 2).replaceAll(toSlash(REPO_ROOT), "~/.claude")}\n`,
     );
     console.log(`bun startup ${file.baseline.meanMs} ms`);
     for (const x of file.scripts ?? []) console.log(`${x.id}: ${x.meanMs} ms`);

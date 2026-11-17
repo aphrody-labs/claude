@@ -1,5 +1,5 @@
 # Feature matrix: OpenClaw vs Hermes Agent vs the claude repo (~/.claude, aphrody-labs/claude).
-# Proof paths of openclaw/hermes are repo-relative in the upstream checkouts (fr1 /srv/xbuild/agents/{openclaw,hermes-agent}).
+# Proof paths of openclaw/hermes are repo-relative in the upstream checkouts (fr1 $WORK/agents/{openclaw,hermes-agent}).
 # Proof paths of claude are relative to ~/.claude and are verified by `bun scripts/matrix.ts --check`.
 # status: present | partial | missing. `was` records the claude status before the 2026-11-17 work when it changed.
 

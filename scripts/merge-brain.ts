@@ -275,7 +275,7 @@ function cleanupLegacyAndClutter(): void {
     const raw = readFileSync(codexToml, "utf8");
     const next =
       raw
-        .replace(/\r?\n\[projects\.'c:\\aphrody'\][^\[]*/i, "\n")
+        .replace(/\r?\n\[projects\.'c:\\aphrody'\][^\[]*/i, "\n") // paths:ok: removes the stale legacy entry
         .replace(/\r?\n\[marketplaces\.aphrody\][^\[]*/i, "\n")
         .replace(/\r?\n\[plugins\."aphrody-skills@aphrody"\][^\[]*/i, "\n")
         .replace(/\n{3,}/g, "\n\n")
@@ -290,7 +290,7 @@ function cleanupLegacyAndClutter(): void {
     const raw = readFileSync(agyConfigPath, "utf8");
     const cleaned = raw
       .replaceAll("C:\\\\aphrody", srcWin)
-      .replaceAll("C:/aphrody", srcRoot);
+      .replaceAll("C:/aphrody", srcRoot); // paths:ok: stale legacy root
     if (cleaned !== raw) writeFileSync(agyConfigPath, cleaned, "utf8");
   }
 

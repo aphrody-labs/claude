@@ -9,7 +9,7 @@ import {
 import { tmpdir } from "node:os";
 import { join, relative, resolve } from "node:path";
 import { FORBIDDEN, type Settings, undeclaredPlugins } from "./hygiene.ts";
-import { REPO_ROOT, runCmd } from "./lib.ts";
+import { discoverWorkspaceRoot, REPO_ROOT, runCmd } from "./lib.ts";
 
 let failed = 0;
 
@@ -164,6 +164,16 @@ for (const f of files) {
   }
 }
 if (lintHits === 0) console.log("PASS [hygiene scan]");
+
+// Hardcoded absolute paths (scanner: ay/tools/paths.ts in the sibling checkout, allowlist: paths.allow).
+const pathsScanner = join(discoverWorkspaceRoot(), "ay", "tools", "paths.ts");
+if (existsSync(pathsScanner)) {
+  checkStep("absolute paths", ["bun", pathsScanner, "--root", REPO_ROOT]);
+} else {
+  console.log(
+    "SKIP [absolute paths]: ay/tools/paths.ts not found next to the checkouts",
+  );
+}
 
 // 4. Smoke test hooks with non-blocking NHITL stdin payloads.
 async function smokeHook(

@@ -20,6 +20,7 @@
 !/skills/
 !/docs/
 !/agent.toml
+!/paths.allow
 # Per-project auto-memory only, not session transcripts.
 !/projects/
 /projects/*/*

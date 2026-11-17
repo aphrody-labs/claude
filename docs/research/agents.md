@@ -1,6 +1,6 @@
 # Agent frameworks study: OpenClaw, Hermes Agent, and the claude repo
 
-Date 2026-11-17. Sources read live: `aphrody-labs/openclaw` (upstream `openclaw/openclaw`, release `v2026.11.4`, commit `a2a0131d4`) and `aphrody-labs/hermes-agent` (upstream `NousResearch/hermes-agent`, release `v0.23.2`, commit `e22269a1`), shallow clones on fr1 `/srv/xbuild/agents`. Machine-readable matrix: `docs/research/agents.toml`. Dependency graph: `docs/graph/*.mmd`. Benchmarks: `docs/bench/*.json`.
+Date 2026-11-17. Sources read live: `aphrody-labs/openclaw` (upstream `openclaw/openclaw`, release `v2026.11.4`, commit `a2a0131d4`) and `aphrody-labs/hermes-agent` (upstream `NousResearch/hermes-agent`, release `v0.23.2`, commit `e22269a1`), shallow clones on fr1 `$WORK/agents`. Machine-readable matrix: `docs/research/agents.toml`. Dependency graph: `docs/graph/*.mmd`. Benchmarks: `docs/bench/*.json`.
 
 ## OpenClaw in one page
 

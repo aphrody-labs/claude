@@ -22,15 +22,36 @@ export function toSlash(p: string): string {
   return p.replaceAll("\\", "/");
 }
 
+/** Parent directory of the git checkout containing `start` (default: the current directory), when it is not the user home. */
+export function checkoutsParent(start = process.cwd()): string | undefined {
+  let dir = resolve(start);
+  for (;;) {
+    if (existsSync(join(dir, ".git"))) {
+      const parent = dirname(dir);
+      return parent !== dir && toSlash(parent) !== HOME
+        ? toSlash(parent)
+        : undefined;
+    }
+    const up = dirname(dir);
+    if (up === dir) return undefined;
+    dir = up;
+  }
+}
+
+/** Directory holding the checkouts: WORKSPACE_ROOT, else the parent of the current checkout, else ~/src. */
+function workspaceCandidates(): string[] {
+  return [
+    process.env.WORKSPACE_ROOT,
+    checkoutsParent(),
+    join(HOME, "src"),
+  ].filter((x): x is string => Boolean(x));
+}
+
 function resolveRepoDir(
   names: string[],
   markerFiles: string[],
 ): string | undefined {
-  const roots = [
-    process.env.WORKSPACE_ROOT,
-    existsSync("C:/src") ? "C:/src" : join(HOME, "src"),
-  ].filter((x): x is string => Boolean(x));
-  for (const r of roots) {
+  for (const r of workspaceCandidates()) {
     for (const name of names) {
       const dir = toSlash(join(r, name));
       if (!existsSync(dir)) continue;
@@ -41,11 +62,8 @@ function resolveRepoDir(
 }
 
 export function discoverWorkspaceRoot(): string {
-  if (process.env.WORKSPACE_ROOT && existsSync(process.env.WORKSPACE_ROOT)) {
-    return toSlash(resolve(process.env.WORKSPACE_ROOT));
-  }
-  if (existsSync("C:/src")) return "C:/src";
-  return toSlash(join(HOME, "src"));
+  const found = workspaceCandidates().find((d) => existsSync(d));
+  return toSlash(resolve(found ?? join(HOME, "src")));
 }
 
 export function discoverSrcRoot(): string {

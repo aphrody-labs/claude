@@ -1,4 +1,6 @@
 import { expect, test } from "bun:test";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 import {
   type BenchFile,
   casesFromHooks,
@@ -7,6 +9,7 @@ import {
   payloadFor,
   summarizeEvents,
 } from "./bench.ts";
+import { toSlash } from "./lib.ts";
 
 const hooks = {
   hooks: {
@@ -38,12 +41,19 @@ const hooks = {
 };
 
 test("casesFromHooks expands plugin root, ids and payloads", () => {
-  const cases = casesFromHooks("p", "C:\\root\\p", hooks, "/cwd");
+  const cases = casesFromHooks(
+    "p",
+    join(tmpdir(), "plugin-root", "p"),
+    hooks,
+    "/cwd",
+  );
   expect(cases.map((c) => c.id)).toEqual([
     "p/sessionstart/a-claude",
     "p/posttooluse/b-x",
   ]);
-  expect(cases[0]!.command).toContain("C:/root/p/hooks-handlers/a.ts");
+  expect(cases[0]!.command).toContain(
+    `${toSlash(join(tmpdir(), "plugin-root", "p"))}/hooks-handlers/a.ts`,
+  );
   expect(cases[1]!.payload.tool_name).toBe("Edit");
 });
 
