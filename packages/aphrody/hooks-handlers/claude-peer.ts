@@ -290,8 +290,11 @@ export async function deliverRealtime(opts: {
       const gotCwd = s.cwd.replaceAll("\\", "/").toLowerCase();
       if (!gotCwd.startsWith(wantCwd)) return false;
     }
-    if (target === "all" || target === "*" || target === "workspace")
-      return true;
+    if (target === "all" || target === "*" || target === "workspace") {
+      // A broadcast never loops back to the session that sent it.
+      const self = process.env.CLAUDE_SESSION_ID ?? process.env.CLAUDE_CODE_SESSION_ID;
+      return s.name !== sender && s.sessionId !== sender && s.sessionId !== self;
+    }
     if (String(s.pid) === target) return true;
     if (s.sessionId === target || s.sessionId.startsWith(target)) return true;
     if (
