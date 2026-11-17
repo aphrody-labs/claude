@@ -1,9 +1,0 @@
-{
-  "mcpServers": {
-    "relay": {
-      "command": "bun",
-      "args": ["${REPO_ROOT}/packages/aphrody/hooks-handlers/relay-stdio.ts"],
-      "disabled": false
-    }
-  }
-}

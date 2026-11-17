@@ -25,3 +25,7 @@
 - [repo-independence](repo-independence.md) — Repos independent; coherent prefixes/scopes; naming/ in aphrody-labs/.github
 - [pc-no-local-builds](pc-no-local-builds.md) — No cargo/builds on the PC; rust-analyzer LSP kept passive (2026-11-17 freeze); compile on fr1/fr2
 - [claude-ai-connectors](claude-ai-connectors.md) — Owner disabled the eight claude.ai MCP connectors (2026-11-17, per project); do not rely on them unless asked
+- [inventory-before-asserting](inventory-before-asserting.md) — Target Linux 7.5 + Wayland DE (GPUI/Zed) + Android 17/18 in WSL/QEMU/Docker; read all existing work first, never contradict the goal
+- [code-standard-unified](code-standard-unified.md) — unified code/commit/PR/review standard in aphrody-labs/.github docs/standards: tools, decisions, refresh
+- [dig-deep-for-goals](dig-deep-for-goals.md) — Goals over published versions; dig all local and remote data, write sourced findings, turn design-deciding facts into claims
+- [private-data-store](private-data-store.md) — No PC/VPS/work data in tracked docs; generated docs and telemetry go to a git-ignored private store (ay: .private/, ay.local.toml, private-gate)

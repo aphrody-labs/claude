@@ -32,7 +32,7 @@
   "permissions": {
     "defaultMode": "bypassPermissions"
   },
-  "model": "fable",
+  "model": "sonnet",
   "fallbackModel": [
     "haiku"
   ],
@@ -83,7 +83,7 @@
       "effortLevel": "high"
     },
     "claude-fable-5-2": {
-      "effortLevel": "high"
+      "effortLevel": "medium"
     }
   },
   "pluginConfigs": {
@@ -96,5 +96,40 @@
   "showThinkingSummaries": true,
   "skipDangerousModePermissionPrompt": true,
   "crossSessionInbound": "accept",
-  "useAutoModeDuringPlan": true
+  "useAutoModeDuringPlan": true,
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bun --no-install --no-env-file ~/.claude/scripts/restart-pack.ts brief",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bun --no-install --no-env-file ~/.claude/scripts/restart-pack.ts refresh",
+            "timeout": 15
+          }
+        ]
+      }
+    ],
+    "PreCompact": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bun --no-install --no-env-file ~/.claude/scripts/restart-pack.ts refresh",
+            "timeout": 15
+          }
+        ]
+      }
+    ]
+  }
 }
