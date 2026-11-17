@@ -22,9 +22,6 @@
 !/paths.allow
 !/naming.toml
 !/toolchain.toml
-# Per-project auto-memory only, not session transcripts.
-!/projects/
-/projects/*/*
-!/projects/*/memory/
+# Project memory and transcripts live in the private claude-local repository (nested at projects/), never here.
 node_modules/
 packages/**/node_modules/

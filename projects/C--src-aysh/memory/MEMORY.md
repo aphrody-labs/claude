@@ -1,1 +1,0 @@
-- [Build host GitHub access](build-host-github-access.md) — fr1 pushes by ssh only (no gh, no https creds); aysh layout under /srv/xbuild/aysh; cargo-xwin for Windows checks
