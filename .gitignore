@@ -2,6 +2,7 @@
 /*
 !/.gitignore
 !/.gitattributes
+!/.editorconfig
 !/README.md
 !/CLAUDE.md
 !/settings.json
