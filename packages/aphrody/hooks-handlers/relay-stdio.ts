@@ -1,40 +1,73 @@
 #!/usr/bin/env bun
 import { existsSync } from "node:fs";
 import { homedir } from "node:os";
-import { dirname, join } from "node:path";
+import { dirname, join, resolve } from "node:path";
 
 const home = (
   process.env.USERPROFILE ??
   process.env.HOME ??
   homedir()
 ).replaceAll("\\", "/");
-/** Directory holding the checkouts: WORKSPACE_ROOT, else the parent of the checkout containing the working directory. */
-function checkoutsParent(start: string): string | undefined {
-  for (let dir = start; ; dir = dirname(dir)) {
-    if (existsSync(join(dir, ".git"))) return dirname(dir);
-    if (dirname(dir) === dir) return undefined;
-  }
+
+/** The user-level value of a variable this process was started without (Windows: HKCU\Environment), read with the system reg.exe. */
+function userEnv(name: string): string | undefined {
+  const systemRoot = process.env.SystemRoot ?? process.env.windir;
+  if (process.platform !== "win32" || !systemRoot) return undefined;
+  const r = Bun.spawnSync(
+    [
+      join(systemRoot, "System32", "reg.exe"),
+      "query",
+      "HKCU\\Environment",
+      "/v",
+      name,
+    ],
+    {
+      stdout: "pipe",
+      stderr: "ignore",
+      stdin: "ignore",
+    },
+  );
+  return r.stdout
+    .toString()
+    .match(new RegExp(`^\\s*${name}\\s+REG_\\w+\\s+(.+?)\\s*$`, "m"))?.[1];
 }
-const workspace = process.env.WORKSPACE_ROOT ?? checkoutsParent(process.cwd());
+
+// Explicit configuration only, never the working directory: AI_OS_ROOT, then the checkouts directory
+// (WORKSPACE_ROOT, or the parent of the aphrody checkout SRC_ROOT), then ~/src and ~.
+const workspace = process.env.WORKSPACE_ROOT ?? userEnv("WORKSPACE_ROOT");
 const candidates = [
   process.env.AI_OS_ROOT,
   workspace && join(workspace, "ai-os"),
+  process.env.SRC_ROOT && join(dirname(process.env.SRC_ROOT), "ai-os"),
   join(home, "src", "ai-os"),
   join(home, "ai-os"),
 ].filter((x): x is string => Boolean(x));
 
+const git = Bun.which("git");
+/** A checkout is trusted when it is not the home or a filesystem root and its origin is aphrody-dev/ai-os. */
+function trusted(dir: string): boolean {
+  const abs = resolve(dir).replaceAll("\\", "/");
+  if (abs === home || dirname(abs) === abs || !git) return false;
+  const r = Bun.spawnSync([git, "-C", abs, "remote", "get-url", "origin"], {
+    stdout: "pipe",
+    stderr: "ignore",
+    stdin: "ignore",
+  });
+  return /[/:]aphrody-dev\/ai-os(\.git)?$/i.test(r.stdout.toString().trim());
+}
+
 const rel = ["frameworks", "ai-os", "src", "relay", "cli.ts"] as const;
-const target = candidates
-  .map((c) => join(c, ...rel))
-  .find((p) => existsSync(p));
+const target = candidates.find(
+  (c) => existsSync(join(c, ...rel)) && trusted(c),
+);
 if (!target) {
   console.error(
-    "relay-stdio: could not locate frameworks/ai-os/src/relay/cli.ts (clone aphrody-dev/ai-os next to your other checkouts, set WORKSPACE_ROOT, or set AI_OS_ROOT)",
+    "relay-stdio: no trusted aphrody-dev/ai-os checkout with frameworks/ai-os/src/relay/cli.ts (clone it next to your other checkouts and set WORKSPACE_ROOT, or set AI_OS_ROOT)",
   );
   process.exit(1);
 }
 
-const child = Bun.spawn([process.execPath, target, "mcp-stdio"], {
+const child = Bun.spawn([process.execPath, join(target, ...rel), "mcp-stdio"], {
   stdin: "inherit",
   stdout: "inherit",
   stderr: "inherit",

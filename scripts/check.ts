@@ -165,7 +165,7 @@ for (const f of files) {
 }
 if (lintHits === 0) console.log("PASS [hygiene scan]");
 
-// Hardcoded absolute paths (scanner: ay/tools/paths.ts in the sibling checkout, allowlist: paths.allow).
+// Hardcoded absolute paths (scanner: ay/tools/paths.ts under WORKSPACE_ROOT, allowlist: paths.allow).
 const pathsScanner = join(discoverWorkspaceRoot(), "ay", "tools", "paths.ts");
 if (existsSync(pathsScanner)) {
   checkStep("absolute paths", ["bun", pathsScanner, "--root", REPO_ROOT]);

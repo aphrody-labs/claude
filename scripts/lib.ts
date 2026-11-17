@@ -22,29 +22,11 @@ export function toSlash(p: string): string {
   return p.replaceAll("\\", "/");
 }
 
-/** Parent directory of the git checkout containing `start` (default: the current directory), when it is not the user home. */
-export function checkoutsParent(start = process.cwd()): string | undefined {
-  let dir = resolve(start);
-  for (;;) {
-    if (existsSync(join(dir, ".git"))) {
-      const parent = dirname(dir);
-      return parent !== dir && toSlash(parent) !== HOME
-        ? toSlash(parent)
-        : undefined;
-    }
-    const up = dirname(dir);
-    if (up === dir) return undefined;
-    dir = up;
-  }
-}
-
-/** Directory holding the checkouts: WORKSPACE_ROOT, else the parent of the current checkout, else ~/src. */
+/** Directory holding the checkouts: WORKSPACE_ROOT, else ~/src. Never derived from the working directory. */
 function workspaceCandidates(): string[] {
-  return [
-    process.env.WORKSPACE_ROOT,
-    checkoutsParent(),
-    join(HOME, "src"),
-  ].filter((x): x is string => Boolean(x));
+  return [process.env.WORKSPACE_ROOT, join(HOME, "src")].filter(
+    (x): x is string => Boolean(x),
+  );
 }
 
 function resolveRepoDir(
