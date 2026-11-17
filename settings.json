@@ -43,9 +43,10 @@
           {
             "type": "command",
             "command": "bun --no-install --no-env-file ~/.claude/scripts/restart-pack.ts brief",
-            "timeout": 10
+            "timeout": 5
           }
-        ]
+        ],
+        "matcher": "startup"
       }
     ],
     "Stop": [
@@ -54,7 +55,8 @@
           {
             "type": "command",
             "command": "bun --no-install --no-env-file ~/.claude/scripts/restart-pack.ts refresh",
-            "timeout": 15
+            "timeout": 30,
+            "async": true
           }
         ]
       }
@@ -65,7 +67,8 @@
           {
             "type": "command",
             "command": "bun --no-install --no-env-file ~/.claude/scripts/restart-pack.ts refresh",
-            "timeout": 15
+            "timeout": 30,
+            "async": true
           }
         ]
       }

@@ -64,3 +64,10 @@ test("the SessionStart output carries the pack when fresh and nothing when absen
 test("brief names are restricted", async () => {
   await expect(save("../escape", join(root, "alpha", "f.txt"))).rejects.toThrow("brief name");
 });
+
+test("the injected brief drops the instructions block and stays bounded", () => {
+  refresh();
+  const ctx = JSON.parse(briefOutput()).hookSpecificOutput.additionalContext as string;
+  expect(ctx).not.toContain("What to do first");
+  expect(ctx.length).toBeLessThan(4400);
+});

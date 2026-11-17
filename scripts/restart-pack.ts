@@ -93,11 +93,19 @@ export function refresh(opts: { remote?: boolean; cwd?: string } = {}): string {
   return text;
 }
 
+const BRIEF_MAX = 4000;
+
+// The injected brief is the pack without its instructions block, cut to BRIEF_MAX characters; the full file stays on disk.
+export function condense(text: string, file: string): string {
+  const body = text.replace(/## What to do first[\s\S]*?(?=\n## )/, "").trim();
+  return body.length <= BRIEF_MAX ? body : `${body.slice(0, BRIEF_MAX)}\n[cut: full pack in ${file}]`;
+}
+
 export function briefOutput(now = Date.now()): string {
   const file = join(stateDir(), "restart.md");
   if (!existsSync(file) || now - statSync(file).mtimeMs > MAX_AGE_MS) return "";
-  const text = readFileSync(file, "utf8").slice(0, 14000);
-  return JSON.stringify({ hookSpecificOutput: { hookEventName: "SessionStart", additionalContext: `RESTART BRIEF (previous session state, written by the restart pack; verify with the repositories before acting):\n\n${text}` } });
+  const text = condense(readFileSync(file, "utf8"), file);
+  return JSON.stringify({ hookSpecificOutput: { hookEventName: "SessionStart", additionalContext: `RESTART BRIEF (previous session state; verify with the repositories before acting; relaunch saved briefs with Agent):\n\n${text}` } });
 }
 
 export async function save(name: string, file?: string): Promise<string> {
