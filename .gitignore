@@ -15,7 +15,6 @@
 !/.claude/
 /.claude/settings.local.json
 !/packages/
-!/gemini/
 !/scripts/
 !/skills/
 !/docs/
