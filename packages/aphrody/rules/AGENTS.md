@@ -17,18 +17,25 @@
 
 ## Memory (C--src)
 
-- [agent-policy](agent-policy.md) — Recursive parallelism, cheap subagent models, literal request diffing, and writer coordination
-- [ai-os-architecture](ai-os-architecture.md) — Reusable building blocks across OS, browser, self-hosted Google services, UI, and Bun-style logo
-- [assemble-and-reuse](assemble-and-reuse.md) — Upstream-first assembly, restore inventory lookup, deduplication, and measured performance
-- [autonomy-nhitl](autonomy-nhitl.md) — Blanket consent, zero `deny`/blocking gates, minimal-input goal execution, zero pauses
-- [budget-and-hosting](budget-and-hosting.md) — Google Sheet budget ledger, Cloudflare/VPS primary hosting, $0 Vercel policy
-- [code-quality-and-design](code-quality-and-design.md) — Code-before-docs, Google eng bar, Figma/M3 visual diffing, latest deps, real proof
-- [english-i18n-generalist](english-i18n-generalist.md) — English code/docs baseline, pluggable i18n catalogs, registry-driven generalist design
-- [fleet-and-relay](fleet-and-relay.md) — Fleet roles (`fr1`/`fr2`/`prd`/PC), SSH recovery, AphrodyRelay hub, Chrome Gemini fallback
-- [git-and-workspace-map](git-and-workspace-map.md) — `C:\src\*` checkouts, `ay`/`aphrody`/`open`/`auto`/`rosegriffon`/`nie` split, main-only git discipline
-- [language-and-tooling](language-and-tooling.md) — Generalist unrestricted CLI/language tooling, rustdoc-md, Windows path/shell quirks, `%TEMP%` sandboxes
-- [legal-and-licenses](legal-and-licenses.md) — Never gate architecture, absorption, or asset pipelines on license speculation
-- [naming-and-privacy](naming-and-privacy.md) — Goal-derived naming (`identity.toml`), live discovery, zero private literals in tracked files
-- [owner-accessibility](owner-accessibility.md) — Low-vision UX for rare human-only steps (short numbered single actions, direct launch)
-- [platform-lessons](platform-lessons.md) — Reproducible host setup, focused workspace crates, platform API depth, continuous refactoring
-- [vision](vision.md) — Generalist core vision: OS, browser, Google self-hosted services, and Cloudflare/Vercel in any best-fit language
+- [agent-policy](~/.claude/projects/C--src/memory/agent-policy.md) — Recursive parallelism, cheap subagent models, literal request diffing, and writer coordination
+- [ai-os-architecture](~/.claude/projects/C--src/memory/ai-os-architecture.md) — Reusable building blocks across OS, browser, self-hosted Google services, UI, and Bun-style logo
+- [assemble-and-reuse](~/.claude/projects/C--src/memory/assemble-and-reuse.md) — Upstream-first assembly, restore inventory lookup, deduplication, and measured performance
+- [autonomy-nhitl](~/.claude/projects/C--src/memory/autonomy-nhitl.md) — Blanket consent, zero `deny`/blocking gates, minimal-input goal execution, zero pauses
+- [budget-and-hosting](~/.claude/projects/C--src/memory/budget-and-hosting.md) — Google Sheet budget ledger, Cloudflare/VPS primary hosting, $0 Vercel policy
+- [code-quality-and-design](~/.claude/projects/C--src/memory/code-quality-and-design.md) — Code-before-docs, Google eng bar, Figma/M3 visual diffing, latest deps, real proof
+- [english-i18n-generalist](~/.claude/projects/C--src/memory/english-i18n-generalist.md) — English code/docs baseline, pluggable i18n catalogs, registry-driven generalist design
+- [fleet-and-relay](~/.claude/projects/C--src/memory/fleet-and-relay.md) — Fleet roles (`fr1`/`fr2`/`prd`/PC), SSH recovery, Chrome Gemini fallback
+- [git-and-workspace-map](~/.claude/projects/C--src/memory/git-and-workspace-map.md) — `$WORKSPACE_ROOT/*` checkouts, `ay`/`aphrody`/`open`/`auto`/`rosegriffon`/`nie` split, main-only git discipline
+- [language-and-tooling](~/.claude/projects/C--src/memory/language-and-tooling.md) — Generalist unrestricted CLI/language tooling, rustdoc-md, Windows path/shell quirks, `%TEMP%` sandboxes
+- [legal-and-licenses](~/.claude/projects/C--src/memory/legal-and-licenses.md) — Never gate architecture, absorption, or asset pipelines on license speculation
+- [naming-and-privacy](~/.claude/projects/C--src/memory/naming-and-privacy.md) — Goal-derived naming (`identity.toml`), live discovery, zero private literals in tracked files
+- [owner-accessibility](~/.claude/projects/C--src/memory/owner-accessibility.md) — Low-vision UX for rare human-only steps (short numbered single actions, direct launch)
+- [platform-lessons](~/.claude/projects/C--src/memory/platform-lessons.md) — Reproducible host setup, focused workspace crates, platform API depth, continuous refactoring
+- [vision](~/.claude/projects/C--src/memory/vision.md) — Generalist core vision: OS, browser, Google self-hosted services, and Cloudflare/Vercel in any best-fit language
+- [push-checks-and-shared-writers](~/.claude/projects/C--src/memory/push-checks-and-shared-writers.md) — 2026-11-16 errors: run repo gates before push, low-disk build flags, check other writers on shared config, deliver the approved plan
+- [fleet-disks](~/.claude/projects/C--src/memory/fleet-disks.md) — fr1 $WORK 805 GB XFS LVM (~740 GB free, NFS on fr2 $WORK/shared); small roots; scan with ay tools/disks.ts
+- [ay-legacy-rebuild](~/.claude/projects/C--src/memory/ay-legacy-rebuild.md) — aphrody-labs/ay renamed legacy, purged from PC and fr1 (2026-11-16); $WORKSPACE_ROOT/ay is aphrody-dev/ay
+- [agent-fanout-budget](~/.claude/projects/C--src/memory/agent-fanout-budget.md) — Max ~3 concurrent agents, inline cheap checks, lean context, weekly limits
+- [ai-os-repo](~/.claude/projects/C--src/memory/ai-os-repo.md) — ai-os + AI surface in standalone aphrody-dev/ai-os, generated by tools/extract.ts from a pinned legacy rev
+- [ay-hub-source-of-truth](~/.claude/projects/C--src/memory/ay-hub-source-of-truth.md) — aphrody = complete pure-Rust OS and source of truth; ay = its SDK
+- [no-security-nags](~/.claude/projects/C--src/memory/no-security-nags.md) — Use pasted secrets silently; no revoke/rotate advice

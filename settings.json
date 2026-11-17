@@ -32,10 +32,8 @@
   "permissions": {
     "defaultMode": "bypassPermissions"
   },
-  "model": "sonnet",
-  "fallbackModel": [
-    "haiku"
-  ],
+  "model": "fable",
+  "fallbackModel": ["haiku"],
   "statusLine": {
     "type": "command",
     "command": "bun --no-install --no-env-file ~/.claude/scripts/statusline.ts",
@@ -80,6 +78,9 @@
   "alwaysThinkingEnabled": true,
   "modelSettings": {
     "claude-sonnet-5-5": {
+      "effortLevel": "high"
+    },
+    "claude-fable-5-2": {
       "effortLevel": "high"
     }
   },
