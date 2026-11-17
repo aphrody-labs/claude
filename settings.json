@@ -47,7 +47,7 @@
     "document-skills@anthropic-agent-skills": true,
     "example-skills@anthropic-agent-skills": true,
     "claude-md-management@claude-plugins-official": true,
-    "security-guidance@claude-plugins-official": true,
+    "security-guidance@claude-plugins-official": false,
     "rust-analyzer-lsp@claude-plugins-official": false,
     "clangd-lsp@claude-plugins-official": true,
     "typescript-lsp@claude-plugins-official": false,
