@@ -48,7 +48,7 @@
     "example-skills@anthropic-agent-skills": true,
     "claude-md-management@claude-plugins-official": true,
     "security-guidance@claude-plugins-official": true,
-    "rust-analyzer-lsp@claude-plugins-official": true,
+    "rust-analyzer-lsp@claude-plugins-official": false,
     "clangd-lsp@claude-plugins-official": true,
     "typescript-lsp@claude-plugins-official": false,
     "pyright-lsp@claude-plugins-official": true,
@@ -95,6 +95,6 @@
   },
   "showThinkingSummaries": true,
   "skipDangerousModePermissionPrompt": true,
-  "useAutoModeDuringPlan": true,
-  "crossSessionInbound": "accept"
+  "crossSessionInbound": "accept",
+  "useAutoModeDuringPlan": true
 }
