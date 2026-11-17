@@ -22,6 +22,7 @@
 !/agent.toml
 !/paths.allow
 !/naming.toml
+!/toolchain.toml
 # Per-project auto-memory only, not session transcripts.
 !/projects/
 /projects/*/*

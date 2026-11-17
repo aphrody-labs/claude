@@ -18,6 +18,8 @@ metadata:
   - Its local `$WORK` is a 4 GB loop file.
 - **prd**: btrfs on `/`, about 253 GB free.
 
+- **PC**: `C:` reached 0 MB free on 2026-11-17 because a cargo `target/` under the aphrody checkout had grown to 330 GB. The symptom is a tool result starting with `Disk full: ... output may be cut short`, and commands that write temp files fail. Check `df -h /c` first when output is truncated; cargo builds belong on fr1.
+
 **Why:** on 2026-11-16 I judged disk space from `df -h /` alone. That made Chromium look blocked and filled fr1's root, while 740 GB sat free on `$WORK`. The owner called it a bad scan.
 
 **How to apply:** run `bun tools/disks.ts` (in the aphrody-dev/ay checkout) before any large build, clone or mirror. Put work under the `→ large work` mount it names. The `disks` skill in ay covers grow and cleanup procedures.

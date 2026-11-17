@@ -23,3 +23,4 @@
 - [agy-coordination](agy-coordination.md) — agy finished aphrody (now ours); never spawn or drive agy.exe
 - [npm-trusted-publishing](npm-trusted-publishing.md) — @rosegriffon publishes via OIDC, no token; new packages need one owner trust step
 - [repo-independence](repo-independence.md) — Repos independent; coherent prefixes/scopes; naming/ in aphrody-labs/.github
+- [claude-ai-connectors](claude-ai-connectors.md) — Owner disabled the eight claude.ai MCP connectors (2026-11-17, per project); do not rely on them unless asked
