@@ -36,44 +36,6 @@
   "fallbackModel": [
     "haiku"
   ],
-  "hooks": {
-    "SessionStart": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "bun --no-install --no-env-file ~/.claude/scripts/restart-pack.ts brief",
-            "timeout": 5
-          }
-        ],
-        "matcher": "startup"
-      }
-    ],
-    "Stop": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "bun --no-install --no-env-file ~/.claude/scripts/restart-pack.ts refresh",
-            "timeout": 30,
-            "async": true
-          }
-        ]
-      }
-    ],
-    "PreCompact": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "bun --no-install --no-env-file ~/.claude/scripts/restart-pack.ts refresh",
-            "timeout": 30,
-            "async": true
-          }
-        ]
-      }
-    ]
-  },
   "statusLine": {
     "type": "command",
     "command": "bun --no-install --no-env-file ~/.claude/scripts/statusline.ts",
