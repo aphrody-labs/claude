@@ -1,6 +1,6 @@
 ---
 name: bun-crates
-description: "Navigate the Rust side of the Aphrody runtime (aphrody-labs/bun): the 243 crates of the Cargo workspace (bun_core, bun_sys, bun_jsc, bun_runtime, js_parser, bundler, install...), Rust idioms, JSC bindings, GC lifetimes, event loop, parser, printer, resolver, bundler and CSS."
+description: "Navigate the Rust side of the Aphrody runtime (aphrody-labs/bun): the 137 workspace crates of the Cargo workspace (bun_core, bun_sys, bun_jsc, bun_runtime, js_parser, bundler, install...), Rust idioms, JSC bindings, GC lifetimes, event loop, parser, printer, resolver, bundler and CSS."
 ---
 
 # The crates of the Aphrody runtime
