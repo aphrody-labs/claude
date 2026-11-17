@@ -1,5 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "cleanupPeriodDays": 14,
+  "skillListingMaxDescChars": 200,
   "env": {
     "CLAUDE_CODE_AUTO_COMPACT_WINDOW": "1000000",
     "BASH_MAX_OUTPUT_LENGTH": "150000",
@@ -26,14 +28,32 @@
     "pr": "",
     "sessionUrl": false
   },
+  "includeGitInstructions": false,
   "permissions": {
     "defaultMode": "bypassPermissions"
   },
   "model": "sonnet",
-  "fallbackModel": ["haiku"],
+  "fallbackModel": [
+    "haiku"
+  ],
+  "statusLine": {
+    "type": "command",
+    "command": "bun --no-install --no-env-file ~/.claude/scripts/statusline.ts",
+    "refreshInterval": 30
+  },
   "enabledPlugins": {
     "aphrody@aphrody": true,
-    "bun@aphrody": true
+    "bun@aphrody": true,
+    "document-skills@anthropic-agent-skills": true,
+    "example-skills@anthropic-agent-skills": true,
+    "claude-md-management@claude-plugins-official": true,
+    "security-guidance@claude-plugins-official": true,
+    "rust-analyzer-lsp@claude-plugins-official": true,
+    "clangd-lsp@claude-plugins-official": true,
+    "typescript-lsp@claude-plugins-official": true,
+    "pyright-lsp@claude-plugins-official": true,
+    "csharp-lsp@claude-plugins-official": true,
+    "gopls-lsp@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "aphrody": {
@@ -41,9 +61,22 @@
         "source": "directory",
         "path": "C:\\Users\\aphro\\.claude"
       }
+    },
+    "anthropic-agent-skills": {
+      "source": {
+        "source": "github",
+        "repo": "anthropics/skills"
+      }
+    },
+    "claude-plugins-official": {
+      "source": {
+        "source": "github",
+        "repo": "anthropics/claude-plugins-official"
+      }
     }
   },
   "outputStyle": "Autonome",
+  "spinnerTipsEnabled": false,
   "alwaysThinkingEnabled": true,
   "modelSettings": {
     "claude-sonnet-5-5": {
@@ -59,14 +92,5 @@
   },
   "showThinkingSummaries": true,
   "skipDangerousModePermissionPrompt": true,
-  "useAutoModeDuringPlan": true,
-  "statusLine": {
-    "type": "command",
-    "command": "bun --no-install --no-env-file ~/.claude/scripts/statusline.ts",
-    "refreshInterval": 30
-  },
-  "cleanupPeriodDays": 14,
-  "spinnerTipsEnabled": false,
-  "skillListingMaxDescChars": 200,
-  "includeGitInstructions": false
+  "useAutoModeDuringPlan": true
 }

@@ -12,3 +12,4 @@ type: project
   - Resilience: systemd `Restart=always`, Docker `unless-stopped`, linger, `agent` user with sudo for headless workers; cluster failover.
 - **SSH traps**: always invoke SSH with `timeout 60 ssh <host> '...'`. Exit 255 typically indicates CPU/RAM saturation from runaway `gitleaks` or `lighthouse` Chrome processes (`pkill -f gitleaks; pkill -f user-data-dir=/tmp/lighthouse`).
 - **Large Gemini Carbon review fallback**: if relay `gemini_review` hits 429, inject `<input type=file>` into `gemini.google.com/app`, upload bundle under `%TEMP%`, insert into `.ql-editor`, submit, poll `Stop response`, and read verified findings against live code.
+- **Clobbered fr1 binaries**: `~/.cargo/bin/cargo-deny` was overwritten with the 17-byte text `fr1:cargo-deny =` (2026-11-16), failing CI with exit 127. When a runner tool exits 127/126, check the file content first (`head -c 64`), then reinstall from the upstream release.

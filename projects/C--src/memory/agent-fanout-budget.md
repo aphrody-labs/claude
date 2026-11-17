@@ -13,3 +13,5 @@ Keep sub-agent fan-out small: at most ~3 concurrent background agents. Do cheap 
 **Why:** 2026-11-16 the owner said "limite le fan out d'agent et gere mieux ta context window et tes weekly limits" after I ran 6-7 agents at once across repos.
 
 **How to apply:** before spawning, count running agents; queue extra work rather than launching it; prefer one agent per user request, not per repo, when repos' fixes are small. Related: [[agent-policy]], [[push-checks-and-shared-writers]].
+
+Finished background agents keep firing stale wait-timer notifications; once the final report is in, stop the agent with TaskStop.

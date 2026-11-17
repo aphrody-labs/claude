@@ -17,3 +17,4 @@ type: project
   - `aphrody.com` (`apps/web`) = marketing/vitrine; `aphrody.app` (`aphrody-app`) = full-Rust apps & Bevy/wgpu game launcher.
   - Submodules use relative URLs and sibling checkouts via directory junctions (never duplicate nested clones).
 - **Shared-tree git safety**: always work on `main`; never run `git stash`, `git stash pop`, `git reset --hard`, or branch switches on shared `C:\src` trees; make path-scoped commits and push directly.
+- rosegriffon moved 2026-11-17 to GitHub org `rose-griffon` (rose-griffon/rosegriffon), owned by the old account `aphrody-code` (token in Windows Credential Manager target `gh:github.com:aphrody-code`; scopes repo, read:org, no admin:org). aphrody-dev has repo admin, not org membership. rosegriffon also has its own Gmail and OVH accounts.

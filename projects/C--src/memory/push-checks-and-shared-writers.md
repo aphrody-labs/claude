@@ -18,4 +18,6 @@ Mistakes from the 2026-11-16 session (craft-anything in the Bun fork, the bun su
 - **Scripts reported results on the wrong signal** ("sync refused" read from empty stdout). Decide on exit codes.
 - **Rewrote AGENTS.md rules another session owned** (the main freeze, the sources-of-truth rule) right after saying I'd keep them. When a rule belongs to someone else's active work, change it only on the owner's explicit word, and say so.
 
+- **A purge agent deleted other writers' uncommitted edits** (nie `docs/ie`, `docs/re`, untracked `replica/screens`, 2026-11-16). Every brief that deletes or restructures a tree must say: run `git status` first, leave foreign modified/untracked paths in place, and report them instead of removing them.
+
 Related: [[agent-policy]], [[autonomy-nhitl]].
