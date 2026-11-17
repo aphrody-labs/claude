@@ -5,13 +5,23 @@ export type Harness = "claude" | "agy" | "gemini";
 
 export type HookInput = {
   session_id?: string;
+  conversationId?: string;
   cwd?: string;
+  workspacePaths?: string[];
   hook_event_name?: string;
+  hookEventName?: string;
   tool_name?: string;
   tool_input?: Record<string, unknown>;
+  toolCall?: {
+    id?: string;
+    name?: string;
+    args?: Record<string, unknown>;
+  };
   tool_response?: unknown;
   prompt?: string;
   user_prompt?: string;
+  lastUserInput?: string;
+  error?: string;
   [k: string]: unknown;
 };
 

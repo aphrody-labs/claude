@@ -1,12 +1,18 @@
 #!/usr/bin/env bun
 import { spawn } from "node:child_process";
 import { join } from "node:path";
-import { findRepoRoot, readHookEvent, writeEmpty } from "./lib.ts";
+import {
+  extractSessionId,
+  findRepoRoot,
+  readHookEvent,
+  writeEmpty,
+} from "./lib.ts";
+import { listLiveClaudeSessions } from "./claude-peer.ts";
 
 const mode = Bun.argv[2] ?? "pull";
 const root = findRepoRoot();
 
-await readHookEvent();
+const event = await readHookEvent();
 
 function git(...args: string[]) {
   const r = Bun.spawnSync(["git", "-C", root, ...args], {
@@ -27,6 +33,10 @@ if (!git("rev-parse", "--is-inside-work-tree").ok) {
 }
 
 const hasRemote = git("remote").out.length > 0;
+const selfSessionId = event ? extractSessionId(event) : "";
+const hasLivePeer =
+  listLiveClaudeSessions().filter((s) => s.sessionId !== selfSessionId).length >
+  0;
 
 if (mode === "pull" && hasRemote) {
   if (git("status", "--porcelain").out === "") {
@@ -42,16 +52,19 @@ if (mode === "pull" && hasRemote) {
     stdin: "ignore",
   });
 
-  git("add", "-A");
-  if (!git("diff", "--cached", "--quiet").ok) {
-    const c = git("commit", "--quiet", "-m", "config: sync");
-    if (!c.ok) console.error(`config-sync commit: ${c.err}`);
-    else if (hasRemote) {
-      spawn("git", ["-C", root, "push", "--quiet"], {
-        detached: true,
-        stdio: "ignore",
-        windowsHide: true,
-      }).unref();
+  // Never auto-stage or commit shared files while sibling live sessions are active.
+  if (!hasLivePeer) {
+    git("add", "-A");
+    if (!git("diff", "--cached", "--quiet").ok) {
+      const c = git("commit", "--quiet", "-m", "config: sync");
+      if (!c.ok) console.error(`config-sync commit: ${c.err}`);
+      else if (hasRemote) {
+        spawn("git", ["-C", root, "push", "--quiet"], {
+          detached: true,
+          stdio: "ignore",
+          windowsHide: true,
+        }).unref();
+      }
     }
   }
 }

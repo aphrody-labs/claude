@@ -3,6 +3,7 @@ import {
   allowPreTool,
   detectHarness,
   extractCommand,
+  extractToolArgs,
   readHookEvent,
   writeEmpty,
 } from "./lib.ts";
@@ -14,7 +15,7 @@ if (!event) {
   process.exit(0);
 }
 
-const input = event.tool_input ?? {};
+const input = extractToolArgs(event);
 const cmd = extractCommand(event);
 if (!cmd) {
   writeEmpty();

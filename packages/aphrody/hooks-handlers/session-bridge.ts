@@ -1,7 +1,14 @@
 #!/usr/bin/env bun
 import { existsSync } from "node:fs";
 import { join } from "node:path";
-import { readHookEvent, writeEmpty } from "./lib.ts";
+import {
+  emitContext,
+  extractCwd,
+  extractHookName,
+  extractSessionId,
+  readHookEvent,
+  writeEmpty,
+} from "./lib.ts";
 import {
   drainHookMail,
   registerRelaySession,
@@ -10,14 +17,21 @@ import {
 
 const mode = Bun.argv[2] ?? "deliver";
 const event = await readHookEvent();
-if (!event || !event.session_id) {
+const rawSessionId = event ? extractSessionId(event) : "";
+if (!event || !rawSessionId) {
   writeEmpty();
   process.exit(0);
 }
 
-const sessionId = event.session_id;
-const hookName =
-  event.hook_event_name ?? (mode === "start" ? "SessionStart" : "PostToolUse");
+const sessionId = rawSessionId;
+const isAgyPayload =
+  typeof event.conversationId === "string" ||
+  typeof event.hookEventName === "string";
+const hookName = extractHookName(
+  event,
+  mode === "start" ? "SessionStart" : "PostToolUse",
+);
+const kind = isAgyPayload ? "antigravity" : "claude-code";
 
 // Fast path: skip opening SQLite during turns when no unread pending flag exists.
 if (mode !== "start") {
@@ -29,7 +43,7 @@ if (mode !== "start") {
 }
 
 if (mode === "start") {
-  registerRelaySession(sessionId, "claude-code", event.cwd ?? "");
+  registerRelaySession(sessionId, kind, extractCwd(event));
 }
 
 const mail = drainHookMail(sessionId);
@@ -41,11 +55,21 @@ if (mail.length === 0) {
 const lines = mail.map(
   (m) => `[Live peer message from ${m.from_name}]: ${m.text}`,
 );
-process.stdout.write(
-  JSON.stringify({
-    hookSpecificOutput: {
-      hookEventName: hookName,
-      additionalContext: lines.join("\n"),
-    },
-  }),
-);
+if (isAgyPayload) {
+  const mappedHook =
+    hookName === "SessionStart" ? "SessionStart" : "UserPromptSubmit";
+  emitContext(
+    "agy",
+    hookName === "PostToolUse" ? "PostToolUse" : mappedHook,
+    lines.join("\n"),
+  );
+} else {
+  process.stdout.write(
+    JSON.stringify({
+      hookSpecificOutput: {
+        hookEventName: hookName,
+        additionalContext: lines.join("\n"),
+      },
+    }),
+  );
+}

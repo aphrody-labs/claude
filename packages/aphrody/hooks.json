@@ -1,16 +1,32 @@
 {
   "aphrody": {
+    "enabled": true,
     "SessionStart": [
       {
         "type": "command",
         "command": "bun --no-install --no-env-file \"./hooks-handlers/config-sync.ts\" pull agy",
         "timeout": 10
+      },
+      {
+        "type": "command",
+        "command": "bun --no-install --no-env-file \"./hooks-handlers/session-bridge.ts\" start",
+        "timeout": 5
+      },
+      {
+        "type": "command",
+        "command": "bun --no-install --no-env-file \"./hooks-handlers/learn.ts\" nudge agy",
+        "timeout": 5
       }
     ],
     "PreInvocation": [
       {
         "type": "command",
         "command": "bun --no-install --no-env-file \"./hooks-handlers/learn.ts\" capture agy",
+        "timeout": 5
+      },
+      {
+        "type": "command",
+        "command": "bun --no-install --no-env-file \"./hooks-handlers/session-bridge.ts\" deliver",
         "timeout": 5
       }
     ],
@@ -28,7 +44,7 @@
     ],
     "PostToolUse": [
       {
-        "matcher": "write_to_file|replace_file_content|multi_replace_file_content",
+        "matcher": "write_file|edit_file|write_to_file|replace_file_content|multi_replace_file_content",
         "hooks": [
           {
             "type": "command",
@@ -38,7 +54,7 @@
         ]
       },
       {
-        "matcher": "run_command|write_to_file|replace_file_content|multi_replace_file_content",
+        "matcher": "run_command|write_file|edit_file|write_to_file|replace_file_content|multi_replace_file_content",
         "hooks": [
           {
             "type": "command",

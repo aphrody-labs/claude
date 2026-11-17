@@ -3,6 +3,7 @@ import {
   appendFileSync,
   existsSync,
   mkdirSync,
+  readdirSync,
   readFileSync,
   writeFileSync,
 } from "node:fs";
@@ -11,7 +12,12 @@ import { basename, join } from "node:path";
 import {
   CLAUDE_HOME,
   detectHarness,
+  emitContext,
   extractCommand,
+  extractCwd,
+  extractPrompt,
+  extractSessionId,
+  extractToolName,
   readHookEvent,
   redactSecrets,
   writeEmpty,
@@ -31,6 +37,7 @@ interface LearnState {
   lastDistillAt: number;
   lastLineCount: number;
   lastErrorsBySession: Record<string, string>;
+  lastPromptsBySession?: Record<string, string>;
 }
 
 const LEARN_DIR = join(CLAUDE_HOME, "learning");
@@ -59,6 +66,14 @@ function appendEntry(entry: JournalEntry): number {
   appendFileSync(JOURNAL, `${JSON.stringify(entry)}\n`, "utf8");
   if (!existsSync(JOURNAL)) return 1;
   return readFileSync(JOURNAL, "utf8").split(/\r?\n/).filter(Boolean).length;
+}
+
+function looksFailed(text: string): boolean {
+  return (
+    /\bCommand exited with code [1-9]\d*|exitCode["']?\s*:\s*[1-9]\d*|stderr["']?\s*:\s*["'][^"']+/i.test(
+      text,
+    ) || /error:\s|ENOENT|ECONNREFUSED|SyntaxError|ParseError/i.test(text)
+  );
 }
 
 function responseText(resp: unknown): string {
@@ -95,46 +110,51 @@ async function handleCapture(harnessArg?: string): Promise<void> {
     return;
   }
 
-  const session =
-    typeof event.session_id === "string" && event.session_id
-      ? event.session_id
-      : "default";
-  const cwd =
-    typeof event.cwd === "string" && event.cwd ? event.cwd : process.cwd();
+  const session = extractSessionId(event) || "default";
+  const cwd = extractCwd(event);
   const state = loadState();
-  const prompt = event.prompt ?? event.user_prompt;
+  const tool = extractToolName(event);
+  const prompt = extractPrompt(event);
 
-  if (typeof prompt === "string" && prompt.trim()) {
+  if (!tool && prompt.trim()) {
     const clean = redactSecrets(prompt.trim())
       .replace(/\s+/g, " ")
       .slice(0, 400);
-    if (CORRECTION_RE.test(clean)) {
-      const n = appendEntry({
-        at: new Date().toISOString(),
-        harness,
-        session,
-        cwd,
-        kind: "correction",
-        summary: clean,
-      });
-      maybeTriggerDistill(n, state);
+    state.lastPromptsBySession ??= {};
+    if (state.lastPromptsBySession[session] !== clean) {
+      state.lastPromptsBySession[session] = clean;
+      const pKeys = Object.keys(state.lastPromptsBySession);
+      if (pKeys.length > 24) delete state.lastPromptsBySession[pKeys[0]!];
+      saveState(state);
+      if (CORRECTION_RE.test(clean)) {
+        const n = appendEntry({
+          at: new Date().toISOString(),
+          harness,
+          session,
+          cwd,
+          kind: "correction",
+          summary: clean,
+        });
+        maybeTriggerDistill(n, state);
+      }
     }
     writeEmpty();
     return;
   }
 
-  const tool = typeof event.tool_name === "string" ? event.tool_name : "";
   if (!tool) {
     writeEmpty();
     return;
   }
 
-  const rawResp = responseText(event.tool_response);
+  const rawResp = responseText(event.error ?? event.tool_response);
   const cmd = extractCommand(event);
-  const isError =
-    /\bCommand exited with code [1-9]\d*|exitCode["']?\s*:\s*[1-9]\d*|stderr["']?\s*:\s*["'][^"']+/i.test(
-      rawResp,
-    ) || /error:\s|ENOENT|ECONNREFUSED|SyntaxError|ParseError/i.test(rawResp);
+  // Claude Code reports failed tools through PostToolUseFailure; matching the text of a successful result
+  // flags every file or log that merely contains the word "error:". Other harnesses carry no such event.
+  const failed =
+    event.hook_event_name === "PostToolUseFailure" ||
+    (typeof event.error === "string" && event.error !== "");
+  const isError = failed || (harness !== "claude" && looksFailed(rawResp));
 
   const label = redactSecrets((cmd || tool).replace(/\s+/g, " ").slice(0, 180));
 
@@ -241,6 +261,19 @@ function handleDistill(): void {
 const mode = Bun.argv[2] ?? "capture";
 if (mode === "distill") {
   handleDistill();
+} else if (mode === "nudge") {
+  // Session start: surface undistilled digests so the agent folds them into memory (the self-improvement loop closes here).
+  await readHookEvent();
+  const digests = existsSync(INBOX)
+    ? readdirSync(INBOX).filter((f) => f.endsWith("-digest.md"))
+    : [];
+  if (digests.length === 0) writeEmpty();
+  else
+    emitContext(
+      detectHarness(Bun.argv[3]),
+      "SessionStart",
+      `Learning inbox holds ${digests.length} undistilled digest(s) in ${INBOX}. Run the learn skill: merge durable rules into project memory, then delete the digests.`,
+    );
 } else if (mode === "status") {
   const lines = existsSync(JOURNAL)
     ? readFileSync(JOURNAL, "utf8").split(/\r?\n/).filter(Boolean).length

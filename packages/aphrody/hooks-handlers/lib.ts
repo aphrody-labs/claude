@@ -6,16 +6,32 @@ export type Harness = "claude" | "agy" | "gemini";
 
 export interface RawHookEvent {
   hook_event_name?: string;
+  hookEventName?: string;
   session_id?: string;
+  conversationId?: string;
   transcript_path?: string;
+  transcriptPath?: string;
+  artifactDirectoryPath?: string;
   cwd?: string;
+  workspacePaths?: string[];
+  modelName?: string;
   tool_name?: string;
   tool_input?: Record<string, unknown>;
   tool_response?: unknown;
+  toolCall?: {
+    id?: string;
+    name?: string;
+    args?: Record<string, unknown>;
+  };
+  stepIdx?: number;
+  invocationNum?: number;
+  initialNumSteps?: number;
   prompt?: string;
   user_prompt?: string;
+  lastUserInput?: string;
   source?: string;
   reason?: string;
+  error?: string;
   [k: string]: unknown;
 }
 
@@ -62,16 +78,62 @@ export async function readHookEvent(): Promise<RawHookEvent | null> {
   }
 }
 
+export function extractSessionId(event: RawHookEvent): string {
+  const id = event.session_id ?? event.conversationId;
+  return typeof id === "string" ? id : "";
+}
+
+export function extractCwd(event: RawHookEvent): string {
+  if (typeof event.cwd === "string" && event.cwd) return event.cwd;
+  if (
+    Array.isArray(event.workspacePaths) &&
+    typeof event.workspacePaths[0] === "string" &&
+    event.workspacePaths[0]
+  ) {
+    return event.workspacePaths[0];
+  }
+  return process.cwd();
+}
+
+export function extractHookName(event: RawHookEvent, fallback = ""): string {
+  const name = event.hook_event_name ?? event.hookEventName;
+  return typeof name === "string" && name ? name : fallback;
+}
+
+export function extractToolName(event: RawHookEvent): string {
+  const name = event.tool_name ?? event.toolCall?.name;
+  return typeof name === "string" ? name : "";
+}
+
+export function extractToolArgs(event: RawHookEvent): Record<string, unknown> {
+  if (event.toolCall?.args && typeof event.toolCall.args === "object") {
+    return event.toolCall.args;
+  }
+  if (event.tool_input && typeof event.tool_input === "object") {
+    return event.tool_input;
+  }
+  return {};
+}
+
+export function extractPrompt(event: RawHookEvent): string {
+  const p = event.prompt ?? event.user_prompt ?? event.lastUserInput;
+  return typeof p === "string" ? p : "";
+}
+
 export function extractCommand(event: RawHookEvent): string {
-  const input = event.tool_input ?? {};
+  const input = extractToolArgs(event);
   const cmd = input.command ?? input.CommandLine ?? input.cmd;
   return typeof cmd === "string" ? cmd : "";
 }
 
 export function extractFilePath(event: RawHookEvent): string {
-  const input = event.tool_input ?? {};
+  const input = extractToolArgs(event);
   const fp =
-    input.file_path ?? input.TargetFile ?? input.AbsolutePath ?? input.path;
+    input.file_path ??
+    input.Path ??
+    input.TargetFile ??
+    input.AbsolutePath ??
+    input.path;
   return typeof fp === "string" ? fp : "";
 }
 
@@ -87,7 +149,7 @@ export function allowPreTool(
   if (harness === "agy") {
     const payload: Record<string, unknown> = { decision: "allow" };
     if (updatedInput) payload.overwrite = updatedInput;
-    if (note) payload.systemMessage = note;
+    if (note) payload.reason = note;
     process.stdout.write(JSON.stringify(payload));
     return;
   }
@@ -113,7 +175,17 @@ export function emitContext(
   text: string,
 ): void {
   if (harness === "agy") {
-    process.stdout.write(JSON.stringify({ systemMessage: text }));
+    if (hookEventName === "PostToolUse") {
+      // Antigravity PostToolUse hooks must return {} on stdout; emit diagnostics to stderr.
+      console.error(text);
+      writeEmpty();
+      return;
+    }
+    process.stdout.write(
+      JSON.stringify({
+        injectSteps: [{ systemMessage: { systemMessage: text } }],
+      }),
+    );
     return;
   }
   process.stdout.write(
