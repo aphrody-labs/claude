@@ -20,4 +20,7 @@ Mistakes from the 2026-11-16 session (craft-anything in the Bun fork, the bun su
 
 - **A purge agent deleted other writers' uncommitted edits** (nie `docs/ie`, `docs/re`, untracked `replica/screens`, 2026-11-16). Every brief that deletes or restructures a tree must say: run `git status` first, leave foreign modified/untracked paths in place, and report them instead of removing them.
 
+- **`taskkill /F /IM bun.exe` kills every session's Bun** (MCP servers, hooks, other agents' servers), 2026-11-17. Stop only the PID you spawned (`proc.kill()`, `Stop-Process -Id`).
+- **Restored legacy code is unreviewed code** (2026-11-17). Crates and packages restored from crates.io, npm and the legacy repo (ay-svg, ay-patch, bun-x, ai-os env-kit) drew 13 security findings after they were pushed: SVG sanitizer bypasses, usvg external image resolution, path traversal in patch application, bearer token following redirects, `.env` located from the current directory, a CI gate that exited 0 when its source was missing. Run the `security-review` skill on the restore diff before the first push, and treat "fetches a URL", "writes a path from input", "sanitizes markup" and "loads env" as the four things to read by hand.
+
 Related: [[agent-policy]], [[autonomy-nhitl]].
