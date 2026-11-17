@@ -1,6 +1,6 @@
 ---
 name: ay-hub-source-of-truth
-description: aphrody-dev/aphrody is the complete pure-Rust OS and source of truth; aphrody-dev/ay is its SDK (C ABI, OpenAPI, docs, spec, corelib, libc, design system)
+description: aphrody-dev/aphrody is the complete OS and its source of truth (agy owns it); aphrody-dev/ay is the independent SDK in any best-fit language
 metadata:
   type: project
 ---
@@ -11,4 +11,4 @@ aphrody-dev/aphrody ($WORKSPACE_ROOT/aphrody, identity in product.toml) is the c
 
 **How to apply:** new identity, host, product or repo facts go into ay.toml first; satellites read from it and never redefine names. rosegriffon is leaving for its own org rose-griffon (blocked on aphrody-dev invite); nie stays in aphrody-labs. Related: [[git-and-workspace-map]], [[naming-and-privacy]], [[ay-legacy-rebuild]].
 
-2026-11-17 owner decisions: ay accepts C and derivatives (C++, ObjC), assembly, Zig, WebGPU/WGSL, Python, .NET and Bun, never Rust (Rust = aphrody). Toolchain goal: LLVM first, tree-sitter, C-ABI FFI, LTO, AOT, unified lib/MSVC ABI, cross arch/OS/GPU/platform (ay ADR-0008, ay.toml [sdk], commit eff140f). No duplicated git repos locally or on GitHub: one checkout per repo (nested copies become junctions to $WORKSPACE_ROOT/<repo>), duplicate GitHub repos get archived.
+2026-11-17 owner decisions: ay accepts any best-fit language, Rust included (the earlier no-Rust rule was withdrawn the same day as illogical; ay commit de35a84). Toolchain goal: LLVM first, tree-sitter, C-ABI FFI, LTO, AOT, unified lib/MSVC ABI, cross arch/OS/GPU/platform (ay ADR-0008, ay.toml [sdk]). Repos are independent of each other ([[repo-independence]]); one checkout per repo; duplicate GitHub repos get archived.

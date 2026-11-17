@@ -222,11 +222,6 @@
       "label": "security-guidance@claude-plugins-official"
     },
     {
-      "id": "plugin:typescript-lsp@claude-plugins-official",
-      "kind": "plugin",
-      "label": "typescript-lsp@claude-plugins-official"
-    },
-    {
       "id": "script:packages/aphrody/hooks-handlers/auto-background.ts",
       "kind": "script",
       "label": "auto-background.ts",
@@ -1365,11 +1360,6 @@
     {
       "from": "settings",
       "to": "plugin:security-guidance@claude-plugins-official",
-      "kind": "enables"
-    },
-    {
-      "from": "settings",
-      "to": "plugin:typescript-lsp@claude-plugins-official",
       "kind": "enables"
     }
   ]

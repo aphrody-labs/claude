@@ -11,5 +11,8 @@ type: feedback
   - Niubash (`niu`) reads `~/.niubashrc` (not `~/.bashrc`).
   - Write multiline or backslash-heavy scripts to `.ts`/script files rather than shell heredocs/inline quoting.
   - Check/stop stale localhost listeners before restarting Bun servers on Windows.
+  - `jq` is not installed on the PC (seen 2026-11-17, exit 127): use `gh api --jq`, `jaq`, or a Bun one-liner.
+  - Git Bash `/tmp/x` is `%TEMP%\x`; Bun and other native programs do not resolve `/tmp/...` (ENOENT). Pass `$(cygpath -m /tmp)/x` or a real Windows path.
+  - `bun test test` treats a bare word as a name filter and runs every test file; pass `./test` for a directory.
 - **Isolated sandboxes**: run third-party doc examples or package tests under `%TEMP%` with separate `package.json`, `HOME`, `BUN_INSTALL`, stripped project bins, and process-tree kill on timeout; never run loose `bun add` inside an app workspace.
 - **Clean tree**: leave zero `.bak` files or temp leftovers.

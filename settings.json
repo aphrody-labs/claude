@@ -33,7 +33,9 @@
     "defaultMode": "bypassPermissions"
   },
   "model": "fable",
-  "fallbackModel": ["haiku"],
+  "fallbackModel": [
+    "haiku"
+  ],
   "statusLine": {
     "type": "command",
     "command": "bun --no-install --no-env-file ~/.claude/scripts/statusline.ts",
@@ -93,5 +95,6 @@
   },
   "showThinkingSummaries": true,
   "skipDangerousModePermissionPrompt": true,
-  "useAutoModeDuringPlan": true
+  "useAutoModeDuringPlan": true,
+  "crossSessionInbound": "accept"
 }
