@@ -36,6 +36,41 @@
   "fallbackModel": [
     "haiku"
   ],
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bun --no-install --no-env-file ~/.claude/scripts/restart-pack.ts brief",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bun --no-install --no-env-file ~/.claude/scripts/restart-pack.ts refresh",
+            "timeout": 15
+          }
+        ]
+      }
+    ],
+    "PreCompact": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bun --no-install --no-env-file ~/.claude/scripts/restart-pack.ts refresh",
+            "timeout": 15
+          }
+        ]
+      }
+    ]
+  },
   "statusLine": {
     "type": "command",
     "command": "bun --no-install --no-env-file ~/.claude/scripts/statusline.ts",
@@ -47,7 +82,6 @@
     "document-skills@anthropic-agent-skills": true,
     "example-skills@anthropic-agent-skills": true,
     "claude-md-management@claude-plugins-official": true,
-    "security-guidance@claude-plugins-official": false,
     "rust-analyzer-lsp@claude-plugins-official": false,
     "clangd-lsp@claude-plugins-official": true,
     "typescript-lsp@claude-plugins-official": false,
@@ -96,40 +130,5 @@
   "showThinkingSummaries": true,
   "skipDangerousModePermissionPrompt": true,
   "crossSessionInbound": "accept",
-  "useAutoModeDuringPlan": true,
-  "hooks": {
-    "SessionStart": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "bun --no-install --no-env-file ~/.claude/scripts/restart-pack.ts brief",
-            "timeout": 10
-          }
-        ]
-      }
-    ],
-    "Stop": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "bun --no-install --no-env-file ~/.claude/scripts/restart-pack.ts refresh",
-            "timeout": 15
-          }
-        ]
-      }
-    ],
-    "PreCompact": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "bun --no-install --no-env-file ~/.claude/scripts/restart-pack.ts refresh",
-            "timeout": 15
-          }
-        ]
-      }
-    ]
-  }
+  "useAutoModeDuringPlan": true
 }
