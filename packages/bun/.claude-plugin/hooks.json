@@ -23,29 +23,6 @@
           }
         ]
       }
-    ],
-    "PostToolUse": [
-      {
-        "matcher": "Bash",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "bun --no-install --no-env-file \"${CLAUDE_PLUGIN_ROOT}/hooks/post-tool-use.ts\" claude",
-            "timeout": 5
-          }
-        ]
-      }
-    ],
-    "UserPromptSubmit": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "bun --no-install --no-env-file \"${CLAUDE_PLUGIN_ROOT}/hooks/user-prompt-submit.ts\" claude",
-            "timeout": 5
-          }
-        ]
-      }
     ]
   }
 }

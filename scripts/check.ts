@@ -8,6 +8,7 @@ import {
 } from "node:fs";
 import { tmpdir } from "node:os";
 import { join, relative, resolve } from "node:path";
+import { FORBIDDEN, type Settings, undeclaredPlugins } from "./hygiene.ts";
 import { REPO_ROOT, runCmd } from "./lib.ts";
 
 let failed = 0;
@@ -77,7 +78,7 @@ if (Bun.which("gemini")) {
 }
 
 // 2. Native TypeScript, lint, and formatting checks.
-checkStep("bun check", ["bun", "check"]);
+checkStep("bun check", ["bun", "check", "--no-script"]);
 checkStep("bun lint", ["bun", "lint"]);
 checkStep("bun fmt --check", [
   "bun",
@@ -97,39 +98,22 @@ checkStep("bun fmt --check", [
 
 // 3. Coherence & hygiene audit on tracked config files.
 const settingsPath = join(REPO_ROOT, "settings.json");
-const settings = JSON.parse(readFileSync(settingsPath, "utf8")) as {
-  permissions?: { deny?: unknown };
-  enabledPlugins?: Record<string, boolean>;
-};
+const settings = JSON.parse(readFileSync(settingsPath, "utf8")) as Settings;
 if (settings.permissions && "deny" in settings.permissions) {
   failed++;
   console.error(
     "FAIL [hygiene]: settings.json must not declare permissions.deny",
   );
 }
-const pluginKeys = Object.keys(settings.enabledPlugins ?? {});
-const unexpectedPlugins = pluginKeys.filter(
-  (k) => k !== "aphrody@aphrody" && k !== "bun@aphrody",
-);
+const unexpectedPlugins = undeclaredPlugins(settings);
 if (unexpectedPlugins.length > 0) {
   failed++;
   console.error(
-    `FAIL [hygiene]: unexpected enabledPlugins in settings.json: ${unexpectedPlugins.join(", ")}`,
+    `FAIL [hygiene]: enabledPlugins from an undeclared marketplace: ${unexpectedPlugins.join(", ")}`,
   );
 }
 
 // Scan portable files (excluding historical project memory descriptions) for stale literals.
-const FORBIDDEN: Array<{ label: string; re: RegExp }> = [
-  { label: "stale C:\\aphrody path", re: /C:[\\/]aphrody\b/i },
-  { label: "stale gpui-os ref", re: /\bgpui-os\b/i },
-  { label: "stale C--aphrody slug", re: /\bC--aphrody\b/ },
-  { label: "stale bun-upstream-canary path", re: /bun-upstream-canary/i },
-  { label: "hardcoded user home path", re: /C:[\\/]Users[\\/]aphro\b/i },
-  { label: "deprecated pre-tool-guard", re: /pre-tool-guard/i },
-  { label: "stale aphrody-skills ref", re: /\baphrody-skills\b/ },
-  { label: "Sovereign slop wording", re: /\bsovereign\b/i },
-];
-
 const SCAN_ROOTS = [
   "CLAUDE.md",
   "settings.json",
@@ -162,7 +146,14 @@ let lintHits = 0;
 for (const f of files) {
   const rel = relative(REPO_ROOT, f).replaceAll("\\", "/");
   // Exclude self-referential checks in check.ts/merge-brain.ts and third-party Windows path pattern examples if any.
-  if (rel === "scripts/check.ts" || rel === "scripts/merge-brain.ts") continue;
+  if (
+    rel === "scripts/check.ts" ||
+    rel === "scripts/hygiene.ts" ||
+    rel === "scripts/hygiene.test.ts" ||
+    rel === "scripts/merge-brain.ts"
+  ) {
+    continue;
+  }
   const text = readFileSync(f, "utf8");
   for (const rule of FORBIDDEN) {
     if (rule.re.test(text)) {
@@ -247,7 +238,29 @@ await smokeHook(
     !out.includes('"deny"'),
 );
 await smokeHook(
-  "aphrody auto-background (agy)",
+  "bun pre-tool-use rewrite (agy toolCall)",
+  [
+    "bun",
+    "--no-install",
+    "--no-env-file",
+    join(REPO_ROOT, "packages", "bun", "hooks", "pre-tool-use.ts"),
+    "agy",
+  ],
+  {
+    conversationId: "00000000-0000-0000-0000-000000000001",
+    workspacePaths: [REPO_ROOT],
+    hookEventName: "PreToolUse",
+    toolCall: { name: "run_command", args: { CommandLine: "npm test" } },
+  },
+  (out) =>
+    out.includes("bun run test") &&
+    out.includes('"decision":"allow"') &&
+    out.includes('"overwrite"') &&
+    !out.includes('"systemMessage"') &&
+    !out.includes('"deny"'),
+);
+await smokeHook(
+  "aphrody auto-background (agy toolCall)",
   [
     "bun",
     "--no-install",
@@ -262,13 +275,37 @@ await smokeHook(
     "agy",
   ],
   {
-    tool_name: "run_command",
-    tool_input: { CommandLine: "cargo build", WaitMsBeforeAsync: 5000 },
+    conversationId: "00000000-0000-0000-0000-000000000001",
+    hookEventName: "PreToolUse",
+    toolCall: {
+      name: "run_command",
+      args: { CommandLine: "cargo build", WaitMsBeforeAsync: 5000 },
+    },
   },
   (out) =>
     out.includes('"decision":"allow"') &&
     out.includes('"WaitMsBeforeAsync":1500') &&
+    !out.includes('"systemMessage"') &&
     !out.includes('"deny"'),
+);
+await smokeHook(
+  "aphrody typecheck PostToolUse returns {} (agy toolCall)",
+  [
+    "bun",
+    "--no-install",
+    "--no-env-file",
+    join(REPO_ROOT, "packages", "aphrody", "hooks-handlers", "typecheck.ts"),
+    "agy",
+  ],
+  {
+    conversationId: "00000000-0000-0000-0000-000000000001",
+    hookEventName: "PostToolUse",
+    toolCall: {
+      name: "write_file",
+      args: { Path: join(REPO_ROOT, "README.md") },
+    },
+  },
+  (out) => out.trim() === "{}",
 );
 await smokeHook(
   "bun session-start (agy)",

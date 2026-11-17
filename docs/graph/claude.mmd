@@ -1,0 +1,175 @@
+flowchart LR
+  agent_aphrody_researcher(("researcher"))
+  agent_aphrody_worker(("worker"))
+  agent_toml[["agent.toml"]]
+  cron_graph>"graph"]
+  cron_learn_distill>"learn-distill"]
+  cron_memory_curator>"memory-curator"]
+  cron_memory_index>"memory-index"]
+  hook_aphrody_PostToolUse_Bash_Edit_Write_MultiEdit__learn_ts{{"PostToolUse Bash|Edit|Write|MultiEdit"}}
+  hook_aphrody_PostToolUse_Edit_Write_MultiEdit__typecheck_ts{{"PostToolUse Edit|Write|MultiEdit"}}
+  hook_aphrody_PostToolUse_session_bridge_ts{{"PostToolUse"}}
+  hook_aphrody_PostToolUseFailure_learn_ts{{"PostToolUseFailure"}}
+  hook_aphrody_PreToolUse_Bash__auto_background_ts{{"PreToolUse Bash"}}
+  hook_aphrody_SessionEnd_config_sync_ts{{"SessionEnd"}}
+  hook_aphrody_SessionStart_startup_resume_clear_compact__config_sync_ts{{"SessionStart startup|resume|clear|compact"}}
+  hook_aphrody_SessionStart_startup_resume_clear_compact__learn_ts{{"SessionStart startup|resume|clear|compact"}}
+  hook_aphrody_SessionStart_startup_resume_clear_compact__session_bridge_ts{{"SessionStart startup|resume|clear|compact"}}
+  hook_aphrody_UserPromptSubmit_learn_ts{{"UserPromptSubmit"}}
+  hook_aphrody_UserPromptSubmit_session_bridge_ts{{"UserPromptSubmit"}}
+  hook_bun_PreToolUse_Bash_Grep_Glob__pre_tool_use_ts{{"PreToolUse Bash|Grep|Glob"}}
+  hook_bun_SessionStart_startup_resume_clear_compact__session_start_ts{{"SessionStart startup|resume|clear|compact"}}
+  mcp_aphrody_claude_bridge[("claude-bridge")]
+  mcp_aphrody_hostinger_billing[("hostinger-billing")]
+  mcp_aphrody_hostinger_dns[("hostinger-dns")]
+  mcp_aphrody_hostinger_domains[("hostinger-domains")]
+  mcp_aphrody_hostinger_vps[("hostinger-vps")]
+  mcp_aphrody_memory[("memory")]
+  mcp_aphrody_ovh_cloud[("ovh-cloud (remote)")]
+  mcp_aphrody_ovh_cloud_instance[("ovh-cloud-instance (remote)")]
+  mcp_aphrody_ovh_domain[("ovh-domain (remote)")]
+  mcp_aphrody_ovh_ip[("ovh-ip (remote)")]
+  mcp_aphrody_ovh_vps[("ovh-vps (remote)")]
+  mcp_aphrody_relay[("relay")]
+  package_aphrody[["aphrody 1.0.0 (19 skills)"]]
+  package_bun[["bun 1.4.5 (22 skills)"]]
+  plugin_clangd_lsp_claude_plugins_official[/"clangd-lsp@claude-plugins-official"/]
+  plugin_claude_md_management_claude_plugins_official[/"claude-md-management@claude-plugins-official"/]
+  plugin_csharp_lsp_claude_plugins_official[/"csharp-lsp@claude-plugins-official"/]
+  plugin_document_skills_anthropic_agent_skills[/"document-skills@anthropic-agent-skills"/]
+  plugin_example_skills_anthropic_agent_skills[/"example-skills@anthropic-agent-skills"/]
+  plugin_gopls_lsp_claude_plugins_official[/"gopls-lsp@claude-plugins-official"/]
+  plugin_pyright_lsp_claude_plugins_official[/"pyright-lsp@claude-plugins-official"/]
+  plugin_rust_analyzer_lsp_claude_plugins_official[/"rust-analyzer-lsp@claude-plugins-official"/]
+  plugin_security_guidance_claude_plugins_official[/"security-guidance@claude-plugins-official"/]
+  plugin_typescript_lsp_claude_plugins_official[/"typescript-lsp@claude-plugins-official"/]
+  script_packages_aphrody_hooks_handlers_auto_background_ts["auto-background.ts"]
+  script_packages_aphrody_hooks_handlers_bridge_mcp_ts["bridge-mcp.ts"]
+  script_packages_aphrody_hooks_handlers_claude_peer_ts["claude-peer.ts"]
+  script_packages_aphrody_hooks_handlers_config_sync_ts["config-sync.ts"]
+  script_packages_aphrody_hooks_handlers_learn_ts["learn.ts"]
+  script_packages_aphrody_hooks_handlers_lib_ts["lib.ts"]
+  script_packages_aphrody_hooks_handlers_mcp_lite_ts["mcp-lite.ts"]
+  script_packages_aphrody_hooks_handlers_memory_mcp_ts["memory-mcp.ts"]
+  script_packages_aphrody_hooks_handlers_memory_ts["memory.ts"]
+  script_packages_aphrody_hooks_handlers_relay_stdio_ts["relay-stdio.ts"]
+  script_packages_aphrody_hooks_handlers_session_bridge_ts["session-bridge.ts"]
+  script_packages_aphrody_hooks_handlers_typecheck_ts["typecheck.ts"]
+  script_packages_aphrody_skills_microsoft_scripts_edge_webplatform_ts["edge-webplatform.ts"]
+  script_packages_aphrody_skills_microsoft_scripts_facts_ts["facts.ts"]
+  script_packages_bun_hooks_common_ts["common.ts"]
+  script_packages_bun_hooks_pre_tool_use_ts["pre-tool-use.ts"]
+  script_packages_bun_hooks_rewrite_ts["rewrite.ts"]
+  script_packages_bun_hooks_session_start_ts["session-start.ts"]
+  script_scripts_bench_ts["bench.ts"]
+  script_scripts_check_ts["check.ts"]
+  script_scripts_cron_ts["cron.ts"]
+  script_scripts_gateway_ts["gateway.ts"]
+  script_scripts_graph_ts["graph.ts"]
+  script_scripts_hygiene_ts["hygiene.ts"]
+  script_scripts_lib_ts["lib.ts"]
+  script_scripts_matrix_ts["matrix.ts"]
+  script_scripts_memory_ts["memory.ts"]
+  script_scripts_merge_brain_ts["merge-brain.ts"]
+  script_scripts_notify_ts["notify.ts"]
+  script_scripts_ops_cloudflare_ci_token_ts["cloudflare-ci-token.ts"]
+  script_scripts_ops_github_ts["github.ts"]
+  script_scripts_setup_ts["setup.ts"]
+  script_scripts_skills_ts["skills.ts"]
+  script_scripts_statusline_ts["statusline.ts"]
+  script_scripts_sync_ts["sync.ts"]
+  script_scripts_title_ts["title.ts"]
+  settings[["settings.json"]]
+  agent_toml -->|declares| cron_graph
+  agent_toml -->|declares| cron_learn_distill
+  agent_toml -->|declares| cron_memory_curator
+  agent_toml -->|declares| cron_memory_index
+  cron_graph -->|runs| script_scripts_graph_ts
+  cron_learn_distill -->|runs| script_packages_aphrody_hooks_handlers_learn_ts
+  cron_memory_index -->|runs| script_scripts_memory_ts
+  hook_aphrody_PostToolUse_Bash_Edit_Write_MultiEdit__learn_ts -->|runs| script_packages_aphrody_hooks_handlers_learn_ts
+  hook_aphrody_PostToolUse_Edit_Write_MultiEdit__typecheck_ts -->|runs| script_packages_aphrody_hooks_handlers_typecheck_ts
+  hook_aphrody_PostToolUse_session_bridge_ts -->|runs| script_packages_aphrody_hooks_handlers_session_bridge_ts
+  hook_aphrody_PostToolUseFailure_learn_ts -->|runs| script_packages_aphrody_hooks_handlers_learn_ts
+  hook_aphrody_PreToolUse_Bash__auto_background_ts -->|runs| script_packages_aphrody_hooks_handlers_auto_background_ts
+  hook_aphrody_SessionEnd_config_sync_ts -->|runs| script_packages_aphrody_hooks_handlers_config_sync_ts
+  hook_aphrody_SessionStart_startup_resume_clear_compact__config_sync_ts -->|runs| script_packages_aphrody_hooks_handlers_config_sync_ts
+  hook_aphrody_SessionStart_startup_resume_clear_compact__learn_ts -->|runs| script_packages_aphrody_hooks_handlers_learn_ts
+  hook_aphrody_SessionStart_startup_resume_clear_compact__session_bridge_ts -->|runs| script_packages_aphrody_hooks_handlers_session_bridge_ts
+  hook_aphrody_UserPromptSubmit_learn_ts -->|runs| script_packages_aphrody_hooks_handlers_learn_ts
+  hook_aphrody_UserPromptSubmit_session_bridge_ts -->|runs| script_packages_aphrody_hooks_handlers_session_bridge_ts
+  hook_bun_PreToolUse_Bash_Grep_Glob__pre_tool_use_ts -->|runs| script_packages_bun_hooks_pre_tool_use_ts
+  hook_bun_SessionStart_startup_resume_clear_compact__session_start_ts -->|runs| script_packages_bun_hooks_session_start_ts
+  mcp_aphrody_claude_bridge -->|runs| script_packages_aphrody_hooks_handlers_bridge_mcp_ts
+  mcp_aphrody_memory -->|runs| script_packages_aphrody_hooks_handlers_memory_mcp_ts
+  mcp_aphrody_relay -->|runs| script_packages_aphrody_hooks_handlers_relay_stdio_ts
+  package_aphrody -->|contains| agent_aphrody_researcher
+  package_aphrody -->|contains| agent_aphrody_worker
+  package_aphrody -->|declares| hook_aphrody_PostToolUse_Bash_Edit_Write_MultiEdit__learn_ts
+  package_aphrody -->|declares| hook_aphrody_PostToolUse_Edit_Write_MultiEdit__typecheck_ts
+  package_aphrody -->|declares| hook_aphrody_PostToolUse_session_bridge_ts
+  package_aphrody -->|declares| hook_aphrody_PostToolUseFailure_learn_ts
+  package_aphrody -->|declares| hook_aphrody_PreToolUse_Bash__auto_background_ts
+  package_aphrody -->|declares| hook_aphrody_SessionEnd_config_sync_ts
+  package_aphrody -->|declares| hook_aphrody_SessionStart_startup_resume_clear_compact__config_sync_ts
+  package_aphrody -->|declares| hook_aphrody_SessionStart_startup_resume_clear_compact__learn_ts
+  package_aphrody -->|declares| hook_aphrody_SessionStart_startup_resume_clear_compact__session_bridge_ts
+  package_aphrody -->|declares| hook_aphrody_UserPromptSubmit_learn_ts
+  package_aphrody -->|declares| hook_aphrody_UserPromptSubmit_session_bridge_ts
+  package_aphrody -->|declares| mcp_aphrody_claude_bridge
+  package_aphrody -->|declares| mcp_aphrody_hostinger_billing
+  package_aphrody -->|declares| mcp_aphrody_hostinger_dns
+  package_aphrody -->|declares| mcp_aphrody_hostinger_domains
+  package_aphrody -->|declares| mcp_aphrody_hostinger_vps
+  package_aphrody -->|declares| mcp_aphrody_memory
+  package_aphrody -->|declares| mcp_aphrody_ovh_cloud
+  package_aphrody -->|declares| mcp_aphrody_ovh_cloud_instance
+  package_aphrody -->|declares| mcp_aphrody_ovh_domain
+  package_aphrody -->|declares| mcp_aphrody_ovh_ip
+  package_aphrody -->|declares| mcp_aphrody_ovh_vps
+  package_aphrody -->|declares| mcp_aphrody_relay
+  package_bun -->|declares| hook_bun_PreToolUse_Bash_Grep_Glob__pre_tool_use_ts
+  package_bun -->|declares| hook_bun_SessionStart_startup_resume_clear_compact__session_start_ts
+  script_packages_aphrody_hooks_handlers_auto_background_ts -.->|imports| script_packages_aphrody_hooks_handlers_lib_ts
+  script_packages_aphrody_hooks_handlers_bridge_mcp_ts -.->|imports| script_packages_aphrody_hooks_handlers_claude_peer_ts
+  script_packages_aphrody_hooks_handlers_bridge_mcp_ts -.->|imports| script_packages_aphrody_hooks_handlers_mcp_lite_ts
+  script_packages_aphrody_hooks_handlers_claude_peer_ts -.->|imports| script_packages_aphrody_hooks_handlers_lib_ts
+  script_packages_aphrody_hooks_handlers_config_sync_ts -.->|imports| script_packages_aphrody_hooks_handlers_claude_peer_ts
+  script_packages_aphrody_hooks_handlers_config_sync_ts -.->|imports| script_packages_aphrody_hooks_handlers_lib_ts
+  script_packages_aphrody_hooks_handlers_learn_ts -.->|imports| script_packages_aphrody_hooks_handlers_lib_ts
+  script_packages_aphrody_hooks_handlers_memory_mcp_ts -.->|imports| script_packages_aphrody_hooks_handlers_mcp_lite_ts
+  script_packages_aphrody_hooks_handlers_memory_mcp_ts -.->|imports| script_packages_aphrody_hooks_handlers_memory_ts
+  script_packages_aphrody_hooks_handlers_memory_ts -.->|imports| script_packages_aphrody_hooks_handlers_lib_ts
+  script_packages_aphrody_hooks_handlers_session_bridge_ts -.->|imports| script_packages_aphrody_hooks_handlers_claude_peer_ts
+  script_packages_aphrody_hooks_handlers_session_bridge_ts -.->|imports| script_packages_aphrody_hooks_handlers_lib_ts
+  script_packages_aphrody_hooks_handlers_typecheck_ts -.->|imports| script_packages_aphrody_hooks_handlers_lib_ts
+  script_packages_bun_hooks_pre_tool_use_ts -.->|imports| script_packages_bun_hooks_common_ts
+  script_packages_bun_hooks_pre_tool_use_ts -.->|imports| script_packages_bun_hooks_rewrite_ts
+  script_packages_bun_hooks_session_start_ts -.->|imports| script_packages_bun_hooks_common_ts
+  script_scripts_bench_ts -.->|imports| script_scripts_lib_ts
+  script_scripts_check_ts -.->|imports| script_scripts_hygiene_ts
+  script_scripts_check_ts -.->|imports| script_scripts_lib_ts
+  script_scripts_cron_ts -.->|imports| script_packages_aphrody_hooks_handlers_claude_peer_ts
+  script_scripts_cron_ts -.->|imports| script_scripts_lib_ts
+  script_scripts_gateway_ts -.->|imports| script_scripts_cron_ts
+  script_scripts_graph_ts -.->|imports| script_scripts_lib_ts
+  script_scripts_matrix_ts -.->|imports| script_scripts_lib_ts
+  script_scripts_memory_ts -.->|imports| script_packages_aphrody_hooks_handlers_memory_ts
+  script_scripts_merge_brain_ts -.->|imports| script_scripts_lib_ts
+  script_scripts_notify_ts -.->|imports| script_packages_aphrody_hooks_handlers_claude_peer_ts
+  script_scripts_setup_ts -.->|imports| script_scripts_lib_ts
+  script_scripts_setup_ts -.->|imports| script_scripts_sync_ts
+  script_scripts_skills_ts -.->|imports| script_scripts_lib_ts
+  script_scripts_sync_ts -.->|imports| script_scripts_lib_ts
+  settings -->|enables| package_aphrody
+  settings -->|enables| package_bun
+  settings -->|enables| plugin_clangd_lsp_claude_plugins_official
+  settings -->|enables| plugin_claude_md_management_claude_plugins_official
+  settings -->|enables| plugin_csharp_lsp_claude_plugins_official
+  settings -->|enables| plugin_document_skills_anthropic_agent_skills
+  settings -->|enables| plugin_example_skills_anthropic_agent_skills
+  settings -->|enables| plugin_gopls_lsp_claude_plugins_official
+  settings -->|enables| plugin_pyright_lsp_claude_plugins_official
+  settings -->|enables| plugin_rust_analyzer_lsp_claude_plugins_official
+  settings -->|enables| plugin_security_guidance_claude_plugins_official
+  settings -->|enables| plugin_typescript_lsp_claude_plugins_official

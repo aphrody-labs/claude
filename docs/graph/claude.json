@@ -1,0 +1,1376 @@
+{
+  "name": "claude",
+  "nodes": [
+    {
+      "id": "agent:aphrody/researcher",
+      "kind": "agent",
+      "label": "researcher",
+      "path": "packages/aphrody/agents/researcher.md"
+    },
+    {
+      "id": "agent:aphrody/worker",
+      "kind": "agent",
+      "label": "worker",
+      "path": "packages/aphrody/agents/worker.md"
+    },
+    {
+      "id": "agent.toml",
+      "kind": "package",
+      "label": "agent.toml",
+      "path": "agent.toml"
+    },
+    {
+      "id": "cron:graph",
+      "kind": "cron",
+      "label": "graph"
+    },
+    {
+      "id": "cron:learn-distill",
+      "kind": "cron",
+      "label": "learn-distill"
+    },
+    {
+      "id": "cron:memory-curator",
+      "kind": "cron",
+      "label": "memory-curator"
+    },
+    {
+      "id": "cron:memory-index",
+      "kind": "cron",
+      "label": "memory-index"
+    },
+    {
+      "id": "hook:aphrody/PostToolUse[Bash|Edit|Write|MultiEdit]/learn.ts",
+      "kind": "hook",
+      "label": "PostToolUse Bash|Edit|Write|MultiEdit"
+    },
+    {
+      "id": "hook:aphrody/PostToolUse[Edit|Write|MultiEdit]/typecheck.ts",
+      "kind": "hook",
+      "label": "PostToolUse Edit|Write|MultiEdit"
+    },
+    {
+      "id": "hook:aphrody/PostToolUse/session-bridge.ts",
+      "kind": "hook",
+      "label": "PostToolUse"
+    },
+    {
+      "id": "hook:aphrody/PostToolUseFailure/learn.ts",
+      "kind": "hook",
+      "label": "PostToolUseFailure"
+    },
+    {
+      "id": "hook:aphrody/PreToolUse[Bash]/auto-background.ts",
+      "kind": "hook",
+      "label": "PreToolUse Bash"
+    },
+    {
+      "id": "hook:aphrody/SessionEnd/config-sync.ts",
+      "kind": "hook",
+      "label": "SessionEnd"
+    },
+    {
+      "id": "hook:aphrody/SessionStart[startup|resume|clear|compact]/config-sync.ts",
+      "kind": "hook",
+      "label": "SessionStart startup|resume|clear|compact"
+    },
+    {
+      "id": "hook:aphrody/SessionStart[startup|resume|clear|compact]/learn.ts",
+      "kind": "hook",
+      "label": "SessionStart startup|resume|clear|compact"
+    },
+    {
+      "id": "hook:aphrody/SessionStart[startup|resume|clear|compact]/session-bridge.ts",
+      "kind": "hook",
+      "label": "SessionStart startup|resume|clear|compact"
+    },
+    {
+      "id": "hook:aphrody/UserPromptSubmit/learn.ts",
+      "kind": "hook",
+      "label": "UserPromptSubmit"
+    },
+    {
+      "id": "hook:aphrody/UserPromptSubmit/session-bridge.ts",
+      "kind": "hook",
+      "label": "UserPromptSubmit"
+    },
+    {
+      "id": "hook:bun/PreToolUse[Bash|Grep|Glob]/pre-tool-use.ts",
+      "kind": "hook",
+      "label": "PreToolUse Bash|Grep|Glob"
+    },
+    {
+      "id": "hook:bun/SessionStart[startup|resume|clear|compact]/session-start.ts",
+      "kind": "hook",
+      "label": "SessionStart startup|resume|clear|compact"
+    },
+    {
+      "id": "mcp:aphrody/claude-bridge",
+      "kind": "mcp",
+      "label": "claude-bridge"
+    },
+    {
+      "id": "mcp:aphrody/hostinger-billing",
+      "kind": "mcp",
+      "label": "hostinger-billing"
+    },
+    {
+      "id": "mcp:aphrody/hostinger-dns",
+      "kind": "mcp",
+      "label": "hostinger-dns"
+    },
+    {
+      "id": "mcp:aphrody/hostinger-domains",
+      "kind": "mcp",
+      "label": "hostinger-domains"
+    },
+    {
+      "id": "mcp:aphrody/hostinger-vps",
+      "kind": "mcp",
+      "label": "hostinger-vps"
+    },
+    {
+      "id": "mcp:aphrody/memory",
+      "kind": "mcp",
+      "label": "memory"
+    },
+    {
+      "id": "mcp:aphrody/ovh-cloud",
+      "kind": "mcp",
+      "label": "ovh-cloud (remote)"
+    },
+    {
+      "id": "mcp:aphrody/ovh-cloud-instance",
+      "kind": "mcp",
+      "label": "ovh-cloud-instance (remote)"
+    },
+    {
+      "id": "mcp:aphrody/ovh-domain",
+      "kind": "mcp",
+      "label": "ovh-domain (remote)"
+    },
+    {
+      "id": "mcp:aphrody/ovh-ip",
+      "kind": "mcp",
+      "label": "ovh-ip (remote)"
+    },
+    {
+      "id": "mcp:aphrody/ovh-vps",
+      "kind": "mcp",
+      "label": "ovh-vps (remote)"
+    },
+    {
+      "id": "mcp:aphrody/relay",
+      "kind": "mcp",
+      "label": "relay"
+    },
+    {
+      "id": "package:aphrody",
+      "kind": "package",
+      "label": "aphrody 1.0.0",
+      "path": "packages/aphrody"
+    },
+    {
+      "id": "package:bun",
+      "kind": "package",
+      "label": "bun 1.4.5",
+      "path": "packages/bun"
+    },
+    {
+      "id": "plugin:clangd-lsp@claude-plugins-official",
+      "kind": "plugin",
+      "label": "clangd-lsp@claude-plugins-official"
+    },
+    {
+      "id": "plugin:claude-md-management@claude-plugins-official",
+      "kind": "plugin",
+      "label": "claude-md-management@claude-plugins-official"
+    },
+    {
+      "id": "plugin:csharp-lsp@claude-plugins-official",
+      "kind": "plugin",
+      "label": "csharp-lsp@claude-plugins-official"
+    },
+    {
+      "id": "plugin:document-skills@anthropic-agent-skills",
+      "kind": "plugin",
+      "label": "document-skills@anthropic-agent-skills"
+    },
+    {
+      "id": "plugin:example-skills@anthropic-agent-skills",
+      "kind": "plugin",
+      "label": "example-skills@anthropic-agent-skills"
+    },
+    {
+      "id": "plugin:gopls-lsp@claude-plugins-official",
+      "kind": "plugin",
+      "label": "gopls-lsp@claude-plugins-official"
+    },
+    {
+      "id": "plugin:pyright-lsp@claude-plugins-official",
+      "kind": "plugin",
+      "label": "pyright-lsp@claude-plugins-official"
+    },
+    {
+      "id": "plugin:rust-analyzer-lsp@claude-plugins-official",
+      "kind": "plugin",
+      "label": "rust-analyzer-lsp@claude-plugins-official"
+    },
+    {
+      "id": "plugin:security-guidance@claude-plugins-official",
+      "kind": "plugin",
+      "label": "security-guidance@claude-plugins-official"
+    },
+    {
+      "id": "plugin:typescript-lsp@claude-plugins-official",
+      "kind": "plugin",
+      "label": "typescript-lsp@claude-plugins-official"
+    },
+    {
+      "id": "script:packages/aphrody/hooks-handlers/auto-background.ts",
+      "kind": "script",
+      "label": "auto-background.ts",
+      "path": "packages/aphrody/hooks-handlers/auto-background.ts"
+    },
+    {
+      "id": "script:packages/aphrody/hooks-handlers/bridge-mcp.ts",
+      "kind": "script",
+      "label": "bridge-mcp.ts",
+      "path": "packages/aphrody/hooks-handlers/bridge-mcp.ts"
+    },
+    {
+      "id": "script:packages/aphrody/hooks-handlers/claude-peer.ts",
+      "kind": "script",
+      "label": "claude-peer.ts",
+      "path": "packages/aphrody/hooks-handlers/claude-peer.ts"
+    },
+    {
+      "id": "script:packages/aphrody/hooks-handlers/config-sync.ts",
+      "kind": "script",
+      "label": "config-sync.ts",
+      "path": "packages/aphrody/hooks-handlers/config-sync.ts"
+    },
+    {
+      "id": "script:packages/aphrody/hooks-handlers/learn.ts",
+      "kind": "script",
+      "label": "learn.ts",
+      "path": "packages/aphrody/hooks-handlers/learn.ts"
+    },
+    {
+      "id": "script:packages/aphrody/hooks-handlers/lib.ts",
+      "kind": "script",
+      "label": "lib.ts",
+      "path": "packages/aphrody/hooks-handlers/lib.ts"
+    },
+    {
+      "id": "script:packages/aphrody/hooks-handlers/mcp-lite.ts",
+      "kind": "script",
+      "label": "mcp-lite.ts",
+      "path": "packages/aphrody/hooks-handlers/mcp-lite.ts"
+    },
+    {
+      "id": "script:packages/aphrody/hooks-handlers/memory-mcp.ts",
+      "kind": "script",
+      "label": "memory-mcp.ts",
+      "path": "packages/aphrody/hooks-handlers/memory-mcp.ts"
+    },
+    {
+      "id": "script:packages/aphrody/hooks-handlers/memory.ts",
+      "kind": "script",
+      "label": "memory.ts",
+      "path": "packages/aphrody/hooks-handlers/memory.ts"
+    },
+    {
+      "id": "script:packages/aphrody/hooks-handlers/relay-stdio.ts",
+      "kind": "script",
+      "label": "relay-stdio.ts",
+      "path": "packages/aphrody/hooks-handlers/relay-stdio.ts"
+    },
+    {
+      "id": "script:packages/aphrody/hooks-handlers/session-bridge.ts",
+      "kind": "script",
+      "label": "session-bridge.ts",
+      "path": "packages/aphrody/hooks-handlers/session-bridge.ts"
+    },
+    {
+      "id": "script:packages/aphrody/hooks-handlers/typecheck.ts",
+      "kind": "script",
+      "label": "typecheck.ts",
+      "path": "packages/aphrody/hooks-handlers/typecheck.ts"
+    },
+    {
+      "id": "script:packages/aphrody/skills/microsoft/scripts/edge-webplatform.ts",
+      "kind": "script",
+      "label": "edge-webplatform.ts",
+      "path": "packages/aphrody/skills/microsoft/scripts/edge-webplatform.ts"
+    },
+    {
+      "id": "script:packages/aphrody/skills/microsoft/scripts/facts.ts",
+      "kind": "script",
+      "label": "facts.ts",
+      "path": "packages/aphrody/skills/microsoft/scripts/facts.ts"
+    },
+    {
+      "id": "script:packages/bun/hooks/common.ts",
+      "kind": "script",
+      "label": "common.ts",
+      "path": "packages/bun/hooks/common.ts"
+    },
+    {
+      "id": "script:packages/bun/hooks/pre-tool-use.ts",
+      "kind": "script",
+      "label": "pre-tool-use.ts",
+      "path": "packages/bun/hooks/pre-tool-use.ts"
+    },
+    {
+      "id": "script:packages/bun/hooks/rewrite.ts",
+      "kind": "script",
+      "label": "rewrite.ts",
+      "path": "packages/bun/hooks/rewrite.ts"
+    },
+    {
+      "id": "script:packages/bun/hooks/session-start.ts",
+      "kind": "script",
+      "label": "session-start.ts",
+      "path": "packages/bun/hooks/session-start.ts"
+    },
+    {
+      "id": "script:scripts/bench.ts",
+      "kind": "script",
+      "label": "bench.ts",
+      "path": "scripts/bench.ts"
+    },
+    {
+      "id": "script:scripts/check.ts",
+      "kind": "script",
+      "label": "check.ts",
+      "path": "scripts/check.ts"
+    },
+    {
+      "id": "script:scripts/cron.ts",
+      "kind": "script",
+      "label": "cron.ts",
+      "path": "scripts/cron.ts"
+    },
+    {
+      "id": "script:scripts/gateway.ts",
+      "kind": "script",
+      "label": "gateway.ts",
+      "path": "scripts/gateway.ts"
+    },
+    {
+      "id": "script:scripts/graph.ts",
+      "kind": "script",
+      "label": "graph.ts",
+      "path": "scripts/graph.ts"
+    },
+    {
+      "id": "script:scripts/hygiene.ts",
+      "kind": "script",
+      "label": "hygiene.ts",
+      "path": "scripts/hygiene.ts"
+    },
+    {
+      "id": "script:scripts/lib.ts",
+      "kind": "script",
+      "label": "lib.ts",
+      "path": "scripts/lib.ts"
+    },
+    {
+      "id": "script:scripts/matrix.ts",
+      "kind": "script",
+      "label": "matrix.ts",
+      "path": "scripts/matrix.ts"
+    },
+    {
+      "id": "script:scripts/memory.ts",
+      "kind": "script",
+      "label": "memory.ts",
+      "path": "scripts/memory.ts"
+    },
+    {
+      "id": "script:scripts/merge-brain.ts",
+      "kind": "script",
+      "label": "merge-brain.ts",
+      "path": "scripts/merge-brain.ts"
+    },
+    {
+      "id": "script:scripts/notify.ts",
+      "kind": "script",
+      "label": "notify.ts",
+      "path": "scripts/notify.ts"
+    },
+    {
+      "id": "script:scripts/ops/cloudflare-ci-token.ts",
+      "kind": "script",
+      "label": "cloudflare-ci-token.ts",
+      "path": "scripts/ops/cloudflare-ci-token.ts"
+    },
+    {
+      "id": "script:scripts/ops/github.ts",
+      "kind": "script",
+      "label": "github.ts",
+      "path": "scripts/ops/github.ts"
+    },
+    {
+      "id": "script:scripts/setup.ts",
+      "kind": "script",
+      "label": "setup.ts",
+      "path": "scripts/setup.ts"
+    },
+    {
+      "id": "script:scripts/skills.ts",
+      "kind": "script",
+      "label": "skills.ts",
+      "path": "scripts/skills.ts"
+    },
+    {
+      "id": "script:scripts/statusline.ts",
+      "kind": "script",
+      "label": "statusline.ts",
+      "path": "scripts/statusline.ts"
+    },
+    {
+      "id": "script:scripts/sync.ts",
+      "kind": "script",
+      "label": "sync.ts",
+      "path": "scripts/sync.ts"
+    },
+    {
+      "id": "script:scripts/title.ts",
+      "kind": "script",
+      "label": "title.ts",
+      "path": "scripts/title.ts"
+    },
+    {
+      "id": "settings",
+      "kind": "package",
+      "label": "settings.json",
+      "path": "settings.json"
+    },
+    {
+      "id": "skill:aphrody/agent-browser",
+      "kind": "skill",
+      "label": "agent-browser",
+      "path": "packages/aphrody/skills/agent-browser/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/ai-os-orchestrator",
+      "kind": "skill",
+      "label": "ai-os-orchestrator",
+      "path": "packages/aphrody/skills/ai-os-orchestrator/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/chrome-devtools",
+      "kind": "skill",
+      "label": "chrome-devtools",
+      "path": "packages/aphrody/skills/chrome-devtools/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/claude-live-bridge",
+      "kind": "skill",
+      "label": "claude-live-bridge",
+      "path": "packages/aphrody/skills/claude-live-bridge/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/cloudflare-platform",
+      "kind": "skill",
+      "label": "cloudflare-platform",
+      "path": "packages/aphrody/skills/cloudflare-platform/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/containers-alpine-arch-k8s",
+      "kind": "skill",
+      "label": "containers-alpine-arch-k8s",
+      "path": "packages/aphrody/skills/containers-alpine-arch-k8s/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/context7-deep-research",
+      "kind": "skill",
+      "label": "context7-deep-research",
+      "path": "packages/aphrody/skills/context7-deep-research/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/env-auth",
+      "kind": "skill",
+      "label": "env-auth",
+      "path": "packages/aphrody/skills/env-auth/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/fleet",
+      "kind": "skill",
+      "label": "fleet",
+      "path": "packages/aphrody/skills/fleet/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/gh-fork",
+      "kind": "skill",
+      "label": "gh-fork",
+      "path": "packages/aphrody/skills/gh-fork/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/github-workflow",
+      "kind": "skill",
+      "label": "github-workflow",
+      "path": "packages/aphrody/skills/github-workflow/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/hostinger",
+      "kind": "skill",
+      "label": "hostinger",
+      "path": "packages/aphrody/skills/hostinger/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/humanizer",
+      "kind": "skill",
+      "label": "humanizer",
+      "path": "packages/aphrody/skills/humanizer/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/learn",
+      "kind": "skill",
+      "label": "learn",
+      "path": "packages/aphrody/skills/learn/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/material-3",
+      "kind": "skill",
+      "label": "material-3",
+      "path": "packages/aphrody/skills/material-3/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/microsoft",
+      "kind": "skill",
+      "label": "microsoft",
+      "path": "packages/aphrody/skills/microsoft/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/niubash",
+      "kind": "skill",
+      "label": "niubash",
+      "path": "packages/aphrody/skills/niubash/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/rust-cargo",
+      "kind": "skill",
+      "label": "rust-cargo",
+      "path": "packages/aphrody/skills/rust-cargo/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/web-quality",
+      "kind": "skill",
+      "label": "web-quality",
+      "path": "packages/aphrody/skills/web-quality/SKILL.md"
+    },
+    {
+      "id": "skill:bun/bun-aphrody",
+      "kind": "skill",
+      "label": "bun-aphrody",
+      "path": "packages/bun/skills/bun-aphrody/SKILL.md"
+    },
+    {
+      "id": "skill:bun/bun-apis",
+      "kind": "skill",
+      "label": "bun-apis",
+      "path": "packages/bun/skills/bun-apis/SKILL.md"
+    },
+    {
+      "id": "skill:bun/bun-build",
+      "kind": "skill",
+      "label": "bun-build",
+      "path": "packages/bun/skills/bun-build/SKILL.md"
+    },
+    {
+      "id": "skill:bun/bun-crates",
+      "kind": "skill",
+      "label": "bun-crates",
+      "path": "packages/bun/skills/bun-crates/SKILL.md"
+    },
+    {
+      "id": "skill:bun/bun-deps",
+      "kind": "skill",
+      "label": "bun-deps",
+      "path": "packages/bun/skills/bun-deps/SKILL.md"
+    },
+    {
+      "id": "skill:bun/bun-docs",
+      "kind": "skill",
+      "label": "bun-docs",
+      "path": "packages/bun/skills/bun-docs/SKILL.md"
+    },
+    {
+      "id": "skill:bun/bun-graph",
+      "kind": "skill",
+      "label": "bun-graph",
+      "path": "packages/bun/skills/bun-graph/SKILL.md"
+    },
+    {
+      "id": "skill:bun/bun-native",
+      "kind": "skill",
+      "label": "bun-native",
+      "path": "packages/bun/skills/bun-native/SKILL.md"
+    },
+    {
+      "id": "skill:bun/bun-nginx",
+      "kind": "skill",
+      "label": "bun-nginx",
+      "path": "packages/bun/skills/bun-nginx/SKILL.md"
+    },
+    {
+      "id": "skill:bun/bun-runtime",
+      "kind": "skill",
+      "label": "bun-runtime",
+      "path": "packages/bun/skills/bun-runtime/SKILL.md"
+    },
+    {
+      "id": "skill:bun/bun-rust-first",
+      "kind": "skill",
+      "label": "bun-rust-first",
+      "path": "packages/bun/skills/bun-rust-first/SKILL.md"
+    },
+    {
+      "id": "skill:bun/bun-tests",
+      "kind": "skill",
+      "label": "bun-tests",
+      "path": "packages/bun/skills/bun-tests/SKILL.md"
+    },
+    {
+      "id": "skill:bun/bun-video",
+      "kind": "skill",
+      "label": "bun-video",
+      "path": "packages/bun/skills/bun-video/SKILL.md"
+    },
+    {
+      "id": "skill:bun/bun-vpn",
+      "kind": "skill",
+      "label": "bun-vpn",
+      "path": "packages/bun/skills/bun-vpn/SKILL.md"
+    },
+    {
+      "id": "skill:bun/bun-yolo",
+      "kind": "skill",
+      "label": "bun-yolo",
+      "path": "packages/bun/skills/bun-yolo/SKILL.md"
+    },
+    {
+      "id": "skill:bun/cpp-bun",
+      "kind": "skill",
+      "label": "cpp-bun",
+      "path": "packages/bun/skills/cpp-bun/SKILL.md"
+    },
+    {
+      "id": "skill:bun/linux-kernel",
+      "kind": "skill",
+      "label": "linux-kernel",
+      "path": "packages/bun/skills/linux-kernel/SKILL.md"
+    },
+    {
+      "id": "skill:bun/n2b",
+      "kind": "skill",
+      "label": "n2b",
+      "path": "packages/bun/skills/n2b/SKILL.md"
+    },
+    {
+      "id": "skill:bun/source-command-dedupe",
+      "kind": "skill",
+      "label": "source-command-dedupe",
+      "path": "packages/bun/skills/source-command-dedupe/SKILL.md"
+    },
+    {
+      "id": "skill:bun/webkit",
+      "kind": "skill",
+      "label": "webkit",
+      "path": "packages/bun/skills/webkit/SKILL.md"
+    },
+    {
+      "id": "skill:bun/win32",
+      "kind": "skill",
+      "label": "win32",
+      "path": "packages/bun/skills/win32/SKILL.md"
+    },
+    {
+      "id": "skill:bun/work",
+      "kind": "skill",
+      "label": "work",
+      "path": "packages/bun/skills/work/SKILL.md"
+    },
+    {
+      "id": "skill:repo/agent-ops",
+      "kind": "skill",
+      "label": "agent-ops",
+      "path": "skills/agent-ops/SKILL.md"
+    }
+  ],
+  "edges": [
+    {
+      "from": "agent.toml",
+      "to": "cron:graph",
+      "kind": "declares"
+    },
+    {
+      "from": "agent.toml",
+      "to": "cron:learn-distill",
+      "kind": "declares"
+    },
+    {
+      "from": "agent.toml",
+      "to": "cron:memory-curator",
+      "kind": "declares"
+    },
+    {
+      "from": "agent.toml",
+      "to": "cron:memory-index",
+      "kind": "declares"
+    },
+    {
+      "from": "cron:graph",
+      "to": "script:scripts/graph.ts",
+      "kind": "runs"
+    },
+    {
+      "from": "cron:learn-distill",
+      "to": "script:packages/aphrody/hooks-handlers/learn.ts",
+      "kind": "runs"
+    },
+    {
+      "from": "cron:memory-index",
+      "to": "script:scripts/memory.ts",
+      "kind": "runs"
+    },
+    {
+      "from": "hook:aphrody/PostToolUse[Bash|Edit|Write|MultiEdit]/learn.ts",
+      "to": "script:packages/aphrody/hooks-handlers/learn.ts",
+      "kind": "runs"
+    },
+    {
+      "from": "hook:aphrody/PostToolUse[Edit|Write|MultiEdit]/typecheck.ts",
+      "to": "script:packages/aphrody/hooks-handlers/typecheck.ts",
+      "kind": "runs"
+    },
+    {
+      "from": "hook:aphrody/PostToolUse/session-bridge.ts",
+      "to": "script:packages/aphrody/hooks-handlers/session-bridge.ts",
+      "kind": "runs"
+    },
+    {
+      "from": "hook:aphrody/PostToolUseFailure/learn.ts",
+      "to": "script:packages/aphrody/hooks-handlers/learn.ts",
+      "kind": "runs"
+    },
+    {
+      "from": "hook:aphrody/PreToolUse[Bash]/auto-background.ts",
+      "to": "script:packages/aphrody/hooks-handlers/auto-background.ts",
+      "kind": "runs"
+    },
+    {
+      "from": "hook:aphrody/SessionEnd/config-sync.ts",
+      "to": "script:packages/aphrody/hooks-handlers/config-sync.ts",
+      "kind": "runs"
+    },
+    {
+      "from": "hook:aphrody/SessionStart[startup|resume|clear|compact]/config-sync.ts",
+      "to": "script:packages/aphrody/hooks-handlers/config-sync.ts",
+      "kind": "runs"
+    },
+    {
+      "from": "hook:aphrody/SessionStart[startup|resume|clear|compact]/learn.ts",
+      "to": "script:packages/aphrody/hooks-handlers/learn.ts",
+      "kind": "runs"
+    },
+    {
+      "from": "hook:aphrody/SessionStart[startup|resume|clear|compact]/session-bridge.ts",
+      "to": "script:packages/aphrody/hooks-handlers/session-bridge.ts",
+      "kind": "runs"
+    },
+    {
+      "from": "hook:aphrody/UserPromptSubmit/learn.ts",
+      "to": "script:packages/aphrody/hooks-handlers/learn.ts",
+      "kind": "runs"
+    },
+    {
+      "from": "hook:aphrody/UserPromptSubmit/session-bridge.ts",
+      "to": "script:packages/aphrody/hooks-handlers/session-bridge.ts",
+      "kind": "runs"
+    },
+    {
+      "from": "hook:bun/PreToolUse[Bash|Grep|Glob]/pre-tool-use.ts",
+      "to": "script:packages/bun/hooks/pre-tool-use.ts",
+      "kind": "runs"
+    },
+    {
+      "from": "hook:bun/SessionStart[startup|resume|clear|compact]/session-start.ts",
+      "to": "script:packages/bun/hooks/session-start.ts",
+      "kind": "runs"
+    },
+    {
+      "from": "mcp:aphrody/claude-bridge",
+      "to": "script:packages/aphrody/hooks-handlers/bridge-mcp.ts",
+      "kind": "runs"
+    },
+    {
+      "from": "mcp:aphrody/memory",
+      "to": "script:packages/aphrody/hooks-handlers/memory-mcp.ts",
+      "kind": "runs"
+    },
+    {
+      "from": "mcp:aphrody/relay",
+      "to": "script:packages/aphrody/hooks-handlers/relay-stdio.ts",
+      "kind": "runs"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "agent:aphrody/researcher",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "agent:aphrody/worker",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "hook:aphrody/PostToolUse[Bash|Edit|Write|MultiEdit]/learn.ts",
+      "kind": "declares"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "hook:aphrody/PostToolUse[Edit|Write|MultiEdit]/typecheck.ts",
+      "kind": "declares"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "hook:aphrody/PostToolUse/session-bridge.ts",
+      "kind": "declares"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "hook:aphrody/PostToolUseFailure/learn.ts",
+      "kind": "declares"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "hook:aphrody/PreToolUse[Bash]/auto-background.ts",
+      "kind": "declares"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "hook:aphrody/SessionEnd/config-sync.ts",
+      "kind": "declares"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "hook:aphrody/SessionStart[startup|resume|clear|compact]/config-sync.ts",
+      "kind": "declares"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "hook:aphrody/SessionStart[startup|resume|clear|compact]/learn.ts",
+      "kind": "declares"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "hook:aphrody/SessionStart[startup|resume|clear|compact]/session-bridge.ts",
+      "kind": "declares"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "hook:aphrody/UserPromptSubmit/learn.ts",
+      "kind": "declares"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "hook:aphrody/UserPromptSubmit/session-bridge.ts",
+      "kind": "declares"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "mcp:aphrody/claude-bridge",
+      "kind": "declares"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "mcp:aphrody/hostinger-billing",
+      "kind": "declares"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "mcp:aphrody/hostinger-dns",
+      "kind": "declares"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "mcp:aphrody/hostinger-domains",
+      "kind": "declares"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "mcp:aphrody/hostinger-vps",
+      "kind": "declares"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "mcp:aphrody/memory",
+      "kind": "declares"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "mcp:aphrody/ovh-cloud",
+      "kind": "declares"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "mcp:aphrody/ovh-cloud-instance",
+      "kind": "declares"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "mcp:aphrody/ovh-domain",
+      "kind": "declares"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "mcp:aphrody/ovh-ip",
+      "kind": "declares"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "mcp:aphrody/ovh-vps",
+      "kind": "declares"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "mcp:aphrody/relay",
+      "kind": "declares"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/agent-browser",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/ai-os-orchestrator",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/chrome-devtools",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/claude-live-bridge",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/cloudflare-platform",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/containers-alpine-arch-k8s",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/context7-deep-research",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/env-auth",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/fleet",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/gh-fork",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/github-workflow",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/hostinger",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/humanizer",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/learn",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/material-3",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/microsoft",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/niubash",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/rust-cargo",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/web-quality",
+      "kind": "contains"
+    },
+    {
+      "from": "package:bun",
+      "to": "hook:bun/PreToolUse[Bash|Grep|Glob]/pre-tool-use.ts",
+      "kind": "declares"
+    },
+    {
+      "from": "package:bun",
+      "to": "hook:bun/SessionStart[startup|resume|clear|compact]/session-start.ts",
+      "kind": "declares"
+    },
+    {
+      "from": "package:bun",
+      "to": "skill:bun/bun-aphrody",
+      "kind": "contains"
+    },
+    {
+      "from": "package:bun",
+      "to": "skill:bun/bun-apis",
+      "kind": "contains"
+    },
+    {
+      "from": "package:bun",
+      "to": "skill:bun/bun-build",
+      "kind": "contains"
+    },
+    {
+      "from": "package:bun",
+      "to": "skill:bun/bun-crates",
+      "kind": "contains"
+    },
+    {
+      "from": "package:bun",
+      "to": "skill:bun/bun-deps",
+      "kind": "contains"
+    },
+    {
+      "from": "package:bun",
+      "to": "skill:bun/bun-docs",
+      "kind": "contains"
+    },
+    {
+      "from": "package:bun",
+      "to": "skill:bun/bun-graph",
+      "kind": "contains"
+    },
+    {
+      "from": "package:bun",
+      "to": "skill:bun/bun-native",
+      "kind": "contains"
+    },
+    {
+      "from": "package:bun",
+      "to": "skill:bun/bun-nginx",
+      "kind": "contains"
+    },
+    {
+      "from": "package:bun",
+      "to": "skill:bun/bun-runtime",
+      "kind": "contains"
+    },
+    {
+      "from": "package:bun",
+      "to": "skill:bun/bun-rust-first",
+      "kind": "contains"
+    },
+    {
+      "from": "package:bun",
+      "to": "skill:bun/bun-tests",
+      "kind": "contains"
+    },
+    {
+      "from": "package:bun",
+      "to": "skill:bun/bun-video",
+      "kind": "contains"
+    },
+    {
+      "from": "package:bun",
+      "to": "skill:bun/bun-vpn",
+      "kind": "contains"
+    },
+    {
+      "from": "package:bun",
+      "to": "skill:bun/bun-yolo",
+      "kind": "contains"
+    },
+    {
+      "from": "package:bun",
+      "to": "skill:bun/cpp-bun",
+      "kind": "contains"
+    },
+    {
+      "from": "package:bun",
+      "to": "skill:bun/linux-kernel",
+      "kind": "contains"
+    },
+    {
+      "from": "package:bun",
+      "to": "skill:bun/n2b",
+      "kind": "contains"
+    },
+    {
+      "from": "package:bun",
+      "to": "skill:bun/source-command-dedupe",
+      "kind": "contains"
+    },
+    {
+      "from": "package:bun",
+      "to": "skill:bun/webkit",
+      "kind": "contains"
+    },
+    {
+      "from": "package:bun",
+      "to": "skill:bun/win32",
+      "kind": "contains"
+    },
+    {
+      "from": "package:bun",
+      "to": "skill:bun/work",
+      "kind": "contains"
+    },
+    {
+      "from": "script:packages/aphrody/hooks-handlers/auto-background.ts",
+      "to": "script:packages/aphrody/hooks-handlers/lib.ts",
+      "kind": "imports"
+    },
+    {
+      "from": "script:packages/aphrody/hooks-handlers/bridge-mcp.ts",
+      "to": "script:packages/aphrody/hooks-handlers/claude-peer.ts",
+      "kind": "imports"
+    },
+    {
+      "from": "script:packages/aphrody/hooks-handlers/bridge-mcp.ts",
+      "to": "script:packages/aphrody/hooks-handlers/mcp-lite.ts",
+      "kind": "imports"
+    },
+    {
+      "from": "script:packages/aphrody/hooks-handlers/claude-peer.ts",
+      "to": "script:packages/aphrody/hooks-handlers/lib.ts",
+      "kind": "imports"
+    },
+    {
+      "from": "script:packages/aphrody/hooks-handlers/config-sync.ts",
+      "to": "script:packages/aphrody/hooks-handlers/claude-peer.ts",
+      "kind": "imports"
+    },
+    {
+      "from": "script:packages/aphrody/hooks-handlers/config-sync.ts",
+      "to": "script:packages/aphrody/hooks-handlers/lib.ts",
+      "kind": "imports"
+    },
+    {
+      "from": "script:packages/aphrody/hooks-handlers/learn.ts",
+      "to": "script:packages/aphrody/hooks-handlers/lib.ts",
+      "kind": "imports"
+    },
+    {
+      "from": "script:packages/aphrody/hooks-handlers/memory-mcp.ts",
+      "to": "script:packages/aphrody/hooks-handlers/mcp-lite.ts",
+      "kind": "imports"
+    },
+    {
+      "from": "script:packages/aphrody/hooks-handlers/memory-mcp.ts",
+      "to": "script:packages/aphrody/hooks-handlers/memory.ts",
+      "kind": "imports"
+    },
+    {
+      "from": "script:packages/aphrody/hooks-handlers/memory.ts",
+      "to": "script:packages/aphrody/hooks-handlers/lib.ts",
+      "kind": "imports"
+    },
+    {
+      "from": "script:packages/aphrody/hooks-handlers/session-bridge.ts",
+      "to": "script:packages/aphrody/hooks-handlers/claude-peer.ts",
+      "kind": "imports"
+    },
+    {
+      "from": "script:packages/aphrody/hooks-handlers/session-bridge.ts",
+      "to": "script:packages/aphrody/hooks-handlers/lib.ts",
+      "kind": "imports"
+    },
+    {
+      "from": "script:packages/aphrody/hooks-handlers/typecheck.ts",
+      "to": "script:packages/aphrody/hooks-handlers/lib.ts",
+      "kind": "imports"
+    },
+    {
+      "from": "script:packages/bun/hooks/pre-tool-use.ts",
+      "to": "script:packages/bun/hooks/common.ts",
+      "kind": "imports"
+    },
+    {
+      "from": "script:packages/bun/hooks/pre-tool-use.ts",
+      "to": "script:packages/bun/hooks/rewrite.ts",
+      "kind": "imports"
+    },
+    {
+      "from": "script:packages/bun/hooks/session-start.ts",
+      "to": "script:packages/bun/hooks/common.ts",
+      "kind": "imports"
+    },
+    {
+      "from": "script:scripts/bench.ts",
+      "to": "script:scripts/lib.ts",
+      "kind": "imports"
+    },
+    {
+      "from": "script:scripts/check.ts",
+      "to": "script:scripts/hygiene.ts",
+      "kind": "imports"
+    },
+    {
+      "from": "script:scripts/check.ts",
+      "to": "script:scripts/lib.ts",
+      "kind": "imports"
+    },
+    {
+      "from": "script:scripts/cron.ts",
+      "to": "script:packages/aphrody/hooks-handlers/claude-peer.ts",
+      "kind": "imports"
+    },
+    {
+      "from": "script:scripts/cron.ts",
+      "to": "script:scripts/lib.ts",
+      "kind": "imports"
+    },
+    {
+      "from": "script:scripts/gateway.ts",
+      "to": "script:scripts/cron.ts",
+      "kind": "imports"
+    },
+    {
+      "from": "script:scripts/graph.ts",
+      "to": "script:scripts/lib.ts",
+      "kind": "imports"
+    },
+    {
+      "from": "script:scripts/matrix.ts",
+      "to": "script:scripts/lib.ts",
+      "kind": "imports"
+    },
+    {
+      "from": "script:scripts/memory.ts",
+      "to": "script:packages/aphrody/hooks-handlers/memory.ts",
+      "kind": "imports"
+    },
+    {
+      "from": "script:scripts/merge-brain.ts",
+      "to": "script:scripts/lib.ts",
+      "kind": "imports"
+    },
+    {
+      "from": "script:scripts/notify.ts",
+      "to": "script:packages/aphrody/hooks-handlers/claude-peer.ts",
+      "kind": "imports"
+    },
+    {
+      "from": "script:scripts/setup.ts",
+      "to": "script:scripts/lib.ts",
+      "kind": "imports"
+    },
+    {
+      "from": "script:scripts/setup.ts",
+      "to": "script:scripts/sync.ts",
+      "kind": "imports"
+    },
+    {
+      "from": "script:scripts/skills.ts",
+      "to": "script:scripts/lib.ts",
+      "kind": "imports"
+    },
+    {
+      "from": "script:scripts/sync.ts",
+      "to": "script:scripts/lib.ts",
+      "kind": "imports"
+    },
+    {
+      "from": "settings",
+      "to": "package:aphrody",
+      "kind": "enables"
+    },
+    {
+      "from": "settings",
+      "to": "package:bun",
+      "kind": "enables"
+    },
+    {
+      "from": "settings",
+      "to": "plugin:clangd-lsp@claude-plugins-official",
+      "kind": "enables"
+    },
+    {
+      "from": "settings",
+      "to": "plugin:claude-md-management@claude-plugins-official",
+      "kind": "enables"
+    },
+    {
+      "from": "settings",
+      "to": "plugin:csharp-lsp@claude-plugins-official",
+      "kind": "enables"
+    },
+    {
+      "from": "settings",
+      "to": "plugin:document-skills@anthropic-agent-skills",
+      "kind": "enables"
+    },
+    {
+      "from": "settings",
+      "to": "plugin:example-skills@anthropic-agent-skills",
+      "kind": "enables"
+    },
+    {
+      "from": "settings",
+      "to": "plugin:gopls-lsp@claude-plugins-official",
+      "kind": "enables"
+    },
+    {
+      "from": "settings",
+      "to": "plugin:pyright-lsp@claude-plugins-official",
+      "kind": "enables"
+    },
+    {
+      "from": "settings",
+      "to": "plugin:rust-analyzer-lsp@claude-plugins-official",
+      "kind": "enables"
+    },
+    {
+      "from": "settings",
+      "to": "plugin:security-guidance@claude-plugins-official",
+      "kind": "enables"
+    },
+    {
+      "from": "settings",
+      "to": "plugin:typescript-lsp@claude-plugins-official",
+      "kind": "enables"
+    }
+  ]
+}

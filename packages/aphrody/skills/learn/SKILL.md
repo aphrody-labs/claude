@@ -1,6 +1,6 @@
 ---
 name: learn
-description: Continuous recursive self-learning across Claude, Antigravity, and Gemini: inspect captured journal entries, distill non-duplicate rules into project memory, and keep SQLite/Markdown memory synchronized.
+description: "Continuous recursive self-learning across Claude, Antigravity, and Gemini: inspect captured journal entries, distill non-duplicate rules into project memory, and keep SQLite/Markdown memory synchronized."
 ---
 
 # Continuous Self-Learning Loop
@@ -16,6 +16,7 @@ Use this skill to inspect pending failures/recoveries/corrections captured by ho
 
 ## Commands
 
+- Search memory and past sessions first: `bun ~/.claude/scripts/memory.ts search <words>` (or the `memory_search` MCP tool).
 - Inspect pending status: `bun ~/.claude/packages/aphrody/hooks-handlers/learn.ts status`
 - Distill unreviewed journal entries into inbox digest: `bun ~/.claude/packages/aphrody/hooks-handlers/learn.ts distill`
 - Sync Markdown memories to SQLite and clean stale clutter: `bun ~/.claude/scripts/merge-brain.ts`
@@ -24,4 +25,5 @@ Use this skill to inspect pending failures/recoveries/corrections captured by ho
 
 1. One durable fact per focused topic file (no bloated catch-all ledgers).
 2. Check existing `MEMORY.md` entries first: merge into an existing topic file instead of creating duplicates or contradictions.
-3. Delete or update obsolete entries whenever codebase/runtime facts change, then rebuild `MEMORY.md` and run `bun ~/.claude/scripts/merge-brain.ts`.
+3. After merging a digest into memory, delete the digest from `~/.claude/learning/inbox/` (session start announces pending digests until the inbox is empty).
+4. Delete or update obsolete entries whenever codebase/runtime facts change, then rebuild `MEMORY.md` and run `bun ~/.claude/scripts/merge-brain.ts`.

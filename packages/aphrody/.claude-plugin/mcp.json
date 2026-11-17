@@ -2,14 +2,18 @@
   "mcpServers": {
     "relay": {
       "command": "bun",
-      "args": ["${CLAUDE_PLUGIN_ROOT}/hooks-handlers/relay-stdio.ts"],
+      "args": [
+        "${CLAUDE_PLUGIN_ROOT}/hooks-handlers/relay-stdio.ts"
+      ],
       "env": {
         "RELAY_HUB": "0"
       }
     },
     "claude-bridge": {
       "command": "bun",
-      "args": ["${CLAUDE_PLUGIN_ROOT}/hooks-handlers/bridge-mcp.ts"]
+      "args": [
+        "${CLAUDE_PLUGIN_ROOT}/hooks-handlers/bridge-mcp.ts"
+      ]
     },
     "ovh-domain": {
       "type": "http",
@@ -66,6 +70,14 @@
       "env": {
         "HOSTINGER_API_TOKEN": "${HOSTINGER_API_TOKEN}"
       }
+    },
+    "memory": {
+      "command": "bun",
+      "args": [
+        "--no-install",
+        "--no-env-file",
+        "${CLAUDE_PLUGIN_ROOT}/hooks-handlers/memory-mcp.ts"
+      ]
     }
   }
 }

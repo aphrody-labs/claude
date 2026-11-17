@@ -1,7 +1,7 @@
 #!/usr/bin/env bun
 // GitHub hygiene for the authenticated user and the organisations it administers.
-//   bun scripts/github.ts audit        report only (default)
-//   bun scripts/github.ts fix          apply every fix the audit finds
+//   bun scripts/ops/github.ts audit        report only (default)
+//   bun scripts/ops/github.ts fix          apply every fix the audit finds
 // Fixes: fill missing descriptions (forks from their parent, sources from the README's first
 // paragraph), delete archived repositories whose content survives elsewhere (canonical copy in
 // another owner, or a fork with no commits of its own), regenerate profile READMEs.
@@ -21,6 +21,13 @@ interface Repo {
     default_branch: string;
     description: string | null;
   };
+}
+
+if (process.argv.includes("--help")) {
+  console.log(
+    "usage: bun scripts/ops/github.ts [audit|fix]  (audit is the default and read-only)",
+  );
+  process.exit(0);
 }
 
 const apply = process.argv[2] === "fix";

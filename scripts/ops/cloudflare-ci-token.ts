@@ -1,13 +1,13 @@
 #!/usr/bin/env bun
 // Mints an account-owned Cloudflare API token for CI (Workers, R2, tunnels read, zones) and stores it, with the account
 // id, as GitHub Actions secrets of the given repositories. The token never touches stdout or disk.
-//   CLOUDFLARE_API_TOKEN=<token able to create account tokens> bun scripts/cloudflare-ci-token.ts <owner/repo>...
+//   CLOUDFLARE_API_TOKEN=<token able to create account tokens> bun scripts/ops/cloudflare-ci-token.ts <owner/repo>...
 // The account is discovered from the token; permission groups are looked up by name.
 const repos = process.argv.slice(2);
 const tok = process.env.CLOUDFLARE_API_TOKEN;
 if (!tok || !repos.length) {
   console.error(
-    "usage: CLOUDFLARE_API_TOKEN=... bun scripts/cloudflare-ci-token.ts <owner/repo>...",
+    "usage: CLOUDFLARE_API_TOKEN=... bun scripts/ops/cloudflare-ci-token.ts <owner/repo>...",
   );
   process.exit(2);
 }

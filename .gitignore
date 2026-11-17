@@ -9,12 +9,16 @@
 !/package.json
 !/bun.lock
 !/tsconfig.json
+!/bunfig.toml
 !/.claude-plugin/
 !/.claude/
 /.claude/settings.local.json
 !/packages/
 !/gemini/
 !/scripts/
+!/skills/
+!/docs/
+!/agent.toml
 # Per-project auto-memory only, not session transcripts.
 !/projects/
 /projects/*/*

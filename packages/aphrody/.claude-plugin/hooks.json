@@ -13,6 +13,11 @@
             "type": "command",
             "command": "bun --no-install --no-env-file \"${CLAUDE_PLUGIN_ROOT}/hooks-handlers/session-bridge.ts\" start",
             "timeout": 5
+          },
+          {
+            "type": "command",
+            "command": "bun --no-install --no-env-file \"${CLAUDE_PLUGIN_ROOT}/hooks-handlers/learn.ts\" nudge claude",
+            "timeout": 5
           }
         ]
       }
@@ -83,6 +88,17 @@
             "type": "command",
             "command": "bun --no-install --no-env-file \"${CLAUDE_PLUGIN_ROOT}/hooks-handlers/config-sync.ts\" push claude",
             "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PostToolUseFailure": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bun --no-install --no-env-file \"${CLAUDE_PLUGIN_ROOT}/hooks-handlers/learn.ts\" capture claude",
+            "timeout": 5
           }
         ]
       }

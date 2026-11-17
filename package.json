@@ -5,9 +5,15 @@
   "scripts": {
     "setup": "bun scripts/setup.ts",
     "check": "bun scripts/check.ts",
+    "test": "bun test scripts packages",
     "sync": "bun scripts/sync.ts",
     "merge-brain": "bun scripts/merge-brain.ts",
-    "github": "bun scripts/github.ts"
+    "graph": "bun scripts/graph.ts",
+    "bench": "bun scripts/bench.ts",
+    "memory": "bun scripts/memory.ts",
+    "cron": "bun scripts/cron.ts",
+    "skills": "bun scripts/skills.ts",
+    "github": "bun scripts/ops/github.ts"
   },
   "devDependencies": {
     "@types/bun": "1.4.4"

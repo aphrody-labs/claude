@@ -1,14 +1,8 @@
 #!/usr/bin/env bun
 import { deliverRealtime, listLiveClaudeSessions } from "./claude-peer.ts";
+import { type McpTool, serveMcp } from "./mcp-lite.ts";
 
-interface JsonRpcReq {
-  jsonrpc?: string;
-  id?: string | number | null;
-  method?: string;
-  params?: Record<string, unknown>;
-}
-
-const TOOLS = [
+export const TOOLS: McpTool[] = [
   {
     name: "claude_sessions",
     description:
@@ -18,6 +12,17 @@ const TOOLS = [
       properties: {},
       additionalProperties: false,
     },
+    run: () =>
+      listLiveClaudeSessions().map(
+        ({ pid, sessionId, name, cwd, status, messagingSocketPath }) => ({
+          pid,
+          sessionId,
+          name,
+          cwd,
+          status,
+          pipeReady: Boolean(messagingSocketPath),
+        }),
+      ),
   },
   {
     name: "claude_inject",
@@ -53,109 +58,21 @@ const TOOLS = [
       required: ["message"],
       additionalProperties: false,
     },
+    run: (args) => {
+      const message = String(args.message ?? "").trim();
+      if (!message) throw new Error("message is required");
+      return deliverRealtime({
+        message,
+        target: typeof args.target === "string" ? args.target : "all",
+        sender:
+          typeof args.sender === "string" ? args.sender : "aphrody-bridge",
+        cwdFilter: typeof args.cwd === "string" ? args.cwd : undefined,
+        urgent: args.urgent === true,
+      });
+    },
   },
 ];
 
-function send(msg: unknown): void {
-  process.stdout.write(`${JSON.stringify(msg)}\n`);
-}
-
-let buf = "";
-process.stdin.setEncoding("utf8");
-for await (const chunk of process.stdin) {
-  buf += chunk;
-  let nl: number;
-  while ((nl = buf.indexOf("\n")) !== -1) {
-    const line = buf.slice(0, nl).trim();
-    buf = buf.slice(nl + 1);
-    if (!line) continue;
-    let req: JsonRpcReq;
-    try {
-      req = JSON.parse(line) as JsonRpcReq;
-    } catch {
-      continue;
-    }
-    if (req.id === undefined || req.id === null) continue;
-
-    if (req.method === "initialize") {
-      send({
-        jsonrpc: "2.0",
-        id: req.id,
-        result: {
-          protocolVersion: "2024-11-05",
-          capabilities: { tools: {} },
-          serverInfo: { name: "aphrody-claude-bridge", version: "1.0.0" },
-        },
-      });
-    } else if (req.method === "tools/list") {
-      send({ jsonrpc: "2.0", id: req.id, result: { tools: TOOLS } });
-    } else if (req.method === "tools/call") {
-      const params = req.params ?? {};
-      const name = String(params.name ?? "");
-      const args = (params.arguments ?? {}) as Record<string, unknown>;
-      try {
-        if (name === "claude_sessions") {
-          const rows = listLiveClaudeSessions().map(
-            ({
-              pid,
-              sessionId,
-              name: sName,
-              cwd,
-              status,
-              messagingSocketPath,
-            }) => ({
-              pid,
-              sessionId,
-              name: sName,
-              cwd,
-              status,
-              pipeReady: Boolean(messagingSocketPath),
-            }),
-          );
-          send({
-            jsonrpc: "2.0",
-            id: req.id,
-            result: {
-              content: [{ type: "text", text: JSON.stringify(rows, null, 2) }],
-            },
-          });
-        } else if (name === "claude_inject") {
-          const message = String(args.message ?? "").trim();
-          if (!message) throw new Error("message is required");
-          const res = await deliverRealtime({
-            message,
-            target: typeof args.target === "string" ? args.target : "all",
-            sender:
-              typeof args.sender === "string" ? args.sender : "aphrody-bridge",
-            cwdFilter: typeof args.cwd === "string" ? args.cwd : undefined,
-            urgent: args.urgent === true,
-          });
-          send({
-            jsonrpc: "2.0",
-            id: req.id,
-            result: {
-              content: [{ type: "text", text: JSON.stringify(res, null, 2) }],
-            },
-          });
-        } else {
-          send({
-            jsonrpc: "2.0",
-            id: req.id,
-            error: { code: -32601, message: `Unknown tool: ${name}` },
-          });
-        }
-      } catch (err) {
-        send({
-          jsonrpc: "2.0",
-          id: req.id,
-          result: {
-            isError: true,
-            content: [{ type: "text", text: (err as Error).message }],
-          },
-        });
-      }
-    } else {
-      send({ jsonrpc: "2.0", id: req.id, result: {} });
-    }
-  }
+if (import.meta.main) {
+  await serveMcp({ name: "aphrody-claude-bridge", version: "1.0.0" }, TOOLS);
 }
