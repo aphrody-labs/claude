@@ -25,3 +25,5 @@
 # Project memory and transcripts live in the private claude-local repository (nested at projects/), never here.
 node_modules/
 packages/**/node_modules/
+/skills/linux-kernel-docs/references/
+/skills/linux-kernel-docs/areas.json
