@@ -6,7 +6,8 @@
 // Global profile  ~/.claude/profile.toml: [mcp] baseline (servers every project keeps, read by mcp-profiles.ts),
 //                 [skills] off / name_only, rendered into the `skillOverrides` key of ~/.claude/settings.json.
 // Repo profile    <repo>/.claude/profile.toml or <repo>/tools/claude/profile.toml: allow-list semantics.
-//                 [mcp] claude_ai_connectors, allow  -> disableClaudeAiConnectors, enabledMcpjsonServers and the
+//                 [mcp] allow (server names; claude.ai connectors as "claude.ai <Name>")
+//                       -> enabledMcpjsonServers, disableClaudeAiConnectors (only when no connector is allowed) and the
 //                       per-project disabledMcpServers in ~/.claude.json (what `/mcp disable` writes)
 //                 [plugins] id = bool               -> enabledPlugins overrides
 //                 [skills] on / name_only           -> every other discovered skill is "off"
@@ -28,7 +29,7 @@ export type GlobalProfile = {
   skills?: { off?: string[]; name_only?: string[] };
 };
 export type RepoProfile = {
-  mcp?: { claude_ai_connectors?: boolean; allow?: string[] };
+  mcp?: { allow?: string[] };
   plugins?: Record<string, boolean>;
   skills?: { on?: string[]; name_only?: string[] };
 };
@@ -111,7 +112,13 @@ export function discover(
     ) ?? {};
   const skills = new Set(skillsIn(join(env.config, "skills"), ""));
   const servers = new Map<string, string>(); // toggle name -> bare name
-  const state = readJson<{ mcpServers?: object }>(env.state) ?? {};
+  const state =
+    readJson<{ mcpServers?: object; claudeAiMcpEverConnected?: string[] }>(
+      env.state,
+    ) ?? {};
+  // claude.ai connectors this account ever connected (Claude Code's own record of them).
+  for (const name of state.claudeAiMcpEverConnected ?? [])
+    servers.set(name, name);
   for (const name of Object.keys(state.mcpServers ?? {}))
     servers.set(name, name);
 
@@ -189,7 +196,7 @@ export function renderRepo(
   return {
     settings: {
       $schema: "https://json.schemastore.org/claude-code-settings.json",
-      disableClaudeAiConnectors: profile.mcp?.claude_ai_connectors === false,
+      disableClaudeAiConnectors: !allow.some((n) => n.startsWith("claude.ai ")),
       enabledMcpjsonServers: mcpJson.filter((n) => allow.includes(n)),
       enabledPlugins: sortKeys(profile.plugins ?? {}),
       skillOverrides,

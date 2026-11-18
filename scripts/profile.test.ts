@@ -56,7 +56,14 @@ put(
   join(config, "plugins", "known_marketplaces.json"),
   JSON.stringify({ m: { source: { source: "github" } } }),
 );
-put(env.state, JSON.stringify({ mcpServers: { user: {} }, projects: {} }));
+put(
+  env.state,
+  JSON.stringify({
+    mcpServers: { user: {} },
+    claudeAiMcpEverConnected: ["claude.ai Figma", "claude.ai Gmail"],
+    projects: {},
+  }),
+);
 
 test("discover reads plugin skills, commands, MCP servers and user entries", () => {
   const found = discover(env, "x");
@@ -67,6 +74,8 @@ test("discover reads plugin skills, commands, MCP servers and user entries", () 
     "p:keep",
   ]);
   expect([...found.servers]).toEqual([
+    ["claude.ai Figma", "claude.ai Figma"],
+    ["claude.ai Gmail", "claude.ai Gmail"],
     ["user", "user"],
     ["plugin:p:srv", "srv"],
   ]);
@@ -77,7 +86,7 @@ test("renderRepo turns off what the profile does not keep", () => {
   const found = discover(env, "x");
   const { settings, disabled, missing } = renderRepo(
     {
-      mcp: { claude_ai_connectors: false, allow: ["srv", "local"] },
+      mcp: { allow: ["srv", "local", "claude.ai Figma"] },
       skills: { on: ["p:keep", "ghost"], name_only: ["mine"] },
     },
     found,
@@ -88,9 +97,9 @@ test("renderRepo turns off what the profile does not keep", () => {
     "p:cmd": "off",
     "p:drop": "off",
   });
-  expect(settings.disableClaudeAiConnectors).toBe(true);
+  expect(settings.disableClaudeAiConnectors).toBe(false);
   expect(settings.enabledMcpjsonServers).toEqual(["local"]);
-  expect(disabled).toEqual(["user"]);
+  expect(disabled).toEqual(["claude.ai Gmail", "user"]);
   expect(missing).toEqual(["ghost"]);
 });
 
@@ -116,7 +125,11 @@ test("run applies a repo profile, then check and hook see no drift", () => {
   run(repo, "apply", env);
   expect(run(repo, "check", env).drift).toEqual([]);
   const state = JSON.parse(readFileSync(env.state, "utf8"));
-  expect(state.projects[projectKey(repo)].disabledMcpServers).toEqual(["user"]);
+  expect(state.projects[projectKey(repo)].disabledMcpServers).toEqual([
+    "claude.ai Figma",
+    "claude.ai Gmail",
+    "user",
+  ]);
   expect(state.mcpServers).toEqual({ user: {} });
   state.projects[projectKey(repo)].disabledMcpServers = [];
   writeFileSync(env.state, JSON.stringify(state));
