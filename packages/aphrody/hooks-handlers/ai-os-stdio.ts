@@ -55,13 +55,13 @@ function trusted(dir: string): boolean {
   return /[/:]aphrody-dev\/ay(\.git)?$/i.test(r.stdout.toString().trim());
 }
 
-const rel = ["packages", "ai-os", "src", "relay", "cli.ts"] as const;
+const rel = ["packages", "ai-os", "src", "server", "cli.ts"] as const;
 const target = candidates.find(
   (c) => existsSync(join(c, ...rel)) && trusted(c),
 );
 if (!target) {
   console.error(
-    "relay-stdio: no trusted aphrody-dev/ay checkout with packages/ai-os/src/relay/cli.ts (clone it next to your other checkouts and set WORKSPACE_ROOT, or set AY_ROOT)",
+    "ai-os-stdio: no trusted aphrody-dev/ay checkout with packages/ai-os/src/server/cli.ts (clone it next to your other checkouts and set WORKSPACE_ROOT, or set AY_ROOT)",
   );
   process.exit(1);
 }

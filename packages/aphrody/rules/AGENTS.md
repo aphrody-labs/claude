@@ -24,7 +24,7 @@
 - [budget-and-hosting](~/.claude/projects/C--src/memory/budget-and-hosting.md) — Google Sheet budget ledger, Cloudflare/VPS primary hosting, $0 Vercel policy
 - [code-quality-and-design](~/.claude/projects/C--src/memory/code-quality-and-design.md) — Code-before-docs, Google eng bar, Figma/M3 visual diffing, latest deps, real proof
 - [english-i18n-generalist](~/.claude/projects/C--src/memory/english-i18n-generalist.md) — English code/docs baseline, pluggable i18n catalogs, registry-driven generalist design
-- [fleet-and-relay](~/.claude/projects/C--src/memory/fleet-and-relay.md) — Fleet roles (`fr1`/`fr2`/`prd`/PC), SSH recovery, Chrome Gemini fallback
+- [fleet-and-ai-os](~/.claude/projects/C--src/memory/fleet-and-ai-os.md) — Fleet roles (`fr1`/`fr2`/`prd`/PC), SSH recovery, Chrome Gemini fallback
 - [git-and-workspace-map](~/.claude/projects/C--src/memory/git-and-workspace-map.md) — `$WORKSPACE_ROOT/*` checkouts, `ay`/`aphrody`/`open`/`auto`/`rosegriffon`/`nie` split, main-only git discipline
 - [language-and-tooling](~/.claude/projects/C--src/memory/language-and-tooling.md) — Generalist unrestricted CLI/language tooling, rustdoc-md, Windows path/shell quirks, `%TEMP%` sandboxes
 - [legal-and-licenses](~/.claude/projects/C--src/memory/legal-and-licenses.md) — Never gate architecture, absorption, or asset pipelines on license speculation

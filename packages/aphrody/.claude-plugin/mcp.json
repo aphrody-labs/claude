@@ -1,12 +1,12 @@
 {
   "mcpServers": {
-    "relay": {
+    "ai-os": {
       "command": "bun",
       "args": [
-        "${CLAUDE_PLUGIN_ROOT}/hooks-handlers/relay-stdio.ts"
+        "${CLAUDE_PLUGIN_ROOT}/hooks-handlers/ai-os-stdio.ts"
       ],
       "env": {
-        "RELAY_HUB": "0"
+        "AI_OS_HUB": "0"
       }
     },
     "claude-bridge": {

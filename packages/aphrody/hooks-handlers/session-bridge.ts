@@ -12,7 +12,7 @@ import {
 import {
   drainHookMail,
   registerRelaySession,
-  relaySessionsDir,
+  aiOsSessionsDir,
 } from "./claude-peer.ts";
 
 const mode = Bun.argv[2] ?? "deliver";
@@ -35,7 +35,7 @@ const kind = isAgyPayload ? "antigravity" : "claude-code";
 
 // Fast path: skip opening SQLite during turns when no unread pending flag exists.
 if (mode !== "start") {
-  const pending = join(relaySessionsDir(), `${sessionId}.pending`);
+  const pending = join(aiOsSessionsDir(), `${sessionId}.pending`);
   if (!existsSync(pending)) {
     writeEmpty();
     process.exit(0);

@@ -4,11 +4,11 @@
   "description": "Unified cross-CLI autonomous engineering plugin: rules, MCP servers, and curated cross-project skills.",
   "contextFileName": "rules/AGENTS.md",
   "mcpServers": {
-    "relay": {
+    "ai-os": {
       "command": "bun",
-      "args": ["${extensionPath}/hooks-handlers/relay-stdio.ts"],
+      "args": ["${extensionPath}/hooks-handlers/ai-os-stdio.ts"],
       "env": {
-        "RELAY_HUB": "0"
+        "AI_OS_HUB": "0"
       }
     },
     "claude-bridge": {

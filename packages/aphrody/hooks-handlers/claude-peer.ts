@@ -32,21 +32,21 @@ export interface DeliveryResult {
   error?: string;
 }
 
-export function relaySessionsDir(): string {
-  const relayHome =
-    process.env.RELAY_HOME ??
+export function aiOsSessionsDir(): string {
+  const aiOsHome =
+    process.env.AI_OS_HOME ??
     (process.platform === "win32"
       ? join(
           process.env.LOCALAPPDATA ?? join(HOME, "AppData", "Local"),
           "aphrody",
-          "relay",
+          "ai-os",
         )
-      : join(HOME, ".local", "share", "aphrody", "relay"));
-  return join(relayHome, "sessions");
+      : join(HOME, ".local", "share", "aphrody", "ai-os"));
+  return join(aiOsHome, "sessions");
 }
 
 function openSessionsDb(): Database {
-  const dir = relaySessionsDir();
+  const dir = aiOsSessionsDir();
   mkdirSync(dir, { recursive: true });
   const db = new Database(join(dir, "sessions.db"), { create: true });
   db.exec("PRAGMA journal_mode = WAL; PRAGMA busy_timeout = 3000;");
@@ -211,7 +211,7 @@ export function queueHookMail(
       text,
       now,
     );
-    const pendingPath = join(relaySessionsDir(), `${recipientId}.pending`);
+    const pendingPath = join(aiOsSessionsDir(), `${recipientId}.pending`);
     writeFileSync(pendingPath, String(now), "utf8");
   } finally {
     db.close();
@@ -221,7 +221,7 @@ export function queueHookMail(
 export function drainHookMail(
   sessionId: string,
 ): Array<{ from_name: string; text: string; created: number }> {
-  const dir = relaySessionsDir();
+  const dir = aiOsSessionsDir();
   const pendingPath = join(dir, `${sessionId}.pending`);
   const db = openSessionsDb();
   try {
@@ -308,7 +308,7 @@ export async function deliverRealtime(opts: {
 
   // The native pipe only carries messages from real Claude Code sessions: Claude Code holds a pipe message whose
   // from-name is not a live session ("unidentified session"). Any other sender (agy, gemini, scripts) goes through the
-  // relay mailbox, which names the sender and is drained by the session-bridge hook.
+  // ai-os mailbox, which names the sender and is drained by the session-bridge hook.
   const senderIsSession = sessions.some(
     (x) => x.name === sender || x.sessionId === sender,
   );

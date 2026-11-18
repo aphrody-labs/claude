@@ -16,7 +16,7 @@ let tmp: string;
 let sessionsDir: string;
 beforeEach(() => {
   tmp = mkdtempSync(join(tmpdir(), "claude-bridge-test-"));
-  sessionsDir = join(tmp, "relay", "sessions");
+  sessionsDir = join(tmp, "ai-os", "sessions");
 });
 afterEach(() => {
   rmSync(tmp, { recursive: true, force: true });
@@ -31,7 +31,7 @@ const run = (payload: unknown, mode?: string) =>
         ...process.env,
         HOME: tmp,
         USERPROFILE: tmp,
-        RELAY_HOME: join(tmp, "relay"),
+        AI_OS_HOME: join(tmp, "ai-os"),
       },
       stdin: new TextEncoder().encode(
         typeof payload === "string" ? payload : JSON.stringify(payload),
