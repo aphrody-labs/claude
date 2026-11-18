@@ -1,0 +1,19 @@
+# Global Claude Code profile, applied by `bun scripts/profile.ts ~/.claude` (also checked by `bun run check`).
+# Repositories narrow it further with their own .claude/profile.toml or tools/claude/profile.toml.
+
+[mcp]
+# Servers every project keeps; scripts/mcp-profiles.ts disables the rest per project from transcript evidence,
+# except in repositories that declare their own profile.
+baseline = ["plugin:aphrody:ai-os", "plugin:aphrody:claude-bridge", "plugin:aphrody:memory", "claude-in-chrome"]
+
+[skills]
+# Duplicates: hidden from both the model and the / menu in Claude Code (agy keeps them through align-agy).
+off = [
+  "aphrody:no-slop-humanizer", # aphrody:humanizer covers it with the repository rules
+  "aphrody:bun-guide",         # Antigravity router over ~/.gemini/brain; aphrody:bun-aphrody is the Claude entry point
+]
+# Overlapping specialisations: listed by name only, the umbrella skill carries the description.
+name_only = [
+  "aphrody:brand", "aphrody:banner-design", "aphrody:design-system", "aphrody:slides", # under aphrody:design
+  "aphrody:agent-browser", "aphrody:chrome-devtools",                                  # built-in claude-in-chrome first
+]

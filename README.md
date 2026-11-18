@@ -7,6 +7,7 @@ Versioned, reproducible global configuration for Claude Code, Antigravity (`agy`
 Claude Code as an agent in the OpenClaw / Hermes Agent model: the harness is the runtime, this repo adds memory search, a learning loop, a scheduler, a channel gateway launcher and a plugin set. Study and feature matrix: `docs/research/agents.md`.
 
 - `CLAUDE.md`, `settings.json`, `gitconfig`: Claude Code global contract, permissions (NHITL, zero `deny`), and Git configuration.
+- `profile.toml` + `scripts/profile.ts`: declarative Claude profiles. Global: MCP baseline and skill dedupe (`skillOverrides`). Per repository (`.claude/profile.toml` or `tools/claude/profile.toml`): allowed MCP servers, plugins and kept skills, rendered into the repo's `.claude/settings.json` and the per-project `disabledMcpServers`; re-applied at SessionStart (`--hook`), gated by `bun run check`.
 - `agent.toml`: agent layer config (gateway channels, scheduled jobs).
 - `packages/`: plugins. `aphrody` (agents, hooks-handlers, MCP servers `claude-bridge` and `memory`, skills, output style) and `bun` (command rewrites, Bun/Rust/JSC skills). Marketplace: `.claude-plugin/marketplace.json`.
 - `skills/`: user-level skills outside any plugin (`agent-ops`).

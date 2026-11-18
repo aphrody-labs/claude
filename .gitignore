@@ -21,6 +21,7 @@
 !/agent.toml
 !/paths.allow
 !/naming.toml
+!/profile.toml
 !/toolchain.toml
 # Project memory and transcripts live in the private claude-local repository (nested at projects/), never here.
 node_modules/

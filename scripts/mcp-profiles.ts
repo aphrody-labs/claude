@@ -21,17 +21,14 @@ import {
 } from "node:fs";
 import { homedir } from "node:os";
 import { join, resolve } from "node:path";
+import { defaultEnv, globalProfile, repoProfilePath } from "./profile.ts";
 
 const HOME = homedir();
 const CLAUDE_JSON = join(HOME, ".claude.json");
 const STATE = join(HOME, ".claude", "state");
 const DAYS = Number(Bun.env.MCP_PROFILE_DAYS ?? 60);
-export const BASELINE = [
-  "plugin:aphrody:ai-os",
-  "plugin:aphrody:claude-bridge",
-  "plugin:aphrody:memory",
-  "claude-in-chrome",
-];
+/** Servers every project keeps: `[mcp] baseline` of ~/.claude/profile.toml (scripts/profile.ts). */
+export const BASELINE = globalProfile(defaultEnv()).mcp?.baseline ?? [];
 
 /** Claude Code names a server's tools `mcp__<server with every character outside [A-Za-z0-9_-] replaced by _>__<tool>`. */
 export const toolPrefix = (server: string): string =>
@@ -197,6 +194,14 @@ if (import.meta.main) {
           );
   const decisions = new Map<string, string[]>();
   for (const project of wanted) {
+    // A repository that declares its own profile owns its toggles (scripts/profile.ts applies them).
+    if (existsSync(project) && repoProfilePath(project)) {
+      if (cmd === "plan")
+        console.log(
+          `${project}: declared profile, see bun scripts/profile.ts ${project}`,
+        );
+      continue;
+    }
     const entries = existsSync(project)
       ? readdirSync(project).slice(0, 80)
       : [];

@@ -84,6 +84,12 @@ checkStep("agy skill alignment (scripts/align-agy.ts --check)", [
   "scripts/align-agy.ts",
   "--check",
 ]);
+checkStep("Claude profile (scripts/profile.ts --check)", [
+  "bun",
+  "scripts/profile.ts",
+  "--check",
+  REPO_ROOT,
+]);
 checkStep("bun lint", ["bun", "lint"]);
 checkStep("bun fmt --check", [
   "bun",
