@@ -1,3 +1,4 @@
+import { Database } from "bun:sqlite";
 import { afterEach, expect, test } from "bun:test";
 import {
   mkdirSync,
@@ -9,9 +10,12 @@ import {
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import {
+  chunkAgyTranscript,
   chunkMarkdown,
   chunkTranscript,
+  defaultSources,
   ftsQuery,
+  geminiSources,
   indexAll,
   openIndex,
   search,
@@ -105,4 +109,89 @@ test("indexAll is incremental, searchable, ranked and drops deleted files", () =
   } finally {
     db.close();
   }
+});
+
+test("chunkAgyTranscript keeps requests, answers, reasoning and checkpoints, and skips tool results", () => {
+  const lines = [
+    {
+      type: "USER_INPUT",
+      content:
+        "<USER_REQUEST>\nfix the oauth redirect\n</USER_REQUEST>\n<ADDITIONAL_METADATA>noise</ADDITIONAL_METADATA>",
+    },
+    { type: "PLANNER_RESPONSE", thinking: "reading the proxy", tool_calls: [] },
+    { type: "GENERIC", content: "Command exited with code 0." },
+    { type: "PLANNER_RESPONSE", content: "redirect fixed" },
+    { type: "CHECKPOINT", content: "summary so far" },
+  ]
+    .map((l) => JSON.stringify(l))
+    .join("\n");
+  const chunks = chunkAgyTranscript(lines, "agy c3274da2");
+  expect(chunks.map((c) => c.title)).toEqual([
+    "agy c3274da2 user",
+    "agy c3274da2 thinking",
+    "agy c3274da2 assistant",
+    "agy c3274da2 checkpoint",
+  ]);
+  expect(chunks[0]!.body).toBe("fix the oauth redirect");
+});
+
+test("geminiSources index the Gemini memory and brain, and agy sessions only on request", () => {
+  const home = tmp();
+  mkdirSync(join(home, "memory"), { recursive: true });
+  mkdirSync(join(home, "brain", "bun"), { recursive: true });
+  writeFileSync(
+    join(home, "memory", "quoting.md"),
+    "never embed escaped quotes in hooks",
+  );
+  writeFileSync(
+    join(home, "brain", "bun", "INDEX.md"),
+    "# Redis\nscan and unlink",
+  );
+  const agy = join(home, "antigravity-cli");
+  const logs = join(agy, "brain", "c3274da2-3f9c", ".system_generated", "logs");
+  mkdirSync(logs, { recursive: true });
+  writeFileSync(
+    join(logs, "transcript.jsonl"),
+    `${JSON.stringify({ type: "PLANNER_RESPONSE", content: "deployed the griffon website" })}\n`,
+  );
+  const summaries = new Database(join(agy, "conversation_summaries.db"));
+  summaries.exec(
+    "CREATE VIRTUAL TABLE conversations_fts USING fts5(conversation_id UNINDEXED, chunk_index UNINDEXED, title, workspace, user_body, agent_body)",
+  );
+  summaries
+    .query("INSERT INTO conversations_fts VALUES (?, ?, ?, ?, ?, ?)")
+    .run("598efceb-aaaa", -1, "Monorepo Audit", "rosegriffon", "", "");
+  summaries
+    .query("INSERT INTO conversations_fts VALUES (?, ?, ?, ?, ?, ?)")
+    .run(
+      "598efceb-aaaa",
+      0,
+      "",
+      "",
+      "audit the monorepo",
+      "nginx upstream repaired",
+    );
+  summaries.close();
+
+  const db = openIndex(join(tmp(), "m.db"));
+  indexAll(db, geminiSources(home));
+  expect(search(db, "escaped quotes")[0]!.kind).toBe("memory");
+  expect(search(db, "unlink")[0]!.title).toBe("INDEX > Redis");
+  expect(search(db, "griffon website")).toEqual([]);
+
+  indexAll(db, geminiSources(home, true));
+  expect(search(db, "griffon website")[0]!.title).toBe(
+    "agy c3274da2 assistant",
+  );
+  const hit = search(db, "nginx upstream")[0]!;
+  expect(hit.kind).toBe("session");
+  expect(hit.title).toBe("598efceb rosegriffon Monorepo Audit assistant");
+  db.close();
+});
+
+test("defaultSources leaves the Gemini home out when another Claude home is given", () => {
+  const home = tmp();
+  expect(defaultSources(home).some((s) => s.dir.includes(".gemini"))).toBe(
+    false,
+  );
 });

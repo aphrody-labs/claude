@@ -1,5 +1,6 @@
-// Full-text memory: one SQLite FTS5 index over project memory, instructions, learning digests, research docs and
-// (optionally) past session transcripts. Incremental by mtime and size. Same idea as the session search of Hermes
+// Full-text memory: one SQLite FTS5 index over project memory, instructions, learning digests, research docs, the
+// Gemini / Antigravity brain (~/.gemini memory, rules, brain) and (optionally) past session transcripts of Claude Code
+// and of the Antigravity CLI (agy). Incremental by mtime and size. Same idea as the session search of Hermes
 // Agent and the memory search of OpenClaw, on bun:sqlite only.
 import { Database } from "bun:sqlite";
 import {
@@ -10,7 +11,7 @@ import {
   statSync,
 } from "node:fs";
 import { dirname, join } from "node:path";
-import { CLAUDE_HOME } from "./lib.ts";
+import { CLAUDE_HOME, HOME } from "./lib.ts";
 
 export type Kind = "memory" | "instructions" | "digest" | "doc" | "session";
 
@@ -22,12 +23,18 @@ export interface Hit {
   rank: number;
 }
 
+/** How a file is cut into chunks; when absent it follows the kind (session: Claude transcript, anything else: markdown). */
+export type Format = "markdown" | "claude" | "agy" | "agy-summaries";
+
 export interface Source {
   kind: Kind;
   dir: string;
   match: (name: string) => boolean;
   recursive: boolean;
+  format?: Format;
 }
+
+export const GEMINI_HOME = `${HOME}/.gemini`;
 
 export const DB_PATH = join(CLAUDE_HOME, "learning", "memory.db");
 const MAX_CHUNK = 1500;
@@ -45,7 +52,58 @@ export function openIndex(path = DB_PATH): Database {
   return db;
 }
 
-export function defaultSources(home = CLAUDE_HOME, sessions = false): Source[] {
+/**
+ * The Gemini CLI and Antigravity CLI (agy) side of the brain, read in place and never written: curated memory and
+ * rules, the compacted brain digests, and with `sessions` every agy conversation (the full-text table agy keeps
+ * for all of them, plus the step transcript of the ones whose brain folder still exists).
+ */
+export function geminiSources(
+  geminiHome = GEMINI_HOME,
+  sessions = false,
+): Source[] {
+  const md = (n: string) => n.endsWith(".md");
+  const sources: Source[] = [
+    {
+      kind: "instructions",
+      dir: join(geminiHome, "rules"),
+      match: md,
+      recursive: true,
+    },
+    {
+      kind: "memory",
+      dir: join(geminiHome, "memory"),
+      match: md,
+      recursive: false,
+    },
+    { kind: "doc", dir: join(geminiHome, "brain"), match: md, recursive: true },
+  ];
+  if (!sessions) return sources;
+  const agy = join(geminiHome, "antigravity-cli");
+  sources.push({
+    kind: "session",
+    dir: join(agy, "conversation_summaries.db"),
+    match: () => true,
+    recursive: false,
+    format: "agy-summaries",
+  });
+  const brain = join(agy, "brain");
+  if (existsSync(brain))
+    for (const id of readdirSync(brain))
+      sources.push({
+        kind: "session",
+        dir: join(brain, id, ".system_generated", "logs", "transcript.jsonl"),
+        match: () => true,
+        recursive: false,
+        format: "agy",
+      });
+  return sources;
+}
+
+export function defaultSources(
+  home = CLAUDE_HOME,
+  sessions = false,
+  geminiHome = home === CLAUDE_HOME ? GEMINI_HOME : "",
+): Source[] {
   const md = (n: string) => n.endsWith(".md");
   const sources: Source[] = [
     {
@@ -80,6 +138,7 @@ export function defaultSources(home = CLAUDE_HOME, sessions = false): Source[] {
         });
     }
   }
+  if (geminiHome) sources.push(...geminiSources(geminiHome, sessions));
   return sources;
 }
 
@@ -163,7 +222,112 @@ export function chunkTranscript(text: string, fallbackTitle: string): Chunk[] {
   return chunks;
 }
 
-export function indexFile(db: Database, kind: Kind, file: string): number {
+interface AgyStep {
+  type?: string;
+  content?: unknown;
+  thinking?: unknown;
+}
+
+/**
+ * One chunk per user request, model answer, model reasoning note and checkpoint summary of an agy step transcript
+ * (`brain/<conversation>/.system_generated/logs/transcript.jsonl`). Tool results (GENERIC steps) are skipped.
+ */
+export function chunkAgyTranscript(
+  text: string,
+  fallbackTitle: string,
+): Chunk[] {
+  const chunks: Chunk[] = [];
+  const push = (role: string, raw: unknown) => {
+    if (typeof raw !== "string") return;
+    const body = raw.trim();
+    if (body)
+      chunks.push({
+        title: `${fallbackTitle} ${role}`,
+        body: body.slice(0, MAX_CHUNK),
+      });
+  };
+  for (const line of text.split("\n")) {
+    if (!line.startsWith("{")) continue;
+    let rec: AgyStep;
+    try {
+      rec = JSON.parse(line) as AgyStep;
+    } catch {
+      continue;
+    }
+    if (rec.type === "USER_INPUT") {
+      const c = typeof rec.content === "string" ? rec.content : "";
+      push(
+        "user",
+        c.match(/<USER_REQUEST>([\s\S]*?)<\/USER_REQUEST>/)?.[1] ?? c,
+      );
+    } else if (rec.type === "PLANNER_RESPONSE") {
+      push("assistant", rec.content);
+      push("thinking", rec.thinking);
+    } else if (rec.type === "CHECKPOINT") push("checkpoint", rec.content);
+  }
+  return chunks;
+}
+
+interface AgySummaryRow {
+  conversation_id: string;
+  chunk_index: number;
+  title: string;
+  workspace: string;
+  user_body: string;
+  agent_body: string;
+}
+
+/**
+ * Every conversation agy remembers, from the full-text table of its `conversation_summaries.db`: this covers the
+ * sessions whose brain folder is gone. The database is opened read-only; agy keeps writing it.
+ */
+export function chunkAgySummaries(file: string): Chunk[] {
+  const src = new Database(file, { readonly: true });
+  try {
+    const rows = src
+      .query<AgySummaryRow, []>(
+        "SELECT conversation_id, chunk_index, title, workspace, user_body, agent_body FROM conversations_fts ORDER BY conversation_id, chunk_index",
+      )
+      .all();
+    const chunks: Chunk[] = [];
+    const heads = new Map<string, string>();
+    for (const r of rows) {
+      const id = String(r.conversation_id).slice(0, 8);
+      if (r.chunk_index < 0) {
+        heads.set(id, [id, r.workspace, r.title].filter(Boolean).join(" "));
+        continue;
+      }
+      const head = heads.get(id) ?? id;
+      for (const [role, text] of [
+        ["user", r.user_body],
+        ["assistant", r.agent_body],
+      ] as const) {
+        const body = String(text ?? "").trim();
+        for (let i = 0; i < body.length; i += MAX_CHUNK)
+          chunks.push({
+            title: `${head} ${role}`,
+            body: body.slice(i, i + MAX_CHUNK),
+          });
+      }
+    }
+    return chunks;
+  } finally {
+    src.close();
+  }
+}
+
+/** The conversation id an agy transcript path belongs to (`brain/<id>/.system_generated/logs/transcript.jsonl`). */
+function agyConversation(file: string): string {
+  const parts = file.replaceAll("\\", "/").split("/");
+  return (parts.at(-4) ?? "agy").slice(0, 8);
+}
+
+export function indexFile(
+  db: Database,
+  kind: Kind,
+  file: string,
+  format: Format = kind === "session" ? "claude" : "markdown",
+): number {
   const st = statSync(file);
   const prev = db
     .query<{ mtime: number; size: number }, [string]>(
@@ -173,11 +337,23 @@ export function indexFile(db: Database, kind: Kind, file: string): number {
   const mtime = Math.floor(st.mtimeMs);
   if (prev && prev.mtime === mtime && prev.size === st.size) return 0;
   const name = file.replaceAll("\\", "/").split("/").pop() ?? file;
-  const text = readFileSync(file, "utf8");
   const chunks =
-    kind === "session"
-      ? chunkTranscript(text, name.replace(/\.jsonl$/, "").slice(0, 8))
-      : chunkMarkdown(text, name.replace(/\.md$/, ""));
+    format === "agy-summaries"
+      ? chunkAgySummaries(file)
+      : format === "agy"
+        ? chunkAgyTranscript(
+            readFileSync(file, "utf8"),
+            `agy ${agyConversation(file)}`,
+          )
+        : format === "claude"
+          ? chunkTranscript(
+              readFileSync(file, "utf8"),
+              name.replace(/\.jsonl$/, "").slice(0, 8),
+            )
+          : chunkMarkdown(
+              readFileSync(file, "utf8"),
+              name.replace(/\.md$/, ""),
+            );
   const insert = db.query(
     "INSERT INTO chunks (path, kind, title, body) VALUES (?, ?, ?, ?)",
   );
@@ -205,7 +381,7 @@ export function indexAll(db: Database, sources: Source[]): IndexStats {
     for (const file of listFiles(src)) {
       seen.add(file);
       stats.files++;
-      const n = indexFile(db, src.kind, file);
+      const n = indexFile(db, src.kind, file, src.format);
       if (n > 0) {
         stats.changed++;
         stats.chunks += n;
