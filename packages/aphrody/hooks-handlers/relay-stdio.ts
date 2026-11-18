@@ -32,19 +32,18 @@ function userEnv(name: string): string | undefined {
     .match(new RegExp(`^\\s*${name}\\s+REG_\\w+\\s+(.+?)\\s*$`, "m"))?.[1];
 }
 
-// Explicit configuration only, never the working directory: AI_OS_ROOT, then the checkouts directory
-// (WORKSPACE_ROOT, or the parent of the aphrody checkout SRC_ROOT), then ~/src and ~.
+// Explicit configuration only, never the working directory: AY_ROOT, then the checkouts directory
+// (WORKSPACE_ROOT, from the environment or the user environment), then ~/src and ~.
 const workspace = process.env.WORKSPACE_ROOT ?? userEnv("WORKSPACE_ROOT");
 const candidates = [
-  process.env.AI_OS_ROOT,
-  workspace && join(workspace, "ai-os"),
-  process.env.SRC_ROOT && join(dirname(process.env.SRC_ROOT), "ai-os"),
-  join(home, "src", "ai-os"),
-  join(home, "ai-os"),
+  process.env.AY_ROOT,
+  workspace && join(workspace, "ay"),
+  join(home, "src", "ay"),
+  join(home, "ay"),
 ].filter((x): x is string => Boolean(x));
 
 const git = Bun.which("git");
-/** A checkout is trusted when it is not the home or a filesystem root and its origin is aphrody-dev/ai-os. */
+/** A checkout is trusted when it is not the home or a filesystem root and its origin is aphrody-dev/ay. */
 function trusted(dir: string): boolean {
   const abs = resolve(dir).replaceAll("\\", "/");
   if (abs === home || dirname(abs) === abs || !git) return false;
@@ -53,16 +52,16 @@ function trusted(dir: string): boolean {
     stderr: "ignore",
     stdin: "ignore",
   });
-  return /[/:]aphrody-dev\/ai-os(\.git)?$/i.test(r.stdout.toString().trim());
+  return /[/:]aphrody-dev\/ay(\.git)?$/i.test(r.stdout.toString().trim());
 }
 
-const rel = ["frameworks", "ai-os", "src", "relay", "cli.ts"] as const;
+const rel = ["packages", "ai-os", "src", "relay", "cli.ts"] as const;
 const target = candidates.find(
   (c) => existsSync(join(c, ...rel)) && trusted(c),
 );
 if (!target) {
   console.error(
-    "relay-stdio: no trusted aphrody-dev/ai-os checkout with frameworks/ai-os/src/relay/cli.ts (clone it next to your other checkouts and set WORKSPACE_ROOT, or set AI_OS_ROOT)",
+    "relay-stdio: no trusted aphrody-dev/ay checkout with packages/ai-os/src/relay/cli.ts (clone it next to your other checkouts and set WORKSPACE_ROOT, or set AY_ROOT)",
   );
   process.exit(1);
 }
@@ -71,6 +70,6 @@ const child = Bun.spawn([process.execPath, join(target, ...rel), "mcp-stdio"], {
   stdin: "inherit",
   stdout: "inherit",
   stderr: "inherit",
-  env: process.env,
+  env: { ...process.env, AY_ROOT: target },
 });
 process.exit(await child.exited);
