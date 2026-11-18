@@ -17,7 +17,7 @@ const HOME = homedir();
 const CLAUDE_JSON = join(HOME, ".claude.json");
 const STATE = join(HOME, ".claude", "state");
 const DAYS = Number(Bun.env.MCP_PROFILE_DAYS ?? 60);
-export const BASELINE = ["plugin:aphrody:relay", "plugin:aphrody:claude-bridge", "plugin:aphrody:memory", "claude-in-chrome"];
+export const BASELINE = ["plugin:aphrody:ai-os", "plugin:aphrody:claude-bridge", "plugin:aphrody:memory", "claude-in-chrome"];
 
 /** Claude Code names a server's tools `mcp__<server with every character outside [A-Za-z0-9_-] replaced by _>__<tool>`. */
 export const toolPrefix = (server: string): string => `mcp__${server.replace(/[^A-Za-z0-9_-]/g, "_")}__`;
