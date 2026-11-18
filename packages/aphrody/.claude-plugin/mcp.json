@@ -35,37 +35,10 @@
       "type": "http",
       "url": "https://mcp.eu.ovhcloud.com/mcp/v1_cloud_instance"
     },
-    "hostinger-vps": {
+    "hostinger": {
       "command": "bun",
       "args": [
-        "${USERPROFILE}/.bun/install/global/node_modules/@hostinger/mcp/src/servers/vps.js"
-      ],
-      "env": {
-        "HOSTINGER_API_TOKEN": "${HOSTINGER_API_TOKEN}"
-      }
-    },
-    "hostinger-dns": {
-      "command": "bun",
-      "args": [
-        "${USERPROFILE}/.bun/install/global/node_modules/@hostinger/mcp/src/servers/dns.js"
-      ],
-      "env": {
-        "HOSTINGER_API_TOKEN": "${HOSTINGER_API_TOKEN}"
-      }
-    },
-    "hostinger-domains": {
-      "command": "bun",
-      "args": [
-        "${USERPROFILE}/.bun/install/global/node_modules/@hostinger/mcp/src/servers/domains.js"
-      ],
-      "env": {
-        "HOSTINGER_API_TOKEN": "${HOSTINGER_API_TOKEN}"
-      }
-    },
-    "hostinger-billing": {
-      "command": "bun",
-      "args": [
-        "${USERPROFILE}/.bun/install/global/node_modules/@hostinger/mcp/src/servers/billing.js"
+        "${USERPROFILE}/.bun/install/global/node_modules/@hostinger/mcp/src/servers/all.js"
       ],
       "env": {
         "HOSTINGER_API_TOKEN": "${HOSTINGER_API_TOKEN}"
