@@ -1,5 +1,12 @@
 import { expect, test } from "bun:test";
-import { bin, load, platformKey, problems, sourceFor, type Manifest } from "./toolchain.ts";
+import {
+  bin,
+  load,
+  platformKey,
+  problems,
+  sourceFor,
+  type Manifest,
+} from "./toolchain.ts";
 
 test("the versioned manifest is valid", async () => {
   const manifest = await load();
@@ -19,7 +26,12 @@ test("a source resolves its version in the url and the archive member", () => {
       version: "2.1.0",
       check: ["gh", "--version"],
       role: "x",
-      "linux-x86_64": { url: "https://e.org/v{version}/gh_{version}.tar.gz", sha256: "a".repeat(64), archive: "tar.gz", member: "gh_{version}/bin/gh" },
+      "linux-x86_64": {
+        url: "https://e.org/v{version}/gh_{version}.tar.gz",
+        sha256: "a".repeat(64),
+        archive: "tar.gz",
+        member: "gh_{version}/bin/gh",
+      },
     },
   };
   expect(sourceFor(manifest.gh!, "linux-x86_64")).toEqual({
@@ -33,7 +45,16 @@ test("a source resolves its version in the url and the archive member", () => {
 
 test("problems rejects loose versions, unpinned or insecure downloads and archives without a member", () => {
   const manifest: Manifest = {
-    a: { version: "latest", check: [], role: "", "linux-x86_64": { url: "http://e.org/a", sha256: "abc", archive: "tar.gz" } },
+    a: {
+      version: "latest",
+      check: [],
+      role: "",
+      "linux-x86_64": {
+        url: "http://e.org/a",
+        sha256: "abc",
+        archive: "tar.gz",
+      },
+    },
   };
   expect(problems(manifest)).toEqual([
     'a: version "latest" is not an exact version',
