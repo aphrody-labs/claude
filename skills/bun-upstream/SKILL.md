@@ -1,6 +1,6 @@
 ---
-name: bun-upstream
-description: How to contribute to and optimise oven-sh/bun (and our fork aphrody-labs/bun): current Rust+C++ source layout, build (bun bd), tests, benchmarks (mitata), BuildKite CI, PR and AI-policy rules, open issue classes, JSC/WebKit pin. Use before changing Bun source, filing or fixing an upstream issue, or benchmarking Bun.
+name: "bun-upstream"
+description: "How to contribute to and optimise oven-sh/bun (and our fork aphrody-labs/bun): current Rust+C++ source layout, build (bun bd), tests, benchmarks (mitata), BuildKite CI, PR and AI-policy rules, open issue classes, JSC/WebKit pin. Use before changing Bun source, filing or fixing an upstream issue, or benchmarking Bun."
 ---
 
 # bun-upstream

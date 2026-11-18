@@ -1,6 +1,6 @@
 ---
-name: rust-upstream
-description: How rust-lang works and how to land or track a change: teams, RFC and FCP process, project goals (rust-lang/goals), tracking issues, bors merge queue, try builds, crater, rustc-perf and perf.rust-lang.org, release train, current 2026 blocker status. Use before opening a rust-lang PR or RFC, proposing a compiler optimisation, or deciding whether to depend on an unstable feature.
+name: "rust-upstream"
+description: "How rust-lang works and how to land or track a change: teams, RFC and FCP process, project goals (rust-lang/goals), tracking issues, bors merge queue, try builds, crater, rustc-perf and perf.rust-lang.org, release train, current 2026 blocker status. Use before opening a rust-lang PR or RFC, proposing a compiler optimisation, or deciding whether to depend on an unstable feature."
 ---
 
 # rust-upstream
@@ -21,13 +21,13 @@ Triage and reviewers are assigned by `triagebot` (`triagebot.toml` in rust-lang/
 
 ## Which route for which change
 
-| Change | Route |
-|---|---|
-| Bug fix, small refactor, perf patch | PR to rust-lang/rust, `r?` a reviewer (or auto-assigned), tests in `tests/ui` or `tests/codegen-llvm`/`mir-opt` |
-| New unstable feature, internal refactor with wide impact | Compiler MCP (major change proposal) on the compiler-team repo, Zulip thread, then PR |
-| New language/library/Cargo feature, user-visible | RFC in rust-lang/rfcs (needs sub-team sign-off, 10-day FCP: merge/close/postpone via rfcbot); accepted RFC gets a tracking issue in rust-lang/rust |
-| Stabilisation | Stabilisation PR with report, FCP from the owning teams (labels `disposition-merge`, `finished-final-comment-period`); examples: #155499 (never type), #164209 (new solver) |
-| Multi-month work needing resources | Project goal in `rust-lang/goals` (2026 is one annual period: proposals in January, vetting and champion in February, tracking issue, regular updates) |
+| Change                                                   | Route                                                                                                                                                                       |
+| -------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Bug fix, small refactor, perf patch                      | PR to rust-lang/rust, `r?` a reviewer (or auto-assigned), tests in `tests/ui` or `tests/codegen-llvm`/`mir-opt`                                                             |
+| New unstable feature, internal refactor with wide impact | Compiler MCP (major change proposal) on the compiler-team repo, Zulip thread, then PR                                                                                       |
+| New language/library/Cargo feature, user-visible         | RFC in rust-lang/rfcs (needs sub-team sign-off, 10-day FCP: merge/close/postpone via rfcbot); accepted RFC gets a tracking issue in rust-lang/rust                          |
+| Stabilisation                                            | Stabilisation PR with report, FCP from the owning teams (labels `disposition-merge`, `finished-final-comment-period`); examples: #155499 (never type), #164209 (new solver) |
+| Multi-month work needing resources                       | Project goal in `rust-lang/goals` (2026 is one annual period: proposals in January, vetting and champion in February, tracking issue, regular updates)                      |
 
 ## Landing a PR
 

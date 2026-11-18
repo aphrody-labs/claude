@@ -1,6 +1,6 @@
 ---
-name: async-design
-description: Design and review asynchronous code in Rust (tokio, futures, Pin) and Bun/JavaScript (Bun.serve, promises, streams, workers): structured concurrency, future size, cancellation, backpressure, work stealing, readiness versus completion I/O, io_uring and IOCP choices. Use when writing or reviewing an async server, scheduler, channel pipeline or event-loop code.
+name: "async-design"
+description: "Design and review asynchronous code in Rust (tokio, futures, Pin) and Bun/JavaScript (Bun.serve, promises, streams, workers): structured concurrency, future size, cancellation, backpressure, work stealing, readiness versus completion I/O, io_uring and IOCP choices. Use when writing or reviewing an async server, scheduler, channel pipeline or event-loop code."
 ---
 
 # async-design
@@ -23,11 +23,11 @@ Online: https://github.com/aphrody-dev/ay/tree/main/docs/science. Numbers for si
 
 ## Choosing the I/O model
 
-| Platform | Use | Note |
-|---|---|---|
-| Linux | epoll via the runtime; io_uring only if the kernel probe and `kernel.io_uring_disabled` allow it | syscalls per request 2 + 1/E (epoll) vs 2/B (io_uring); security record in `os.md` |
-| Windows | IOCP (the runtime does it) | IoRing is Windows 11 only and file-only |
-| macOS/BSD | kqueue | readiness only; disk I/O uses a thread pool |
+| Platform  | Use                                                                                              | Note                                                                               |
+| --------- | ------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------- |
+| Linux     | epoll via the runtime; io_uring only if the kernel probe and `kernel.io_uring_disabled` allow it | syscalls per request 2 + 1/E (epoll) vs 2/B (io_uring); security record in `os.md` |
+| Windows   | IOCP (the runtime does it)                                                                       | IoRing is Windows 11 only and file-only                                            |
+| macOS/BSD | kqueue                                                                                           | readiness only; disk I/O uses a thread pool                                        |
 
 Do not adopt io_uring because it is faster in theory: count syscalls (`strace -c -f`) and measure on the target first.
 
