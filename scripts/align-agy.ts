@@ -57,6 +57,7 @@ export function drift(src = AGY_SKILLS, dst = TARGET, merged = MERGED): Drift {
 
 export function apply(src = AGY_SKILLS, dst = TARGET, merged = MERGED): Drift {
   const d = drift(src, dst, merged);
+  if (!d.added.length && !d.changed.length && !d.removed.length && !d.merged.length) return d;
   rmSync(dst, { recursive: true, force: true });
   cpSync(src, dst, { recursive: true });
   for (const m of merged) rmSync(m, { recursive: true, force: true });
