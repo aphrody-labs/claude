@@ -19,7 +19,7 @@
     {
       "name": "bun",
       "source": "./packages/bun",
-      "description": "Bun-native workflow plugin: transparent command rewrites to bun/bunx/bun check/bun lint/bun fmt, non-blocking hooks, and Bun/Rust/JSC skills.",
+      "description": "Bun-native workflow plugin: transparent command rewrites to bun/bunx/bun check/bun lint/bun fmt and non-blocking hooks; its skills ship in the aphrody plugin (aligned on agy).",
       "version": "1.4.5"
     }
   ]

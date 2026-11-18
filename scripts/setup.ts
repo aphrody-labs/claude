@@ -128,23 +128,15 @@ async function setupClaudePlugins(): Promise<void> {
 
 function setupAgyAndGemini(): void {
   const geminiRoot = join(HOME, ".gemini");
-  const agyPluginsDir = join(geminiRoot, "config", "plugins");
-
-  for (const name of ["aphrody", "bun"]) {
-    ensureDirLink(join(REPO_ROOT, "packages", name), join(agyPluginsDir, name));
+  // agy owns its plugins: ~/.gemini/scripts/install.ts builds the unified plugin (~/.gemini/plugins/aphrody) and
+  // materializes it for agy and the Gemini CLI. Claude follows it (scripts/align-agy.ts), never the reverse.
+  const agyInstall = join(geminiRoot, "scripts", "install.ts");
+  if (existsSync(agyInstall)) {
+    const res = runCmd(["bun", agyInstall]);
+    if (!res.ok) console.error(`agy install: ${res.err || res.out}`);
   }
-
-  if (Bun.which("gemini")) {
-    for (const name of ["aphrody", "bun"]) {
-      const target = join(REPO_ROOT, "packages", name);
-      const extLink = join(geminiRoot, "extensions", name);
-      if (existsSync(extLink))
-        rmSync(extLink, { recursive: true, force: true });
-      const res = runCmd(["gemini", "extensions", "link", target, "--consent"]);
-      if (!res.ok)
-        console.error(`gemini extensions link ${name}: ${res.err || res.out}`);
-    }
-  }
+  const aligned = runCmd(["bun", join(REPO_ROOT, "scripts", "align-agy.ts")]);
+  if (!aligned.ok) console.error(`align-agy: ${aligned.err || aligned.out}`);
 
   ensureDirLink(
     join(REPO_ROOT, "packages", "bun"),

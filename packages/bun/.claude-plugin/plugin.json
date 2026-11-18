@@ -1,7 +1,7 @@
 {
   "name": "bun",
   "version": "1.4.5",
-  "description": "Bun-native workflow plugin: transparent npm/npx/node/yarn/pnpm/tsc/prettier/eslint rewrites to bun/bunx/bun check/bun lint/bun fmt, non-blocking hooks, and Bun/Rust/JSC skills.",
+  "description": "Bun-native workflow plugin: transparent command rewrites to bun/bunx/bun check/bun lint/bun fmt and non-blocking hooks; its skills ship in the aphrody plugin (aligned on agy).",
   "author": {
     "name": "aphrody-labs",
     "url": "https://github.com/aphrody-labs"
@@ -17,9 +17,7 @@
     "package-manager",
     "typescript",
     "rust",
-    "skills",
     "hooks"
   ],
-  "hooks": "./.claude-plugin/hooks.json",
-  "skills": "./skills/"
+  "hooks": "./.claude-plugin/hooks.json"
 }

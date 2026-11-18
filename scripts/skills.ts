@@ -48,7 +48,8 @@ function skillFiles(dir: string, depth = 5): string[] {
       if (
         e.name === "node_modules" ||
         e.name === ".git" ||
-        e.name === "references"
+        e.name === "references" ||
+        e.name === "upstream"
       )
         continue;
       out.push(...skillFiles(p, depth - 1));

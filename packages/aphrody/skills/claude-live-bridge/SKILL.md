@@ -17,7 +17,7 @@ Use this bridge to communicate your ongoing actions, coordinate disjoint file sc
 ## 2. Via CLI (`scripts/notify.ts`)
 
 ```sh
-bun ~/.claude/scripts/notify.ts --list
-bun ~/.claude/scripts/notify.ts --to all --from agy "Updated global ~/.gemini config and restarted AphrodyRelay."
-bun ~/.claude/scripts/notify.ts --to <sessionId|name|pid> --urgent "Pause edits on shared config while check runs."
+bun ~/.gemini/scripts/notify.ts --list
+bun ~/.gemini/scripts/notify.ts --to all --from agy "Updated global ~/.gemini config and restarted AphrodyRelay."
+bun ~/.gemini/scripts/notify.ts --to <sessionId|name|pid> --urgent "Pause edits on shared config while check runs."
 ```

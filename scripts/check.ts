@@ -79,6 +79,11 @@ if (Bun.which("gemini")) {
 
 // 2. Native TypeScript, lint, and formatting checks.
 checkStep("bun check", ["bun", "check", "--no-script"]);
+checkStep("agy skill alignment (scripts/align-agy.ts --check)", [
+  "bun",
+  "scripts/align-agy.ts",
+  "--check",
+]);
 checkStep("bun lint", ["bun", "lint"]);
 checkStep("bun fmt --check", [
   "bun",
@@ -87,7 +92,6 @@ checkStep("bun fmt --check", [
   "scripts",
   "packages/aphrody/hooks-handlers",
   "packages/bun/hooks",
-  "gemini",
   "CLAUDE.md",
   "README.md",
   "settings.json",

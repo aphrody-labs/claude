@@ -3,7 +3,7 @@
   "name": "bun",
   "displayName": "Bun OS",
   "version": "1.4.5",
-  "description": "Bun-native workflow plugin: transparent npm/npx/node/yarn/pnpm/tsc/prettier/eslint rewrites to bun/bunx/bun check/bun lint/bun fmt, non-blocking hooks, and Bun/Rust/JSC skills.",
+  "description": "Bun-native workflow plugin: transparent command rewrites to bun/bunx/bun check/bun lint/bun fmt and non-blocking hooks; its skills ship in the aphrody plugin (aligned on agy).",
   "logo": "assets/logo.svg",
   "suggestedPrompts": [
     "Rewrite Node/npm scripts to Bun-native APIs and verify with bun check",
@@ -17,5 +17,12 @@
   "homepage": "https://github.com/aphrody-labs/bun",
   "repository": "https://github.com/aphrody-labs/claude",
   "license": "MIT",
-  "keywords": ["bun", "typescript", "runtime", "rust", "jsc", "bundler"]
+  "keywords": [
+    "bun",
+    "typescript",
+    "runtime",
+    "rust",
+    "jsc",
+    "bundler"
+  ]
 }
