@@ -52,11 +52,18 @@ export function proofPath(proof: string): string | null {
   return p === "none" ? null : p;
 }
 
+/** Directories that exist only on a machine that ran Claude Code (untracked runtime state): a proof inside them cannot exist in a clean checkout. */
+const RUNTIME_DIRS = ["plugins", "projects"];
+
 export function missingProofs(rows: Capability[], root = REPO_ROOT): string[] {
   const out: string[] = [];
+  const tracked =
+    existsSync(join(root, "projects")) || existsSync(join(root, "plugins"));
   for (const r of rows) {
     if (r.claude.status === "missing") continue;
     const p = proofPath(r.claude.proof);
+    if (p && !tracked && RUNTIME_DIRS.includes(p.split("/")[0] as string))
+      continue;
     if (p && !existsSync(join(root, p))) out.push(`${r.id}: ${p}`);
   }
   return out;
