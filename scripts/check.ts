@@ -84,6 +84,11 @@ checkStep("agy skill alignment (scripts/align-agy.ts --check)", [
   "scripts/align-agy.ts",
   "--check",
 ]);
+checkStep("directory map (scripts/map.ts --check)", [
+  "bun",
+  "scripts/map.ts",
+  "--check",
+]);
 checkStep("Claude profile (scripts/profile.ts --check)", [
   "bun",
   "scripts/profile.ts",

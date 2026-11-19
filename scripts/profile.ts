@@ -11,6 +11,7 @@
 //                       per-project disabledMcpServers in ~/.claude.json (what `/mcp disable` writes)
 //                 [plugins] id = bool               -> enabledPlugins overrides
 //                 [skills] on / name_only           -> every other discovered skill is "off"
+//                 [settings] any key (outputStyle, hooks, env) -> copied verbatim into settings.json
 //                 rendered into <repo>/.claude/settings.json (generated, committed).
 // allowedMcpServers is not used: it matches plugin stdio servers on their expanded, machine-specific command line.
 import {
@@ -32,6 +33,7 @@ export type RepoProfile = {
   mcp?: { allow?: string[] };
   plugins?: Record<string, boolean>;
   skills?: { on?: string[]; name_only?: string[] };
+  settings?: Record<string, unknown>;
 };
 type Install = { scope: string; installPath: string; projectPath?: string };
 type Manifest = {
@@ -195,6 +197,7 @@ export function renderRepo(
   }
   return {
     settings: {
+      ...(profile.settings ?? {}),
       $schema: "https://json.schemastore.org/claude-code-settings.json",
       disableClaudeAiConnectors: !allow.some((n) => n.startsWith("claude.ai ")),
       enabledMcpjsonServers: mcpJson.filter((n) => allow.includes(n)),

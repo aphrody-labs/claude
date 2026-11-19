@@ -1,5 +1,5 @@
 ---
-name: "rust-upstream"
+name: "rust-lang-process"
 description: "How rust-lang works and how to land or track a change: teams, RFC and FCP process, project goals (rust-lang/goals), tracking issues, bors merge queue, try builds, crater, rustc-perf and perf.rust-lang.org, release train, current 2026 blocker status. Use before opening a rust-lang PR or RFC, proposing a compiler optimisation, or deciding whether to depend on an unstable feature."
 ---
 

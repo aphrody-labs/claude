@@ -44,7 +44,10 @@ description: >-
 ## References
 
 - [Zed Architecture & Dev Docs](../../docs/zed/SUMMARY.md)
+- [Zed AI Docs Mirror](../../docs/zed/ai/overview.md)
+- [Zed Nix Mirror](../../docs/zed/nix/root-flake.nix)
 - [UI Checklist](../../docs/zed/development/ui-checklist.md)
 - [Extension Development](../../docs/zed/extensions.md)
 - [Brand Conformance](../../docs/conventions/CONVENTIONS.md)
-- Also see sibling skills: `zed-cherry-pick`, `aphrody-brand`, `gpui`, `gpui-test`, `gpui-bench`, `lint-creator`.
+- Real-time live refresh (Issues, PRs, Discussions, Actions, Project #78, Security Advisories, Releases, `zed.dev/{blog,about,roadmap,theme-builder,languages}`): `bun ~/.gemini/scripts/import-zed-brain.ts --live --sync` (`~/.gemini/brain/zed/`).
+- Also see sibling skills: `zed-ai`, `zed-nix`, `zed-cherry-pick`, `aphrody-brand`, `gpui`, `gpui-test`, `gpui-bench`, `lint-creator`.

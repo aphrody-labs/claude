@@ -11,7 +11,7 @@ Every fact keeps its source (library id, repo plus commit, file:line, command ou
 
 `context7` is a hub server declared in `tools/agents/toolchain.toml` (`[[hub.mcp]]`, `https://mcp.context7.com/mcp`, no key). Claude Code reaches it through the relay:
 
-1. `hub_tools` with `search: "context7"` lists the tools: `context7__resolve-library-id` and `context7__query-docs`.
+1. `hub_tools` with `query: "context7"` lists the tools: `context7__resolve-library-id` and `context7__query-docs`.
 2. `hub_call` with `name: "context7__resolve-library-id"` and `arguments: { libraryName, query }` returns ids such as `/oven-sh/bun`.
 3. `hub_call` with `name: "context7__query-docs"` and `arguments: { libraryId, query }` returns the docs.
 

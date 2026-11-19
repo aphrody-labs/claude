@@ -5,10 +5,12 @@ import {
   mkdirSync,
   readdirSync,
   readFileSync,
+  rmSync,
   writeFileSync,
 } from "node:fs";
 import { spawn } from "node:child_process";
-import { basename, join } from "node:path";
+import { homedir, hostname, platform } from "node:os";
+import { basename, dirname, join } from "node:path";
 import {
   CLAUDE_HOME,
   detectHarness,
@@ -255,25 +257,168 @@ function handleDistill(): void {
   state.lastDistillAt = Date.now();
   state.lastLineCount = kept.length;
   saveState(state);
-  console.log(`Distilled ${parsed.length} journal entries -> ${digestPath}`);
+  const promoted = autoPromoteDigests();
+  console.log(`Distilled ${parsed.length} journal entries -> ${digestPath} (auto-promoted ${promoted.promoted})`);
+}
+
+function resolveCloudConfig(): { url: string; token?: string; pcId: string } {
+  const url = (process.env.APHRODY_LEARN_URL?.trim() || "https://learn.aphrody.com").replace(/\/$/, "");
+  const tokenFile = join(homedir(), ".config", "aphrody", "learn.token");
+  const token =
+    process.env.APHRODY_LEARN_TOKEN?.trim() ||
+    process.env.APHRODY_FLEET_TOKEN?.trim() ||
+    (existsSync(tokenFile) ? readFileSync(tokenFile, "utf8").trim() : undefined);
+  const pcId = `${platform()}-${hostname().replace(/[^A-Za-z0-9_.-]/g, "_").slice(0, 32)}`;
+  return { url, token, pcId };
+}
+
+function autoPromoteDigests(): { promoted: number; filesRemoved: number } {
+  if (!existsSync(INBOX)) return { promoted: 0, filesRemoved: 0 };
+  const digests = readdirSync(INBOX).filter((f) => f.endsWith("-digest.md"));
+  if (digests.length === 0) return { promoted: 0, filesRemoved: 0 };
+  const memDir = join(CLAUDE_HOME, "projects", "shared", "memory");
+  const memFile = join(memDir, "learned-auto.md");
+  const cur = existsSync(memFile) ? readFileSync(memFile, "utf8") : "# Autonomous Shared Learnings\n";
+  const seen = new Set(cur.split(/\r?\n/).map((l) => l.trim()));
+  const adds: string[] = [];
+  for (const f of digests) {
+    const p = join(INBOX, f);
+    for (const line of readFileSync(p, "utf8").split(/\r?\n/)) {
+      const m = /^- \[(correction|recovery|error) x(\d+)\]\s+\([^)]+\)\s+(.+)$/.exec(line.trim());
+      if (!m) continue;
+      if (m[1] === "correction" || m[1] === "recovery" || Number(m[2]) >= 2) {
+        const entry = `- [${m[1]}] ${redactSecrets(m[3]).slice(0, 220)}`;
+        if (!seen.has(entry)) {
+          seen.add(entry);
+          adds.push(entry);
+        }
+      }
+    }
+    rmSync(p, { force: true });
+  }
+  if (adds.length > 0) {
+    mkdirSync(memDir, { recursive: true });
+    writeFileSync(memFile, `${cur.trimEnd()}\n${adds.join("\n")}\n`, "utf8");
+    const idx = join(memDir, "MEMORY.md");
+    const curIdx = existsSync(idx) ? readFileSync(idx, "utf8") : "# Shared Memory\n";
+    if (!curIdx.includes("(learned-auto.md)")) {
+      writeFileSync(idx, `${curIdx.trimEnd()}\n- [learned-auto](learned-auto.md) — Autonomous cross-session rules.\n`, "utf8");
+    }
+  }
+  return { promoted: adds.length, filesRemoved: digests.length };
+}
+
+async function syncCloudLearn(mode: "push" | "pull" | "cycle" = "cycle"): Promise<Record<string, unknown>> {
+  const { url, token, pcId } = resolveCloudConfig();
+  const csPath = join(LEARN_DIR, "cloud-state.json");
+  let cs = { lastRevision: -1, lastPushLine: 0, lastCheckAt: 0 };
+  try {
+    cs = JSON.parse(readFileSync(csPath, "utf8")) as typeof cs;
+  } catch {
+    // Use defaults.
+  }
+  const headers: Record<string, string> = {
+    "content-type": "application/json",
+    ...(token ? { authorization: `Bearer ${token}` } : {}),
+  };
+  let pushed = 0;
+  try {
+    if ((mode === "push" || mode === "cycle") && existsSync(JOURNAL)) {
+      const lines = readFileSync(JOURNAL, "utf8").split(/\r?\n/).filter(Boolean);
+      const start = Math.min(cs.lastPushLine, lines.length);
+      const batch = lines
+        .slice(start, start + 60)
+        .map((l) => {
+          try {
+            return JSON.parse(l) as JournalEntry;
+          } catch {
+            return null;
+          }
+        })
+        .filter((x): x is JournalEntry => x !== null && !!x.summary);
+      if (batch.length > 0) {
+        const res = await fetch(`${url}/api/learn/events?distill=1`, {
+          method: "POST",
+          headers,
+          body: JSON.stringify({ harness: "claude", pcId, entries: batch }),
+          signal: AbortSignal.timeout(4000),
+        });
+        if (res.ok) {
+          pushed = batch.length;
+          cs.lastPushLine = Math.min(lines.length, start + 60);
+        }
+      } else {
+        cs.lastPushLine = lines.length;
+      }
+    }
+    if (mode === "pull" || mode === "cycle") {
+      const mUrl = cs.lastRevision >= 0 ? `${url}/api/learn/manifest.json?since=${cs.lastRevision}` : `${url}/api/learn/manifest.json`;
+      const man = await fetch(mUrl, { headers, signal: AbortSignal.timeout(3500) });
+      if (man.status === 200) {
+        const bRes = await fetch(`${url}/api/learn/bundle.json`, { headers, signal: AbortSignal.timeout(4500) });
+        if (bRes.ok) {
+          const bundle = (await bRes.json()) as {
+            revision: number;
+            memory?: { topics?: Record<string, { title: string; summary: string; bullets: string[] }> };
+            brain?: { docs?: Record<string, { path: string; content: string }> };
+          };
+          const memDir = join(CLAUDE_HOME, "projects", "shared", "memory");
+          mkdirSync(memDir, { recursive: true });
+          const outLines = [`# Aphrody Cloud Memory (rev ${bundle.revision})`, ""];
+          for (const t of Object.values(bundle.memory?.topics ?? {})) {
+            outLines.push(`## ${t.title}`, t.summary || "", ...t.bullets.slice(0, 10).map((b) => `- ${b}`), "");
+          }
+          writeFileSync(join(memDir, "learned-cloud.md"), `${outLines.join("\n").trim()}\n`, "utf8");
+          const idx = join(memDir, "MEMORY.md");
+          const curIdx = existsSync(idx) ? readFileSync(idx, "utf8") : "# Shared Memory\n";
+          if (!curIdx.includes("(learned-cloud.md)")) {
+            writeFileSync(idx, `${curIdx.trimEnd()}\n- [learned-cloud](learned-cloud.md) — Autonomous serverless unified memory.\n`, "utf8");
+          }
+          for (const doc of Object.values(bundle.brain?.docs ?? {})) {
+            const dst = join(LEARN_DIR, "brain-cloud", doc.path.replace(/^\/+/, ""));
+            mkdirSync(dirname(dst), { recursive: true });
+            writeFileSync(dst, doc.content, "utf8");
+          }
+          cs.lastRevision = bundle.revision;
+        }
+      }
+    }
+  } catch {
+    // Non-blocking offline resilience.
+  }
+  cs.lastCheckAt = Date.now();
+  mkdirSync(LEARN_DIR, { recursive: true });
+  writeFileSync(csPath, `${JSON.stringify(cs, null, 2)}\n`, "utf8");
+  return { ok: true, pushed, revision: cs.lastRevision };
 }
 
 const mode = Bun.argv[2] ?? "capture";
 if (mode === "distill") {
   handleDistill();
-} else if (mode === "nudge") {
-  // Session start: surface undistilled digests so the agent folds them into memory (the self-improvement loop closes here).
+} else if (mode === "distill-quiet") {
   await readHookEvent();
-  const digests = existsSync(INBOX)
-    ? readdirSync(INBOX).filter((f) => f.endsWith("-digest.md"))
-    : [];
-  if (digests.length === 0) writeEmpty();
-  else
-    emitContext(
-      detectHarness(Bun.argv[3]),
-      "SessionStart",
-      `Learning inbox holds ${digests.length} undistilled digest(s) in ${INBOX}. Run the learn skill: merge durable rules into project memory, then delete the digests.`,
-    );
+  handleDistill();
+  await syncCloudLearn("cycle");
+  writeEmpty();
+} else if (mode === "cloud-sync") {
+  await readHookEvent();
+  console.log(JSON.stringify(await syncCloudLearn("cycle")));
+} else if (mode === "nudge") {
+  await readHookEvent();
+  const promoted = autoPromoteDigests();
+  if (promoted.promoted > 0) {
+    spawn("bun", ["--no-install", join(CLAUDE_HOME, "scripts", "memory.ts"), "index"], {
+      detached: true,
+      stdio: "ignore",
+      windowsHide: true,
+    }).unref();
+  }
+  spawn("bun", ["--no-install", "--no-env-file", import.meta.path, "cloud-sync"], {
+    detached: true,
+    stdio: "ignore",
+    windowsHide: true,
+  }).unref();
+  writeEmpty();
 } else if (mode === "status") {
   const lines = existsSync(JOURNAL)
     ? readFileSync(JOURNAL, "utf8").split(/\r?\n/).filter(Boolean).length

@@ -2,7 +2,9 @@
   "mcpServers": {
     "claude-bridge": {
       "command": "bun",
-      "args": ["${PLUGIN_ROOT}/hooks-handlers/bridge-mcp.ts"]
+      "args": [
+        "${PLUGIN_ROOT}/hooks-handlers/bridge-mcp.ts"
+      ]
     },
     "hostinger": {
       "serverUrl": "https://mcp.hostinger.com"
@@ -21,6 +23,9 @@
     },
     "ovh-cloud-instance": {
       "serverUrl": "https://mcp.eu.ovhcloud.com/mcp/v1_cloud_instance"
+    },
+    "docker-docs": {
+      "serverUrl": "https://ai-backend-service.docker.com/mcp"
     }
   }
 }

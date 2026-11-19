@@ -43,7 +43,7 @@ const candidates = [
 ].filter((x): x is string => Boolean(x));
 
 const git = Bun.which("git");
-/** A checkout is trusted when it is not the home or a filesystem root and its origin is aphrody-dev/ay. */
+/** A checkout is trusted when it is not the home or a filesystem root and its origin is aphrody-labs/ay (or legacy aphrody-dev/ay). */
 function trusted(dir: string): boolean {
   const abs = resolve(dir).replaceAll("\\", "/");
   if (abs === home || dirname(abs) === abs || !git) return false;
@@ -52,7 +52,7 @@ function trusted(dir: string): boolean {
     stderr: "ignore",
     stdin: "ignore",
   });
-  return /[/:]aphrody-dev\/ay(\.git)?$/i.test(r.stdout.toString().trim());
+  return /[/:]aphrody-(?:labs|dev)\/ay(\.git)?$/i.test(r.stdout.toString().trim());
 }
 
 const rel = ["packages", "ai-os", "src", "server", "cli.ts"] as const;
@@ -61,7 +61,7 @@ const target = candidates.find(
 );
 if (!target) {
   console.error(
-    "ai-os-stdio: no trusted aphrody-dev/ay checkout with packages/ai-os/src/server/cli.ts (clone it next to your other checkouts and set WORKSPACE_ROOT, or set AY_ROOT)",
+    "ai-os-stdio: no trusted aphrody-labs/ay checkout with packages/ai-os/src/server/cli.ts (clone it next to your other checkouts and set WORKSPACE_ROOT, or set AY_ROOT)",
   );
   process.exit(1);
 }

@@ -1,2 +1,3 @@
 [test]
 timeout = 30000
+pathIgnorePatterns = ["**/references/**/*.example.spec.ts"]

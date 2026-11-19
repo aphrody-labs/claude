@@ -103,7 +103,7 @@ area = "skills"
 capability = "SKILL.md skills with loader"
 openclaw = { status = "present", proof = "skills/*/SKILL.md (52), src/skills/" }
 hermes = { status = "present", proof = "skills/ (44), optional-skills/ (141), tools/skills_tool.py" }
-claude = { status = "present", proof = "packages/aphrody/skills/learn/SKILL.md", note = "41 skills in two plugins plus Anthropic document/example skills" }
+claude = { status = "present", proof = "packages/aphrody/skills/fleet/SKILL.md", note = "41 skills in two plugins plus Anthropic document/example skills" }
 
 [[capability]]
 id = "skill-hub"
@@ -119,7 +119,7 @@ area = "skills"
 capability = "Agent writes and maintains its own skills"
 openclaw = { status = "present", proof = "extensions/skill-workshop (auto/propose, 30-day archive)" }
 hermes = { status = "present", proof = "tools/skill_manage, agent/curator.py" }
-claude = { status = "partial", proof = "packages/aphrody/skills/learn/SKILL.md", note = "learn skill folds digests into memory; skill-creator comes from example-skills" }
+claude = { status = "partial", proof = "packages/aphrody/hooks-handlers/learn.ts", note = "hooks-handlers/learn.ts folds digests into memory; skill-creator comes from example-skills" }
 
 [[capability]]
 id = "skill-audit"

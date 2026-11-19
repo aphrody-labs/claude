@@ -32,5 +32,7 @@ mirrors and datasets go. Put a per-project directory under it, never under `~` o
 - Prefer moving work to the large volume over deleting; delete only build outputs, caches and temp dirs you created.
 - Resizing or repartitioning a disk with data needs a snapshot or provider backup first (OVH/Hostinger API);
   growing into free space (growpart, lvextend -r, xfs_growfs) is online and non-destructive.
-- Build flags that keep disks small: `CARGO_INCREMENTAL=0`, `CARGO_PROFILE_DEV_DEBUG=0`, a shared
-  `CARGO_TARGET_DIR` on the large volume, sccache.
+- Build flags that keep disks small: `CARGO_INCREMENTAL=0`, `CARGO_PROFILE_DEV_DEBUG=line-tables-only`, a shared
+  `CARGO_TARGET_DIR` on the large volume, `sccache`, and `cp --reflink=auto` on XFS (`reflink=1`).
+- Keep XFS volumes `<= 80%` used (allocator stalls sharply above 90%); mount build XFS with `logbsize=256k,logbufs=8,noatime,inode64,noquota` and set block scheduler to `none` on `ROTA=0` virtual disks (never `bfq`).
+- Kernel VM & swap invariants on build VPS: `zram0` (`zstd`, prio 100) + disk swapfile (prio 10), `ZSWAP=N` (no double-compression), `vm.page-cluster=0`, `MGLRU=0x0007`, `THP=madvise`, `vm.watermark_boost_factor=0`, `vm.watermark_scale_factor=125`.

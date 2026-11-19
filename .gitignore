@@ -4,6 +4,8 @@
 !/.gitattributes
 !/.editorconfig
 !/README.md
+!/MAP.tsv
+!/map.toml
 !/CLAUDE.md
 !/settings.json
 !/gitconfig
