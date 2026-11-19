@@ -7,6 +7,12 @@
 baseline = ["plugin:aphrody:ai-os", "plugin:aphrody:claude-bridge", "plugin:aphrody:memory", "claude-in-chrome"]
 
 [skills]
+# Not mirrored from agy into packages/aphrody (scripts/align-agy.ts also skips every skill that an installed plugin ships,
+# for example the official cloudflare plugin): unofficial content with no upstream source.
+exclude = [
+  "cloudflare-platform", # unofficial Cloudflare reference; the cloudflare plugin and mcp.cloudflare.com are the sources
+  "ay-cf-finops-infra",  # runbook for an internal ay-cf stack, not Cloudflare material
+]
 # Duplicates: hidden from both the model and the / menu in Claude Code (agy keeps them through align-agy).
 off = [
   "aphrody:no-slop-humanizer", # aphrody:humanizer covers it with the repository rules
