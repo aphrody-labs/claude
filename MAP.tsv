@@ -1,9 +1,10 @@
 dir	tier	files	bytes	gate
-(root)	config	17	21622	bun scripts/check.ts
+(root)	config	21	37978	bun scripts/check.ts
 .claude	misc	1	1518	bun scripts/check.ts
 .claude-plugin	marketplace	1	942	claude plugin validate .
+.github	misc	3	1653	bun scripts/check.ts
 docs	docs	10	353782	read-only
-packages/aphrody	plugin	715	5337416	claude plugin validate packages/aphrody
+packages/aphrody	plugin	715	5337262	claude plugin validate packages/aphrody
 packages/bun	plugin	17	145973	claude plugin validate packages/bun
-scripts	typed-bun	48	259190	bun test scripts
+scripts	typed-bun	48	259573	bun test scripts
 skills	user-skill	2	4126	bun scripts/skills.ts
