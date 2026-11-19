@@ -11,7 +11,7 @@ Claude Code as an agent in the OpenClaw / Hermes Agent model: the harness is the
 - `agent.toml`: agent layer config (gateway channels, scheduled jobs).
 - `packages/`: plugins. `aphrody` (agents, hooks-handlers, MCP servers `claude-bridge` and `memory`, skills, output style) and `bun` (command rewrites, Bun/Rust/JSC skills). Marketplace: `.claude-plugin/marketplace.json`.
 - `skills/`: user-level skills outside any plugin (`agent-ops`, `linux-kernel-docs`); every other skill lives once, in the aphrody plugin (source `~/.gemini/plugins/aphrody/skills`, mirrored by `scripts/align-agy.ts`) or in the fairwind plugin (`aphrody-labs/fairwind`, `plugin/`, installed as `fairwind@fairwind`).
-- `MAP.tsv` + `map.toml`: byte-exact directory map with the gate of each directory, rendered by `scripts/map.ts` (gated by `bun run check`), same shape as fairwind's `cargo xtask map`.
+- `MAP.tsv` + `map.toml`: byte-exact directory map with the gate of each directory, rendered by the organization's `tools/map.ts` (aphrody-labs/.github; gated by `bun run check`), same shape as fairwind's `cargo xtask map`.
 - `scripts/`: typed Bun scripts, each with a `.test.ts`: `setup`, `check`, `sync`, `merge-brain`, `memory`, `cron`, `gateway`, `graph`, `bench`, `matrix`, `skills`, `notify`, `statusline`, `lib`, `hygiene`; `ops/` holds account-level one-offs (`github`, `cloudflare-ci-token`).
 - `docs/`: `research/` (agent framework matrix), `graph/` (module graph, JSON and Mermaid), `bench/` (hyperfine results).
 - `gemini/`: portable templates for `~/.gemini/` materialized by `scripts/setup.ts`.

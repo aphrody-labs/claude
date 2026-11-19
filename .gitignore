@@ -4,6 +4,11 @@
 !/.gitattributes
 !/.editorconfig
 !/README.md
+!/LICENSE
+!/REVIEW.md
+!/.gitmessage
+!/.markdownlint-cli2.jsonc
+!/.github/
 !/MAP.tsv
 !/map.toml
 !/CLAUDE.md

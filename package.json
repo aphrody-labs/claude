@@ -13,7 +13,6 @@
     "memory": "bun scripts/memory.ts",
     "cron": "bun scripts/cron.ts",
     "skills": "bun scripts/skills.ts",
-    "map": "bun scripts/map.ts",
     "github": "bun scripts/ops/github.ts"
   },
   "devDependencies": {

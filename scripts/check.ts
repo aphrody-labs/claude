@@ -84,11 +84,10 @@ checkStep("agy skill alignment (scripts/align-agy.ts --check)", [
   "scripts/align-agy.ts",
   "--check",
 ]);
-checkStep("directory map (scripts/map.ts --check)", [
-  "bun",
-  "scripts/map.ts",
-  "--check",
-]);
+// Directory map: one tool for every repository, owned by the organization repository (aphrody-labs/.github tools/map.ts).
+const mapTool = join(discoverWorkspaceRoot(), "aphrody-labs-github", "tools", "map.ts");
+if (existsSync(mapTool))
+  checkStep("directory map (aphrody-labs/.github tools/map.ts --check)", ["bun", mapTool, "--root", REPO_ROOT, "--check"]);
 checkStep("Claude profile (scripts/profile.ts --check)", [
   "bun",
   "scripts/profile.ts",
