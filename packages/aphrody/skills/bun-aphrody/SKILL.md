@@ -1,116 +1,36 @@
 ---
 name: bun-aphrody
-description: "Start here for any work with Bun: use the Aphrody runtime (aphrody-labs/bun) for everything (bun, bunx, bun uv instead of node, npm, npx, yarn, pnpm, pip, python), install and upgrade it, and pick the skill or memory fiche for the task."
+description: "Start here for any Bun work: use the Aphrody runtime (aphrody-labs/bun) for everything (bun and bunx instead of node, npm, npx, yarn, pnpm, pip). Use BEFORE any choice of JS/TS tool, script, test, format, typecheck or build. Routes to Bun APIs vs Node/npm, runtime docs, building and testing the runtime, Rust crates, C++/JSC bindings, nginx, video, VPN, yolo, legacy-Node migration (n2b) and the Bun graph."
 ---
+# Bun with the Aphrody runtime
 
-# Working with the Aphrody runtime
+`references/core.md` is the former body of this skill (install, upgrade, runtime rules, memory fiches): read it first, then the reference that matches the task.
 
-- Use the Aphrody runtime (aphrody-labs/bun) for everything JavaScript, TypeScript and Python: `bun` instead of `node`, `bun install`/`bun add`/`bun remove`/`bun run` instead of `npm`, `yarn` and `pnpm`, `bunx` instead of `npx` for unrelated packages, `bun uv` instead of `pip`, `python` and `uv`.
-- Type checking, lint, formatting and migration must use native `bun check`, `bun lint`, `bun fmt` and `bun n2b` directly. Never delegate these four commands to subprocess backends, standalone Oxc tools, tsgo/tsc or external n2b. In a Bun checkout, qualify them with `bun bd check`, `bun bd lint`, `bun bd fmt` and `bun bd n2b`; correct native failures instead of using an external fallback. Package scripts may expose these native commands but must not wrap or replace them; `bunx` is reserved for unrelated packages.
-- Check which `bun` runs with `bun agent-plugin doctor --json`. Stable releases such as `1.4.4+<commit>` are identified by `process.release.sourceUrl` under `https://github.com/aphrody-labs/bun/releases/download/`, with a matching release version and native `Bun.revision` commit. Older `-aphrody.N` revisions remain recognized. The plugin's content hash identifies the plugin, not the runtime; this provenance check does not verify an archive checksum. If the runtime is not recognized, install it (`curl -fsSL https://aphrody.app/install | bash`, or `powershell -c "irm aphrody.app/install.ps1|iex"` on Windows) or upgrade it (`bun upgrade`).
-- The `bun` MCP server (`bun mcp`) exposes the tools of the Aphrody runtime to the agent; prefer them over ad hoc scripts when they cover the task.
-- In a checkout of the Bun repository, build with `bun bd` and test with `bun bd test <file>`: plain `bun test` runs the installed `bun`, not your changes. Read `AGENTS.md` and the repository's applicable guidance first; `CLAUDE.md` remains a compatible source, not a restriction to Claude.
-- For a task on Bun itself, load the matching skill of this plugin (`bun-build`, `bun-tests`, `bun-crates`, `bun-runtime`, `bun-docs`) and the reference it lists.
+Read the reference that matches the task in full before acting. Paths written inside reference files are relative to this skill's directory (the one holding this SKILL.md). Where a reference names another merged skill, open `references/<name>.md`; its helper files are under `references/<name>/`.
 
-## Skills of this plugin
+| Reference | Use when |
+| --- | --- |
+| [references/core.md](references/core.md) | Former body of this skill (read first) |
+| [references/bun.md](references/bun.md) | bun reference (CLI, runtime API, upstream docs), bun:ffi bridge to native C ABIs, zero-dependency / zero-bunx package rules with native replacements (Bun.SQL, bun:sqlite, Bun.S3Client, Bun.Image, Bun.serve, Bun.Glob, bun fmt, bun check, bun build --compile). Use BEFORE any choice of JS/TS tool, script, test, format,... |
+| [references/bun-native.md](references/bun-native.md) | Write Bun-native code for Bun 1.4.5: Bun APIs before Node.js modules and npm packages (Bun.serve, Bun.file/Bun.write, bun:sqlite, Bun.sql, Bun.redis, Bun.s3, Bun.$, Bun.spawn, bun:test, Bun.build, Bun.password, Bun.Glob, HTMLRewriter, bun:ffi). Use whenever writing, reviewing or migrating JavaScript or TypeScript that... |
+| [references/bun-apis.md](references/bun-apis.md) | Which Bun API replaces which Node.js module or npm package in an application run by Bun OS, and how complete the Node.js compatibility is. Use before adding a dependency or writing Node-style code. |
+| [references/bun-awesome.md](references/bun-awesome.md) | Curated Bun 1.4+ stack, ecosystem libraries, frameworks, and architectural patterns. Use when choosing libraries or templates for web servers, APIs, databases, fullstack apps, workers, containers, or CI with Bun. |
+| [references/bun-rust-first.md](references/bun-rust-first.md) | Obligatoire pour concevoir, coder, refactoriser ou distribuer les composants Aphrody avec Rust et Bun : vérifier les API actuelles, réutiliser les propriétaires existants, limiter dépendances et builds, garder un noyau minimal et des extensions optionnelles. |
+| [references/bun-legacy-replace.md](references/bun-legacy-replace.md) | Analyze and migrate legacy Node.js, npm/Yarn/pnpm, CommonJS, Dockerfile, CI, and tsconfig codebases to Bun 1.4+ native APIs and commands. Use when scanning for legacy JS/TS patterns, replacing npm packages with Bun built-ins, or planning a Bun/Rust migration. |
+| [references/n2b.md](references/n2b.md) | Move a Node.js project to Bun with n2b (`bun n2b`): safe and behavior-changing rewrites, reports, project migration. Use when converting Node code, scripts or package.json to Bun. |
+| [references/bun-deps.md](references/bun-deps.md) | Inspect installed npm/Cargo/vendor dependency trees, metadata, and docs offline at their exact installed versions using bun pm ls/why/info, relay core_ingest/core_query, and local node_modules/Cargo sources instead of guessing from web searches. |
+| [references/bun-runtime.md](references/bun-runtime.md) | How the Aphrody runtime works and is documented: Bun APIs, CLI commands, built-in JS modules, node:* compatibility, Bun.serve, fetch and streams, HTTP/SQL/Valkey, the shell, the test runner and the package manager (bun install, lockfile, linkers). |
+| [references/bun-docs.md](references/bun-docs.md) | Find the right page of the Aphrody runtime's documentation (docs/, 406 pages: runtime, bundler, package manager, test runner, guides, project) and the packages in packages/. |
+| [references/bun-build.md](references/bun-build.md) | Build, run and lint the Aphrody runtime (aphrody-labs/bun) from a checkout: `bun bd`, the 92 package.json scripts (gn, gn:vendor, vendor:audit, vendor:setup, depots_tools, depot_tools, chromium, factory, ...), build profiles, Windows/Linux toolchains, codegen and vendored dependencies. |
+| [references/bun-tests.md](references/bun-tests.md) | Write and run tests in the Aphrody runtime (aphrody-labs/bun): `bun bd test <file>`, where a test goes (test/js, test/cli, test/bundler, regression), the harness (bunExe, bunEnv, tempDir, normalizeBunSnapshot...), CI runner and review rules. |
+| [references/bun-crates.md](references/bun-crates.md) | Navigate the Rust side of the Aphrody runtime (aphrody-labs/bun): the 137 workspace crates of the Cargo workspace (bun_core, bun_sys, bun_jsc, bun_runtime, js_parser, bundler, install...), Rust idioms, JSC bindings, GC lifetimes, event loop, parser, printer, resolver, bundler and CSS. |
+| [references/cpp-bun.md](references/cpp-bun.md) | C++ in Bun OS: JavaScriptCore bindings in src/jsc/bindings, JS classes and .classes.ts codegen, exception scopes (BUN_JSC_validateExceptionChecks), GC and iso subspaces, Rust and C++ interop. Use when editing the runtime's .cpp/.h files or their Rust counterparts. |
+| [references/bun-graph.md](references/bun-graph.md) | Index and inspect Bun source/package domains through native graph APIs, then export snapshot-pinned documentation with explicit hashes and coverage. |
+| [references/bun-gpui.md](references/bun-gpui.md) | Bun integration in aphrody via the `vendor/bun` submodule (aphrody-labs/bun). Use whenever working on TypeScript/TSX Native Shell (NSH) surfaces, typechecking (`bun check` / `nsh check`), formatting (`bun fmt` / `nsh fmt`), linting (`bun lint` / `nsh lint`), bundling (`Bun.build` / `bun build`), or reading upstream... |
+| [references/bun-nginx.md](references/bun-nginx.md) | Build and control the pinned NGINX engine through bun:nginx; qualify the Rust C ABI, engine, native process controller and each platform separately. |
+| [references/bun-video.md](references/bun-video.md) | Use native Bun.Video and Bun.Image for media metadata, transformed frames, bounded frame batches, audio, GIF and MP4 remux; route composition, HLS/DASH and WebGPU tasks to the Bun Video package. |
+| [references/bun-vpn.md](references/bun-vpn.md) | Build, inspect and qualify Bun's native embedded Mullvad VPN daemon and management client. |
+| [references/bun-yolo.md](references/bun-yolo.md) | Use Bun's internal typed decision capability for named Noul/Choice/Score batches, native answer validation, confidence and its private Python SDK bridge. |
+| [references/bun-guide.md](references/bun-guide.md) | Master guide and router for Bun 1.4+ development in Antigravity: navigates ~/.gemini/brain/bun/ knowledge digests, bun-brain MCP tools, bun-lsp diagnostics/hover, and native Bun CLI tooling (check, lint, fmt, test, build, pm). |
 
-- `bun-aphrody`
-- `bun-apis`
-- `bun-build`
-- `bun-crates`
-- `bun-deps`
-- `bun-docs`
-- `bun-graph`
-- `bun-native`
-- `bun-nginx`
-- `bun-runtime`
-- `bun-rust-first`
-- `bun-tests`
-- `bun-video`
-- `bun-vpn`
-- `bun-yolo`
-- `cpp-bun`
-- `implementing-jsc-classes-cpp`
-- `implementing-jsc-classes-rust`
-- `javascriptcore-garbage-collector`
-- `linux-kernel`
-- `n2b`
-- `rust-system-calls`
-- `slowest-tests`
-- `source-command-dedupe`
-- `source-command-find-duplicate-prs`
-- `source-command-find-issues`
-- `source-command-upgrade-boringssl`
-- `source-command-upgrade-nodejs`
-- `source-command-upgrade-webkit`
-- `sync-react-compiler`
-- `verify`
-- `webkit`
-- `win32`
-- `work`
-- `writing-bundler-tests`
-- `writing-dev-server-tests`
-
-## References
-
-Read the one that matches the task (`references/<name>.md`):
-
-- [bun-agent-shared-memory](references/bun-agent-shared-memory.md): Shared source-backed Bun OS decisions and qualification for coding-agent harnesses
-- [bun-aphrody-graph-memory](references/bun-aphrody-graph-memory.md): Provider-neutral native graph and memory workflow with explicit Bun domain scopes and source evidence
-- [bun-graph-hotspots](references/bun-graph-hotspots.md): Historical upstream source churn, commit subjects and maintained-source divergence as of 2026-10-08
-- [bun-graph-structure](references/bun-graph-structure.md): What the graph:bun code graph says about Bun's structure (communities decoded, god nodes, crate coupling), repo size facts from aphrody scan/ingest, and the graph's reliability limits + label-to-id recipe
-- [bun-mcp-tools](references/bun-mcp-tools.md): Which aphrody MCP tools (mcp__plugin_aphrody_aphrody__*) help on <bun>, verified 2026-10-08 — docs snapshot staleness, n2b compat drift, Context7 ids, upstream/github tool limits
-- [bun-os-runtime](references/bun-os-runtime.md): Bun OS and Aphrody runtime source ownership, provenance, integration and qualification boundaries
-- [bun-skills-catalog](references/bun-skills-catalog.md): Provider-neutral router for Bun OS agent skills and source-backed memory
-
-## Tools of `bun mcp`
-
-| Tool              | What                            |
-| ----------------- | ------------------------------- |
-| `docs_search`     | Search Bun docs                 |
-| `docs_read`       | Read a Bun docs page            |
-| `examples_search` | Bun code examples               |
-| `skills_list`     | List agent skills               |
-| `skill_read`      | Read an agent skill             |
-| `memory_search`   | Search project memory           |
-| `memory_read`     | Read a memory                   |
-| `memory_write`    | Save a memory                   |
-| `memory_import`   | Import Markdown memories        |
-| `graph_query`     | Query the code graph            |
-| `graph_symbols`   | Find symbols                    |
-| `graph_callers`   | Find callers or callees         |
-| `graph_path`      | Path between symbols            |
-| `graph_community` | Code communities                |
-| `graph_impact`    | Change impact                   |
-| `host_inventory`  | Host inventory                  |
-| `host_find`       | Find a host                     |
-| `vfs_find`        | Find files                      |
-| `vfs_grep`        | Search file contents            |
-| `vfs_edit`        | Preview a bulk edit             |
-| `vfs_apply`       | Apply a bulk edit               |
-| `lsp_diagnostics` | Diagnostics                     |
-| `lsp_definition`  | Go to definition                |
-| `lsp_references`  | Find references                 |
-| `lsp_hover`       | Hover                           |
-| `lsp_rename`      | Rename symbol                   |
-| `lsp_symbols`     | Symbols                         |
-| `run`             | bun run                         |
-| `test`            | bun test                        |
-| `html_parse`      | Parse inert HTML                |
-| `css_parse`       | Parse browser CSS               |
-| `git_ingest`      | Directory digest                |
-| `deps_list`       | List dependencies               |
-| `deps_info`       | Dependency facts                |
-| `deps_tree`       | Dependency tree                 |
-| `deps_read`       | Read a dependency file          |
-| `deps_search`     | Search dependency sources       |
-| `deps_docs`       | Search dependency documentation |
-| `yolo_decide`     | Bun typed decision              |
-
-Prefer `graph_symbols`, `graph_callers`, `lsp_references`, `lsp_definition`, `vfs_grep` over Grep for code in a project.
-
-Prefer `vfs_find`, `graph_query` over Glob for code in a project.
-
-Experimental native file and shell tools require `BUN_FEATURE_FLAG_EXPERIMENTAL_MCP_NATIVE_TOOLS=1` on the MCP server and a fresh client connection. When tools/list exposes them, use read_file to obtain a revision, write_file/edit_file to preview changes, vfs_apply to commit, and shell for embedded Bun Shell. Host built-in tools remain available.
-
-`bun lsp` is one language server for c, cpp, javascript, csharp, typescript, javascriptreact, objective-c, objective-cpp, python, rust, typescriptreact (.c .c++ .cc .cjs .cpp .cs .cts .cxx .h .h++ .hh .hpp .hxx .inl .ipp .js .jsx .m .mjs .mm .mts .py .pyi .rs .ts .tsx).
+<!-- merge-skill-families:v1 -->

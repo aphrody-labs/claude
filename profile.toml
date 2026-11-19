@@ -16,10 +16,9 @@ exclude = [
 # Duplicates: hidden from both the model and the / menu in Claude Code (agy keeps them through align-agy).
 off = [
   "aphrody:no-slop-humanizer", # aphrody:humanizer covers it with the repository rules
-  "aphrody:bun-guide",         # Antigravity router over ~/.gemini/brain; aphrody:bun-aphrody is the Claude entry point
 ]
 # Overlapping specialisations: listed by name only, the umbrella skill carries the description.
+# Families merged into one parent skill by scripts/merge-skill-families.ts (bun-*, design, docker-*, ...) need no entry here.
 name_only = [
-  "aphrody:brand", "aphrody:banner-design", "aphrody:design-system", "aphrody:slides", # under aphrody:design
-  "aphrody:agent-browser", "aphrody:chrome-devtools",                                  # built-in claude-in-chrome first
+  "aphrody:agent-browser", "aphrody:chrome-devtools", # built-in claude-in-chrome first
 ]

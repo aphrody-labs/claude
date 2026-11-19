@@ -1,38 +1,21 @@
 ---
 name: gpui
-description: >-
-  Core GPUI UI framework engineering skill for aphrody covering Entity state,
-  Render views, Element custom painting, Taffy Flexbox/Grid layout, FocusHandle,
-  Actions, Async spawning, and multi-backend rendering (gpui_wgpu, gpui_windows,
-  gpui_macos, gpui_linux, gpui_web, gpui_android). Use before designing or editing
-  native UI, elements, windows, events, or GPUI crate internals.
+description: "Native UI in Rust with GPUI: core framework (entities, render, elements, Taffy layout, focus, actions, backends), GPUI Kit apps and their design guides, GPUI Fast retained views, gpui::test and Criterion benchmarks. Use before designing or editing native UI, windows, events or GPUI crate internals."
 ---
+# GPUI: native UI in Rust
 
-# GPUI Core Framework in aphrody
+`references/core.md` is the former body of this skill (core GPUI): read it first, then the reference for the layer you touch.
 
-GPUI (`crates/gpui`) is the hybrid immediate/retained-mode GPU UI framework powering Aphrody (`crates/zed`), `gpui-kit` components, and `NSH` Native Shell surfaces across Windows, macOS, Linux, Android, and Web/WASM.
+Read the reference that matches the task in full before acting. Paths written inside reference files are relative to this skill's directory (the one holding this SKILL.md). Where a reference names another merged skill, open `references/<name>.md`; its helper files are under `references/<name>/`.
 
-## Workspace Crate Map
+| Reference | Use when |
+| --- | --- |
+| [references/core.md](references/core.md) | Former body of this skill (read first) |
+| [references/gpui-brain.md](references/gpui-brain.md) | Master router and offline knowledge index for GPUI Core (crates/gpui), GPUI Kit 0.10 (gpui-base / gpui-component / gpui-kit), GPUI Fast 0.1.17 (retained views, splicing, layout keys, text replay, GPU tile scroll layers, native window composition), and Aphrody's unification matrix. Use before building, porting,... |
+| [references/gpui-kit.md](references/gpui-kit.md) | How to build desktop applications with GPUI Kit, the Rust framework published as the gpui-kit crate (GPUI plus gpui_kit::component, gpui_kit::base, gpui_kit::assets). Use when setting up a gpui-kit app, choosing or using a component (Button, Input, Select, Dialog, Sheet, Tabs, Sidebar, List, DataTable, Tree, Chart,... |
+| [references/gpui-kit-design-guides.md](references/gpui-kit-design-guides.md) | The normative Design Guides for GPUI Kit desktop applications. Read in full before designing or changing any screen, layout, spacing, visual hierarchy, color, density, component choice, interaction state, overlay, motion, data-heavy view, or interface copy in a GPUI Kit (gpui-kit / gpui-component) application, and... |
+| [references/gpui-fast.md](references/gpui-fast.md) | Master engineering reference for GPUI Fast (longbridge/gpui-fast) retained-mode frame reuse, view splicing, dependency tracking, persistent Taffy layout keys, text measurement Carry/Replay, GPU tile scroll layers, dynamic GPU textures, and native window composition in GPUI / GPUI Kit / Aphrody. |
+| [references/gpui-test.md](references/gpui-test.md) | Use when writing, debugging, or reproducing GPUI tests in Zed, including gpui::test arguments, TestAppContext parameters, scheduler seeds, ITERATIONS/SEED reproduction, parking failures, and pending task traces. |
+| [references/gpui-bench.md](references/gpui-bench.md) | Design, write, review, run, and interpret production-shaped GPUI Criterion benchmarks, including gpui::bench, BenchAppContext, renderer and task benchmarks, headless Metal frame data, responsiveness and hang regressions, feature isolation from test-support, and before/after performance evidence. |
 
-- `crates/gpui` — Core platform-independent reactive state (`App`, `Entity<T>`, `WeakEntity<T>`, `Context<T>`, `Window`), `Render`, `IntoElement`, `Element`, Taffy layout engine, text system, actions, animations.
-- `crates/gpui_wgpu` — Cross-platform WGPU/Naga GPU UI renderer (9 pipelines, reverse-Z depth, Oklab gradients, dual-source subpixel text, headless PNG capture).
-- `crates/gpui_windows` — Windows Win32 windowing, DWrite/D2D/D3D11/DX12 platform integration, AMD AGS, DirectComposition.
-- `crates/gpui_macos`, `crates/gpui_linux`, `crates/gpui_web`, `crates/gpui_android`, `crates/gpui_platform` — OS windowing, clipboard, display, input, and WebGPU/WebGL2 browser targets.
-- `crates/gpui_ui`, `crates/gpui_code`, `crates/gpui_app_shell` — Clean modular SDK facades decoupling reusable UI/code/app-shell primitives from full editor/LLM transitive bloat.
-
-## Essential Patterns
-
-1. **Entities & Borrowing**: Read/update models via `entity.read(cx)` / `entity.update(cx, |this, cx| ...)`. Hold only `WeakEntity<T>` inside closures (`cx.listener`, `cx.spawn`, `observe`) and check `.upgrade()` inside async blocks to avoid leaks or panics.
-2. **State Updates & Repaint**: Mutate state cleanly and call `cx.notify()` inside `update` callbacks; avoid mutating entities during `render()`.
-3. **Elements & Layout**: Prefer composable `div().flex().flex_col().gap_2()` chains (`taffy` 0.15); use custom `Element` (`request_layout` -> `prepaint` -> `paint`) for virtualized canvases, GPU shader quads, or custom hitboxes (`HitboxBehavior`).
-4. **Boundary Architecture**: Never leak `settings_content`, `cloud_llm_client`, `rpc`, or `proto` into `gpui_ui` or `--no-default-features` `gpui_code`.
-5. **Testing & Benchmarking**: Pair every change with `gpui::test` deterministic scheduler tests (see `gpui-test`) and Criterion benchmarks via `gpui::bench` (see `gpui-bench`).
-
-## Deep References
-
-- Complete API guides in `.agents/plugins/aphrody/skills/gpui-kit/references/gpui/`:
-  - `entity.md`, `entity-api.md`, `entity-patterns.md`, `entity-best-practices.md`
-  - `element.md`, `element-api.md`, `element-patterns.md`, `element-best-practices.md`
-  - `context.md`, `action.md`, `event.md`, `focus-handle.md`, `global.md`, `async.md`, `layout-style.md`
-  - `test.md`, `test-reference.md`, `test-examples.md`
-- GPU renderers & shader stack: see `wgpu`, `vulkan`, `directx`, `webgpu`, `nsh`, `gpui-kit`.
+<!-- merge-skill-families:v1 -->

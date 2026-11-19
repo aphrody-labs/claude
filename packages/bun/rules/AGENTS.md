@@ -5,7 +5,7 @@
 - Check which `bun` runs with `bun agent-plugin doctor --json`. Stable releases such as `1.4.4+<commit>` are identified by `process.release.sourceUrl` under `https://github.com/aphrody-labs/bun/releases/download/`, with a matching release version and native `Bun.revision` commit. Older `-aphrody.N` revisions remain recognized. The plugin's content hash identifies the plugin, not the runtime; this provenance check does not verify an archive checksum. If the runtime is not recognized, install it (`curl -fsSL https://aphrody.app/install | bash`, or `powershell -c "irm aphrody.app/install.ps1|iex"` on Windows) or upgrade it (`bun upgrade`).
 - The `bun` MCP server (`bun mcp`) exposes the tools of the Aphrody runtime to the agent; prefer them over ad hoc scripts when they cover the task.
 - In a checkout of the Bun repository, build with `bun bd` and test with `bun bd test <file>`: plain `bun test` runs the installed `bun`, not your changes. Read `AGENTS.md` and the repository's applicable guidance first; `CLAUDE.md` remains a compatible source, not a restriction to Claude.
-- For a task on Bun itself, load the matching skill of this plugin (`bun-build`, `bun-tests`, `bun-crates`, `bun-runtime`, `bun-docs`) and the reference it lists.
+- For a task on Bun itself, load the `bun-aphrody` skill and the matching reference it lists (`references/bun-build.md`, `bun-tests.md`, `bun-crates.md`, `bun-runtime.md`, `bun-docs.md`).
 
 ## Tools of `bun mcp`
 

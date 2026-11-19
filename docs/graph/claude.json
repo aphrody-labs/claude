@@ -40,69 +40,9 @@
       "label": "memory-index"
     },
     {
-      "id": "hook:aphrody/PostToolUse[Bash|Edit|Write|MultiEdit]/learn.ts",
-      "kind": "hook",
-      "label": "PostToolUse Bash|Edit|Write|MultiEdit"
-    },
-    {
-      "id": "hook:aphrody/PostToolUse[Edit|Write|MultiEdit]/typecheck.ts",
-      "kind": "hook",
-      "label": "PostToolUse Edit|Write|MultiEdit"
-    },
-    {
-      "id": "hook:aphrody/PostToolUse/session-bridge.ts",
-      "kind": "hook",
-      "label": "PostToolUse"
-    },
-    {
-      "id": "hook:aphrody/PostToolUseFailure/learn.ts",
-      "kind": "hook",
-      "label": "PostToolUseFailure"
-    },
-    {
-      "id": "hook:aphrody/PreToolUse[Bash]/auto-background.ts",
-      "kind": "hook",
-      "label": "PreToolUse Bash"
-    },
-    {
-      "id": "hook:aphrody/SessionEnd/config-sync.ts",
-      "kind": "hook",
-      "label": "SessionEnd"
-    },
-    {
-      "id": "hook:aphrody/SessionStart[startup|resume|clear|compact]/config-sync.ts",
-      "kind": "hook",
-      "label": "SessionStart startup|resume|clear|compact"
-    },
-    {
-      "id": "hook:aphrody/SessionStart[startup|resume|clear|compact]/learn.ts",
-      "kind": "hook",
-      "label": "SessionStart startup|resume|clear|compact"
-    },
-    {
-      "id": "hook:aphrody/SessionStart[startup|resume|clear|compact]/session-bridge.ts",
-      "kind": "hook",
-      "label": "SessionStart startup|resume|clear|compact"
-    },
-    {
-      "id": "hook:aphrody/UserPromptSubmit/learn.ts",
-      "kind": "hook",
-      "label": "UserPromptSubmit"
-    },
-    {
-      "id": "hook:aphrody/UserPromptSubmit/session-bridge.ts",
-      "kind": "hook",
-      "label": "UserPromptSubmit"
-    },
-    {
-      "id": "hook:bun/PreToolUse[Bash|Grep|Glob]/pre-tool-use.ts",
-      "kind": "hook",
-      "label": "PreToolUse Bash|Grep|Glob"
-    },
-    {
-      "id": "hook:bun/SessionStart[startup|resume|clear|compact]/session-start.ts",
-      "kind": "hook",
-      "label": "SessionStart startup|resume|clear|compact"
+      "id": "mcp:aphrody/ai-os",
+      "kind": "mcp",
+      "label": "ai-os"
     },
     {
       "id": "mcp:aphrody/claude-bridge",
@@ -110,24 +50,14 @@
       "label": "claude-bridge"
     },
     {
-      "id": "mcp:aphrody/hostinger-billing",
+      "id": "mcp:aphrody/docker-docs",
       "kind": "mcp",
-      "label": "hostinger-billing"
+      "label": "docker-docs (remote)"
     },
     {
-      "id": "mcp:aphrody/hostinger-dns",
+      "id": "mcp:aphrody/hostinger",
       "kind": "mcp",
-      "label": "hostinger-dns"
-    },
-    {
-      "id": "mcp:aphrody/hostinger-domains",
-      "kind": "mcp",
-      "label": "hostinger-domains"
-    },
-    {
-      "id": "mcp:aphrody/hostinger-vps",
-      "kind": "mcp",
-      "label": "hostinger-vps"
+      "label": "hostinger"
     },
     {
       "id": "mcp:aphrody/memory",
@@ -160,11 +90,6 @@
       "label": "ovh-vps (remote)"
     },
     {
-      "id": "mcp:aphrody/relay",
-      "kind": "mcp",
-      "label": "relay"
-    },
-    {
       "id": "package:aphrody",
       "kind": "package",
       "label": "aphrody 1.0.0",
@@ -187,6 +112,11 @@
       "label": "claude-md-management@claude-plugins-official"
     },
     {
+      "id": "plugin:cloudflare@anthropic-plugin-directory",
+      "kind": "plugin",
+      "label": "cloudflare@anthropic-plugin-directory"
+    },
+    {
       "id": "plugin:csharp-lsp@claude-plugins-official",
       "kind": "plugin",
       "label": "csharp-lsp@claude-plugins-official"
@@ -202,6 +132,11 @@
       "label": "example-skills@anthropic-agent-skills"
     },
     {
+      "id": "plugin:github@claude-plugins-official",
+      "kind": "plugin",
+      "label": "github@claude-plugins-official"
+    },
+    {
       "id": "plugin:gopls-lsp@claude-plugins-official",
       "kind": "plugin",
       "label": "gopls-lsp@claude-plugins-official"
@@ -212,14 +147,16 @@
       "label": "pyright-lsp@claude-plugins-official"
     },
     {
-      "id": "plugin:rust-analyzer-lsp@claude-plugins-official",
-      "kind": "plugin",
-      "label": "rust-analyzer-lsp@claude-plugins-official"
+      "id": "script:backups/fix-20261119T041700Z/align-agy.ts",
+      "kind": "script",
+      "label": "align-agy.ts",
+      "path": "backups/fix-20261119T041700Z/align-agy.ts"
     },
     {
-      "id": "plugin:security-guidance@claude-plugins-official",
-      "kind": "plugin",
-      "label": "security-guidance@claude-plugins-official"
+      "id": "script:packages/aphrody/hooks-handlers/ai-os-stdio.ts",
+      "kind": "script",
+      "label": "ai-os-stdio.ts",
+      "path": "packages/aphrody/hooks-handlers/ai-os-stdio.ts"
     },
     {
       "id": "script:packages/aphrody/hooks-handlers/auto-background.ts",
@@ -276,12 +213,6 @@
       "path": "packages/aphrody/hooks-handlers/memory.ts"
     },
     {
-      "id": "script:packages/aphrody/hooks-handlers/relay-stdio.ts",
-      "kind": "script",
-      "label": "relay-stdio.ts",
-      "path": "packages/aphrody/hooks-handlers/relay-stdio.ts"
-    },
-    {
       "id": "script:packages/aphrody/hooks-handlers/session-bridge.ts",
       "kind": "script",
       "label": "session-bridge.ts",
@@ -294,6 +225,12 @@
       "path": "packages/aphrody/hooks-handlers/typecheck.ts"
     },
     {
+      "id": "script:packages/aphrody/skills/bun-legacy-replace/scripts/legacy-scan.ts",
+      "kind": "script",
+      "label": "legacy-scan.ts",
+      "path": "packages/aphrody/skills/bun-legacy-replace/scripts/legacy-scan.ts"
+    },
+    {
       "id": "script:packages/aphrody/skills/microsoft/scripts/edge-webplatform.ts",
       "kind": "script",
       "label": "edge-webplatform.ts",
@@ -304,6 +241,12 @@
       "kind": "script",
       "label": "facts.ts",
       "path": "packages/aphrody/skills/microsoft/scripts/facts.ts"
+    },
+    {
+      "id": "script:packages/aphrody/skills/replica-test/e2e.example.spec.ts",
+      "kind": "script",
+      "label": "e2e.example.spec.ts",
+      "path": "packages/aphrody/skills/replica-test/e2e.example.spec.ts"
     },
     {
       "id": "script:packages/bun/hooks/common.ts",
@@ -328,6 +271,12 @@
       "kind": "script",
       "label": "session-start.ts",
       "path": "packages/bun/hooks/session-start.ts"
+    },
+    {
+      "id": "script:scripts/align-agy.ts",
+      "kind": "script",
+      "label": "align-agy.ts",
+      "path": "scripts/align-agy.ts"
     },
     {
       "id": "script:scripts/bench.ts",
@@ -378,6 +327,12 @@
       "path": "scripts/matrix.ts"
     },
     {
+      "id": "script:scripts/mcp-profiles.ts",
+      "kind": "script",
+      "label": "mcp-profiles.ts",
+      "path": "scripts/mcp-profiles.ts"
+    },
+    {
       "id": "script:scripts/memory.ts",
       "kind": "script",
       "label": "memory.ts",
@@ -406,6 +361,18 @@
       "kind": "script",
       "label": "github.ts",
       "path": "scripts/ops/github.ts"
+    },
+    {
+      "id": "script:scripts/profile.ts",
+      "kind": "script",
+      "label": "profile.ts",
+      "path": "scripts/profile.ts"
+    },
+    {
+      "id": "script:scripts/restart-pack.ts",
+      "kind": "script",
+      "label": "restart-pack.ts",
+      "path": "scripts/restart-pack.ts"
     },
     {
       "id": "script:scripts/setup.ts",
@@ -438,10 +405,22 @@
       "path": "scripts/title.ts"
     },
     {
+      "id": "script:scripts/toolchain.ts",
+      "kind": "script",
+      "label": "toolchain.ts",
+      "path": "scripts/toolchain.ts"
+    },
+    {
       "id": "settings",
       "kind": "package",
       "label": "settings.json",
       "path": "settings.json"
+    },
+    {
+      "id": "skill:aphrody/3ds-reverse",
+      "kind": "skill",
+      "label": "3ds-reverse",
+      "path": "packages/aphrody/skills/3ds-reverse/SKILL.md"
     },
     {
       "id": "skill:aphrody/agent-browser",
@@ -456,10 +435,190 @@
       "path": "packages/aphrody/skills/ai-os-orchestrator/SKILL.md"
     },
     {
+      "id": "skill:aphrody/ai-os-pilot",
+      "kind": "skill",
+      "label": "ai-os-pilot",
+      "path": "packages/aphrody/skills/ai-os-pilot/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/amd",
+      "kind": "skill",
+      "label": "amd",
+      "path": "packages/aphrody/skills/amd/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/aphrody-brand",
+      "kind": "skill",
+      "label": "aphrody-brand",
+      "path": "packages/aphrody/skills/aphrody-brand/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/banner-design",
+      "kind": "skill",
+      "label": "banner-design",
+      "path": "packages/aphrody/skills/banner-design/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/base-ui",
+      "kind": "skill",
+      "label": "base-ui",
+      "path": "packages/aphrody/skills/base-ui/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/better-auth-best-practices",
+      "kind": "skill",
+      "label": "better-auth-best-practices",
+      "path": "packages/aphrody/skills/better-auth-best-practices/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/better-auth-security-best-practices",
+      "kind": "skill",
+      "label": "better-auth-security-best-practices",
+      "path": "packages/aphrody/skills/better-auth-security-best-practices/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/binary-triage",
+      "kind": "skill",
+      "label": "binary-triage",
+      "path": "packages/aphrody/skills/binary-triage/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/brand",
+      "kind": "skill",
+      "label": "brand",
+      "path": "packages/aphrody/skills/brand/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/bun",
+      "kind": "skill",
+      "label": "bun",
+      "path": "packages/aphrody/skills/bun/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/bun-aphrody",
+      "kind": "skill",
+      "label": "bun-aphrody",
+      "path": "packages/aphrody/skills/bun-aphrody/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/bun-apis",
+      "kind": "skill",
+      "label": "bun-apis",
+      "path": "packages/aphrody/skills/bun-apis/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/bun-awesome",
+      "kind": "skill",
+      "label": "bun-awesome",
+      "path": "packages/aphrody/skills/bun-awesome/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/bun-build",
+      "kind": "skill",
+      "label": "bun-build",
+      "path": "packages/aphrody/skills/bun-build/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/bun-crates",
+      "kind": "skill",
+      "label": "bun-crates",
+      "path": "packages/aphrody/skills/bun-crates/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/bun-deps",
+      "kind": "skill",
+      "label": "bun-deps",
+      "path": "packages/aphrody/skills/bun-deps/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/bun-docs",
+      "kind": "skill",
+      "label": "bun-docs",
+      "path": "packages/aphrody/skills/bun-docs/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/bun-gpui",
+      "kind": "skill",
+      "label": "bun-gpui",
+      "path": "packages/aphrody/skills/bun-gpui/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/bun-graph",
+      "kind": "skill",
+      "label": "bun-graph",
+      "path": "packages/aphrody/skills/bun-graph/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/bun-guide",
+      "kind": "skill",
+      "label": "bun-guide",
+      "path": "packages/aphrody/skills/bun-guide/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/bun-legacy-replace",
+      "kind": "skill",
+      "label": "bun-legacy-replace",
+      "path": "packages/aphrody/skills/bun-legacy-replace/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/bun-native",
+      "kind": "skill",
+      "label": "bun-native",
+      "path": "packages/aphrody/skills/bun-native/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/bun-nginx",
+      "kind": "skill",
+      "label": "bun-nginx",
+      "path": "packages/aphrody/skills/bun-nginx/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/bun-runtime",
+      "kind": "skill",
+      "label": "bun-runtime",
+      "path": "packages/aphrody/skills/bun-runtime/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/bun-rust-first",
+      "kind": "skill",
+      "label": "bun-rust-first",
+      "path": "packages/aphrody/skills/bun-rust-first/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/bun-tests",
+      "kind": "skill",
+      "label": "bun-tests",
+      "path": "packages/aphrody/skills/bun-tests/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/bun-video",
+      "kind": "skill",
+      "label": "bun-video",
+      "path": "packages/aphrody/skills/bun-video/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/bun-vpn",
+      "kind": "skill",
+      "label": "bun-vpn",
+      "path": "packages/aphrody/skills/bun-vpn/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/bun-yolo",
+      "kind": "skill",
+      "label": "bun-yolo",
+      "path": "packages/aphrody/skills/bun-yolo/SKILL.md"
+    },
+    {
       "id": "skill:aphrody/chrome-devtools",
       "kind": "skill",
       "label": "chrome-devtools",
       "path": "packages/aphrody/skills/chrome-devtools/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/chromium",
+      "kind": "skill",
+      "label": "chromium",
+      "path": "packages/aphrody/skills/chromium/SKILL.md"
     },
     {
       "id": "skill:aphrody/claude-live-bridge",
@@ -468,10 +627,22 @@
       "path": "packages/aphrody/skills/claude-live-bridge/SKILL.md"
     },
     {
-      "id": "skill:aphrody/cloudflare-platform",
+      "id": "skill:aphrody/cli-just",
       "kind": "skill",
-      "label": "cloudflare-platform",
-      "path": "packages/aphrody/skills/cloudflare-platform/SKILL.md"
+      "label": "cli-just",
+      "path": "packages/aphrody/skills/cli-just/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/connect-recommend",
+      "kind": "skill",
+      "label": "connect-recommend",
+      "path": "packages/aphrody/skills/connect-recommend/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/connect-required-verification-information",
+      "kind": "skill",
+      "label": "connect-required-verification-information",
+      "path": "packages/aphrody/skills/connect-required-verification-information/SKILL.md"
     },
     {
       "id": "skill:aphrody/containers-alpine-arch-k8s",
@@ -486,10 +657,172 @@
       "path": "packages/aphrody/skills/context7-deep-research/SKILL.md"
     },
     {
+      "id": "skill:aphrody/cpp-bun",
+      "kind": "skill",
+      "label": "cpp-bun",
+      "path": "packages/aphrody/skills/cpp-bun/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/create-auth",
+      "kind": "skill",
+      "label": "create-auth",
+      "path": "packages/aphrody/skills/create-auth/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/crunchyroll",
+      "kind": "skill",
+      "label": "crunchyroll",
+      "path": "packages/aphrody/skills/crunchyroll/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/ctf-solver",
+      "kind": "skill",
+      "label": "ctf-solver",
+      "path": "packages/aphrody/skills/ctf-solver/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/databooks-ocr",
+      "kind": "skill",
+      "label": "databooks-ocr",
+      "path": "packages/aphrody/skills/databooks-ocr/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/decompile-cleaner",
+      "kind": "skill",
+      "label": "decompile-cleaner",
+      "path": "packages/aphrody/skills/decompile-cleaner/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/design",
+      "kind": "skill",
+      "label": "design",
+      "path": "packages/aphrody/skills/design/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/design-package",
+      "kind": "skill",
+      "label": "design-package",
+      "path": "packages/aphrody/skills/design-package/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/design-system",
+      "kind": "skill",
+      "label": "design-system",
+      "path": "packages/aphrody/skills/design-system/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/directx",
+      "kind": "skill",
+      "label": "directx",
+      "path": "packages/aphrody/skills/directx/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/disks",
+      "kind": "skill",
+      "label": "disks",
+      "path": "packages/aphrody/skills/disks/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/docker-agent-config",
+      "kind": "skill",
+      "label": "docker-agent-config",
+      "path": "packages/aphrody/skills/docker-agent-config/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/docker-agent-deploy",
+      "kind": "skill",
+      "label": "docker-agent-deploy",
+      "path": "packages/aphrody/skills/docker-agent-deploy/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/docker-agent-run",
+      "kind": "skill",
+      "label": "docker-agent-run",
+      "path": "packages/aphrody/skills/docker-agent-run/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/docker-build-strategies",
+      "kind": "skill",
+      "label": "docker-build-strategies",
+      "path": "packages/aphrody/skills/docker-build-strategies/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/docker-compose-patterns",
+      "kind": "skill",
+      "label": "docker-compose-patterns",
+      "path": "packages/aphrody/skills/docker-compose-patterns/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/docker-destructive-guardrails",
+      "kind": "skill",
+      "label": "docker-destructive-guardrails",
+      "path": "packages/aphrody/skills/docker-destructive-guardrails/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/docker-docs",
+      "kind": "skill",
+      "label": "docker-docs",
+      "path": "packages/aphrody/skills/docker-docs/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/docker-project-foundations",
+      "kind": "skill",
+      "label": "docker-project-foundations",
+      "path": "packages/aphrody/skills/docker-project-foundations/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/docker-sandboxes-kits",
+      "kind": "skill",
+      "label": "docker-sandboxes-kits",
+      "path": "packages/aphrody/skills/docker-sandboxes-kits/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/docker-sandboxes-lifecycle",
+      "kind": "skill",
+      "label": "docker-sandboxes-lifecycle",
+      "path": "packages/aphrody/skills/docker-sandboxes-lifecycle/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/docker-sandboxes-network-credentials",
+      "kind": "skill",
+      "label": "docker-sandboxes-network-credentials",
+      "path": "packages/aphrody/skills/docker-sandboxes-network-credentials/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/ds-reverse",
+      "kind": "skill",
+      "label": "ds-reverse",
+      "path": "packages/aphrody/skills/ds-reverse/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/email-and-password-best-practices",
+      "kind": "skill",
+      "label": "email-and-password-best-practices",
+      "path": "packages/aphrody/skills/email-and-password-best-practices/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/emscripten",
+      "kind": "skill",
+      "label": "emscripten",
+      "path": "packages/aphrody/skills/emscripten/SKILL.md"
+    },
+    {
       "id": "skill:aphrody/env-auth",
       "kind": "skill",
       "label": "env-auth",
       "path": "packages/aphrody/skills/env-auth/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/filmcraft",
+      "kind": "skill",
+      "label": "filmcraft",
+      "path": "packages/aphrody/skills/filmcraft/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/firmware-analyst",
+      "kind": "skill",
+      "label": "firmware-analyst",
+      "path": "packages/aphrody/skills/firmware-analyst/SKILL.md"
     },
     {
       "id": "skill:aphrody/fleet",
@@ -498,16 +831,100 @@
       "path": "packages/aphrody/skills/fleet/SKILL.md"
     },
     {
+      "id": "skill:aphrody/gamebanana",
+      "kind": "skill",
+      "label": "gamebanana",
+      "path": "packages/aphrody/skills/gamebanana/SKILL.md"
+    },
+    {
       "id": "skill:aphrody/gh-fork",
       "kind": "skill",
       "label": "gh-fork",
       "path": "packages/aphrody/skills/gh-fork/SKILL.md"
     },
     {
+      "id": "skill:aphrody/ghidra-gui-computer-use",
+      "kind": "skill",
+      "label": "ghidra-gui-computer-use",
+      "path": "packages/aphrody/skills/ghidra-gui-computer-use/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/ghidra-headless",
+      "kind": "skill",
+      "label": "ghidra-headless",
+      "path": "packages/aphrody/skills/ghidra-headless/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/ghidra-mcp-live",
+      "kind": "skill",
+      "label": "ghidra-mcp-live",
+      "path": "packages/aphrody/skills/ghidra-mcp-live/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/ghidra-workflows",
+      "kind": "skill",
+      "label": "ghidra-workflows",
+      "path": "packages/aphrody/skills/ghidra-workflows/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/github-ops",
+      "kind": "skill",
+      "label": "github-ops",
+      "path": "packages/aphrody/skills/github-ops/SKILL.md"
+    },
+    {
       "id": "skill:aphrody/github-workflow",
       "kind": "skill",
       "label": "github-workflow",
       "path": "packages/aphrody/skills/github-workflow/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/google-design",
+      "kind": "skill",
+      "label": "google-design",
+      "path": "packages/aphrody/skills/google-design/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/gpui",
+      "kind": "skill",
+      "label": "gpui",
+      "path": "packages/aphrody/skills/gpui/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/gpui-bench",
+      "kind": "skill",
+      "label": "gpui-bench",
+      "path": "packages/aphrody/skills/gpui-bench/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/gpui-brain",
+      "kind": "skill",
+      "label": "gpui-brain",
+      "path": "packages/aphrody/skills/gpui-brain/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/gpui-fast",
+      "kind": "skill",
+      "label": "gpui-fast",
+      "path": "packages/aphrody/skills/gpui-fast/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/gpui-kit",
+      "kind": "skill",
+      "label": "gpui-kit",
+      "path": "packages/aphrody/skills/gpui-kit/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/gpui-kit-design-guides",
+      "kind": "skill",
+      "label": "gpui-kit-design-guides",
+      "path": "packages/aphrody/skills/gpui-kit-design-guides/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/gpui-test",
+      "kind": "skill",
+      "label": "gpui-test",
+      "path": "packages/aphrody/skills/gpui-test/SKILL.md"
     },
     {
       "id": "skill:aphrody/hostinger",
@@ -522,10 +939,46 @@
       "path": "packages/aphrody/skills/humanizer/SKILL.md"
     },
     {
+      "id": "skill:aphrody/ie-game-formats",
+      "kind": "skill",
+      "label": "ie-game-formats",
+      "path": "packages/aphrody/skills/ie-game-formats/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/intel",
+      "kind": "skill",
+      "label": "intel",
+      "path": "packages/aphrody/skills/intel/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/kernel-watch",
+      "kind": "skill",
+      "label": "kernel-watch",
+      "path": "packages/aphrody/skills/kernel-watch/SKILL.md"
+    },
+    {
       "id": "skill:aphrody/learn",
       "kind": "skill",
       "label": "learn",
       "path": "packages/aphrody/skills/learn/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/lint-creator",
+      "kind": "skill",
+      "label": "lint-creator",
+      "path": "packages/aphrody/skills/lint-creator/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/linux-kernel",
+      "kind": "skill",
+      "label": "linux-kernel",
+      "path": "packages/aphrody/skills/linux-kernel/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/malware-analyst",
+      "kind": "skill",
+      "label": "malware-analyst",
+      "path": "packages/aphrody/skills/malware-analyst/SKILL.md"
     },
     {
       "id": "skill:aphrody/material-3",
@@ -534,10 +987,100 @@
       "path": "packages/aphrody/skills/material-3/SKILL.md"
     },
     {
+      "id": "skill:aphrody/metronome",
+      "kind": "skill",
+      "label": "metronome",
+      "path": "packages/aphrody/skills/metronome/SKILL.md"
+    },
+    {
       "id": "skill:aphrody/microsoft",
       "kind": "skill",
       "label": "microsoft",
       "path": "packages/aphrody/skills/microsoft/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/migrate-radix-to-base",
+      "kind": "skill",
+      "label": "migrate-radix-to-base",
+      "path": "packages/aphrody/skills/migrate-radix-to-base/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/mod-package",
+      "kind": "skill",
+      "label": "mod-package",
+      "path": "packages/aphrody/skills/mod-package/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/modern-web-guidance",
+      "kind": "skill",
+      "label": "modern-web-guidance",
+      "path": "packages/aphrody/skills/modern-web-guidance/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/n2b",
+      "kind": "skill",
+      "label": "n2b",
+      "path": "packages/aphrody/skills/n2b/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/next-bundle-optimizer",
+      "kind": "skill",
+      "label": "next-bundle-optimizer",
+      "path": "packages/aphrody/skills/next-bundle-optimizer/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/next-cache-components-adoption",
+      "kind": "skill",
+      "label": "next-cache-components-adoption",
+      "path": "packages/aphrody/skills/next-cache-components-adoption/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/next-cache-components-optimizer",
+      "kind": "skill",
+      "label": "next-cache-components-optimizer",
+      "path": "packages/aphrody/skills/next-cache-components-optimizer/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/next-dev-loop",
+      "kind": "skill",
+      "label": "next-dev-loop",
+      "path": "packages/aphrody/skills/next-dev-loop/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/next-partial-prefetching-adoption",
+      "kind": "skill",
+      "label": "next-partial-prefetching-adoption",
+      "path": "packages/aphrody/skills/next-partial-prefetching-adoption/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/next-partial-prefetching-optimizer",
+      "kind": "skill",
+      "label": "next-partial-prefetching-optimizer",
+      "path": "packages/aphrody/skills/next-partial-prefetching-optimizer/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/nextjs-app-router",
+      "kind": "skill",
+      "label": "nextjs-app-router",
+      "path": "packages/aphrody/skills/nextjs-app-router/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/nextjs-config-caching",
+      "kind": "skill",
+      "label": "nextjs-config-caching",
+      "path": "packages/aphrody/skills/nextjs-config-caching/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/nextjs-devtools-mcp",
+      "kind": "skill",
+      "label": "nextjs-devtools-mcp",
+      "path": "packages/aphrody/skills/nextjs-devtools-mcp/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/nhil",
+      "kind": "skill",
+      "label": "nhil",
+      "path": "packages/aphrody/skills/nhil/SKILL.md"
     },
     {
       "id": "skill:aphrody/niubash",
@@ -546,10 +1089,292 @@
       "path": "packages/aphrody/skills/niubash/SKILL.md"
     },
     {
+      "id": "skill:aphrody/no-slop-humanizer",
+      "kind": "skill",
+      "label": "no-slop-humanizer",
+      "path": "packages/aphrody/skills/no-slop-humanizer/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/nsh",
+      "kind": "skill",
+      "label": "nsh",
+      "path": "packages/aphrody/skills/nsh/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/nsh-design-guides",
+      "kind": "skill",
+      "label": "nsh-design-guides",
+      "path": "packages/aphrody/skills/nsh-design-guides/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/nvidia",
+      "kind": "skill",
+      "label": "nvidia",
+      "path": "packages/aphrody/skills/nvidia/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/organization-best-practices",
+      "kind": "skill",
+      "label": "organization-best-practices",
+      "path": "packages/aphrody/skills/organization-best-practices/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/python-re",
+      "kind": "skill",
+      "label": "python-re",
+      "path": "packages/aphrody/skills/python-re/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/rea-changelog-update",
+      "kind": "skill",
+      "label": "rea-changelog-update",
+      "path": "packages/aphrody/skills/rea-changelog-update/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/rea-ci-tests-audit",
+      "kind": "skill",
+      "label": "rea-ci-tests-audit",
+      "path": "packages/aphrody/skills/rea-ci-tests-audit/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/rea-tool-design",
+      "kind": "skill",
+      "label": "rea-tool-design",
+      "path": "packages/aphrody/skills/rea-tool-design/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/replica-architect",
+      "kind": "skill",
+      "label": "replica-architect",
+      "path": "packages/aphrody/skills/replica-architect/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/replica-backend",
+      "kind": "skill",
+      "label": "replica-backend",
+      "path": "packages/aphrody/skills/replica-backend/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/replica-brand",
+      "kind": "skill",
+      "label": "replica-brand",
+      "path": "packages/aphrody/skills/replica-brand/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/replica-build",
+      "kind": "skill",
+      "label": "replica-build",
+      "path": "packages/aphrody/skills/replica-build/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/replica-deploy",
+      "kind": "skill",
+      "label": "replica-deploy",
+      "path": "packages/aphrody/skills/replica-deploy/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/replica-design",
+      "kind": "skill",
+      "label": "replica-design",
+      "path": "packages/aphrody/skills/replica-design/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/replica-diff",
+      "kind": "skill",
+      "label": "replica-diff",
+      "path": "packages/aphrody/skills/replica-diff/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/replica-entrepreneur",
+      "kind": "skill",
+      "label": "replica-entrepreneur",
+      "path": "packages/aphrody/skills/replica-entrepreneur/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/replica-launch",
+      "kind": "skill",
+      "label": "replica-launch",
+      "path": "packages/aphrody/skills/replica-launch/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/replica-recon",
+      "kind": "skill",
+      "label": "replica-recon",
+      "path": "packages/aphrody/skills/replica-recon/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/replica-test",
+      "kind": "skill",
+      "label": "replica-test",
+      "path": "packages/aphrody/skills/replica-test/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/reverse-engineer-anything",
+      "kind": "skill",
+      "label": "reverse-engineer-anything",
+      "path": "packages/aphrody/skills/reverse-engineer-anything/SKILL.md"
+    },
+    {
       "id": "skill:aphrody/rust-cargo",
       "kind": "skill",
       "label": "rust-cargo",
       "path": "packages/aphrody/skills/rust-cargo/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/shadcn",
+      "kind": "skill",
+      "label": "shadcn",
+      "path": "packages/aphrody/skills/shadcn/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/shenron-admin",
+      "kind": "skill",
+      "label": "shenron-admin",
+      "path": "packages/aphrody/skills/shenron-admin/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/shenron-bun-mastery",
+      "kind": "skill",
+      "label": "shenron-bun-mastery",
+      "path": "packages/aphrody/skills/shenron-bun-mastery/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/slides",
+      "kind": "skill",
+      "label": "slides",
+      "path": "packages/aphrody/skills/slides/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/source-command-dedupe",
+      "kind": "skill",
+      "label": "source-command-dedupe",
+      "path": "packages/aphrody/skills/source-command-dedupe/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/static-recompile",
+      "kind": "skill",
+      "label": "static-recompile",
+      "path": "packages/aphrody/skills/static-recompile/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/steam",
+      "kind": "skill",
+      "label": "steam",
+      "path": "packages/aphrody/skills/steam/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/stitch-design-md",
+      "kind": "skill",
+      "label": "stitch-design-md",
+      "path": "packages/aphrody/skills/stitch-design-md/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/stripe-apps",
+      "kind": "skill",
+      "label": "stripe-apps",
+      "path": "packages/aphrody/skills/stripe-apps/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/stripe-best-practices",
+      "kind": "skill",
+      "label": "stripe-best-practices",
+      "path": "packages/aphrody/skills/stripe-best-practices/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/stripe-directory",
+      "kind": "skill",
+      "label": "stripe-directory",
+      "path": "packages/aphrody/skills/stripe-directory/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/stripe-docs",
+      "kind": "skill",
+      "label": "stripe-docs",
+      "path": "packages/aphrody/skills/stripe-docs/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/stripe-pay",
+      "kind": "skill",
+      "label": "stripe-pay",
+      "path": "packages/aphrody/skills/stripe-pay/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/stripe-projects",
+      "kind": "skill",
+      "label": "stripe-projects",
+      "path": "packages/aphrody/skills/stripe-projects/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/supabase-postgres-best-practices",
+      "kind": "skill",
+      "label": "supabase-postgres-best-practices",
+      "path": "packages/aphrody/skills/supabase-postgres-best-practices/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/switch-reverse",
+      "kind": "skill",
+      "label": "switch-reverse",
+      "path": "packages/aphrody/skills/switch-reverse/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/tailwind-v4",
+      "kind": "skill",
+      "label": "tailwind-v4",
+      "path": "packages/aphrody/skills/tailwind-v4/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/toriyama-svg",
+      "kind": "skill",
+      "label": "toriyama-svg",
+      "path": "packages/aphrody/skills/toriyama-svg/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/two-factor-authentication-best-practices",
+      "kind": "skill",
+      "label": "two-factor-authentication-best-practices",
+      "path": "packages/aphrody/skills/two-factor-authentication-best-practices/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/ui-styling",
+      "kind": "skill",
+      "label": "ui-styling",
+      "path": "packages/aphrody/skills/ui-styling/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/ui-ux-pro-max",
+      "kind": "skill",
+      "label": "ui-ux-pro-max",
+      "path": "packages/aphrody/skills/ui-ux-pro-max/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/upgrade-stripe",
+      "kind": "skill",
+      "label": "upgrade-stripe",
+      "path": "packages/aphrody/skills/upgrade-stripe/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/uv-project",
+      "kind": "skill",
+      "label": "uv-project",
+      "path": "packages/aphrody/skills/uv-project/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/vendor-ecosystem",
+      "kind": "skill",
+      "label": "vendor-ecosystem",
+      "path": "packages/aphrody/skills/vendor-ecosystem/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/vulkan",
+      "kind": "skill",
+      "label": "vulkan",
+      "path": "packages/aphrody/skills/vulkan/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/wasm-bindgen",
+      "kind": "skill",
+      "label": "wasm-bindgen",
+      "path": "packages/aphrody/skills/wasm-bindgen/SKILL.md"
     },
     {
       "id": "skill:aphrody/web-quality",
@@ -558,142 +1383,100 @@
       "path": "packages/aphrody/skills/web-quality/SKILL.md"
     },
     {
-      "id": "skill:bun/bun-aphrody",
+      "id": "skill:aphrody/webassembly",
       "kind": "skill",
-      "label": "bun-aphrody",
-      "path": "packages/bun/skills/bun-aphrody/SKILL.md"
+      "label": "webassembly",
+      "path": "packages/aphrody/skills/webassembly/SKILL.md"
     },
     {
-      "id": "skill:bun/bun-apis",
+      "id": "skill:aphrody/webgpu",
       "kind": "skill",
-      "label": "bun-apis",
-      "path": "packages/bun/skills/bun-apis/SKILL.md"
+      "label": "webgpu",
+      "path": "packages/aphrody/skills/webgpu/SKILL.md"
     },
     {
-      "id": "skill:bun/bun-build",
-      "kind": "skill",
-      "label": "bun-build",
-      "path": "packages/bun/skills/bun-build/SKILL.md"
-    },
-    {
-      "id": "skill:bun/bun-crates",
-      "kind": "skill",
-      "label": "bun-crates",
-      "path": "packages/bun/skills/bun-crates/SKILL.md"
-    },
-    {
-      "id": "skill:bun/bun-deps",
-      "kind": "skill",
-      "label": "bun-deps",
-      "path": "packages/bun/skills/bun-deps/SKILL.md"
-    },
-    {
-      "id": "skill:bun/bun-docs",
-      "kind": "skill",
-      "label": "bun-docs",
-      "path": "packages/bun/skills/bun-docs/SKILL.md"
-    },
-    {
-      "id": "skill:bun/bun-graph",
-      "kind": "skill",
-      "label": "bun-graph",
-      "path": "packages/bun/skills/bun-graph/SKILL.md"
-    },
-    {
-      "id": "skill:bun/bun-native",
-      "kind": "skill",
-      "label": "bun-native",
-      "path": "packages/bun/skills/bun-native/SKILL.md"
-    },
-    {
-      "id": "skill:bun/bun-nginx",
-      "kind": "skill",
-      "label": "bun-nginx",
-      "path": "packages/bun/skills/bun-nginx/SKILL.md"
-    },
-    {
-      "id": "skill:bun/bun-runtime",
-      "kind": "skill",
-      "label": "bun-runtime",
-      "path": "packages/bun/skills/bun-runtime/SKILL.md"
-    },
-    {
-      "id": "skill:bun/bun-rust-first",
-      "kind": "skill",
-      "label": "bun-rust-first",
-      "path": "packages/bun/skills/bun-rust-first/SKILL.md"
-    },
-    {
-      "id": "skill:bun/bun-tests",
-      "kind": "skill",
-      "label": "bun-tests",
-      "path": "packages/bun/skills/bun-tests/SKILL.md"
-    },
-    {
-      "id": "skill:bun/bun-video",
-      "kind": "skill",
-      "label": "bun-video",
-      "path": "packages/bun/skills/bun-video/SKILL.md"
-    },
-    {
-      "id": "skill:bun/bun-vpn",
-      "kind": "skill",
-      "label": "bun-vpn",
-      "path": "packages/bun/skills/bun-vpn/SKILL.md"
-    },
-    {
-      "id": "skill:bun/bun-yolo",
-      "kind": "skill",
-      "label": "bun-yolo",
-      "path": "packages/bun/skills/bun-yolo/SKILL.md"
-    },
-    {
-      "id": "skill:bun/cpp-bun",
-      "kind": "skill",
-      "label": "cpp-bun",
-      "path": "packages/bun/skills/cpp-bun/SKILL.md"
-    },
-    {
-      "id": "skill:bun/linux-kernel",
-      "kind": "skill",
-      "label": "linux-kernel",
-      "path": "packages/bun/skills/linux-kernel/SKILL.md"
-    },
-    {
-      "id": "skill:bun/n2b",
-      "kind": "skill",
-      "label": "n2b",
-      "path": "packages/bun/skills/n2b/SKILL.md"
-    },
-    {
-      "id": "skill:bun/source-command-dedupe",
-      "kind": "skill",
-      "label": "source-command-dedupe",
-      "path": "packages/bun/skills/source-command-dedupe/SKILL.md"
-    },
-    {
-      "id": "skill:bun/webkit",
+      "id": "skill:aphrody/webkit",
       "kind": "skill",
       "label": "webkit",
-      "path": "packages/bun/skills/webkit/SKILL.md"
+      "path": "packages/aphrody/skills/webkit/SKILL.md"
     },
     {
-      "id": "skill:bun/win32",
+      "id": "skill:aphrody/wgpu",
+      "kind": "skill",
+      "label": "wgpu",
+      "path": "packages/aphrody/skills/wgpu/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/win32",
       "kind": "skill",
       "label": "win32",
-      "path": "packages/bun/skills/win32/SKILL.md"
+      "path": "packages/aphrody/skills/win32/SKILL.md"
     },
     {
-      "id": "skill:bun/work",
+      "id": "skill:aphrody/work",
       "kind": "skill",
       "label": "work",
-      "path": "packages/bun/skills/work/SKILL.md"
+      "path": "packages/aphrody/skills/work/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/xh",
+      "kind": "skill",
+      "label": "xh",
+      "path": "packages/aphrody/skills/xh/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/zed",
+      "kind": "skill",
+      "label": "zed",
+      "path": "packages/aphrody/skills/zed/SKILL.md"
+    },
+    {
+      "id": "skill:aphrody/zed-cherry-pick",
+      "kind": "skill",
+      "label": "zed-cherry-pick",
+      "path": "packages/aphrody/skills/zed-cherry-pick/SKILL.md"
     },
     {
       "id": "skill:repo/agent-ops",
       "kind": "skill",
       "label": "agent-ops",
       "path": "skills/agent-ops/SKILL.md"
+    },
+    {
+      "id": "skill:repo/async-design",
+      "kind": "skill",
+      "label": "async-design",
+      "path": "skills/async-design/SKILL.md"
+    },
+    {
+      "id": "skill:repo/bun-upstream",
+      "kind": "skill",
+      "label": "bun-upstream",
+      "path": "skills/bun-upstream/SKILL.md"
+    },
+    {
+      "id": "skill:repo/linux-kernel-docs",
+      "kind": "skill",
+      "label": "linux-kernel-docs",
+      "path": "skills/linux-kernel-docs/SKILL.md"
+    },
+    {
+      "id": "skill:repo/perf-math",
+      "kind": "skill",
+      "label": "perf-math",
+      "path": "skills/perf-math/SKILL.md"
+    },
+    {
+      "id": "skill:repo/recursion-design",
+      "kind": "skill",
+      "label": "recursion-design",
+      "path": "skills/recursion-design/SKILL.md"
+    },
+    {
+      "id": "skill:repo/rust-upstream",
+      "kind": "skill",
+      "label": "rust-upstream",
+      "path": "skills/rust-upstream/SKILL.md"
     }
   ],
   "edges": [
@@ -733,68 +1516,8 @@
       "kind": "runs"
     },
     {
-      "from": "hook:aphrody/PostToolUse[Bash|Edit|Write|MultiEdit]/learn.ts",
-      "to": "script:packages/aphrody/hooks-handlers/learn.ts",
-      "kind": "runs"
-    },
-    {
-      "from": "hook:aphrody/PostToolUse[Edit|Write|MultiEdit]/typecheck.ts",
-      "to": "script:packages/aphrody/hooks-handlers/typecheck.ts",
-      "kind": "runs"
-    },
-    {
-      "from": "hook:aphrody/PostToolUse/session-bridge.ts",
-      "to": "script:packages/aphrody/hooks-handlers/session-bridge.ts",
-      "kind": "runs"
-    },
-    {
-      "from": "hook:aphrody/PostToolUseFailure/learn.ts",
-      "to": "script:packages/aphrody/hooks-handlers/learn.ts",
-      "kind": "runs"
-    },
-    {
-      "from": "hook:aphrody/PreToolUse[Bash]/auto-background.ts",
-      "to": "script:packages/aphrody/hooks-handlers/auto-background.ts",
-      "kind": "runs"
-    },
-    {
-      "from": "hook:aphrody/SessionEnd/config-sync.ts",
-      "to": "script:packages/aphrody/hooks-handlers/config-sync.ts",
-      "kind": "runs"
-    },
-    {
-      "from": "hook:aphrody/SessionStart[startup|resume|clear|compact]/config-sync.ts",
-      "to": "script:packages/aphrody/hooks-handlers/config-sync.ts",
-      "kind": "runs"
-    },
-    {
-      "from": "hook:aphrody/SessionStart[startup|resume|clear|compact]/learn.ts",
-      "to": "script:packages/aphrody/hooks-handlers/learn.ts",
-      "kind": "runs"
-    },
-    {
-      "from": "hook:aphrody/SessionStart[startup|resume|clear|compact]/session-bridge.ts",
-      "to": "script:packages/aphrody/hooks-handlers/session-bridge.ts",
-      "kind": "runs"
-    },
-    {
-      "from": "hook:aphrody/UserPromptSubmit/learn.ts",
-      "to": "script:packages/aphrody/hooks-handlers/learn.ts",
-      "kind": "runs"
-    },
-    {
-      "from": "hook:aphrody/UserPromptSubmit/session-bridge.ts",
-      "to": "script:packages/aphrody/hooks-handlers/session-bridge.ts",
-      "kind": "runs"
-    },
-    {
-      "from": "hook:bun/PreToolUse[Bash|Grep|Glob]/pre-tool-use.ts",
-      "to": "script:packages/bun/hooks/pre-tool-use.ts",
-      "kind": "runs"
-    },
-    {
-      "from": "hook:bun/SessionStart[startup|resume|clear|compact]/session-start.ts",
-      "to": "script:packages/bun/hooks/session-start.ts",
+      "from": "mcp:aphrody/ai-os",
+      "to": "script:packages/aphrody/hooks-handlers/ai-os-stdio.ts",
       "kind": "runs"
     },
     {
@@ -805,11 +1528,6 @@
     {
       "from": "mcp:aphrody/memory",
       "to": "script:packages/aphrody/hooks-handlers/memory-mcp.ts",
-      "kind": "runs"
-    },
-    {
-      "from": "mcp:aphrody/relay",
-      "to": "script:packages/aphrody/hooks-handlers/relay-stdio.ts",
       "kind": "runs"
     },
     {
@@ -824,57 +1542,7 @@
     },
     {
       "from": "package:aphrody",
-      "to": "hook:aphrody/PostToolUse[Bash|Edit|Write|MultiEdit]/learn.ts",
-      "kind": "declares"
-    },
-    {
-      "from": "package:aphrody",
-      "to": "hook:aphrody/PostToolUse[Edit|Write|MultiEdit]/typecheck.ts",
-      "kind": "declares"
-    },
-    {
-      "from": "package:aphrody",
-      "to": "hook:aphrody/PostToolUse/session-bridge.ts",
-      "kind": "declares"
-    },
-    {
-      "from": "package:aphrody",
-      "to": "hook:aphrody/PostToolUseFailure/learn.ts",
-      "kind": "declares"
-    },
-    {
-      "from": "package:aphrody",
-      "to": "hook:aphrody/PreToolUse[Bash]/auto-background.ts",
-      "kind": "declares"
-    },
-    {
-      "from": "package:aphrody",
-      "to": "hook:aphrody/SessionEnd/config-sync.ts",
-      "kind": "declares"
-    },
-    {
-      "from": "package:aphrody",
-      "to": "hook:aphrody/SessionStart[startup|resume|clear|compact]/config-sync.ts",
-      "kind": "declares"
-    },
-    {
-      "from": "package:aphrody",
-      "to": "hook:aphrody/SessionStart[startup|resume|clear|compact]/learn.ts",
-      "kind": "declares"
-    },
-    {
-      "from": "package:aphrody",
-      "to": "hook:aphrody/SessionStart[startup|resume|clear|compact]/session-bridge.ts",
-      "kind": "declares"
-    },
-    {
-      "from": "package:aphrody",
-      "to": "hook:aphrody/UserPromptSubmit/learn.ts",
-      "kind": "declares"
-    },
-    {
-      "from": "package:aphrody",
-      "to": "hook:aphrody/UserPromptSubmit/session-bridge.ts",
+      "to": "mcp:aphrody/ai-os",
       "kind": "declares"
     },
     {
@@ -884,22 +1552,12 @@
     },
     {
       "from": "package:aphrody",
-      "to": "mcp:aphrody/hostinger-billing",
+      "to": "mcp:aphrody/docker-docs",
       "kind": "declares"
     },
     {
       "from": "package:aphrody",
-      "to": "mcp:aphrody/hostinger-dns",
-      "kind": "declares"
-    },
-    {
-      "from": "package:aphrody",
-      "to": "mcp:aphrody/hostinger-domains",
-      "kind": "declares"
-    },
-    {
-      "from": "package:aphrody",
-      "to": "mcp:aphrody/hostinger-vps",
+      "to": "mcp:aphrody/hostinger",
       "kind": "declares"
     },
     {
@@ -934,8 +1592,8 @@
     },
     {
       "from": "package:aphrody",
-      "to": "mcp:aphrody/relay",
-      "kind": "declares"
+      "to": "skill:aphrody/3ds-reverse",
+      "kind": "contains"
     },
     {
       "from": "package:aphrody",
@@ -949,7 +1607,157 @@
     },
     {
       "from": "package:aphrody",
+      "to": "skill:aphrody/ai-os-pilot",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/amd",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/aphrody-brand",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/banner-design",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/base-ui",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/better-auth-best-practices",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/better-auth-security-best-practices",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/binary-triage",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/brand",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/bun",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/bun-aphrody",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/bun-apis",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/bun-awesome",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/bun-build",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/bun-crates",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/bun-deps",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/bun-docs",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/bun-gpui",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/bun-graph",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/bun-guide",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/bun-legacy-replace",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/bun-native",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/bun-nginx",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/bun-runtime",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/bun-rust-first",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/bun-tests",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/bun-video",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/bun-vpn",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/bun-yolo",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
       "to": "skill:aphrody/chrome-devtools",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/chromium",
       "kind": "contains"
     },
     {
@@ -959,7 +1767,17 @@
     },
     {
       "from": "package:aphrody",
-      "to": "skill:aphrody/cloudflare-platform",
+      "to": "skill:aphrody/cli-just",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/connect-recommend",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/connect-required-verification-information",
       "kind": "contains"
     },
     {
@@ -974,7 +1792,142 @@
     },
     {
       "from": "package:aphrody",
+      "to": "skill:aphrody/cpp-bun",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/create-auth",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/crunchyroll",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/ctf-solver",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/databooks-ocr",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/decompile-cleaner",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/design",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/design-package",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/design-system",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/directx",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/disks",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/docker-agent-config",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/docker-agent-deploy",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/docker-agent-run",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/docker-build-strategies",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/docker-compose-patterns",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/docker-destructive-guardrails",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/docker-docs",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/docker-project-foundations",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/docker-sandboxes-kits",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/docker-sandboxes-lifecycle",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/docker-sandboxes-network-credentials",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/ds-reverse",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/email-and-password-best-practices",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/emscripten",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
       "to": "skill:aphrody/env-auth",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/filmcraft",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/firmware-analyst",
       "kind": "contains"
     },
     {
@@ -984,12 +1937,82 @@
     },
     {
       "from": "package:aphrody",
+      "to": "skill:aphrody/gamebanana",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
       "to": "skill:aphrody/gh-fork",
       "kind": "contains"
     },
     {
       "from": "package:aphrody",
+      "to": "skill:aphrody/ghidra-gui-computer-use",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/ghidra-headless",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/ghidra-mcp-live",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/ghidra-workflows",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/github-ops",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
       "to": "skill:aphrody/github-workflow",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/google-design",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/gpui",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/gpui-bench",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/gpui-brain",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/gpui-fast",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/gpui-kit",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/gpui-kit-design-guides",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/gpui-test",
       "kind": "contains"
     },
     {
@@ -1004,7 +2027,37 @@
     },
     {
       "from": "package:aphrody",
+      "to": "skill:aphrody/ie-game-formats",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/intel",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/kernel-watch",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
       "to": "skill:aphrody/learn",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/lint-creator",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/linux-kernel",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/malware-analyst",
       "kind": "contains"
     },
     {
@@ -1014,7 +2067,82 @@
     },
     {
       "from": "package:aphrody",
+      "to": "skill:aphrody/metronome",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
       "to": "skill:aphrody/microsoft",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/migrate-radix-to-base",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/mod-package",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/modern-web-guidance",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/n2b",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/next-bundle-optimizer",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/next-cache-components-adoption",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/next-cache-components-optimizer",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/next-dev-loop",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/next-partial-prefetching-adoption",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/next-partial-prefetching-optimizer",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/nextjs-app-router",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/nextjs-config-caching",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/nextjs-devtools-mcp",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/nhil",
       "kind": "contains"
     },
     {
@@ -1024,7 +2152,242 @@
     },
     {
       "from": "package:aphrody",
+      "to": "skill:aphrody/no-slop-humanizer",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/nsh",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/nsh-design-guides",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/nvidia",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/organization-best-practices",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/python-re",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/rea-changelog-update",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/rea-ci-tests-audit",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/rea-tool-design",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/replica-architect",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/replica-backend",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/replica-brand",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/replica-build",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/replica-deploy",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/replica-design",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/replica-diff",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/replica-entrepreneur",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/replica-launch",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/replica-recon",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/replica-test",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/reverse-engineer-anything",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
       "to": "skill:aphrody/rust-cargo",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/shadcn",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/shenron-admin",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/shenron-bun-mastery",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/slides",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/source-command-dedupe",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/static-recompile",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/steam",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/stitch-design-md",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/stripe-apps",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/stripe-best-practices",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/stripe-directory",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/stripe-docs",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/stripe-pay",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/stripe-projects",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/supabase-postgres-best-practices",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/switch-reverse",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/tailwind-v4",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/toriyama-svg",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/two-factor-authentication-best-practices",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/ui-styling",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/ui-ux-pro-max",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/upgrade-stripe",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/uv-project",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/vendor-ecosystem",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/vulkan",
+      "kind": "contains"
+    },
+    {
+      "from": "package:aphrody",
+      "to": "skill:aphrody/wasm-bindgen",
       "kind": "contains"
     },
     {
@@ -1033,123 +2396,48 @@
       "kind": "contains"
     },
     {
-      "from": "package:bun",
-      "to": "hook:bun/PreToolUse[Bash|Grep|Glob]/pre-tool-use.ts",
-      "kind": "declares"
-    },
-    {
-      "from": "package:bun",
-      "to": "hook:bun/SessionStart[startup|resume|clear|compact]/session-start.ts",
-      "kind": "declares"
-    },
-    {
-      "from": "package:bun",
-      "to": "skill:bun/bun-aphrody",
+      "from": "package:aphrody",
+      "to": "skill:aphrody/webassembly",
       "kind": "contains"
     },
     {
-      "from": "package:bun",
-      "to": "skill:bun/bun-apis",
+      "from": "package:aphrody",
+      "to": "skill:aphrody/webgpu",
       "kind": "contains"
     },
     {
-      "from": "package:bun",
-      "to": "skill:bun/bun-build",
+      "from": "package:aphrody",
+      "to": "skill:aphrody/webkit",
       "kind": "contains"
     },
     {
-      "from": "package:bun",
-      "to": "skill:bun/bun-crates",
+      "from": "package:aphrody",
+      "to": "skill:aphrody/wgpu",
       "kind": "contains"
     },
     {
-      "from": "package:bun",
-      "to": "skill:bun/bun-deps",
+      "from": "package:aphrody",
+      "to": "skill:aphrody/win32",
       "kind": "contains"
     },
     {
-      "from": "package:bun",
-      "to": "skill:bun/bun-docs",
+      "from": "package:aphrody",
+      "to": "skill:aphrody/work",
       "kind": "contains"
     },
     {
-      "from": "package:bun",
-      "to": "skill:bun/bun-graph",
+      "from": "package:aphrody",
+      "to": "skill:aphrody/xh",
       "kind": "contains"
     },
     {
-      "from": "package:bun",
-      "to": "skill:bun/bun-native",
+      "from": "package:aphrody",
+      "to": "skill:aphrody/zed",
       "kind": "contains"
     },
     {
-      "from": "package:bun",
-      "to": "skill:bun/bun-nginx",
-      "kind": "contains"
-    },
-    {
-      "from": "package:bun",
-      "to": "skill:bun/bun-runtime",
-      "kind": "contains"
-    },
-    {
-      "from": "package:bun",
-      "to": "skill:bun/bun-rust-first",
-      "kind": "contains"
-    },
-    {
-      "from": "package:bun",
-      "to": "skill:bun/bun-tests",
-      "kind": "contains"
-    },
-    {
-      "from": "package:bun",
-      "to": "skill:bun/bun-video",
-      "kind": "contains"
-    },
-    {
-      "from": "package:bun",
-      "to": "skill:bun/bun-vpn",
-      "kind": "contains"
-    },
-    {
-      "from": "package:bun",
-      "to": "skill:bun/bun-yolo",
-      "kind": "contains"
-    },
-    {
-      "from": "package:bun",
-      "to": "skill:bun/cpp-bun",
-      "kind": "contains"
-    },
-    {
-      "from": "package:bun",
-      "to": "skill:bun/linux-kernel",
-      "kind": "contains"
-    },
-    {
-      "from": "package:bun",
-      "to": "skill:bun/n2b",
-      "kind": "contains"
-    },
-    {
-      "from": "package:bun",
-      "to": "skill:bun/source-command-dedupe",
-      "kind": "contains"
-    },
-    {
-      "from": "package:bun",
-      "to": "skill:bun/webkit",
-      "kind": "contains"
-    },
-    {
-      "from": "package:bun",
-      "to": "skill:bun/win32",
-      "kind": "contains"
-    },
-    {
-      "from": "package:bun",
-      "to": "skill:bun/work",
+      "from": "package:aphrody",
+      "to": "skill:aphrody/zed-cherry-pick",
       "kind": "contains"
     },
     {
@@ -1233,6 +2521,11 @@
       "kind": "imports"
     },
     {
+      "from": "script:scripts/align-agy.ts",
+      "to": "script:scripts/lib.ts",
+      "kind": "imports"
+    },
+    {
       "from": "script:scripts/bench.ts",
       "to": "script:scripts/lib.ts",
       "kind": "imports"
@@ -1270,6 +2563,11 @@
     {
       "from": "script:scripts/matrix.ts",
       "to": "script:scripts/lib.ts",
+      "kind": "imports"
+    },
+    {
+      "from": "script:scripts/mcp-profiles.ts",
+      "to": "script:scripts/profile.ts",
       "kind": "imports"
     },
     {
@@ -1329,6 +2627,11 @@
     },
     {
       "from": "settings",
+      "to": "plugin:cloudflare@anthropic-plugin-directory",
+      "kind": "enables"
+    },
+    {
+      "from": "settings",
       "to": "plugin:csharp-lsp@claude-plugins-official",
       "kind": "enables"
     },
@@ -1344,22 +2647,17 @@
     },
     {
       "from": "settings",
+      "to": "plugin:github@claude-plugins-official",
+      "kind": "enables"
+    },
+    {
+      "from": "settings",
       "to": "plugin:gopls-lsp@claude-plugins-official",
       "kind": "enables"
     },
     {
       "from": "settings",
       "to": "plugin:pyright-lsp@claude-plugins-official",
-      "kind": "enables"
-    },
-    {
-      "from": "settings",
-      "to": "plugin:rust-analyzer-lsp@claude-plugins-official",
-      "kind": "enables"
-    },
-    {
-      "from": "settings",
-      "to": "plugin:security-guidance@claude-plugins-official",
       "kind": "enables"
     }
   ]

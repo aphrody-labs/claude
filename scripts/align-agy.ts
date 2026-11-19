@@ -29,12 +29,18 @@ export function excludedSkills(repo = REPO_ROOT): Set<string> {
   const read = (p: string) => (existsSync(p) ? readFileSync(p, "utf8") : "");
   const profile = read(join(repo, "profile.toml"));
   if (profile) {
-    const parsed = Bun.TOML.parse(profile) as { skills?: { exclude?: string[] } };
+    const parsed = Bun.TOML.parse(profile) as {
+      skills?: { exclude?: string[] };
+    };
     for (const n of parsed.skills?.exclude ?? []) out.add(n);
   }
   const installed = read(join(repo, "plugins", "installed_plugins.json"));
   const plugins = installed
-    ? ((JSON.parse(installed) as { plugins?: Record<string, { installPath?: string }[]> }).plugins ?? {})
+    ? ((
+        JSON.parse(installed) as {
+          plugins?: Record<string, { installPath?: string }[]>;
+        }
+      ).plugins ?? {})
     : {};
   for (const [id, entries] of Object.entries(plugins)) {
     if (OWN_PLUGINS.test(id)) continue;
@@ -42,19 +48,25 @@ export function excludedSkills(repo = REPO_ROOT): Set<string> {
       const dir = e.installPath ? join(e.installPath, "skills") : "";
       if (!dir || !existsSync(dir)) continue;
       for (const d of readdirSync(dir, { withFileTypes: true }))
-        if (d.isDirectory() && existsSync(join(dir, d.name, "SKILL.md"))) out.add(d.name);
+        if (d.isDirectory() && existsSync(join(dir, d.name, "SKILL.md")))
+          out.add(d.name);
     }
   }
   return out;
 }
 
-function files(dir: string, skip: Set<string>, base = dir): Map<string, string> {
+function files(
+  dir: string,
+  skip: Set<string>,
+  base = dir,
+): Map<string, string> {
   const out = new Map<string, string>();
   if (!existsSync(dir)) return out;
   for (const e of readdirSync(dir, { withFileTypes: true })) {
     if (dir === base && skip.has(e.name)) continue;
     const p = join(dir, e.name);
-    if (e.isDirectory()) for (const [k, v] of files(p, skip, base)) out.set(k, v);
+    if (e.isDirectory())
+      for (const [k, v] of files(p, skip, base)) out.set(k, v);
     else if (e.isFile()) out.set(toSlash(relative(base, p)), p);
   }
   return out;
@@ -97,7 +109,13 @@ export function apply(
   skip = excludedSkills(),
 ): Drift {
   const d = drift(src, dst, merged, skip);
-  if (!d.added.length && !d.changed.length && !d.removed.length && !d.merged.length) return d;
+  if (
+    !d.added.length &&
+    !d.changed.length &&
+    !d.removed.length &&
+    !d.merged.length
+  )
+    return d;
   rmSync(dst, { recursive: true, force: true });
   cpSync(src, dst, {
     recursive: true,

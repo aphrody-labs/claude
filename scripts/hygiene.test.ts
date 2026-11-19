@@ -50,6 +50,14 @@ describe("undeclaredPlugins", () => {
     ).toEqual([]);
   });
 
+  test("the built-in Anthropic directory is always known", () => {
+    expect(
+      undeclaredPlugins({
+        enabledPlugins: { "cloudflare@anthropic-plugin-directory": true },
+      }),
+    ).toEqual([]);
+  });
+
   test("flags marketplaces absent from extraKnownMarketplaces", () => {
     const out = undeclaredPlugins({
       enabledPlugins: {

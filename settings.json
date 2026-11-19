@@ -32,8 +32,13 @@
   "permissions": {
     "defaultMode": "bypassPermissions"
   },
-  "model": "opus",
+  "model": "sonnet",
   "fallbackModel": ["haiku"],
+  "skillOverrides": {
+    "aphrody:agent-browser": "name-only",
+    "aphrody:chrome-devtools": "name-only",
+    "aphrody:no-slop-humanizer": "off"
+  },
   "hooks": {
     "SessionStart": [
       {
@@ -108,7 +113,8 @@
     "pyright-lsp@claude-plugins-official": true,
     "csharp-lsp@claude-plugins-official": true,
     "gopls-lsp@claude-plugins-official": true,
-    "github@claude-plugins-official": true
+    "github@claude-plugins-official": true,
+    "cloudflare@anthropic-plugin-directory": true
   },
   "extraKnownMarketplaces": {
     "aphrody": {
@@ -156,15 +162,5 @@
   "showThinkingSummaries": true,
   "skipDangerousModePermissionPrompt": true,
   "crossSessionInbound": "accept",
-  "useAutoModeDuringPlan": true,
-  "skillOverrides": {
-    "aphrody:agent-browser": "name-only",
-    "aphrody:banner-design": "name-only",
-    "aphrody:brand": "name-only",
-    "aphrody:bun-guide": "off",
-    "aphrody:chrome-devtools": "name-only",
-    "aphrody:design-system": "name-only",
-    "aphrody:no-slop-humanizer": "off",
-    "aphrody:slides": "name-only"
-  }
+  "useAutoModeDuringPlan": true
 }
