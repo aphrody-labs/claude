@@ -25,7 +25,11 @@ Codecs live in `vendor/craft-libs/crates/{video,media}` (storytold/craft-libs fo
 
 - tiny-skia CPU scene + craft H.264 + MP4: 720 frames 1920x1080@120 in 3.15 s (229 fps); with recon capture and
   decode verification 4.24 s + 1.22 s, 720/720 frames bit-identical.
-- GPUI wgpu headless: see the PR body of `gpui_video_studio` for the measured run; re-measure before quoting.
+- GPUI wgpu headless (`gpui-video 720`): 720 frames 1920x1080@120 in 6.18 s (116 fps): render + readback 2.54 s,
+  I420 0.35 s, encode + mux 3.15 s; decode verification 1.23 s, 720/720 frames bit-identical. The encoder is the
+  bottleneck; frame 361 decoded to PNG shows the expected text and circle position.
+- The headless test window starts at scale factor 2 (3840x2160 captures): call
+  `simulate_window_scale_factor_change(window, 1.0)` before rendering.
 
 ## Dataset
 
